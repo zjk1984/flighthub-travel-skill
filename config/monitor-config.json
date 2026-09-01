@@ -27,18 +27,30 @@
   "directOnlyAirports": [
     "乌鲁木齐"
   ],
+  "search": {
+    "concurrency": 4,
+    "useRouteCache": true
+  },
   "customTransfer": {
     "enabled": true,
     "firstLegTopN": 3,
     "minConnectionMinutes": 90,
     "maxConnectionMinutes": 480,
     "transferHubs": ["乌鲁木齐", "西安", "兰州"],
+    "preferredHubsByDest": {
+      "伊宁": ["乌鲁木齐", "兰州"],
+      "阿勒泰": ["乌鲁木齐", "西安"],
+      "博乐": ["乌鲁木齐", "西安"],
+      "哈密": ["乌鲁木齐", "西安"],
+      "吐鲁番": ["乌鲁木齐", "兰州"]
+    },
+    "dynamicHubsFromApi": true,
     "leg2NextDayIfNeeded": true,
     "lateArrivalHour": 18,
-    "skipIfMainResultsAtLeast": 5,
+    "trigger": { "maxMainResults": 5 },
     "leg2Concurrency": 4,
     "maxCombosPerRoute": 5,
-    "leg2CacheEnabled": true
+    "excludeFromMainTop3": true
   },
   "scoring": {
     "originScores": { "深圳": 100, "广州": 80 },

@@ -5,6 +5,7 @@
  */
 const fs = require("fs");
 const { formatShanghaiTime } = require("./format-time");
+const { parseJsonl, buildRouteMap, compactMap, parsePrice } = require("./flight-store");
 const {
   loadConfig,
   labelCity,
@@ -28,15 +29,8 @@ function xinjiangCity(route) {
 }
 
 const raw = fs.readFileSync("/dev/stdin", "utf8");
-const parts = [];
-let depth = 0, start = 0;
-for (let i = 0; i < raw.length; i++) {
-  if (raw[i] === "{") { if (depth === 0) start = i; depth++; }
-  else if (raw[i] === "}") { depth--; if (depth === 0) parts.push(raw.slice(start, i + 1)); }
-}
+const results = compactMap(buildRouteMap(parseJsonl(raw)));
 
-const results = parts.map(p => JSON.parse(p));
-const parsePrice = p => parseFloat(String(p).replace(/[^0-9.]/g, "")) || 999999;
 const timeSlot = t => {
   const h = parseInt(t.slice(11, 13), 10);
   if (h >= 6 && h < 10) return "早班";
@@ -47,6 +41,12 @@ const timeSlot = t => {
 const slotEmoji = { "早班": "🌅", "上午": "☀️", "下午": "🌆", "晚班": "🌙" };
 const slotRange = { "早班": "06:00-10:00", "上午": "10:00-14:00", "下午": "14:00-18:00", "晚班": "18:00-24:00" };
 
+function journeyLabel(f) {
+  if (f.customTransfer) return `自定义中转(${f.transitCity || "枢纽"})`;
+  if (f.journeyType === "中转") return "中转";
+  return "直达";
+}
+
 function formatFlight(f) {
   const dep = f.depDateTime.slice(11, 16);
   const arr = f.arrDateTime.slice(11, 16);
@@ -56,7 +56,16 @@ function formatFlight(f) {
     : f.journeyType === "中转" || f.journeyType === "自定义中转"
       ? "🔄"
       : "✈️";
-  return `| ${dep} | ${f.depStation} | ${arr} | ${f.arrStation} | ${type} ${f.flightNo} | ${f.airline} | ${price} |`;
+  const label = f.customTransfer ? ` ${journeyLabel(f)}` : "";
+  return `| ${dep} | ${f.depStation} | ${arr} | ${f.arrStation} | ${type} ${f.flightNo}${label} | ${f.airline} | ${price} |`;
+}
+
+function renderBookingLinks(f) {
+  if (f.customTransfer && f.leg1JumpUrl && f.leg2JumpUrl) {
+    return `[第一段预订](${f.leg1JumpUrl}) | [第二段预订](${f.leg2JumpUrl})（分段购票）\n\n`;
+  }
+  if (f.jumpUrl) return `[点击预订](${f.jumpUrl})\n\n`;
+  return "";
 }
 
 function renderRouteDate(r) {
@@ -82,9 +91,9 @@ function renderRouteDate(r) {
 
   md += `#### 💰 当日最低价\n\n`;
   md += `**${cheapest.flightNo}** ${cheapest.airline} ${cheapest.depDateTime.slice(11, 16)} ${cheapest.depStation}→${cheapest.arrStation} **¥${parseFloat(cheapest.price).toFixed(0)}**`;
-  if (cheapest.journeyType === "中转") md += `（中转）`;
+  md += `（${journeyLabel(cheapest)}）`;
   md += `\n\n`;
-  if (cheapest.jumpUrl) md += `[点击预订](${cheapest.jumpUrl})\n\n`;
+  md += renderBookingLinks(cheapest);
   return md;
 }
 
@@ -106,7 +115,7 @@ for (const r of [...outbound, ...inbound]) {
   if (!flights.length) continue;
   const best = [...flights].sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0];
   const dir = isOutbound(r.route) ? "去程" : "返程";
-  const type = best.journeyType === "中转" ? "中转" : "直达";
+  const type = journeyLabel(best);
   md += `| ${dir} | ${r.date} | ${r.route} | ${type} | ¥${parseFloat(best.price).toFixed(0)} | ${best.flightNo} | ${best.depDateTime.slice(11, 16)} |\n`;
 }
 
@@ -122,15 +131,11 @@ const inRange = formatDateRange(CFG.returnDates);
 md += `\n## 🏆 全程最优推荐（跨所有目的地）\n\n`;
 if (globalBest.outbound) {
   const f = globalBest.outbound;
-  md += `- **去程最优（${outRange}）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发`;
-  if (f.journeyType === "中转") md += `（中转）`;
-  md += `\n`;
+  md += `- **去程最优（${outRange}）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发（${journeyLabel(f)}）\n`;
 }
 if (globalBest.inbound) {
   const f = globalBest.inbound;
-  md += `- **返程最优（${inRange}）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发`;
-  if (f.journeyType === "中转") md += `（中转）`;
-  md += `\n`;
+  md += `- **返程最优（${inRange}）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发（${journeyLabel(f)}）\n`;
 }
 if (globalBest.outbound && globalBest.inbound) {
   const total = parsePrice(globalBest.outbound.price) + parsePrice(globalBest.inbound.price);

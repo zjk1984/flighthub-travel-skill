@@ -84,11 +84,15 @@ function showConfig(cfg, asJson) {
   console.log(`去程日期     ${cfg.outboundDates.join(", ")}  (${formatDateRange(cfg.outboundDates)})`);
   console.log(`返程日期     ${cfg.returnDates.join(", ")}  (${formatDateRange(cfg.returnDates)})`);
   console.log(`仅查直达机场 ${cfg.directOnlyAirports.join("、")}`);
+  console.log(
+    `搜索         并发 ${cfg.search.concurrency} | 航线缓存 ${cfg.search.useRouteCache ? "开启" : "关闭"}`
+  );
   if (cfg.customTransfer?.enabled) {
     const ct = cfg.customTransfer;
     console.log(
       `自定义中转   开启 | Top${ct.firstLegTopN} | 枢纽 ${ct.transferHubs.join("、")} | ` +
-        `主查询≥${ct.skipIfMainResultsAtLeast}条跳过 | leg2并发${ct.leg2Concurrency}`
+        `主查询<${ct.trigger.maxMainResults}条触发 | leg2并发${ct.leg2Concurrency} | ` +
+        `主TOP3排除自定义 ${ct.excludeFromMainTop3 ? "是" : "否"}`
     );
   } else {
     console.log("自定义中转   关闭");

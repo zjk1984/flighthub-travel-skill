@@ -4,5 +4,6 @@
 # Dependencies
 node_modules/
 
-# Custom transfer leg2 cache (local API cache)
+# Unified route cache (local API cache)
+reports/flight-route-cache.jsonl
 reports/leg2-cache.jsonl

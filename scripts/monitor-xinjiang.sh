@@ -1,101 +1,19 @@
 #!/usr/bin/env bash
-# Monitor low-price flights: Guangdong ↔ Xinjiang (multi-airport)
-# Usage: bash scripts/monitor-xinjiang.sh [output.md]
+# Monitor low-price flights: Guangdong ↔ Xinjiang (unified orchestrator)
+# Usage: bash scripts/monitor-xinjiang.sh [latest.md] [ranked.md]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-export FLYAI="${FLYAI:-npx flyai}"
-export DEDUP="$SCRIPT_DIR/flyai-dedup.js"
 cd "$ROOT_DIR"
 # shellcheck source=load-env.sh
 source "$SCRIPT_DIR/load-env.sh"
 
-eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
-echo "Monitor config: $ROUTE_LABEL | 出发 ${ORIGINS[*]} → ${DESTINATIONS[*]}" >&2
-echo "  去程: ${OUTBOUND_DATES[*]} | 返程: ${RETURN_DATES[*]}" >&2
-
 OUTPUT="${1:-$ROOT_DIR/reports/xinjiang-flights-latest.md}"
 RANKED_OUTPUT="${2:-$ROOT_DIR/reports/xinjiang-flights-ranked.md}"
-TMP_RESULTS=$(mktemp /tmp/xinjiang-results-XXXX.jsonl)
+RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 
-flight_count() {
-  local origin=$1 dest=$2 date=$3
-  node -e "
-    const fs=require('fs');
-    const raw=fs.readFileSync(process.argv[1],'utf8');
-    const route=process.argv[2]+'→'+process.argv[3];
-    const date=process.argv[4];
-    const parts=[]; let d=0,s=0;
-    for(let i=0;i<raw.length;i++){
-      if(raw[i]==='{'){if(d===0)s=i;d++;}
-      else if(raw[i]==='}'){d--;if(d===0)parts.push(raw.slice(s,i+1));}
-    }
-    let count=0;
-    for(const p of parts){
-      try{
-        const j=JSON.parse(p);
-        if(j.route===route && j.date===date) count=(j.flights||[]).length;
-      }catch(e){}
-    }
-    console.log(count);
-  " "$TMP_RESULTS" "$origin" "$dest" "$date"
-}
-
-run_search() {
-  local origin=$1 dest=$2 date=$3 jt=$4
-  echo "Searching: $origin → $dest | $date | jt=$jt ..." >&2
-  "$SCRIPT_DIR/flyai-adaptive-search.sh" "$origin" "$dest" "$date" "$jt" >> "$TMP_RESULTS"
-}
-
-run_search_smart() {
-  local origin=$1 dest=$2 date=$3
-  run_search "$origin" "$dest" "$date" 1
-  local count
-  count=$(flight_count "$origin" "$dest" "$date")
-  if [[ "$count" -eq 0 ]]; then
-    run_search "$origin" "$dest" "$date" 2
-  fi
-}
-
-# Outbound: 出发地 → 目的地
-for date in "${OUTBOUND_DATES[@]}"; do
-  for origin in "${ORIGINS[@]}"; do
-    for dest in "${DESTINATIONS[@]}"; do
-      if [[ " ${DIRECT_ONLY_AIRPORTS[*]} " == *" $dest "* ]]; then
-        run_search "$origin" "$dest" "$date" 1
-      else
-        run_search_smart "$origin" "$dest" "$date"
-      fi
-    done
-  done
-done
-
-# Return: 目的地 → 出发地
-for date in "${RETURN_DATES[@]}"; do
-  for dest in "${DESTINATIONS[@]}"; do
-    for origin in "${ORIGINS[@]}"; do
-      if [[ " ${DIRECT_ONLY_AIRPORTS[*]} " == *" $dest "* ]]; then
-        run_search "$dest" "$origin" "$date" 1
-      else
-        run_search_smart "$dest" "$origin" "$date"
-      fi
-    done
-  done
-done
-
-# Custom transfer: build combined itineraries (hub leg1 + leg2 inside script)
-if [[ "${CUSTOM_TRANSFER_ENABLED:-false}" == "true" ]]; then
-  echo "Custom transfer: building itineraries (top${CUSTOM_TRANSFER_TOPN}, hubs: ${TRANSFER_HUBS[*]}) ..." >&2
-  node "$SCRIPT_DIR/custom-transfer.js" "$TMP_RESULTS"
-fi
-
-mkdir -p "$(dirname "$OUTPUT")"
-node "$SCRIPT_DIR/format-xinjiang-report.js" < "$TMP_RESULTS" > "$OUTPUT"
-node "$SCRIPT_DIR/format-ranked-report.js" < "$TMP_RESULTS" > "$RANKED_OUTPUT"
-cp "$TMP_RESULTS" "$ROOT_DIR/reports/xinjiang-results.jsonl"
-echo "Report saved to: $OUTPUT" >&2
-echo "Ranked report saved to: $RANKED_OUTPUT" >&2
+node "$SCRIPT_DIR/monitor-run.js" "$RESULTS" "$OUTPUT" "$RANKED_OUTPUT"
 
 # Feishu card notification (optional)
 if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
@@ -104,6 +22,7 @@ if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
   send_feishu() {
     node "$SCRIPT_DIR/feishu-notify.js" --title "$1" "$2" || echo "Feishu notification failed (non-fatal)" >&2
   }
+  eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   case "$FEISHU_REPORT" in
     latest)
       send_feishu "${ROUTE_LABEL} 低价机票监控报告" "$OUTPUT"
@@ -117,5 +36,3 @@ if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
       ;;
   esac
 fi
-
-rm -f "$TMP_RESULTS"

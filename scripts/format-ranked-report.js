@@ -5,6 +5,7 @@
  */
 const fs = require("fs");
 const { formatShanghaiTime } = require("./format-time");
+const { parseJsonl, buildRouteMap, compactMap, parsePrice: storeParsePrice } = require("./flight-store");
 const {
   loadConfig,
   labelCity,
@@ -33,14 +34,19 @@ const WEIGHTS = {
 const DURATION_CAP_8H = 480;
 const DURATION_CAP_10H = 600;
 
-function parseJsonl(raw) {
-  const parts = [];
-  let depth = 0, start = 0;
-  for (let i = 0; i < raw.length; i++) {
-    if (raw[i] === "{") { if (depth === 0) start = i; depth++; }
-    else if (raw[i] === "}") { depth--; if (depth === 0) parts.push(raw.slice(start, i + 1)); }
-  }
-  return parts.map(p => JSON.parse(p));
+function parsePrice(p) {
+  return storeParsePrice(p);
+}
+
+function parseDurationMinutes(f) {
+  const dep = new Date(f.depDateTime.replace(" ", "T"));
+  const arr = new Date(f.arrDateTime.replace(" ", "T"));
+  if (!isNaN(dep) && !isNaN(arr) && arr > dep) return (arr - dep) / 60000;
+  const d = String(f.duration || "");
+  const m = d.match(/(\d+)\s*分钟/);
+  if (m) return parseInt(m[1], 10);
+  if (/^\d+$/.test(d.trim())) return parseInt(d.trim(), 10);
+  return 9999;
 }
 
 function xjAirportPref(airport) {
@@ -55,21 +61,6 @@ function guangdongPref(f, direction) {
   const { origin, dest } = parseRoute(f.route);
   const city = direction === "outbound" ? origin : dest;
   return SCORING.originScores[city] ?? 80;
-}
-
-function parsePrice(p) {
-  return parseFloat(String(p).replace(/[^0-9.]/g, "")) || 0;
-}
-
-function parseDurationMinutes(f) {
-  const dep = new Date(f.depDateTime.replace(" ", "T"));
-  const arr = new Date(f.arrDateTime.replace(" ", "T"));
-  if (!isNaN(dep) && !isNaN(arr) && arr > dep) return (arr - dep) / 60000;
-  const d = String(f.duration || "");
-  const m = d.match(/(\d+)\s*分钟/);
-  if (m) return parseInt(m[1], 10);
-  if (/^\d+$/.test(d.trim())) return parseInt(d.trim(), 10);
-  return 9999;
 }
 
 function transferCount(f) {
@@ -601,8 +592,15 @@ function renderExcludedFlights(flights, limit = 8) {
   return md;
 }
 
+function mainTop3Pool(flights) {
+  if (CFG.customTransfer?.excludeFromMainTop3) {
+    return flights.filter((f) => !f.customTransfer);
+  }
+  return flights;
+}
+
 const raw = fs.readFileSync("/dev/stdin", "utf8");
-const results = parseJsonl(raw);
+const results = compactMap(buildRouteMap(parseJsonl(raw)));
 const all = flattenFlights(results);
 const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "outbound");
 const inboundScored = scoreFlightsByDay(all.filter(f => !isOutbound(f.route)), "inbound");
@@ -611,10 +609,10 @@ const inbound = markPriceReliability(inboundScored);
 const customOutCount = outbound.filter(f => f.customTransfer).length;
 const customInCount = inbound.filter(f => f.customTransfer).length;
 
-const outByDay = topByDay(outbound);
-const inByDay = topByDay(inbound);
-const outPerDest = topByDayPerDest(outbound);
-const inPerDest = topByDayPerDest(inbound);
+const outByDay = topByDay(mainTop3Pool(outbound));
+const inByDay = topByDay(mainTop3Pool(inbound));
+const outPerDest = topByDayPerDest(mainTop3Pool(outbound));
+const inPerDest = topByDayPerDest(mainTop3Pool(inbound));
 const roundTrips = recommendRoundTrips(outbound, inbound);
 
 let md = `# ✈️ ${CFG.routeLabel} 每日 TOP3 评分推荐\n\n`;

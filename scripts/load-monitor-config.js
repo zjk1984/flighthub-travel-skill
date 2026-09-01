@@ -44,20 +44,39 @@ function saveConfig(config) {
   return normalized;
 }
 
+function normalizeSearch(raw) {
+  const d = raw || {};
+  return {
+    concurrency: Math.max(1, Math.min(8, parseInt(d.concurrency, 10) || 4)),
+    useRouteCache: d.useRouteCache !== false,
+  };
+}
+
 function normalizeCustomTransfer(raw) {
   const d = raw || {};
+  const trigger = d.trigger || {};
+  const maxMain =
+    trigger.maxMainResults != null
+      ? parseInt(trigger.maxMainResults, 10)
+      : parseInt(d.skipIfMainResultsAtLeast, 10);
   return {
     enabled: d.enabled !== false,
     firstLegTopN: Math.max(1, parseInt(d.firstLegTopN, 10) || 3),
     minConnectionMinutes: Math.max(30, parseInt(d.minConnectionMinutes, 10) || 90),
     maxConnectionMinutes: Math.max(120, parseInt(d.maxConnectionMinutes, 10) || 480),
     transferHubs: uniqStrings(d.transferHubs || ["乌鲁木齐", "西安", "兰州"]),
+    preferredHubsByDest: d.preferredHubsByDest || {},
+    dynamicHubsFromApi: d.dynamicHubsFromApi !== false,
     leg2NextDayIfNeeded: d.leg2NextDayIfNeeded !== false,
     lateArrivalHour: Math.min(23, Math.max(0, parseInt(d.lateArrivalHour, 10) || 18)),
-    skipIfMainResultsAtLeast: Math.max(0, parseInt(d.skipIfMainResultsAtLeast, 10) || 5),
+    skipIfMainResultsAtLeast: Math.max(0, maxMain >= 0 ? maxMain : 5),
+    trigger: {
+      maxMainResults: Math.max(0, maxMain >= 0 ? maxMain : 5),
+    },
     leg2Concurrency: Math.max(1, Math.min(8, parseInt(d.leg2Concurrency, 10) || 4)),
     maxCombosPerRoute: Math.max(1, parseInt(d.maxCombosPerRoute, 10) || 5),
     leg2CacheEnabled: d.leg2CacheEnabled !== false,
+    excludeFromMainTop3: d.excludeFromMainTop3 !== false,
   };
 }
 
@@ -78,6 +97,7 @@ function normalizeConfig(raw) {
     outboundDates: uniqDates(raw.outboundDates),
     returnDates: uniqDates(raw.returnDates),
     directOnlyAirports: uniqStrings(raw.directOnlyAirports || ["乌鲁木齐"]),
+    search: normalizeSearch(raw.search),
     customTransfer: normalizeCustomTransfer(raw.customTransfer),
     scoring: normalizeScoring(raw.scoring),
   };
@@ -164,6 +184,7 @@ function exportBash(cfg) {
     `ORIGINS=(${quoteArray(c.origins)})`,
     `DESTINATIONS=(${quoteArray(c.destinations)})`,
     `DIRECT_ONLY_AIRPORTS=(${quoteArray(c.directOnlyAirports)})`,
+    `SEARCH_CONCURRENCY=${c.search.concurrency}`,
     `CUSTOM_TRANSFER_ENABLED=${c.customTransfer.enabled ? "true" : "false"}`,
     `CUSTOM_TRANSFER_TOPN=${c.customTransfer.firstLegTopN}`,
     `TRANSFER_HUBS=(${quoteArray(c.customTransfer.transferHubs)})`,
