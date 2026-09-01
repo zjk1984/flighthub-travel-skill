@@ -43,6 +43,15 @@ function saveConfig(config) {
   return normalized;
 }
 
+function normalizeScoring(raw) {
+  const d = raw || {};
+  const originScores = { ...(d.originScores || { 深圳: 100, 广州: 80 }) };
+  const destinationScores = { ...(d.destinationScores || {}) };
+  const apiPriceFloor = { ...(d.apiPriceFloor || { 伊宁: 750, 阿勒泰: 750 }) };
+  const apiPriceFloorReturn = { ...(d.apiPriceFloorReturn || { 伊宁: 650, 阿勒泰: 650 }) };
+  return { originScores, destinationScores, apiPriceFloor, apiPriceFloorReturn };
+}
+
 function normalizeConfig(raw) {
   const cfg = {
     routeLabel: String(raw.routeLabel || "航班监控").trim(),
@@ -51,6 +60,7 @@ function normalizeConfig(raw) {
     outboundDates: uniqDates(raw.outboundDates),
     returnDates: uniqDates(raw.returnDates),
     directOnlyAirports: uniqStrings(raw.directOnlyAirports || ["乌鲁木齐"]),
+    scoring: normalizeScoring(raw.scoring),
   };
 
   if (!cfg.origins.length) throw new Error("origins 不能为空");

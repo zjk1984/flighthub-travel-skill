@@ -18,28 +18,20 @@ const {
 const CFG = loadConfig();
 const ORIGINS = CFG.origins;
 const DESTINATIONS = CFG.destinations;
+const SCORING = CFG.scoring;
 const TOP_N = 3;
 
-const PREF = {
-  guangdong: { 深圳: 100, 广州: 80 },
-  xjAirport: { 乌鲁木齐: 100, default: 100 },
-};
-
 const WEIGHTS = {
-  price: 0.25,
+  price: 0.35,
   duration: 0.15,
-  transfer: 0.15,
-  depCity: 0.1,
-  xjAirport: 0.1,
-  depTime: 0.125,
-  arrTime: 0.125,
+  transfer: 0.20,
+  depCity: 0.10,
+  depTime: 0.10,
+  arrTime: 0.10,
 };
 
-/** 深圳→伊宁/阿勒泰：API 联程价常低于 App，低于此阈值标记不可信 */
-const API_PRICE_FLOOR = {
-  伊宁: 750,
-  阿勒泰: 750,
-};
+const DURATION_CAP_8H = 480;
+const DURATION_CAP_10H = 600;
 
 function parseJsonl(raw) {
   const parts = [];
@@ -52,7 +44,7 @@ function parseJsonl(raw) {
 }
 
 function xjAirportPref(airport) {
-  return PREF.xjAirport[airport] ?? PREF.xjAirport.default;
+  return SCORING.destinationScores[airport] ?? 100;
 }
 
 function isOutbound(route) {
@@ -62,7 +54,7 @@ function isOutbound(route) {
 function guangdongPref(f, direction) {
   const { origin, dest } = parseRoute(f.route);
   const city = direction === "outbound" ? origin : dest;
-  return PREF.guangdong[city] ?? 80;
+  return SCORING.originScores[city] ?? 80;
 }
 
 function parsePrice(p) {
@@ -99,10 +91,26 @@ function normalize(values) {
   return values.map(v => (v - min) / (max - min));
 }
 
-function pricePoints(price) {
-  if (price < 1000) return 100;
+function pricePointsAbsolute(price) {
+  if (price < 500) return 70;
+  if (price < 750) return 85;
+  if (price < 1000) return 92;
   const tier = Math.floor(price / 1000);
   return Math.max(0, 100 - tier * 25);
+}
+
+function pricePointsRelative(price, dayPrices) {
+  if (dayPrices.length < 2) return 100;
+  const min = Math.min(...dayPrices);
+  const max = Math.max(...dayPrices);
+  if (max === min) return 100;
+  return Math.round((1 - (price - min) / (max - min)) * 100);
+}
+
+function pricePointsCombined(price, dayPrices) {
+  const abs = pricePointsAbsolute(price);
+  const rel = pricePointsRelative(price, dayPrices);
+  return Math.round(abs * 0.5 + rel * 0.5);
 }
 
 function dayOf(dt) {
@@ -119,14 +127,39 @@ function isCrossDay(f) {
 }
 
 function transferPoints(count, f) {
-  let pts = Math.max(0, 100 - count * 25);
+  let pts = 100;
+  if (count >= 2) pts = 50;
+  else if (count === 1) pts = 75;
   if (isCrossDay(f)) pts = Math.max(0, pts - 25);
   return pts;
 }
 
 function timeSlotPoints(dateTimeStr) {
   const hour = parseInt(dateTimeStr.slice(11, 13), 10);
-  return hour >= 7 && hour <= 22 ? 100 : 80;
+  if (hour >= 7 && hour < 10) return 100;
+  if (hour >= 10 && hour <= 20) return 100;
+  if (hour > 20 && hour <= 22) return 95;
+  return 75;
+}
+
+function durationPointsFromNorm(normVal, durationMin) {
+  let pts = Math.round((1 - normVal) * 100);
+  if (durationMin > DURATION_CAP_10H) pts = Math.min(pts, 70);
+  else if (durationMin > DURATION_CAP_8H) pts = Math.min(pts, 85);
+  return pts;
+}
+
+function computeTotalScore(f) {
+  return Math.round(
+    (
+      (f.pricePts / 100) * WEIGHTS.price +
+      (f.durationPts / 100) * WEIGHTS.duration +
+      (f.transferPts / 100) * WEIGHTS.transfer +
+      (f.depPref / 100) * WEIGHTS.depCity +
+      (f.depTimePts / 100) * WEIGHTS.depTime +
+      (f.arrTimePts / 100) * WEIGHTS.arrTime
+    ) * 1000
+  ) / 10;
 }
 
 function flattenFlights(results) {
@@ -156,39 +189,45 @@ function flattenFlights(results) {
 
 function scoreFlights(flights, direction) {
   if (!flights.length) return [];
+  const dayPrices = flights.map(f => f.priceNum);
   const durations = flights.map(f => f.durationMin);
   const normD = normalize(durations);
 
   return flights.map((f, i) => {
     const depPref = guangdongPref(f, direction);
-    const xjPref = xjAirportPref(f.xjAirport);
-    const pricePts = pricePoints(f.priceNum);
+    const pricePts = pricePointsCombined(f.priceNum, dayPrices);
     const transferPts = transferPoints(f.transfers, f);
     const depTimePts = timeSlotPoints(f.depDateTime);
     const arrTimePts = timeSlotPoints(f.arrDateTime);
-    const durationPts = Math.round((1 - normD[i]) * 100);
-    const score =
-      (pricePts / 100) * WEIGHTS.price +
-      (durationPts / 100) * WEIGHTS.duration +
-      (transferPts / 100) * WEIGHTS.transfer +
-      (depPref / 100) * WEIGHTS.depCity +
-      (xjPref / 100) * WEIGHTS.xjAirport +
-      (depTimePts / 100) * WEIGHTS.depTime +
-      (arrTimePts / 100) * WEIGHTS.arrTime;
-    return {
+    const durationPts = durationPointsFromNorm(normD[i], f.durationMin);
+    const row = {
       ...f,
       direction,
       depPref,
-      xjPref,
+      xjPref: xjAirportPref(f.xjAirport),
       pricePts,
       transferPts,
       depTimePts,
       arrTimePts,
       durationPts,
       crossDay: isCrossDay(f),
-      score: Math.round(score * 1000) / 10,
     };
+    row.score = computeTotalScore(row);
+    return row;
   }).sort((a, b) => b.score - a.score || a.priceNum - b.priceNum);
+}
+
+function scoreFlightsByDay(allFlights, direction) {
+  const byDate = new Map();
+  for (const f of allFlights) {
+    if (!byDate.has(f.date)) byDate.set(f.date, []);
+    byDate.get(f.date).push(f);
+  }
+  const scored = [];
+  for (const dayFlights of byDate.values()) {
+    scored.push(...scoreFlights(dayFlights, direction));
+  }
+  return scored;
 }
 
 function markPriceReliability(flights) {
@@ -223,14 +262,31 @@ function markPriceReliability(flights) {
   }
 
   for (const f of flights) {
-    if (f.origin !== "深圳") continue;
-    const floor = API_PRICE_FLOOR[f.xjAirport];
-    if (!floor) continue;
-    if (f.priceNum < floor) {
+    const outFloor = SCORING.apiPriceFloor[f.xjAirport];
+    const retFloor = SCORING.apiPriceFloorReturn[f.xjAirport] ?? outFloor;
+    const isOutToRemote =
+      f.direction === "outbound" && ORIGINS.includes(f.origin) && outFloor;
+    const isBackFromRemote =
+      f.direction === "inbound" && DESTINATIONS.includes(f.xjAirport) && retFloor;
+
+    if (isOutToRemote && f.priceNum < outFloor) {
       f.priceVerified = false;
       f.priceWarning =
-        `深圳→${labelCity(f.xjAirport)} API ¥${f.priceNum.toFixed(0)} 低于参考线 ¥${floor}，` +
+        `${f.origin}→${labelCity(f.xjAirport)} API ¥${f.priceNum.toFixed(0)} 低于参考线 ¥${outFloor}，` +
         `联程拆分价常见，App 实价通常更高，**已排除在 TOP3 外**`;
+    }
+    if (isBackFromRemote && f.priceNum < retFloor) {
+      f.priceVerified = false;
+      f.priceWarning =
+        `${labelCity(f.xjAirport)}→${f.dest} API ¥${f.priceNum.toFixed(0)} 低于返程参考线 ¥${retFloor}，` +
+        `联程价可能偏低，**已排除在 TOP3 外**`;
+    }
+  }
+
+  for (const f of flights) {
+    if (f.priceVerified === false) {
+      f.pricePts = Math.min(f.pricePts, 50);
+      f.score = computeTotalScore(f);
     }
   }
 
@@ -243,6 +299,26 @@ function rankCompare(a, b) {
   return b.score - a.score || a.priceNum - b.priceNum;
 }
 
+function pickTopDiverse(flights, n = TOP_N) {
+  const sorted = [...flights].sort(rankCompare);
+  const verified = sorted.filter(f => f.priceVerified !== false);
+  const picked = [];
+  const usedAirports = new Set();
+
+  for (const f of verified) {
+    if (picked.length >= n) break;
+    if (!usedAirports.has(f.xjAirport)) {
+      picked.push(f);
+      usedAirports.add(f.xjAirport);
+    }
+  }
+  for (const f of verified) {
+    if (picked.length >= n) break;
+    if (!picked.includes(f)) picked.push(f);
+  }
+  return picked.slice(0, n);
+}
+
 function topByDay(flights, n = TOP_N) {
   const byDate = new Map();
   for (const f of flights) {
@@ -253,8 +329,50 @@ function topByDay(flights, n = TOP_N) {
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([date, list]) => ({
       date,
-      flights: [...list].sort(rankCompare).slice(0, n),
+      flights: pickTopDiverse(list, n),
     }));
+}
+
+function topByDayPerDest(flights) {
+  const byDate = new Map();
+  for (const f of flights) {
+    if (f.priceVerified === false) continue;
+    if (!byDate.has(f.date)) byDate.set(f.date, new Map());
+    const destMap = byDate.get(f.date);
+    const cur = destMap.get(f.xjAirport);
+    if (!cur || rankCompare(f, cur) < 0) destMap.set(f.xjAirport, f);
+  }
+  return [...byDate.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([date, destMap]) => ({
+      date,
+      flights: [...destMap.values()].sort(rankCompare),
+    }));
+}
+
+function recommendRoundTrips(outbound, inbound, limit = 3) {
+  const outs = outbound
+    .filter(f => f.priceVerified !== false)
+    .sort(rankCompare)
+    .slice(0, 8);
+  const ins = inbound
+    .filter(f => f.priceVerified !== false)
+    .sort(rankCompare)
+    .slice(0, 8);
+  const combos = [];
+  for (const o of outs) {
+    for (const i of ins) {
+      const totalPrice = o.priceNum + i.priceNum;
+      const comboScore =
+        o.score * 0.45 +
+        i.score * 0.45 +
+        pricePointsAbsolute(totalPrice) * 0.1;
+      combos.push({ outbound: o, inbound: i, totalPrice, comboScore });
+    }
+  }
+  return combos
+    .sort((a, b) => b.comboScore - a.comboScore || a.totalPrice - b.totalPrice)
+    .slice(0, limit);
 }
 
 function routeDisplay(f) {
@@ -269,9 +387,13 @@ function buildDeductions(f) {
 
   if (f.priceNum >= 1000) {
     const tier = Math.floor(f.priceNum / 1000);
-    items.push(`价格 ¥${f.priceNum.toFixed(0)}：满 ${tier}000 元档，价格分 ${100 - tier * 25}（扣 ${tier * 25}）`);
+    items.push(`价格 ¥${f.priceNum.toFixed(0)}：满 ${tier}000 元档，绝对分 ${100 - tier * 25}（综合价分 ${f.pricePts}）`);
+  } else if (f.priceNum < 500) {
+    items.push(`价格 ¥${f.priceNum.toFixed(0)}：<500 元档（绝对分 70，综合价分 ${f.pricePts}）`);
+  } else if (f.priceNum < 750) {
+    items.push(`价格 ¥${f.priceNum.toFixed(0)}：500–749 元档（绝对分 85，综合价分 ${f.pricePts}）`);
   } else {
-    items.push(`价格 ¥${f.priceNum.toFixed(0)}：1000 以下，价格分 100（满分）`);
+    items.push(`价格 ¥${f.priceNum.toFixed(0)}：750–999 元档（绝对分 92，综合价分 ${f.pricePts}）`);
   }
 
   if (f.durationPts < 100) {
@@ -281,7 +403,8 @@ function buildDeductions(f) {
   }
 
   const transferParts = [];
-  if (f.transfers > 0) transferParts.push(`转机 ${f.transfers} 次 -${f.transfers * 25}`);
+  if (f.transfers >= 2) transferParts.push(`转机 ≥2 次，转机分封顶 50`);
+  else if (f.transfers > 0) transferParts.push(`转机 ${f.transfers} 次 → 75 分`);
   if (f.crossDay) transferParts.push(`跨天/航段跨日 -25`);
   if (transferParts.length) {
     items.push(`转机分 ${f.transferPts}：${transferParts.join("，")}`);
@@ -296,10 +419,10 @@ function buildDeductions(f) {
   }
 
   if (f.depTimePts < 100) {
-    items.push(`起飞 ${f.depDateTime.slice(11, 16)}：不在 07:00–22:00，扣 20`);
+    items.push(`起飞 ${f.depDateTime.slice(11, 16)}：非理想时段（07–10 / 10–20 最佳），${f.depTimePts} 分`);
   }
   if (f.arrTimePts < 100) {
-    items.push(`落地 ${f.arrDateTime.slice(11, 16)}：不在 07:00–22:00，扣 20`);
+    items.push(`落地 ${f.arrDateTime.slice(11, 16)}：非理想时段，${f.arrTimePts} 分`);
   }
 
   if (f.priceVerified === false && f.priceWarning) {
@@ -310,28 +433,27 @@ function buildDeductions(f) {
 }
 
 function renderScoringGuide() {
-  return `## 📐 评分标准说明
+  return `## 📐 评分标准说明（v2）
 
-综合分 **越高越好**，满分 100。各维度先换算为 0–100 的子分，再按权重加权：
+综合分 **越高越好**，满分 100。**按日期分组**评分（同日航班互相比较时长/价格）。
 
 | 维度 | 权重 | 计分规则 |
 |------|------|----------|
-| 机票价格 | 25% | ¥1000 以下 100 分；每增加 ¥1000 减 25 分（¥1000–1999→75，¥2000–2999→50…） |
-| 飞行时长 | 15% | 同批次候选航班内归一化：越短越高（0=最长，100=最短） |
-| 转机 | 15% | 0 次 100；每多 1 次 -25；全程或航段间跨日再 -25 |
-| 出发/到达地 | 10% | 深圳 100；广州 80 |
-| 新疆机场 | 10% | 乌鲁木齐/伊宁/阿勒泰/石河子均为 100 |
-| 起飞时间 | 12.5% | 07:00–22:00 为 100；其余 80 |
-| 落地时间 | 12.5% | 07:00–22:00 为 100；其余 80 |
+| 机票价格 | 35% | 绝对档（<500→70，500–749→85，750–999→92，¥1000+ 每档-25）与**当日相对价**各 50% 加权 |
+| 飞行时长 | 15% | 同日内归一化；>8h 封顶 85 分，>10h 封顶 70 分 |
+| 转机 | 20% | 直达 100；1 次 75；≥2 次 50；跨日再 -25 |
+| 出发/到达地 | 10% | 可配置（默认深圳 100、广州 80） |
+| 起飞时间 | 10% | 07–10 / 10–20 → 100；20–22 → 95；其余 75 |
+| 落地时间 | 10% | 同起飞 |
 
 **公式：** 综合分 = Σ(子分 ÷ 100 × 权重) × 100
 
+**TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
+
 ### ⚠️ 关于 API 价格
 
-飞猪 API 对 **深圳→伊宁/阿勒泰** 等联程航线，常返回低于手机 App 的拆分价/缓存价。本报告会：
-
-1. 低于同航线中位价 75% 或低于次低价 20% 的报价标记为不可信
-2. 深圳→伊宁/阿勒泰低于 **¥750** 的报价自动标记并 **不参与 TOP3 排名**
+1. 低于同航线中位价 75% 或低于次低价 20% → 不可信
+2. 去程→伊宁/阿勒泰低于参考线、返程←伊宁/阿勒泰低于返程参考线 → 排除 TOP3
 3. 链接跳转后请以 **App/网页实际价格** 为准
 
 `;
@@ -373,18 +495,63 @@ function renderDailySections(days, title, direction) {
   return md;
 }
 
+function renderPerDestTop1(days, title) {
+  let md = `## ${title}\n\n`;
+  if (!days.length) return md + "暂无数据\n\n";
+  for (const { date, flights } of days) {
+    md += `### ${date.slice(5)}（${date}）\n\n`;
+    if (!flights.length) {
+      md += "暂无航班\n\n";
+      continue;
+    }
+    md += "| 目的地 | 评分 | 航线 | 航班 | 价格 | 出发 | 到达 |\n";
+    md += "|--------|------|------|------|------|------|------|\n";
+    for (const f of flights) {
+      md += `| ${labelCity(f.xjAirport)} | ${f.score} | ${routeDisplay(f)} | ${f.flightNo} | ¥${f.priceNum.toFixed(0)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+    }
+    md += "\n";
+  }
+  return md;
+}
+
+function renderRoundTrips(combos) {
+  let md = `## 🔄 推荐往返组合 TOP3\n\n`;
+  md += `综合去程/返程评分（各 45%）与往返总价（10%），仅含可信价格航班。\n\n`;
+  if (!combos.length) return md + "暂无组合推荐\n\n";
+  combos.forEach((c, i) => {
+    const o = c.outbound;
+    const n = c.inbound;
+    md += `${i + 1}. **¥${c.totalPrice.toFixed(0)}**（组合分 ${c.comboScore.toFixed(1)}）\n`;
+    md += `   - 去 ${o.date} ${routeDisplay(o)} ${o.flightNo} ¥${o.priceNum.toFixed(0)}（${o.score} 分）\n`;
+    md += `   - 回 ${n.date} ${routeDisplay(n)} ${n.flightNo} ¥${n.priceNum.toFixed(0)}（${n.score} 分）\n\n`;
+  });
+  return md;
+}
+
+function renderExcludedFlights(flights, limit = 8) {
+  const bad = flights.filter(f => f.priceVerified === false);
+  if (!bad.length) return "";
+  let md = `## ⚠️ 已排除的不可信低价（节选）\n\n`;
+  for (const f of bad.sort((a, b) => a.priceNum - b.priceNum).slice(0, limit)) {
+    md += `- ${f.date} ${routeDisplay(f)} ${f.flightNo} ¥${f.priceNum.toFixed(0)}：${f.priceWarning || "价格不可信"}\n`;
+  }
+  md += "\n";
+  return md;
+}
+
 const raw = fs.readFileSync("/dev/stdin", "utf8");
 const results = parseJsonl(raw);
 const all = flattenFlights(results);
-const outbound = markPriceReliability(
-  scoreFlights(all.filter(f => isOutbound(f.route)), "outbound")
-);
-const inbound = markPriceReliability(
-  scoreFlights(all.filter(f => !isOutbound(f.route)), "inbound")
-);
+const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "outbound");
+const inboundScored = scoreFlightsByDay(all.filter(f => !isOutbound(f.route)), "inbound");
+const outbound = markPriceReliability(outboundScored);
+const inbound = markPriceReliability(inboundScored);
 
 const outByDay = topByDay(outbound);
 const inByDay = topByDay(inbound);
+const outPerDest = topByDayPerDest(outbound);
+const inPerDest = topByDayPerDest(inbound);
+const roundTrips = recommendRoundTrips(outbound, inbound);
 
 let md = `# ✈️ ${CFG.routeLabel} 每日 TOP3 评分推荐\n\n`;
 md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
@@ -393,8 +560,12 @@ md += `- 去程：${formatDateRange(CFG.outboundDates)} | 返程：${formatDateR
 md += `- 候选航班：去程 ${outbound.length} 条，返程 ${inbound.length} 条\n\n`;
 
 md += renderScoringGuide();
-md += renderDailySections(outByDay, "🛫 去程每日 TOP3", "outbound");
-md += renderDailySections(inByDay, "🛬 返程每日 TOP3", "inbound");
+md += renderDailySections(outByDay, "🛫 去程每日 TOP3（目的地多样化）", "outbound");
+md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
+md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
+md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
+md += renderRoundTrips(roundTrips);
+md += renderExcludedFlights([...outbound, ...inbound]);
 
 md += `---\n基于飞猪 fly.ai 实时数据\n`;
 process.stdout.write(md);
