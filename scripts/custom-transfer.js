@@ -91,11 +91,6 @@ function buildRouteMap(results) {
   return map;
 }
 
-function compactResults(results) {
-  const map = buildRouteMap(results);
-  return [...map.values()];
-}
-
 async function runAdaptiveSearch(origin, dest, date, journeyType = 2) {
   const env = {
     ...process.env,
