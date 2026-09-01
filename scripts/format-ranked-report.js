@@ -16,7 +16,7 @@ const TOP_N = 3;
 
 const PREF = {
   guangdong: { 深圳: 100, 广州: 80 },
-  xjAirport: { 乌鲁木齐: 80, default: 100 },
+  xjAirport: { 乌鲁木齐: 100, default: 100 },
 };
 
 const WEIGHTS = {
@@ -32,8 +32,12 @@ const WEIGHTS = {
 const SCORE_DESC =
   "综合分 = 价格×25% + 时长×15% + 转机×15% + 出发地×10% + 目的地×10% + 起飞时间×12.5% + 落地时间×12.5%（**越高越好**）";
 
-function transferPoints(count) {
-  return Math.max(0, 100 - count * 25);
+function transferPoints(count, depDateTime, arrDateTime) {
+  let pts = Math.max(0, 100 - count * 25);
+  const depDay = depDateTime.slice(0, 10);
+  const arrDay = arrDateTime.slice(0, 10);
+  if (depDay !== arrDay) pts = Math.max(0, pts - 25);
+  return pts;
 }
 
 /** 07:00–22:00 为 100 分，其余 80 分 */
@@ -145,7 +149,7 @@ function scoreFlights(flights, direction) {
   return flights.map((f, i) => {
     const depPref = guangdongPref(f, direction);
     const xjPref = xjAirportPref(f.xjAirport);
-    const transferPts = transferPoints(f.transfers);
+    const transferPts = transferPoints(f.transfers, f.depDateTime, f.arrDateTime);
     const depTimePts = timeSlotPoints(f.depDateTime);
     const arrTimePts = timeSlotPoints(f.arrDateTime);
     const score =
@@ -267,10 +271,10 @@ md += `### 偏好分设定\n\n`;
 md += `| 维度 | 选项 | 偏好分 |\n|------|------|--------|\n`;
 md += `| 出发地（去程）/ 到达地（返程） | 深圳 | 100 |\n`;
 md += `| 出发地（去程）/ 到达地（返程） | 广州 | 80 |\n`;
-md += `| 目的地（去程）/ 出发地（返程） | 乌鲁木齐 | 80 |\n`;
-md += `| 目的地（去程）/ 出发地（返程） | 伊宁/阿勒泰/石河子 | 100 |\n`;
+md += `| 目的地（去程）/ 出发地（返程） | 乌鲁木齐/伊宁/阿勒泰/石河子 | 100 |\n`;
 md += `| 转机次数 | 0 次 | 100 |\n`;
 md += `| 转机次数 | 每多 1 次 | -25（最低 0） |\n`;
+md += `| 转机次数 | 跨天（出发日与到达日不同） | 额外 -25 |\n`;
 md += `| 起飞/落地时间 | 07:00–22:00 | 100 |\n`;
 md += `| 起飞/落地时间 | 其他时段 | 80 |\n\n`;
 
