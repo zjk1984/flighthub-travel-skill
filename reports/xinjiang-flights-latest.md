@@ -1,6 +1,6 @@
 # ✈️ 广东 ↔ 新疆 低价机票监控报告
 
-> 生成时间：2026-09-01 07:57:41 UTC
+> 生成时间：2026-09-01 08:04:29 UTC
 
 > 覆盖机场：乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子
 
@@ -17,24 +17,23 @@
 | 去程 | 2026-09-29 | 深圳→乌鲁木齐 | 直达 | ¥1700 | HU7851 | 06:50 |
 | 去程 | 2026-09-29 | 深圳→伊宁 | 中转 | ¥620 | ZH9943 / 9C7651 | 08:30 |
 | 去程 | 2026-09-29 | 深圳→阿勒泰 | 中转 | ¥450 | Y87565 / CZ6860 | 06:55 |
-| 去程 | 2026-09-29 | 广州→乌鲁木齐 | 直达 | ¥1479 | AQ1165 | 06:40 |
+| 去程 | 2026-09-29 | 广州→乌鲁木齐 | 直达 | ¥1489 | AQ1165 | 06:40 |
 | 去程 | 2026-09-29 | 广州→伊宁 | 中转 | ¥580 | CZ8429 / 9C7651 | 07:35 |
 | 去程 | 2026-09-29 | 广州→阿勒泰 | 直达 | ¥1739 | AQ1177 | 06:35 |
 | 去程 | 2026-09-30 | 深圳→乌鲁木齐 | 直达 | ¥2300 | HU7851 | 06:40 |
 | 去程 | 2026-09-30 | 深圳→伊宁 | 中转 | ¥1340 | 3U8710 / EU2805 | 06:55 |
 | 去程 | 2026-09-30 | 深圳→阿勒泰 | 中转 | ¥1400 | DZ6239 / MU9983 | 09:45 |
+| 去程 | 2026-09-30 | 广州→乌鲁木齐 | 直达 | ¥1819 | AQ1165 | 06:45 |
 | 去程 | 2026-09-30 | 广州→伊宁 | 直达 | ¥3488 | CZ2369 | 07:15 |
 | 去程 | 2026-09-30 | 广州→阿勒泰 | 中转 | ¥1240 | 9C7395 / AQ1485 | 06:30 |
 | 去程 | 2026-10-01 | 深圳→乌鲁木齐 | 直达 | ¥2550 | CZ6890 | 17:40 |
 | 去程 | 2026-10-01 | 深圳→伊宁 | 中转 | ¥800 | PN6322 / 9C7651 | 23:40 |
-| 去程 | 2026-10-01 | 深圳→阿勒泰 | 中转 | ¥1070 | CZ3155 / MU6865 | 19:30 |
 | 去程 | 2026-10-01 | 广州→乌鲁木齐 | 直达 | ¥2140 | CZ6013 | 17:10 |
 | 去程 | 2026-10-01 | 广州→伊宁 | 中转 | ¥830 | CZ2326 / CZ2019 | 22:05 |
 | 去程 | 2026-10-01 | 广州→阿勒泰 | 直达 | ¥3990 | AQ1177 | 06:35 |
 | 返程 | 2026-10-06 | 乌鲁木齐→深圳 | 直达 | ¥3300 | Y87570 | 17:55 |
 | 返程 | 2026-10-06 | 乌鲁木齐→广州 | 直达 | ¥2839 | AQ1166 | 14:55 |
 | 返程 | 2026-10-06 | 伊宁→深圳 | 中转 | ¥1450 | 9C7138 / DZ6278 | 18:55 |
-| 返程 | 2026-10-06 | 伊宁→广州 | 中转 | ¥1450 | 9C7138 / ZH8379 | 18:55 |
 | 返程 | 2026-10-06 | 阿勒泰→深圳 | 中转 | ¥400 | G52642 / 9C7680 | 10:05 |
 | 返程 | 2026-10-06 | 阿勒泰→广州 | 直达 | ¥3139 | AQ1178 | 14:50 |
 | 返程 | 2026-10-06 | 石河子→深圳 | 中转 | ¥1320 | HU7686 / 9C6540 | 17:05 |
@@ -121,7 +120,7 @@
 
 **AQ1165** 九元 06:40 白云→乌鲁木齐天山 **¥1309**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0QMXlW)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0WPT5Y)
 
 ### 深圳→乌鲁木齐 | 2026-09-28
 
@@ -160,7 +159,7 @@
 
 **ZH9241** 深航 10:45 宝安→乌鲁木齐天山 **¥1560**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Hdv64)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4IKfCz)
 
 ### 广州→乌鲁木齐 | 2026-09-29
 
@@ -170,14 +169,14 @@
 
 | 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
 |----------|----------|----------|----------|--------|----------|------|
-| 06:40 | 白云 | 13:55 | 乌鲁木齐天山 | ✈️ AQ1165 | 九元 | ¥1479 |
+| 06:40 | 白云 | 13:55 | 乌鲁木齐天山 | ✈️ AQ1165 | 九元 | ¥1489 |
 | 07:00 | 白云 | 12:25 | 乌鲁木齐天山 | ✈️ CA9673 | 国航 | ¥1840 |
 | 07:20 | 白云 | 12:45 | 乌鲁木齐天山 | ✈️ HU7223 | 新海航|海南航空 | ¥1740 |
 | 08:10 | 白云 | 13:50 | 乌鲁木齐天山 | ✈️ CA4370 | 国航 | ¥1840 |
 | 08:10 | 白云 | 13:30 | 乌鲁木齐天山 | ✈️ CZ6886 | 南航 | ¥2520 |
 | 09:05 | 白云 | 14:05 | 乌鲁木齐天山 | ✈️ CZ6900 | 南航 | ¥3750 |
 
-> 💡 早班推荐：**AQ1165** ¥1479 — 该时段最低价
+> 💡 早班推荐：**AQ1165** ¥1489 — 该时段最低价
 
 #### ☀️ 上午（10:00-14:00）
 
@@ -208,9 +207,9 @@
 
 #### 💰 当日最低价
 
-**AQ1165** 九元 06:40 白云→乌鲁木齐天山 **¥1479**
+**AQ1165** 九元 06:40 白云→乌鲁木齐天山 **¥1489**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37RH76)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0AX0zF)
 
 ### 深圳→乌鲁木齐 | 2026-09-29
 
@@ -250,11 +249,59 @@
 
 **HU7851** 新海航|海南航空 06:50 宝安→乌鲁木齐天山 **¥1700**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2WXF80)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3GntZo)
 
 ### 广州→乌鲁木齐 | 2026-09-30
 
-暂无航班数据
+共 **13** 趟 | 📊 API 消耗：3 次
+
+#### 🌅 早班（06:00-10:00）
+
+| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
+|----------|----------|----------|----------|--------|----------|------|
+| 06:45 | 白云 | 14:00 | 乌鲁木齐天山 | ✈️ AQ1165 | 九元 | ¥1819 |
+| 07:00 | 白云 | 12:25 | 乌鲁木齐天山 | ✈️ CA9673 | 国航 | ¥2220 |
+| 07:35 | 白云 | 12:45 | 乌鲁木齐天山 | ✈️ HU7223 | 新海航|海南航空 | ¥2050 |
+| 08:10 | 白云 | 13:30 | 乌鲁木齐天山 | ✈️ CZ6886 | 南航 | ¥2330 |
+| 08:10 | 白云 | 13:50 | 乌鲁木齐天山 | ✈️ CA4370 | 国航 | ¥2220 |
+| 09:05 | 白云 | 13:55 | 乌鲁木齐天山 | ✈️ CZ6900 | 南航 | ¥3750 |
+
+> 💡 早班推荐：**AQ1165** ¥1819 — 该时段最低价
+
+#### ☀️ 上午（10:00-14:00）
+
+| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
+|----------|----------|----------|----------|--------|----------|------|
+| 10:00 | 白云 | 15:10 | 乌鲁木齐天山 | ✈️ CZ6882 | 南航 | ¥2470 |
+| 11:25 | 白云 | 17:00 | 乌鲁木齐天山 | ✈️ CZ6023 | 南航 | ¥2330 |
+| 13:20 | 白云 | 18:35 | 乌鲁木齐天山 | ✈️ CZ8467 | 南航 | ¥2260 |
+
+> 💡 上午推荐：**CZ8467** ¥2260 — 该时段最低价
+
+#### 🌆 下午（14:00-18:00）
+
+| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
+|----------|----------|----------|----------|--------|----------|------|
+| 15:40 | 白云 | 20:55 | 乌鲁木齐天山 | ✈️ CZ6892 | 南航 | ¥2620 |
+| 16:40 | 白云 | 21:55 | 乌鲁木齐天山 | ✈️ UQ2592 | 新海航|乌航 | ¥2250 |
+| 17:15 | 白云 | 22:40 | 乌鲁木齐天山 | ✈️ CZ6896 | 南航 | ¥2340 |
+
+> 💡 下午推荐：**UQ2592** ¥2250 — 该时段最低价
+
+#### 🌙 晚班（18:00-24:00）
+
+| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
+|----------|----------|----------|----------|--------|----------|------|
+| 19:20 | 白云 | 00:40 | 乌鲁木齐天山 | ✈️ CZ6884 | 南航 | ¥2520 |
+
+> 💡 晚班推荐：**CZ6884** ¥2520 — 该时段最低价
+
+#### 💰 当日最低价
+
+**AQ1165** 九元 06:45 白云→乌鲁木齐天山 **¥1819**
+
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HJaHZ)
+
 ### 深圳→乌鲁木齐 | 2026-09-30
 
 共 **8** 趟 | 📊 API 消耗：1 次
@@ -292,7 +339,7 @@
 
 **HU7851** 新海航|海南航空 06:40 宝安→乌鲁木齐天山 **¥2300**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1apYCm)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1BXxRO)
 
 ### 广州→乌鲁木齐 | 2026-10-01
 
@@ -343,7 +390,7 @@
 
 **CZ6013** 南航 17:10 白云→乌鲁木齐天山 **¥2140**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Nq4RI)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qPct5)
 
 ### 深圳→乌鲁木齐 | 2026-10-01
 
@@ -383,7 +430,7 @@
 
 **CZ6890** 南航 17:40 宝安→乌鲁木齐天山 **¥2550**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F35JT89)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4b8qnQ)
 
 ### 伊犁（伊宁）
 
@@ -403,7 +450,7 @@
 
 **CZ2369** 南航 07:15 白云→伊宁 **¥1980**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Wt19E)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37Q9eV)
 
 ### 深圳→伊宁 | 2026-09-28
 
@@ -447,7 +494,7 @@
 
 **ZH9943 / 9C7651** 深航 / 春秋 08:30 宝安→伊宁 **¥520**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2DFog8)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3qk8Eq)
 
 ### 广州→伊宁 | 2026-09-29
 
@@ -484,7 +531,7 @@
 
 **CZ8429 / 9C7651** 南航 / 春秋 07:35 白云→伊宁 **¥580**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F14rWVb)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ZgGfm)
 
 ### 深圳→伊宁 | 2026-09-29
 
@@ -521,7 +568,7 @@
 
 **ZH9943 / 9C7651** 深航 / 春秋 08:30 宝安→伊宁 **¥620**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4AhIvI)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Y54Wl)
 
 ### 广州→伊宁 | 2026-09-30
 
@@ -539,7 +586,7 @@
 
 **CZ2369** 南航 07:15 白云→伊宁 **¥3488**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3xEg6R)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F12Wq0J)
 
 ### 深圳→伊宁 | 2026-09-30
 
@@ -583,7 +630,7 @@
 
 **3U8710 / EU2805** 川航 / 成都航 06:55 宝安→伊宁 **¥1340**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0kpPj3)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1go59A)
 
 ### 广州→伊宁 | 2026-10-01
 
@@ -620,7 +667,7 @@
 
 **CZ2326 / CZ2019** 南航 / 南航 22:05 白云→伊宁 **¥830**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2XOHPP)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4MtggM)
 
 ### 深圳→伊宁 | 2026-10-01
 
@@ -657,7 +704,7 @@
 
 **PN6322 / 9C7651** 新海航|西部航空 / 春秋 23:40 宝安→伊宁 **¥800**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1kGVrg)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2PJBCm)
 
 ### 阿勒泰
 
@@ -703,7 +750,7 @@
 
 **9C7395 / 9C6677** 春秋 / 春秋 06:30 白云→雪都 **¥630**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1z5mnf)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Ut9OA)
 
 ### 深圳→阿勒泰 | 2026-09-28
 
@@ -754,7 +801,7 @@
 
 **ZH9415 / 9C6677** 深航 / 春秋 20:35 宝安→雪都 **¥800**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1VFLAa)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1fxDn6)
 
 ### 广州→阿勒泰 | 2026-09-29
 
@@ -780,7 +827,7 @@
 
 **AQ1177** 九元 06:35 白云→雪都 **¥1739**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0eH1BX)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nYxNw)
 
 ### 深圳→阿勒泰 | 2026-09-29
 
@@ -817,7 +864,7 @@
 
 **Y87565 / CZ6860** 新海航|金鹏航空 / 南航 06:55 宝安→雪都 **¥450**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0XpMck)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2dXjc5)
 
 ### 广州→阿勒泰 | 2026-09-30
 
@@ -861,7 +908,7 @@
 
 **9C7395 / AQ1485** 春秋 / 九元 06:30 白云→雪都 **¥1240**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Wi29l)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Jq4y3)
 
 ### 深圳→阿勒泰 | 2026-09-30
 
@@ -905,7 +952,7 @@
 
 **DZ6239 / MU9983** 东海 / 东航 09:45 宝安→雪都 **¥1400**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F27BgZx)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2VkjCu)
 
 ### 广州→阿勒泰 | 2026-10-01
 
@@ -923,52 +970,14 @@
 
 **AQ1177** 九元 06:35 白云→雪都 **¥3990**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3VGZdi)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3k1uxL)
 
 ### 深圳→阿勒泰 | 2026-10-01
 
 暂无航班数据
 ### 深圳→阿勒泰 | 2026-10-01
 
-共 **10** 趟 | 📊 API 消耗：1 次
-
-#### ☀️ 上午（10:00-14:00）
-
-| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
-|----------|----------|----------|----------|--------|----------|------|
-| 13:40 | 宝安 | 19:00 | 雪都 | 🔄 MU6296 / MU6865 | 东航 / 东航 | ¥2522 |
-| 13:40 | 宝安 | 19:00 | 雪都 | 🔄 MU6296 / MU6865 | 东航 / 东航 | ¥2590 |
-
-> 💡 上午推荐：**MU6296 / MU6865** ¥2522 — 该时段最低价
-
-#### 🌆 下午（14:00-18:00）
-
-| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
-|----------|----------|----------|----------|--------|----------|------|
-| 14:30 | 宝安 | 19:00 | 雪都 | 🔄 CZ3153 / MU6865 | 南航 / 东航 | ¥1190 |
-| 15:30 | 宝安 | 19:00 | 雪都 | 🔄 CZ3189 / MU6865 | 南航 / 东航 | ¥1190 |
-| 16:30 | 宝安 | 19:00 | 雪都 | 🔄 CZ3157 / MU6865 | 南航 / 东航 | ¥1190 |
-
-> 💡 下午推荐：**CZ3153 / MU6865** ¥1190 — 该时段最低价
-
-#### 🌙 晚班（18:00-24:00）
-
-| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
-|----------|----------|----------|----------|--------|----------|------|
-| 19:30 | 宝安 | 19:00 | 雪都 | 🔄 CZ3155 / MU6865 | 南航 / 东航 | ¥1070 |
-| 20:30 | 宝安 | 13:55 | 雪都 | 🔄 MU5358 / MU6205 | 东航 / 东航 | ¥2420 |
-| 20:40 | 宝安 | 19:00 | 雪都 | 🔄 MF8350 / MU6865 | 厦航 / 东航 | ¥1100 |
-| 21:10 | 宝安 | 12:40 | 雪都 | 🔄 GY7214 / 3U6575 | 多彩航 / 川航 | ¥1190 |
-| 21:30 | 宝安 | 13:55 | 雪都 | 🔄 MU5360 / MU6205 | 东航 / 东航 | ¥2420 |
-
-> 💡 晚班推荐：**CZ3155 / MU6865** ¥1070 — 该时段最低价
-
-#### 💰 当日最低价
-
-**CZ3155 / MU6865** 南航 / 东航 19:30 宝安→雪都 **¥1070**（中转）
-
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Wy92Z)
-
+暂无航班数据
 ### 石河子
 
 ### 广州→石河子 | 2026-09-28
@@ -1075,7 +1084,7 @@
 
 **AQ1166** 九元 14:55 乌鲁木齐天山→白云 **¥2839**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3yALEO)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ISsig)
 
 ### 乌鲁木齐→深圳 | 2026-10-06
 
@@ -1122,7 +1131,7 @@
 
 **Y87570** 新海航|金鹏航空 17:55 乌鲁木齐天山→宝安 **¥3300**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4KAGG9)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2GG32y)
 
 ### 乌鲁木齐→广州 | 2026-10-07
 
@@ -1173,7 +1182,7 @@
 
 **AQ1166** 九元 15:15 乌鲁木齐天山→白云 **¥2839**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19Rz5x)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4d9KfB)
 
 ### 乌鲁木齐→深圳 | 2026-10-07
 
@@ -1211,7 +1220,7 @@
 
 **HU7852** 新海航|海南航空 18:55 乌鲁木齐天山→宝安 **¥3460**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Ko3lC)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2YumiO)
 
 ### 乌鲁木齐→广州 | 2026-10-08
 
@@ -1261,7 +1270,7 @@
 
 **HU7224** 新海航|海南航空 19:55 乌鲁木齐天山→白云 **¥2050**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0r10UP)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0NtV2V)
 
 ### 乌鲁木齐→深圳 | 2026-10-08
 
@@ -1308,7 +1317,7 @@
 
 **Y87570** 新海航|金鹏航空 17:15 乌鲁木齐天山→宝安 **¥2200**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Z43A3)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4GrgVo)
 
 ### 伊犁（伊宁）
 
@@ -1317,45 +1326,7 @@
 暂无航班数据
 ### 伊宁→广州 | 2026-10-06
 
-共 **10** 趟 | 📊 API 消耗：1 次
-
-#### ☀️ 上午（10:00-14:00）
-
-| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
-|----------|----------|----------|----------|--------|----------|------|
-| 11:55 | 伊宁 | 09:25 | 白云 | 🔄 3U8562 / 3U8731 | 川航 / 川航 | ¥2410 |
-| 11:55 | 伊宁 | 10:00 | 白云 | 🔄 3U8562 / 3U8739 | 川航 / 川航 | ¥2410 |
-| 11:55 | 伊宁 | 13:00 | 白云 | 🔄 3U8562 / 3U8733 | 川航 / 川航 | ¥2640 |
-
-> 💡 上午推荐：**3U8562 / 3U8731** ¥2410 — 该时段最低价
-
-#### 🌆 下午（14:00-18:00）
-
-| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
-|----------|----------|----------|----------|--------|----------|------|
-| 15:50 | 伊宁 | 10:25 | 白云 | 🔄 3U6915 / 3U6701 | 川航 / 川航 | ¥2410 |
-| 15:50 | 伊宁 | 15:50 | 白云 | 🔄 3U6915 / 3U6703 | 川航 / 川航 | ¥2640 |
-
-> 💡 下午推荐：**3U6915 / 3U6701** ¥2410 — 该时段最低价
-
-#### 🌙 晚班（18:00-24:00）
-
-| 出发时间 | 出发机场 | 到达时间 | 到达机场 | 航班号 | 航空公司 | 价格 |
-|----------|----------|----------|----------|--------|----------|------|
-| 18:55 | 伊宁 | 00:50 | 白云 | 🔄 9C7138 / ZH8379 | 春秋 / 深航 | ¥1450 |
-| 18:55 | 伊宁 | 23:10 | 白云 | 🔄 9C7138 / ZH8371 | 春秋 / 深航 | ¥1450 |
-| 20:25 | 伊宁 | 11:30 | 白云 | 🔄 MU6176 / MU5321 | 东航 / 东航 | ¥2570 |
-| 20:25 | 伊宁 | 23:05 | 白云 | 🔄 MU6176 / MU6142 | 东航 / 东航 | ¥2570 |
-| 20:25 | 伊宁 | 11:30 | 白云 | 🔄 MU6176 / MU5321 | 东航 / 东航 | ¥2610 |
-
-> 💡 晚班推荐：**9C7138 / ZH8379** ¥1450 — 该时段最低价
-
-#### 💰 当日最低价
-
-**9C7138 / ZH8379** 春秋 / 深航 18:55 伊宁→白云 **¥1450**（中转）
-
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1lYnpW)
-
+暂无航班数据
 ### 伊宁→深圳 | 2026-10-06
 
 暂无航班数据
@@ -1398,7 +1369,7 @@
 
 **9C7138 / DZ6278** 春秋 / 东海 18:55 伊宁→宝安 **¥1450**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NIEQe)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1LJV5q)
 
 ### 伊宁→广州 | 2026-10-07
 
@@ -1416,7 +1387,7 @@
 
 **CZ2370** 南航 16:20 伊宁→白云 **¥3790**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Homah)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38I0Uf)
 
 ### 伊宁→深圳 | 2026-10-07
 
@@ -1467,7 +1438,7 @@
 
 **G54185 / 9C7356** 华夏 / 春秋 19:15 伊宁→宝安 **¥550**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F23qZOW)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3cWVKJ)
 
 ### 伊宁→广州 | 2026-10-08
 
@@ -1504,7 +1475,7 @@
 
 **9C7652 / CZ3818** 春秋 / 南航 16:10 伊宁→白云 **¥1000**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F34bwP9)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F30lXKu)
 
 ### 伊宁→深圳 | 2026-10-08
 
@@ -1541,7 +1512,7 @@
 
 **9C7652 / ZH9950** 春秋 / 深航 16:10 伊宁→宝安 **¥1000**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1nv4Oh)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1hMDK9)
 
 ### 阿勒泰
 
@@ -1569,7 +1540,7 @@
 
 **AQ1178** 九元 14:50 雪都→白云 **¥3139**
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1vDWUD)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2NGdh1)
 
 ### 阿勒泰→深圳 | 2026-10-06
 
@@ -1613,7 +1584,7 @@
 
 **G52642 / 9C7680** 华夏 / 春秋 10:05 雪都→宝安 **¥400**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3LNiWR)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3YaDSk)
 
 ### 阿勒泰→广州 | 2026-10-07
 
@@ -1657,7 +1628,7 @@
 
 **EU2870 / AQ1194** 成都航 / 九元 15:55 雪都→白云 **¥380**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3vrtpX)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1kvzvh)
 
 ### 阿勒泰→深圳 | 2026-10-07
 
@@ -1701,7 +1672,7 @@
 
 **G52896 / 9C7356** 华夏 / 春秋 21:00 雪都→宝安 **¥320**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Dt7nF)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JOEn4)
 
 ### 阿勒泰→广州 | 2026-10-08
 
@@ -1751,7 +1722,7 @@
 
 **HU7686 / 9C6540** 新海航|海南航空 / 春秋 17:05 花园→宝安 **¥1320**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0WS2Lm)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3gZY6O)
 
 ### 石河子→广州 | 2026-10-07
 
@@ -1794,7 +1765,7 @@
 
 **G54384 / 9C7356** 华夏 / 春秋 21:35 花园→宝安 **¥320**（中转）
 
-[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eVLQu)
+[点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2yMy1E)
 
 ### 石河子→广州 | 2026-10-08
 
@@ -1810,6 +1781,6 @@
 暂无航班数据
 
 ---
-📊 本次查询总 API 消耗：**106** 次
+📊 本次查询总 API 消耗：**108** 次
 
 基于飞猪 fly.ai 实时数据
