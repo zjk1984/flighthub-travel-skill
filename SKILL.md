@@ -246,6 +246,64 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 基于飞猪 fly.ai 实时数据
 ```
 
+## 广东 ↔ 新疆低价监控 + 飞书通报
+
+内置脚本批量查询广东（深圳/广州）↔ 新疆（乌鲁木齐/伊宁/阿勒泰/石河子）低价航班，生成 Markdown 报告，并可选推送飞书交互卡片（方案借鉴 [daily_stock_analysis](https://github.com/zjk1984/daily_stock_analysis)）。
+
+### 运行
+
+```bash
+npm install
+npm run monitor:ranked    # 查询 + 全量报告 + TOP3 评分报告
+```
+
+输出文件：
+- `reports/xinjiang-flights-latest.md` — 全量价格
+- `reports/xinjiang-flights-ranked.md` — 每日 TOP3 + 扣分项
+
+### 配置与重置
+
+参数文件：`config/monitor-config.json`（默认值见 `config/monitor-defaults.json`）
+
+```bash
+npm run monitor:config     # 查看配置
+npm run monitor:set -- --outbound-dates 2026-11-01,2026-11-02 --return-dates 2026-11-08
+npm run monitor:set -- --origins 深圳 --destinations 乌鲁木齐,伊宁
+npm run monitor:reset      # 全部恢复默认
+node scripts/monitor-config.js reset --outbound-dates   # 仅重置去程日期
+node scripts/monitor-config.js reset --return-dates     # 仅重置返程日期
+node scripts/monitor-config.js reset --origins          # 仅重置出发地
+node scripts/monitor-config.js reset --destinations     # 仅重置目的地
+```
+
+可配置项：`origins`（出发地）、`destinations`（目的地）、`outboundDates`（去程日期）、`returnDates`（返程日期）。
+
+### 飞书卡片推送
+
+**一键配置：**
+
+```bash
+npm run setup:feishu
+# 或：bash scripts/setup-feishu.sh "https://open.feishu.cn/open-apis/bot/v2/hook/<key>"
+```
+
+配置保存到 `.env`，监控脚本自动加载。
+
+```bash
+npm run notify:feishu      # 测试推送 TOP3 报告
+npm run monitor:ranked     # 查询 + 报告 + 自动推送
+```
+
+`FEISHU_REPORT`：`ranked`（默认 TOP3）| `latest` | `both`
+
+**卡片格式**（与 daily_stock_analysis 一致）：
+- `msg_type: interactive`，正文用 `lark_md` 渲染 Markdown
+- 标题默认「广东 ↔ 新疆 每日 TOP3 航班推荐」
+- 超长内容（>20KB）按 `---` / `###` 智能分批，带 `📄 (1/N)` 分页
+- 卡片失败时回退纯文本消息
+
+可选环境变量：`FEISHU_MAX_BYTES`（默认 20000）
+
 ## References
 Detailed command docs live in **`references/`** (one file per subcommand):
 

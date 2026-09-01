@@ -6,6 +6,11 @@
   "scripts": {
     "monitor:xinjiang": "bash scripts/monitor-xinjiang.sh",
     "monitor:ranked": "bash scripts/monitor-xinjiang.sh reports/xinjiang-flights-latest.md reports/xinjiang-flights-ranked.md",
+    "monitor:config": "node scripts/monitor-config.js show",
+    "monitor:reset": "node scripts/monitor-config.js reset",
+    "monitor:set": "node scripts/monitor-config.js set",
+    "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
+    "setup:feishu": "bash scripts/setup-feishu.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -4,33 +4,27 @@
  * Usage: node format-xinjiang-report.js < results.jsonl
  */
 const fs = require("fs");
+const { formatShanghaiTime } = require("./format-time");
+const {
+  loadConfig,
+  labelCity,
+  formatDateRange,
+  formatCoverage,
+  parseRoute,
+  isOutboundRoute,
+  remoteCity,
+} = require("./load-monitor-config");
 
-const CITY_LABEL = {
-  伊宁: "伊犁（伊宁）",
-  乌鲁木齐: "乌鲁木齐",
-  阿勒泰: "阿勒泰",
-  石河子: "石河子",
-};
-
-const XINJIANG = ["乌鲁木齐", "伊宁", "阿勒泰", "石河子"];
-
-function labelCity(name) {
-  return CITY_LABEL[name] || name;
-}
-
-function parseRoute(route) {
-  const [origin, dest] = route.split("→");
-  return { origin, dest };
-}
+const CFG = loadConfig();
+const DESTINATIONS = CFG.destinations;
+const ORIGINS = CFG.origins;
 
 function isOutbound(route) {
-  const { dest } = parseRoute(route);
-  return XINJIANG.includes(dest);
+  return isOutboundRoute(route, CFG);
 }
 
 function xinjiangCity(route) {
-  const { origin, dest } = parseRoute(route);
-  return isOutbound(route) ? dest : origin;
+  return remoteCity(route, CFG);
 }
 
 const raw = fs.readFileSync("/dev/stdin", "utf8");
@@ -91,9 +85,9 @@ function renderRouteDate(r) {
 }
 
 let totalApi = 0;
-let md = `# ✈️ 广东 ↔ 新疆 低价机票监控报告\n\n`;
-md += `> 生成时间：${new Date().toISOString().slice(0, 19).replace("T", " ")} UTC\n\n`;
-md += `> 覆盖机场：乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子\n\n`;
+let md = `# ✈️ ${CFG.routeLabel} 低价机票监控报告\n\n`;
+md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
+md += `> 覆盖目的地：${formatCoverage(DESTINATIONS)}\n\n`;
 
 const outbound = results.filter(r => isOutbound(r.route));
 const inbound = results.filter(r => !isOutbound(r.route));
@@ -118,16 +112,19 @@ const globalBest = {
   inbound: allFlights.filter(f => !isOutbound(f.route)).sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0],
 };
 
-md += `\n## 🏆 全程最优推荐（跨所有新疆机场）\n\n`;
+const outRange = formatDateRange(CFG.outboundDates);
+const inRange = formatDateRange(CFG.returnDates);
+
+md += `\n## 🏆 全程最优推荐（跨所有目的地）\n\n`;
 if (globalBest.outbound) {
   const f = globalBest.outbound;
-  md += `- **去程最优（9/28-10/1）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发`;
+  md += `- **去程最优（${outRange}）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发`;
   if (f.journeyType === "中转") md += `（中转）`;
   md += `\n`;
 }
 if (globalBest.inbound) {
   const f = globalBest.inbound;
-  md += `- **返程最优（10/6-10/8）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发`;
+  md += `- **返程最优（${inRange}）**：${f.date} ${f.route} **${f.flightNo}** ¥${parseFloat(f.price).toFixed(0)} ${f.depDateTime.slice(11, 16)} 出发`;
   if (f.journeyType === "中转") md += `（中转）`;
   md += `\n`;
 }
@@ -136,9 +133,9 @@ if (globalBest.outbound && globalBest.inbound) {
   md += `- **往返合计参考**：约 **¥${total.toFixed(0)}**（${globalBest.outbound.date} 去 + ${globalBest.inbound.date} 回）\n`;
 }
 
-md += `\n## 🗺️ 各机场最低价对比\n\n`;
-md += "| 机场 | 去程最低 | 返程最低 |\n|------|----------|----------|\n";
-for (const city of XINJIANG) {
+md += `\n## 🗺️ 各目的地最低价对比\n\n`;
+md += "| 目的地 | 去程最低 | 返程最低 |\n|------|----------|----------|\n";
+for (const city of DESTINATIONS) {
   const outBest = allFlights
     .filter(f => isOutbound(f.route) && xinjiangCity(f.route) === city)
     .sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0];
@@ -150,8 +147,8 @@ for (const city of XINJIANG) {
   md += `| ${labelCity(city)} | ${outStr} | ${inStr} |\n`;
 }
 
-md += `\n---\n\n## 去程详情（9/28 - 10/1 深圳/广州 → 新疆）\n\n`;
-for (const city of XINJIANG) {
+md += `\n---\n\n## 去程详情（${outRange} ${ORIGINS.join("/")} → 目的地）\n\n`;
+for (const city of DESTINATIONS) {
   const cityRoutes = outbound.filter(r => xinjiangCity(r.route) === city);
   if (!cityRoutes.length) continue;
   md += `### ${labelCity(city)}\n\n`;
@@ -160,8 +157,8 @@ for (const city of XINJIANG) {
   }
 }
 
-md += `\n---\n\n## 返程详情（10/6 - 10/8 新疆 → 深圳/广州）\n\n`;
-for (const city of XINJIANG) {
+md += `\n---\n\n## 返程详情（${inRange} 目的地 → ${ORIGINS.join("/")}）\n\n`;
+for (const city of DESTINATIONS) {
   const cityRoutes = inbound.filter(r => xinjiangCity(r.route) === city);
   if (!cityRoutes.length) continue;
   md += `### ${labelCity(city)}\n\n`;

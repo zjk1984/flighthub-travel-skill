@@ -8,12 +8,12 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 export FLYAI="${FLYAI:-npx flyai}"
 export DEDUP="$SCRIPT_DIR/flyai-dedup.js"
 cd "$ROOT_DIR"
+# shellcheck source=load-env.sh
+source "$SCRIPT_DIR/load-env.sh"
 
-OUTBOUND_DATES=(2026-09-28 2026-09-29 2026-09-30 2026-10-01)
-RETURN_DATES=(2026-10-06 2026-10-07 2026-10-08)
-GUANGDONG=(深圳 广州)
-# API 城市名：伊犁用「伊宁」
-XINJIANG=(乌鲁木齐 伊宁 阿勒泰 石河子)
+eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
+echo "Monitor config: $ROUTE_LABEL | 出发 ${ORIGINS[*]} → ${DESTINATIONS[*]}" >&2
+echo "  去程: ${OUTBOUND_DATES[*]} | 返程: ${RETURN_DATES[*]}" >&2
 
 OUTPUT="${1:-$ROOT_DIR/reports/xinjiang-flights-latest.md}"
 RANKED_OUTPUT="${2:-$ROOT_DIR/reports/xinjiang-flights-ranked.md}"
@@ -50,27 +50,27 @@ run_search_smart() {
   fi
 }
 
-# Outbound: 深圳/广州 → 新疆各机场
+# Outbound: 出发地 → 目的地
 for date in "${OUTBOUND_DATES[@]}"; do
-  for origin in "${GUANGDONG[@]}"; do
-    for xj in "${XINJIANG[@]}"; do
-      if [[ "$xj" == "乌鲁木齐" ]]; then
-        run_search "$origin" "$xj" "$date" 1
+  for origin in "${ORIGINS[@]}"; do
+    for dest in "${DESTINATIONS[@]}"; do
+      if [[ " ${DIRECT_ONLY_AIRPORTS[*]} " == *" $dest "* ]]; then
+        run_search "$origin" "$dest" "$date" 1
       else
-        run_search_smart "$origin" "$xj" "$date"
+        run_search_smart "$origin" "$dest" "$date"
       fi
     done
   done
 done
 
-# Return: 新疆各机场 → 深圳/广州
+# Return: 目的地 → 出发地
 for date in "${RETURN_DATES[@]}"; do
-  for xj in "${XINJIANG[@]}"; do
-    for dest in "${GUANGDONG[@]}"; do
-      if [[ "$xj" == "乌鲁木齐" ]]; then
-        run_search "$xj" "$dest" "$date" 1
+  for dest in "${DESTINATIONS[@]}"; do
+    for origin in "${ORIGINS[@]}"; do
+      if [[ " ${DIRECT_ONLY_AIRPORTS[*]} " == *" $dest "* ]]; then
+        run_search "$dest" "$origin" "$date" 1
       else
-        run_search_smart "$xj" "$dest" "$date"
+        run_search_smart "$dest" "$origin" "$date"
       fi
     done
   done
@@ -82,4 +82,26 @@ node "$SCRIPT_DIR/format-ranked-report.js" < "$TMP_RESULTS" > "$RANKED_OUTPUT"
 cp "$TMP_RESULTS" "$ROOT_DIR/reports/xinjiang-results.jsonl"
 echo "Report saved to: $OUTPUT" >&2
 echo "Ranked report saved to: $RANKED_OUTPUT" >&2
+
+# Feishu card notification (optional)
+if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
+  FEISHU_REPORT="${FEISHU_REPORT:-ranked}"
+  echo "Sending Feishu notification ($FEISHU_REPORT)..." >&2
+  send_feishu() {
+    node "$SCRIPT_DIR/feishu-notify.js" --title "$1" "$2" || echo "Feishu notification failed (non-fatal)" >&2
+  }
+  case "$FEISHU_REPORT" in
+    latest)
+      send_feishu "${ROUTE_LABEL} 低价机票监控报告" "$OUTPUT"
+      ;;
+    both)
+      send_feishu "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED_OUTPUT"
+      send_feishu "${ROUTE_LABEL} 低价机票监控报告" "$OUTPUT"
+      ;;
+    *)
+      send_feishu "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED_OUTPUT"
+      ;;
+  esac
+fi
+
 rm -f "$TMP_RESULTS"

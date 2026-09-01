@@ -44,6 +44,35 @@ CLI 安装：`npm i -g @fly-ai/flyai-cli`
 
 无直飞时自动查询中转航班。
 
+### 配置与重置
+
+监控参数保存在 `config/monitor-config.json`，支持修改/重置出发返程日期、出发地、目的地：
+
+```bash
+npm run monitor:config          # 查看当前配置
+
+# 修改
+npm run monitor:set -- --outbound-dates 2026-11-01,2026-11-02
+npm run monitor:set -- --return-dates 2026-11-08,2026-11-09
+npm run monitor:set -- --origins 深圳,广州
+npm run monitor:set -- --destinations 乌鲁木齐,伊宁,阿勒泰
+
+# 重置为默认值（config/monitor-defaults.json）
+npm run monitor:reset                              # 全部重置
+node scripts/monitor-config.js reset --outbound-dates   # 仅重置去程日期
+node scripts/monitor-config.js reset --return-dates     # 仅重置返程日期
+node scripts/monitor-config.js reset --origins            # 仅重置出发地
+node scripts/monitor-config.js reset --destinations     # 仅重置目的地
+```
+
+| 配置项 | 说明 |
+|--------|------|
+| `origins` | 出发地（去程出发 / 返程到达），如 深圳、广州 |
+| `destinations` | 目的地（去程到达 / 返程出发），如 乌鲁木齐、伊宁 |
+| `outboundDates` | 去程日期列表（YYYY-MM-DD） |
+| `returnDates` | 返程日期列表（YYYY-MM-DD） |
+| `directOnlyAirports` | 仅查直达的机场（默认乌鲁木齐） |
+
 ### 运行监控
 
 ```bash
@@ -65,7 +94,42 @@ npm run monitor:ranked      # 全量 + 每日 TOP3 评分报告
 | `scripts/flyai-dedup.js` | 航班结果去重合并 |
 | `scripts/format-xinjiang-report.js` | 格式化全量 Markdown 报告 |
 | `scripts/format-ranked-report.js` | 每日 TOP3 评分排名与扣分项 |
+| `scripts/feishu-notify.js` | 飞书交互卡片推送（借鉴 daily_stock_analysis） |
+| `scripts/monitor-config.js` | 查看/修改/重置监控配置（日期、出发地、目的地） |
+| `scripts/load-monitor-config.js` | 配置加载模块（脚本内部使用） |
 
-## License
+### 飞书卡片通报
+
+借鉴 [daily_stock_analysis](https://github.com/zjk1984/daily_stock_analysis) 的方案：监控完成后将报告以**飞书交互卡片**（`lark_md`）推送到群聊。
+
+**一键配置：**
+
+```bash
+# 方式 1：交互式（推荐）
+npm run setup:feishu
+
+# 方式 2：直接传入 Webhook
+bash scripts/setup-feishu.sh "https://open.feishu.cn/open-apis/bot/v2/hook/你的key" ranked
+```
+
+配置写入 `.env`（已加入 `.gitignore`，不会提交到仓库）。
+
+**获取 Webhook：** 飞书群 → 设置 → 群机器人 → 添加机器人 → **自定义机器人** → 复制 Webhook 地址
+
+**测试推送 / 监控推送：**
+
+```bash
+npm run notify:feishu        # 推送当前 TOP3 报告（测试用）
+npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
+```
+
+**环境变量（`.env`）：**
+
+| 变量 | 说明 | 默认 |
+|------|------|------|
+| `FEISHU_WEBHOOK_URL` | 飞书自定义机器人 Webhook | 必填 |
+| `FEISHU_REPORT` | `ranked` / `latest` / `both` | `ranked` |
+| `FEISHU_MAX_BYTES` | 单条消息最大字节，超长分批 | `20000` |
+
 
 MIT
