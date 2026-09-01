@@ -82,4 +82,26 @@ node "$SCRIPT_DIR/format-ranked-report.js" < "$TMP_RESULTS" > "$RANKED_OUTPUT"
 cp "$TMP_RESULTS" "$ROOT_DIR/reports/xinjiang-results.jsonl"
 echo "Report saved to: $OUTPUT" >&2
 echo "Ranked report saved to: $RANKED_OUTPUT" >&2
+
+# Feishu card notification (optional)
+if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
+  FEISHU_REPORT="${FEISHU_REPORT:-ranked}"
+  echo "Sending Feishu notification ($FEISHU_REPORT)..." >&2
+  send_feishu() {
+    node "$SCRIPT_DIR/feishu-notify.js" --title "$1" "$2" || echo "Feishu notification failed (non-fatal)" >&2
+  }
+  case "$FEISHU_REPORT" in
+    latest)
+      send_feishu "广东 ↔ 新疆 低价机票监控报告" "$OUTPUT"
+      ;;
+    both)
+      send_feishu "广东 ↔ 新疆 每日 TOP3 航班推荐" "$RANKED_OUTPUT"
+      send_feishu "广东 ↔ 新疆 低价机票监控报告" "$OUTPUT"
+      ;;
+    *)
+      send_feishu "广东 ↔ 新疆 每日 TOP3 航班推荐" "$RANKED_OUTPUT"
+      ;;
+  esac
+fi
+
 rm -f "$TMP_RESULTS"

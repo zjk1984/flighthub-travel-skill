@@ -246,6 +246,46 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 基于飞猪 fly.ai 实时数据
 ```
 
+## 广东 ↔ 新疆低价监控 + 飞书通报
+
+内置脚本批量查询广东（深圳/广州）↔ 新疆（乌鲁木齐/伊宁/阿勒泰/石河子）低价航班，生成 Markdown 报告，并可选推送飞书交互卡片（方案借鉴 [daily_stock_analysis](https://github.com/zjk1984/daily_stock_analysis)）。
+
+### 运行
+
+```bash
+npm install
+npm run monitor:ranked    # 查询 + 全量报告 + TOP3 评分报告
+```
+
+输出文件：
+- `reports/xinjiang-flights-latest.md` — 全量价格
+- `reports/xinjiang-flights-ranked.md` — 每日 TOP3 + 扣分项
+
+### 飞书卡片推送
+
+1. 飞书群添加**自定义机器人**，获取 Webhook URL
+2. 设置环境变量后运行监控，完成后自动推送：
+
+```bash
+export FEISHU_WEBHOOK_URL="https://open.feishu.cn/open-apis/bot/v2/hook/<key>"
+export FEISHU_REPORT=ranked   # ranked（默认 TOP3）| latest | both
+npm run monitor:ranked
+```
+
+单独推送已有报告：
+
+```bash
+node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md
+```
+
+**卡片格式**（与 daily_stock_analysis 一致）：
+- `msg_type: interactive`，正文用 `lark_md` 渲染 Markdown
+- 标题默认「广东 ↔ 新疆 每日 TOP3 航班推荐」
+- 超长内容（>20KB）按 `---` / `###` 智能分批，带 `📄 (1/N)` 分页
+- 卡片失败时回退纯文本消息
+
+可选环境变量：`FEISHU_MAX_BYTES`（默认 20000）
+
 ## References
 Detailed command docs live in **`references/`** (one file per subcommand):
 

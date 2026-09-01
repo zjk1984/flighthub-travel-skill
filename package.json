@@ -6,6 +6,7 @@
   "scripts": {
     "monitor:xinjiang": "bash scripts/monitor-xinjiang.sh",
     "monitor:ranked": "bash scripts/monitor-xinjiang.sh reports/xinjiang-flights-latest.md reports/xinjiang-flights-ranked.md",
+    "notify:feishu": "node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
