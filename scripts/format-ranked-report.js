@@ -30,13 +30,32 @@ const WEIGHTS = {
 };
 
 const SCORE_DESC =
-  "综合分 = 价格×25% + 时长×15% + 转机×15% + 出发地×10% + 目的地×10% + 起飞时间×12.5% + 落地时间×12.5%（**越高越好**）";
+  "综合分 = 价格×25% + 时长×15% + 转机×15% + 出发地×10% + 目的地×10% + 起飞×12.5% + 落地×12.5%（**越高越好**）";
 
-function transferPoints(count, depDateTime, arrDateTime) {
+/** 1000 以下 100 分，每加 1000 减 25 分 */
+function pricePoints(price) {
+  if (price < 1000) return 100;
+  const tier = Math.floor(price / 1000);
+  return Math.max(0, 100 - tier * 25);
+}
+
+function dayOf(dt) {
+  return dt ? dt.slice(0, 10) : "";
+}
+
+/** 跨天：全程跨日，或任一航段与前一段不在同一天（含中转过夜） */
+function isCrossDay(f) {
+  if (dayOf(f.depDateTime) !== dayOf(f.arrDateTime)) return true;
+  const segs = f.segments || [];
+  for (let i = 0; i < segs.length - 1; i++) {
+    if (dayOf(segs[i].arrDateTime) !== dayOf(segs[i + 1].depDateTime)) return true;
+  }
+  return false;
+}
+
+function transferPoints(count, f) {
   let pts = Math.max(0, 100 - count * 25);
-  const depDay = depDateTime.slice(0, 10);
-  const arrDay = arrDateTime.slice(0, 10);
-  if (depDay !== arrDay) pts = Math.max(0, pts - 25);
+  if (isCrossDay(f)) pts = Math.max(0, pts - 25);
   return pts;
 }
 
@@ -141,19 +160,18 @@ function flattenFlights(results) {
 
 function scoreFlights(flights, direction) {
   if (!flights.length) return [];
-  const prices = flights.map(f => f.priceNum);
   const durations = flights.map(f => f.durationMin);
-  const normP = normalize(prices);
   const normD = normalize(durations);
 
   return flights.map((f, i) => {
     const depPref = guangdongPref(f, direction);
     const xjPref = xjAirportPref(f.xjAirport);
-    const transferPts = transferPoints(f.transfers, f.depDateTime, f.arrDateTime);
+    const pricePts = pricePoints(f.priceNum);
+    const transferPts = transferPoints(f.transfers, f);
     const depTimePts = timeSlotPoints(f.depDateTime);
     const arrTimePts = timeSlotPoints(f.arrDateTime);
     const score =
-      (1 - normP[i]) * WEIGHTS.price +
+      (pricePts / 100) * WEIGHTS.price +
       (1 - normD[i]) * WEIGHTS.duration +
       (transferPts / 100) * WEIGHTS.transfer +
       (depPref / 100) * WEIGHTS.depCity +
@@ -164,9 +182,11 @@ function scoreFlights(flights, direction) {
       ...f,
       depPref,
       xjPref,
+      pricePts,
       transferPts,
       depTimePts,
       arrTimePts,
+      crossDay: isCrossDay(f),
       score: Math.round(score * 1000) / 10,
     };
   }).sort((a, b) => b.score - a.score || a.priceNum - b.priceNum);
@@ -229,8 +249,8 @@ function renderDailySections(days, title, direction) {
       md += "暂无航班\n\n";
       continue;
     }
-    md += `| 排名 | 评分 | ${col1} | ${col2} | 航线 | 航班 | 类型 | 价格 | 时长 | 转机分 | 起飞分 | 落地分 | 出发 | 到达 |\n`;
-    md += "|------|------|--------|--------|------|------|------|------|------|--------|--------|--------|------|------|\n";
+    md += `| 排名 | 评分 | ${col1} | ${col2} | 航线 | 航班 | 类型 | 价格 | 价格分 | 时长 | 转机分 | 起飞分 | 落地分 | 出发 | 到达 |\n`;
+    md += "|------|------|--------|--------|------|------|------|------|--------|------|--------|--------|--------|------|------|\n";
     flights.forEach((f, i) => {
       const xjLabel = labelCity(f.xjAirport);
       let c1, c2;
@@ -241,7 +261,7 @@ function renderDailySections(days, title, direction) {
         c1 = `${xjLabel}(${f.xjPref})`;
         c2 = `${f.dest}(${f.depPref})`;
       }
-      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depTimePts} | ${f.arrTimePts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)} | ${f.pricePts} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depTimePts} | ${f.arrTimePts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
     });
     md += "\n**预订链接：**\n";
     flights.forEach((f, i) => {
@@ -272,9 +292,11 @@ md += `| 维度 | 选项 | 偏好分 |\n|------|------|--------|\n`;
 md += `| 出发地（去程）/ 到达地（返程） | 深圳 | 100 |\n`;
 md += `| 出发地（去程）/ 到达地（返程） | 广州 | 80 |\n`;
 md += `| 目的地（去程）/ 出发地（返程） | 乌鲁木齐/伊宁/阿勒泰/石河子 | 100 |\n`;
+md += `| 机票价格 | 1000 以下 | 100 |\n`;
+md += `| 机票价格 | 每加 1000 | -25（最低 0） |\n`;
 md += `| 转机次数 | 0 次 | 100 |\n`;
 md += `| 转机次数 | 每多 1 次 | -25（最低 0） |\n`;
-md += `| 转机次数 | 跨天（出发日与到达日不同） | 额外 -25 |\n`;
+md += `| 转机次数 | 跨天（全程或航段间跨日） | 额外 -25 |\n`;
 md += `| 起飞/落地时间 | 07:00–22:00 | 100 |\n`;
 md += `| 起飞/落地时间 | 其他时段 | 80 |\n\n`;
 
