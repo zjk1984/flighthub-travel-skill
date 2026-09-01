@@ -10,6 +10,7 @@ const DEFAULTS_PATH = path.join(ROOT, "config/monitor-defaults.json");
 
 const CITY_LABEL = {
   伊宁: "伊犁（伊宁）",
+  博乐: "博乐（赛里木湖）",
 };
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
