@@ -133,6 +133,27 @@ function scoreFlights(flights, direction) {
   })).sort((a, b) => a.score - b.score || a.priceNum - b.priceNum);
 }
 
+/** 同航线同日期内，若最低价不到次低价的 65%，标记为待核实 */
+function markPriceOutliers(flights) {
+  const groups = new Map();
+  for (const f of flights) {
+    const key = `${f.route}|${f.date}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(f);
+  }
+  for (const group of groups.values()) {
+    const sorted = [...group].sort((a, b) => a.priceNum - b.priceNum);
+    if (sorted.length < 2) continue;
+    const low = sorted[0].priceNum;
+    const second = sorted[1].priceNum;
+    if (second > 0 && low / second < 0.65) {
+      sorted[0].priceWarning = `API 报价 ¥${low.toFixed(0)} 明显低于同航线次低价 ¥${second.toFixed(0)}，预订页可能不一致`;
+      sorted[0].priceVerified = false;
+    }
+  }
+  return flights;
+}
+
 /** 每个新疆机场取评分最优 1 条，再按评分取 TOP N 机场 */
 function topByXinjiangAirport(flights, direction, n = TOP_N) {
   const byAirport = new Map();
@@ -167,12 +188,14 @@ function renderTable(flights, title, extraNote = "") {
   md += "| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |\n";
   md += "|------|------|------|--------|------|------|------|------|----------|------|------|------|\n";
   flights.forEach((f, i) => {
-    md += `| ${i + 1} | ${f.score} | ${f.date.slice(5)} | ${f.origin} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.transfers} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+    const warn = f.priceWarning ? ` ⚠️ ${f.priceWarning}` : "";
+    md += `| ${i + 1} | ${f.score} | ${f.date.slice(5)} | ${f.origin} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.transfers} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |${warn ? "" : ""}\n`;
   });
   md += "\n### 预订链接\n\n";
   flights.forEach((f, i) => {
     const url = f.jumpUrl || "#";
-    md += `${i + 1}. **${f.date.slice(5)} ${routeDisplay(f)}** ${f.flightNo} ¥${f.priceNum.toFixed(0)} — [点击预订](${url})\n`;
+    const warn = f.priceWarning ? ` ⚠️${f.priceWarning}` : "";
+    md += `${i + 1}. **${f.date.slice(5)} ${routeDisplay(f)}** ${f.flightNo} ¥${f.priceNum.toFixed(0)}${warn} — [点击预订](${url})\n`;
   });
   return md + "\n";
 }
@@ -205,8 +228,8 @@ function renderAirportSections(flights, direction, label) {
 const raw = fs.readFileSync("/dev/stdin", "utf8");
 const results = parseJsonl(raw);
 const all = flattenFlights(results);
-const outbound = scoreFlights(all.filter(f => isOutbound(f.route)), "outbound");
-const inbound = scoreFlights(all.filter(f => !isOutbound(f.route)), "inbound");
+const outbound = markPriceOutliers(scoreFlights(all.filter(f => isOutbound(f.route)), "outbound"));
+const inbound = markPriceOutliers(scoreFlights(all.filter(f => !isOutbound(f.route)), "inbound"));
 
 const topOut = outbound.slice(0, TOP_N);
 const topIn = inbound.slice(0, TOP_N);
