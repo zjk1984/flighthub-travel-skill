@@ -31,6 +31,35 @@ OpenClaw Skill，基于飞猪 MCP 接口，提供机票、酒店、门票、景�
 
 CLI 安装：`npm i -g @fly-ai/flyai-cli`
 
+## 低价机票监控
+
+本项目内置广东 ↔ 新疆低价航班监控脚本，基于 FlyAI skill 的自适应时间切片策略查询飞猪实时数据。
+
+### 监控航线
+
+| 方向 | 日期 | 航线 |
+|------|------|------|
+| 去程 | 9/28 - 10/1 | 深圳/广州 → 乌鲁木齐 |
+| 返程 | 10/6 - 10/8 | 乌鲁木齐 → 深圳/广州 |
+
+### 运行监控
+
+```bash
+npm install
+npm run monitor:xinjiang
+```
+
+报告输出至 `reports/xinjiang-flights-latest.md`。
+
+### 脚本说明
+
+| 脚本 | 功能 |
+|------|------|
+| `scripts/monitor-xinjiang.sh` | 批量查询所有航线日期并生成报告 |
+| `scripts/flyai-adaptive-search.sh` | 单航线自适应时间切片查询 |
+| `scripts/flyai-dedup.js` | 航班结果去重合并 |
+| `scripts/format-xinjiang-report.js` | 格式化 Markdown 报告 |
+
 ## License
 
 MIT
