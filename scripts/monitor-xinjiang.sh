@@ -8,6 +8,8 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 export FLYAI="${FLYAI:-npx flyai}"
 export DEDUP="$SCRIPT_DIR/flyai-dedup.js"
 cd "$ROOT_DIR"
+# shellcheck source=load-env.sh
+source "$SCRIPT_DIR/load-env.sh"
 
 eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
 echo "Monitor config: $ROUTE_LABEL | 出发 ${ORIGINS[*]} → ${DESTINATIONS[*]}" >&2

@@ -9,7 +9,8 @@
     "monitor:config": "node scripts/monitor-config.js show",
     "monitor:reset": "node scripts/monitor-config.js reset",
     "monitor:set": "node scripts/monitor-config.js set",
-    "notify:feishu": "node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md",
+    "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
+    "setup:feishu": "bash scripts/setup-feishu.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

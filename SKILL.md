@@ -280,20 +280,21 @@ node scripts/monitor-config.js reset --destinations     # 仅重置目的地
 
 ### 飞书卡片推送
 
-1. 飞书群添加**自定义机器人**，获取 Webhook URL
-2. 设置环境变量后运行监控，完成后自动推送：
+**一键配置：**
 
 ```bash
-export FEISHU_WEBHOOK_URL="https://open.feishu.cn/open-apis/bot/v2/hook/<key>"
-export FEISHU_REPORT=ranked   # ranked（默认 TOP3）| latest | both
-npm run monitor:ranked
+npm run setup:feishu
+# 或：bash scripts/setup-feishu.sh "https://open.feishu.cn/open-apis/bot/v2/hook/<key>"
 ```
 
-单独推送已有报告：
+配置保存到 `.env`，监控脚本自动加载。
 
 ```bash
-node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md
+npm run notify:feishu      # 测试推送 TOP3 报告
+npm run monitor:ranked     # 查询 + 报告 + 自动推送
 ```
+
+`FEISHU_REPORT`：`ranked`（默认 TOP3）| `latest` | `both`
 
 **卡片格式**（与 daily_stock_analysis 一致）：
 - `msg_type: interactive`，正文用 `lark_md` 渲染 Markdown
