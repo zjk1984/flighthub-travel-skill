@@ -39,17 +39,22 @@ CLI 安装：`npm i -g @fly-ai/flyai-cli`
 
 | 方向 | 日期 | 航线 |
 |------|------|------|
-| 去程 | 9/28 - 10/1 | 深圳/广州 → 乌鲁木齐 |
-| 返程 | 10/6 - 10/8 | 乌鲁木齐 → 深圳/广州 |
+| 去程 | 9/28 - 10/1 | 深圳/广州 → 乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子 |
+| 返程 | 10/6 - 10/8 | 乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子 → 深圳/广州 |
+
+无直飞时自动查询中转航班。
 
 ### 运行监控
 
 ```bash
 npm install
-npm run monitor:xinjiang
+npm run monitor:xinjiang    # 全量价格报告
+npm run monitor:ranked      # 全量 + 每日 TOP3 评分报告
 ```
 
-报告输出至 `reports/xinjiang-flights-latest.md`。
+报告输出：
+- `reports/xinjiang-flights-latest.md` — 全量价格汇总
+- `reports/xinjiang-flights-ranked.md` — 每日 TOP3 评分推荐（含扣分项）
 
 ### 脚本说明
 
@@ -58,7 +63,8 @@ npm run monitor:xinjiang
 | `scripts/monitor-xinjiang.sh` | 批量查询所有航线日期并生成报告 |
 | `scripts/flyai-adaptive-search.sh` | 单航线自适应时间切片查询 |
 | `scripts/flyai-dedup.js` | 航班结果去重合并 |
-| `scripts/format-xinjiang-report.js` | 格式化 Markdown 报告 |
+| `scripts/format-xinjiang-report.js` | 格式化全量 Markdown 报告 |
+| `scripts/format-ranked-report.js` | 每日 TOP3 评分排名与扣分项 |
 
 ## License
 

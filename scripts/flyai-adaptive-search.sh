@@ -15,7 +15,12 @@ API_COUNT=0
 
 query_window() {
   local start=$1 end=$2
+  local sort_type="${3:-}"
   sleep 1
+  local extra=()
+  if [[ -n "$sort_type" ]]; then
+    extra=(--sort-type "$sort_type")
+  fi
   $FLYAI search-flight \
     --origin "$origin" \
     --destination "$destination" \
@@ -23,6 +28,7 @@ query_window() {
     --journey-type "$journey_type" \
     --dep-hour-start "$start" \
     --dep-hour-end "$end" \
+    "${extra[@]}" \
     2>/dev/null >> "$TMPFILE" || true
   API_COUNT=$((API_COUNT + 1))
 }
@@ -51,7 +57,12 @@ slice_recursive() {
   slice_recursive "$mid" "$end" "$min_hours"
 }
 
-slice_recursive 0 24 1
+# 中转航班：单次按低价排序查询即可（监控场景无需全量切片）
+if [[ "$journey_type" == "2" ]]; then
+  query_window 0 24 3
+else
+  slice_recursive 0 24 1
+fi
 
 RESULT=$(cat "$TMPFILE" | node "$DEDUP" 2>&1)
 DEDUP_MSG=$(echo "$RESULT" | head -1)

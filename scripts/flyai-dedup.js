@@ -44,6 +44,11 @@ for (const line of lines) {
             duration: journey.totalDuration || "",
             price: item.ticketPrice || item.adultPrice || "",
             jumpUrl: item.jumpUrl || "",
+            segments: segs.map(s => ({
+              depDateTime: s.depDateTime,
+              arrDateTime: s.arrDateTime,
+              flightNo: s.marketingTransportNo,
+            })),
           });
         }
       }
