@@ -51,7 +51,11 @@ function formatFlight(f) {
   const dep = f.depDateTime.slice(11, 16);
   const arr = f.arrDateTime.slice(11, 16);
   const price = f.price.includes("¥") ? f.price : `¥${parseFloat(f.price).toFixed(0)}`;
-  const type = f.journeyType === "中转" ? "🔄" : "✈️";
+  const type = f.customTransfer
+    ? "🔗"
+    : f.journeyType === "中转" || f.journeyType === "自定义中转"
+      ? "🔄"
+      : "✈️";
   return `| ${dep} | ${f.depStation} | ${arr} | ${f.arrStation} | ${type} ${f.flightNo} | ${f.airline} | ${price} |`;
 }
 

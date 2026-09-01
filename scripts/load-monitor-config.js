@@ -44,6 +44,20 @@ function saveConfig(config) {
   return normalized;
 }
 
+function normalizeCustomTransfer(raw) {
+  const d = raw || {};
+  return {
+    enabled: d.enabled !== false,
+    firstLegTopN: Math.max(1, parseInt(d.firstLegTopN, 10) || 10),
+    minConnectionMinutes: Math.max(30, parseInt(d.minConnectionMinutes, 10) || 90),
+    maxConnectionMinutes: Math.max(120, parseInt(d.maxConnectionMinutes, 10) || 480),
+    transferHubs: uniqStrings(
+      d.transferHubs || ["乌鲁木齐", "西安", "兰州", "成都", "重庆", "郑州"]
+    ),
+    leg2NextDayIfNeeded: d.leg2NextDayIfNeeded !== false,
+  };
+}
+
 function normalizeScoring(raw) {
   const d = raw || {};
   const originScores = { ...(d.originScores || { 深圳: 100, 广州: 80 }) };
@@ -61,6 +75,7 @@ function normalizeConfig(raw) {
     outboundDates: uniqDates(raw.outboundDates),
     returnDates: uniqDates(raw.returnDates),
     directOnlyAirports: uniqStrings(raw.directOnlyAirports || ["乌鲁木齐"]),
+    customTransfer: normalizeCustomTransfer(raw.customTransfer),
     scoring: normalizeScoring(raw.scoring),
   };
 
@@ -146,6 +161,9 @@ function exportBash(cfg) {
     `ORIGINS=(${quoteArray(c.origins)})`,
     `DESTINATIONS=(${quoteArray(c.destinations)})`,
     `DIRECT_ONLY_AIRPORTS=(${quoteArray(c.directOnlyAirports)})`,
+    `CUSTOM_TRANSFER_ENABLED=${c.customTransfer.enabled ? "true" : "false"}`,
+    `CUSTOM_TRANSFER_TOPN=${c.customTransfer.firstLegTopN}`,
+    `TRANSFER_HUBS=(${quoteArray(c.customTransfer.transferHubs)})`,
   ].join("\n");
 }
 

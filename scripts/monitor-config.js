@@ -84,6 +84,13 @@ function showConfig(cfg, asJson) {
   console.log(`去程日期     ${cfg.outboundDates.join(", ")}  (${formatDateRange(cfg.outboundDates)})`);
   console.log(`返程日期     ${cfg.returnDates.join(", ")}  (${formatDateRange(cfg.returnDates)})`);
   console.log(`仅查直达机场 ${cfg.directOnlyAirports.join("、")}`);
+  if (cfg.customTransfer?.enabled) {
+    console.log(
+      `自定义中转   开启 | Top${cfg.customTransfer.firstLegTopN} | 枢纽 ${cfg.customTransfer.transferHubs.join("、")}`
+    );
+  } else {
+    console.log("自定义中转   关闭");
+  }
 }
 
 function cmdReset(args) {

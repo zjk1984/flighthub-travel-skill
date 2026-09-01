@@ -76,6 +76,29 @@ for date in "${RETURN_DATES[@]}"; do
   done
 done
 
+# Custom transfer: first-leg hub routes (origin/xj → hub)
+if [[ "${CUSTOM_TRANSFER_ENABLED:-false}" == "true" ]]; then
+  echo "Custom transfer: searching hub first-leg routes ..." >&2
+  for date in "${OUTBOUND_DATES[@]}"; do
+    for origin in "${ORIGINS[@]}"; do
+      for hub in "${TRANSFER_HUBS[@]}"; do
+        run_search_smart "$origin" "$hub" "$date"
+      done
+    done
+  done
+  for date in "${RETURN_DATES[@]}"; do
+    for dest in "${DESTINATIONS[@]}"; do
+      for hub in "${TRANSFER_HUBS[@]}"; do
+        if [[ "$dest" != "$hub" ]]; then
+          run_search_smart "$dest" "$hub" "$date"
+        fi
+      done
+    done
+  done
+  echo "Custom transfer: building combined itineraries ..." >&2
+  node "$SCRIPT_DIR/custom-transfer.js" "$TMP_RESULTS"
+fi
+
 mkdir -p "$(dirname "$OUTPUT")"
 node "$SCRIPT_DIR/format-xinjiang-report.js" < "$TMP_RESULTS" > "$OUTPUT"
 node "$SCRIPT_DIR/format-ranked-report.js" < "$TMP_RESULTS" > "$RANKED_OUTPUT"

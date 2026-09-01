@@ -14,6 +14,14 @@
     "2026-10-08"
   ],
   "directOnlyAirports": ["乌鲁木齐"],
+  "customTransfer": {
+    "enabled": true,
+    "firstLegTopN": 10,
+    "minConnectionMinutes": 90,
+    "maxConnectionMinutes": 480,
+    "transferHubs": ["乌鲁木齐", "西安", "兰州", "成都", "重庆", "郑州"],
+    "leg2NextDayIfNeeded": true
+  },
   "scoring": {
     "originScores": { "深圳": 100, "广州": 80 },
     "destinationScores": {

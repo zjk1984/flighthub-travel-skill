@@ -73,6 +73,7 @@ function parseDurationMinutes(f) {
 }
 
 function transferCount(f) {
+  if (f.customTransfer) return 1;
   if (f.journeyType === "直达") return 0;
   const segs = (f.flightNo || "").split("/").map(s => s.trim()).filter(Boolean);
   return Math.max(0, segs.length - 1);
@@ -385,6 +386,13 @@ function buildDeductions(f) {
   const items = [];
   const gdCity = f.direction === "outbound" ? f.origin : f.dest;
 
+  if (f.customTransfer) {
+    items.push(
+      `自定义中转：${labelCity(f.transitCity)} 衔接 ${formatDuration(f.connectionMin)}，` +
+        `第一段 ${f.leg1FlightNo || ""} + 第二段 ${f.leg2FlightNo || ""}`
+    );
+  }
+
   if (f.priceNum >= 1000) {
     const tier = Math.floor(f.priceNum / 1000);
     items.push(`价格 ¥${f.priceNum.toFixed(0)}：满 ${tier}000 元档，绝对分 ${100 - tier * 25}（综合价分 ${f.pricePts}）`);
@@ -450,6 +458,8 @@ function renderScoringGuide() {
 
 **TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
 
+**自定义中转：** 从出发地选低价 Top10 第一程至中转枢纽，再拼接枢纽→目的地第二程；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟，评分标准与直达/联程相同。
+
 ### ⚠️ 关于 API 价格
 
 1. 低于同航线中位价 75% 或低于次低价 20% → 不可信
@@ -483,7 +493,10 @@ function renderDailySections(days, title, direction) {
         c2 = `${f.dest}(${f.depPref})`;
       }
       const priceTag = f.priceVerified === false ? " ⚠️" : "";
-      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)}${priceTag} | ${f.pricePts} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+      const typeLabel = f.customTransfer
+        ? `自定义中转(${labelCity(f.transitCity)})`
+        : f.journeyType;
+      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${typeLabel} | ¥${f.priceNum.toFixed(0)}${priceTag} | ${f.pricePts} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
     });
     md += "\n**扣分项明细：**\n\n";
     flights.forEach((f, i) => {
@@ -546,6 +559,8 @@ const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "
 const inboundScored = scoreFlightsByDay(all.filter(f => !isOutbound(f.route)), "inbound");
 const outbound = markPriceReliability(outboundScored);
 const inbound = markPriceReliability(inboundScored);
+const customOutCount = outbound.filter(f => f.customTransfer).length;
+const customInCount = inbound.filter(f => f.customTransfer).length;
 
 const outByDay = topByDay(outbound);
 const inByDay = topByDay(inbound);
@@ -557,7 +572,11 @@ let md = `# ✈️ ${CFG.routeLabel} 每日 TOP3 评分推荐\n\n`;
 md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
 md += `> 覆盖目的地：${formatCoverage(DESTINATIONS)}\n\n`;
 md += `- 去程：${formatDateRange(CFG.outboundDates)} | 返程：${formatDateRange(CFG.returnDates)}\n`;
-md += `- 候选航班：去程 ${outbound.length} 条，返程 ${inbound.length} 条\n\n`;
+md += `- 候选航班：去程 ${outbound.length} 条，返程 ${inbound.length} 条`;
+if (customOutCount + customInCount > 0) {
+  md += `（含自定义中转 ${customOutCount + customInCount} 条）`;
+}
+md += `\n\n`;
 
 md += renderScoringGuide();
 md += renderDailySections(outByDay, "🛫 去程每日 TOP3（目的地多样化）", "outbound");
