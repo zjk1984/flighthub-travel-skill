@@ -20,18 +20,26 @@ RANKED_OUTPUT="${2:-$ROOT_DIR/reports/xinjiang-flights-ranked.md}"
 TMP_RESULTS=$(mktemp /tmp/xinjiang-results-XXXX.jsonl)
 
 flight_count() {
+  local origin=$1 dest=$2 date=$3
   node -e "
     const fs=require('fs');
     const raw=fs.readFileSync(process.argv[1],'utf8');
+    const route=process.argv[2]+'→'+process.argv[3];
+    const date=process.argv[4];
     const parts=[]; let d=0,s=0;
     for(let i=0;i<raw.length;i++){
       if(raw[i]==='{'){if(d===0)s=i;d++;}
       else if(raw[i]==='}'){d--;if(d===0)parts.push(raw.slice(s,i+1));}
     }
-    if(!parts.length){console.log(0);process.exit(0);}
-    const j=JSON.parse(parts[parts.length-1]);
-    console.log((j.flights||[]).length);
-  " "$TMP_RESULTS"
+    let count=0;
+    for(const p of parts){
+      try{
+        const j=JSON.parse(p);
+        if(j.route===route && j.date===date) count=(j.flights||[]).length;
+      }catch(e){}
+    }
+    console.log(count);
+  " "$TMP_RESULTS" "$origin" "$dest" "$date"
 }
 
 run_search() {
@@ -44,7 +52,7 @@ run_search_smart() {
   local origin=$1 dest=$2 date=$3
   run_search "$origin" "$dest" "$date" 1
   local count
-  count=$(flight_count)
+  count=$(flight_count "$origin" "$dest" "$date")
   if [[ "$count" -eq 0 ]]; then
     run_search "$origin" "$dest" "$date" 2
   fi

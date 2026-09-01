@@ -60,7 +60,21 @@ function leg2NeedKey(hub, dest, date) {
 function buildRouteMap(results) {
   const map = new Map();
   for (const r of results) {
-    map.set(routeKey(r.route, r.date), r);
+    const key = routeKey(r.route, r.date);
+    const existing = map.get(key);
+    if (!existing) {
+      map.set(key, { ...r, flights: [...(r.flights || [])] });
+      continue;
+    }
+    const seen = new Set((existing.flights || []).map((f) => `${f.depDateTime}|${f.flightNo}`));
+    for (const f of r.flights || []) {
+      const fk = `${f.depDateTime}|${f.flightNo}`;
+      if (!seen.has(fk)) {
+        existing.flights.push(f);
+        seen.add(fk);
+      }
+    }
+    existing.apiCount = (existing.apiCount || 0) + (r.apiCount || 0);
   }
   return map;
 }
@@ -359,11 +373,12 @@ function main() {
     `Custom transfer: top${CT.firstLegTopN} leg1 via [${CT.transferHubs.join("、")}]\n`
   );
 
-  const appended = appendCustomResults(results, map);
-  const customCount = appended.reduce((n, e) => {
-    const m = String(e.dedup || "").match(/custom-transfer[^+]*\+?(\d+)/);
-    return n + (m ? parseInt(m[1], 10) : 0);
-  }, 0);
+  appendCustomResults(results, map);
+
+  const customCount = results.reduce(
+    (n, r) => n + (r.flights || []).filter((f) => f.customTransfer).length,
+    0
+  );
   process.stderr.write(`Custom transfer: merged ${customCount} combined itineraries\n`);
 
   const out = results.map((r) => JSON.stringify(r)).join("\n") + "\n";

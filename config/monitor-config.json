@@ -29,10 +29,10 @@
   ],
   "customTransfer": {
     "enabled": true,
-    "firstLegTopN": 10,
+    "firstLegTopN": 3,
     "minConnectionMinutes": 90,
     "maxConnectionMinutes": 480,
-    "transferHubs": ["乌鲁木齐", "西安", "兰州", "成都", "重庆", "郑州"],
+    "transferHubs": ["乌鲁木齐", "西安", "兰州"],
     "leg2NextDayIfNeeded": true
   },
   "scoring": {

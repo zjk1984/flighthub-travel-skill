@@ -458,7 +458,7 @@ function renderScoringGuide() {
 
 **TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
 
-**自定义中转：** 从出发地选低价 Top10 第一程至中转枢纽，再拼接枢纽→目的地第二程；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟，评分标准与直达/联程相同。
+**自定义中转：** 从出发地选低价 Top3 第一程至中转枢纽（默认乌鲁木齐/西安/兰州），再拼接枢纽→目的地第二程；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟，评分标准与直达/联程相同。
 
 ### ⚠️ 关于 API 价格
 
