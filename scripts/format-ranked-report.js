@@ -19,11 +19,28 @@ const PREF = {
   xjAirport: { 乌鲁木齐: 80, default: 100 },
 };
 
-const WEIGHTS = { price: 0.35, duration: 0.2, transfer: 0.15, depCity: 0.15, xjAirport: 0.15 };
+const WEIGHTS = {
+  price: 0.25,
+  duration: 0.15,
+  transfer: 0.15,
+  depCity: 0.1,
+  xjAirport: 0.1,
+  depTime: 0.125,
+  arrTime: 0.125,
+};
 
 const SCORE_DESC =
-  "综合分 = 价格×35% + 飞行时长×20% + 转机×15% + 出发地偏好×15% + 目的地偏好×15%（归一化后，**越高越好**）；" +
-  "出发地：深圳100/广州80；新疆机场：乌鲁木齐80/其他100";
+  "综合分 = 价格×25% + 时长×15% + 转机×15% + 出发地×10% + 目的地×10% + 起飞时间×12.5% + 落地时间×12.5%（**越高越好**）";
+
+function transferPoints(count) {
+  return Math.max(0, 100 - count * 25);
+}
+
+/** 07:00–22:00 为 100 分，其余 80 分 */
+function timeSlotPoints(dateTimeStr) {
+  const hour = parseInt(dateTimeStr.slice(11, 13), 10);
+  return hour >= 7 && hour <= 22 ? 100 : 80;
+}
 
 function labelCity(name) {
   return CITY_LABEL[name] || name;
@@ -122,24 +139,30 @@ function scoreFlights(flights, direction) {
   if (!flights.length) return [];
   const prices = flights.map(f => f.priceNum);
   const durations = flights.map(f => f.durationMin);
-  const transfers = flights.map(f => f.transfers);
   const normP = normalize(prices);
   const normD = normalize(durations);
-  const normT = normalize(transfers);
 
   return flights.map((f, i) => {
     const depPref = guangdongPref(f, direction);
     const xjPref = xjAirportPref(f.xjAirport);
+    const transferPts = transferPoints(f.transfers);
+    const depTimePts = timeSlotPoints(f.depDateTime);
+    const arrTimePts = timeSlotPoints(f.arrDateTime);
     const score =
       (1 - normP[i]) * WEIGHTS.price +
       (1 - normD[i]) * WEIGHTS.duration +
-      (1 - normT[i]) * WEIGHTS.transfer +
+      (transferPts / 100) * WEIGHTS.transfer +
       (depPref / 100) * WEIGHTS.depCity +
-      (xjPref / 100) * WEIGHTS.xjAirport;
+      (xjPref / 100) * WEIGHTS.xjAirport +
+      (depTimePts / 100) * WEIGHTS.depTime +
+      (arrTimePts / 100) * WEIGHTS.arrTime;
     return {
       ...f,
       depPref,
       xjPref,
+      transferPts,
+      depTimePts,
+      arrTimePts,
       score: Math.round(score * 1000) / 10,
     };
   }).sort((a, b) => b.score - a.score || a.priceNum - b.priceNum);
@@ -202,8 +225,8 @@ function renderDailySections(days, title, direction) {
       md += "暂无航班\n\n";
       continue;
     }
-    md += `| 排名 | 评分 | ${col1} | ${col2} | 航线 | 航班 | 类型 | 价格 | 时长 | 转机 | 出发 | 到达 |\n`;
-    md += "|------|------|--------|--------|------|------|------|------|------|------|------|------|\n";
+    md += `| 排名 | 评分 | ${col1} | ${col2} | 航线 | 航班 | 类型 | 价格 | 时长 | 转机分 | 起飞分 | 落地分 | 出发 | 到达 |\n`;
+    md += "|------|------|--------|--------|------|------|------|------|------|--------|--------|--------|------|------|\n";
     flights.forEach((f, i) => {
       const xjLabel = labelCity(f.xjAirport);
       let c1, c2;
@@ -214,7 +237,7 @@ function renderDailySections(days, title, direction) {
         c1 = `${xjLabel}(${f.xjPref})`;
         c2 = `${f.dest}(${f.depPref})`;
       }
-      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.transfers} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${f.journeyType} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depTimePts} | ${f.arrTimePts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
     });
     md += "\n**预订链接：**\n";
     flights.forEach((f, i) => {
@@ -245,7 +268,11 @@ md += `| 维度 | 选项 | 偏好分 |\n|------|------|--------|\n`;
 md += `| 出发地（去程）/ 到达地（返程） | 深圳 | 100 |\n`;
 md += `| 出发地（去程）/ 到达地（返程） | 广州 | 80 |\n`;
 md += `| 目的地（去程）/ 出发地（返程） | 乌鲁木齐 | 80 |\n`;
-md += `| 目的地（去程）/ 出发地（返程） | 伊宁/阿勒泰/石河子 | 100 |\n\n`;
+md += `| 目的地（去程）/ 出发地（返程） | 伊宁/阿勒泰/石河子 | 100 |\n`;
+md += `| 转机次数 | 0 次 | 100 |\n`;
+md += `| 转机次数 | 每多 1 次 | -25（最低 0） |\n`;
+md += `| 起飞/落地时间 | 07:00–22:00 | 100 |\n`;
+md += `| 起飞/落地时间 | 其他时段 | 80 |\n\n`;
 
 md += renderDailySections(outByDay, "🛫 去程每日 TOP3", "outbound");
 md += renderDailySections(inByDay, "🛬 返程每日 TOP3", "inbound");
