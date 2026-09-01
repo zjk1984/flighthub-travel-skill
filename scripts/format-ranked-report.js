@@ -5,10 +5,19 @@
  */
 const fs = require("fs");
 const { formatShanghaiTime } = require("./format-time");
+const {
+  loadConfig,
+  labelCity,
+  formatDateRange,
+  formatCoverage,
+  parseRoute,
+  isOutboundRoute,
+  remoteCity,
+} = require("./load-monitor-config");
 
-const XINJIANG = ["乌鲁木齐", "伊宁", "阿勒泰", "石河子"];
-const GUANGDONG = ["深圳", "广州"];
-const CITY_LABEL = { 伊宁: "伊犁（伊宁）" };
+const CFG = loadConfig();
+const ORIGINS = CFG.origins;
+const DESTINATIONS = CFG.destinations;
 const TOP_N = 3;
 
 const PREF = {
@@ -32,10 +41,6 @@ const API_PRICE_FLOOR = {
   阿勒泰: 750,
 };
 
-function labelCity(name) {
-  return CITY_LABEL[name] || name;
-}
-
 function parseJsonl(raw) {
   const parts = [];
   let depth = 0, start = 0;
@@ -44,6 +49,20 @@ function parseJsonl(raw) {
     else if (raw[i] === "}") { depth--; if (depth === 0) parts.push(raw.slice(start, i + 1)); }
   }
   return parts.map(p => JSON.parse(p));
+}
+
+function xjAirportPref(airport) {
+  return PREF.xjAirport[airport] ?? PREF.xjAirport.default;
+}
+
+function isOutbound(route) {
+  return isOutboundRoute(route, CFG);
+}
+
+function guangdongPref(f, direction) {
+  const { origin, dest } = parseRoute(f.route);
+  const city = direction === "outbound" ? origin : dest;
+  return PREF.guangdong[city] ?? 80;
 }
 
 function parsePrice(p) {
@@ -78,26 +97,6 @@ function normalize(values) {
   const max = Math.max(...values);
   if (max === min) return values.map(() => 0);
   return values.map(v => (v - min) / (max - min));
-}
-
-function parseRoute(route) {
-  const [origin, dest] = route.split("→");
-  return { origin, dest };
-}
-
-function isOutbound(route) {
-  const { origin, dest } = parseRoute(route);
-  return GUANGDONG.includes(origin) && XINJIANG.includes(dest);
-}
-
-function guangdongPref(f, direction) {
-  const { origin, dest } = parseRoute(f.route);
-  const city = direction === "outbound" ? origin : dest;
-  return PREF.guangdong[city] ?? 80;
-}
-
-function xjAirportPref(airport) {
-  return PREF.xjAirport[airport] ?? PREF.xjAirport.default;
 }
 
 function pricePoints(price) {
@@ -137,7 +136,7 @@ function flattenFlights(results) {
       const key = `${f.depDateTime}|${f.flightNo}`;
       if (!seen.has(key)) {
         const { origin, dest } = parseRoute(r.route);
-        const xjAirport = isOutbound(r.route) ? dest : origin;
+        const xjAirport = remoteCity(r.route, CFG);
         seen.set(key, {
           ...f,
           route: r.route,
@@ -387,10 +386,10 @@ const inbound = markPriceReliability(
 const outByDay = topByDay(outbound);
 const inByDay = topByDay(inbound);
 
-let md = `# ✈️ 广东 ↔ 新疆 每日 TOP3 评分推荐\n\n`;
+let md = `# ✈️ ${CFG.routeLabel} 每日 TOP3 评分推荐\n\n`;
 md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
-md += `> 覆盖机场：乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子\n\n`;
-md += `- 去程：9/28 - 10/1 | 返程：10/6 - 10/8\n`;
+md += `> 覆盖目的地：${formatCoverage(DESTINATIONS)}\n\n`;
+md += `- 去程：${formatDateRange(CFG.outboundDates)} | 返程：${formatDateRange(CFG.returnDates)}\n`;
 md += `- 候选航班：去程 ${outbound.length} 条，返程 ${inbound.length} 条\n\n`;
 
 md += renderScoringGuide();

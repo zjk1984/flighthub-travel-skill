@@ -261,6 +261,23 @@ npm run monitor:ranked    # 查询 + 全量报告 + TOP3 评分报告
 - `reports/xinjiang-flights-latest.md` — 全量价格
 - `reports/xinjiang-flights-ranked.md` — 每日 TOP3 + 扣分项
 
+### 配置与重置
+
+参数文件：`config/monitor-config.json`（默认值见 `config/monitor-defaults.json`）
+
+```bash
+npm run monitor:config     # 查看配置
+npm run monitor:set -- --outbound-dates 2026-11-01,2026-11-02 --return-dates 2026-11-08
+npm run monitor:set -- --origins 深圳 --destinations 乌鲁木齐,伊宁
+npm run monitor:reset      # 全部恢复默认
+node scripts/monitor-config.js reset --outbound-dates   # 仅重置去程日期
+node scripts/monitor-config.js reset --return-dates     # 仅重置返程日期
+node scripts/monitor-config.js reset --origins          # 仅重置出发地
+node scripts/monitor-config.js reset --destinations     # 仅重置目的地
+```
+
+可配置项：`origins`（出发地）、`destinations`（目的地）、`outboundDates`（去程日期）、`returnDates`（返程日期）。
+
 ### 飞书卡片推送
 
 1. 飞书群添加**自定义机器人**，获取 Webhook URL

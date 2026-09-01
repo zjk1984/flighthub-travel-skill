@@ -44,6 +44,35 @@ CLI 安装：`npm i -g @fly-ai/flyai-cli`
 
 无直飞时自动查询中转航班。
 
+### 配置与重置
+
+监控参数保存在 `config/monitor-config.json`，支持修改/重置出发返程日期、出发地、目的地：
+
+```bash
+npm run monitor:config          # 查看当前配置
+
+# 修改
+npm run monitor:set -- --outbound-dates 2026-11-01,2026-11-02
+npm run monitor:set -- --return-dates 2026-11-08,2026-11-09
+npm run monitor:set -- --origins 深圳,广州
+npm run monitor:set -- --destinations 乌鲁木齐,伊宁,阿勒泰
+
+# 重置为默认值（config/monitor-defaults.json）
+npm run monitor:reset                              # 全部重置
+node scripts/monitor-config.js reset --outbound-dates   # 仅重置去程日期
+node scripts/monitor-config.js reset --return-dates     # 仅重置返程日期
+node scripts/monitor-config.js reset --origins            # 仅重置出发地
+node scripts/monitor-config.js reset --destinations     # 仅重置目的地
+```
+
+| 配置项 | 说明 |
+|--------|------|
+| `origins` | 出发地（去程出发 / 返程到达），如 深圳、广州 |
+| `destinations` | 目的地（去程到达 / 返程出发），如 乌鲁木齐、伊宁 |
+| `outboundDates` | 去程日期列表（YYYY-MM-DD） |
+| `returnDates` | 返程日期列表（YYYY-MM-DD） |
+| `directOnlyAirports` | 仅查直达的机场（默认乌鲁木齐） |
+
 ### 运行监控
 
 ```bash
@@ -66,6 +95,8 @@ npm run monitor:ranked      # 全量 + 每日 TOP3 评分报告
 | `scripts/format-xinjiang-report.js` | 格式化全量 Markdown 报告 |
 | `scripts/format-ranked-report.js` | 每日 TOP3 评分排名与扣分项 |
 | `scripts/feishu-notify.js` | 飞书交互卡片推送（借鉴 daily_stock_analysis） |
+| `scripts/monitor-config.js` | 查看/修改/重置监控配置（日期、出发地、目的地） |
+| `scripts/load-monitor-config.js` | 配置加载模块（脚本内部使用） |
 
 ### 飞书卡片通报
 
