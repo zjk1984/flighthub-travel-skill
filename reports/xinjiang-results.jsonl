@@ -11,7 +11,7 @@
     "journeyType": "直达",
     "duration": "350",
     "price": "1660.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3E5fXf",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4665xP",
     "segments": [
       {
         "depDateTime": "2026-09-28 06:40:00",
@@ -32,7 +32,7 @@
     "journeyType": "直达",
     "duration": "455",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4aaxVe",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4BAvmy",
     "segments": [
       {
         "depDateTime": "2026-09-28 08:00:00",
@@ -53,7 +53,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F16xNbC",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1juj2V",
     "segments": [
       {
         "depDateTime": "2026-09-28 09:10:00",
@@ -74,7 +74,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "1560.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F16cbxf",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1C12ga",
     "segments": [
       {
         "depDateTime": "2026-09-28 10:45:00",
@@ -95,7 +95,7 @@
     "journeyType": "直达",
     "duration": "350",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NRBYz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1RAjXL",
     "segments": [
       {
         "depDateTime": "2026-09-28 11:40:00",
@@ -116,7 +116,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "1570.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ms419",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2XKuUB",
     "segments": [
       {
         "depDateTime": "2026-09-28 12:55:00",
@@ -137,7 +137,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "1720.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ozFzi",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1p5fac",
     "segments": [
       {
         "depDateTime": "2026-09-28 16:15:00",
@@ -158,7 +158,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "1680.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ElwVI",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1pJv98",
     "segments": [
       {
         "depDateTime": "2026-09-28 17:40:00",
@@ -169,531 +169,9 @@
   }
 ]}
 {"route":"深圳→伊宁","date":"2026-09-28","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
-{"route":"深圳→伊宁","date":"2026-09-28","apiCount":1,"dedup":"去重: 10 → 10 条","flights":[
-  {
-    "depDateTime": "2026-09-28 08:30:00",
-    "arrDateTime": "2026-09-29 15:20:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "ZH9943 / 9C7651",
-    "airline": "深航 / 春秋",
-    "journeyType": "中转",
-    "duration": "1850",
-    "price": "520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2EO1tx",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 08:30:00",
-        "arrDateTime": "2026-09-28 10:35:00",
-        "flightNo": "ZH9943"
-      },
-      {
-        "depDateTime": "2026-09-29 09:55:00",
-        "arrDateTime": "2026-09-29 15:20:00",
-        "flightNo": "9C7651"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 09:00:00",
-    "arrDateTime": "2026-09-29 15:20:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ3565 / 9C7651",
-    "airline": "南航 / 春秋",
-    "journeyType": "中转",
-    "duration": "1820",
-    "price": "580.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qggdX",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 09:00:00",
-        "arrDateTime": "2026-09-28 11:10:00",
-        "flightNo": "CZ3565"
-      },
-      {
-        "depDateTime": "2026-09-29 09:55:00",
-        "arrDateTime": "2026-09-29 15:20:00",
-        "flightNo": "9C7651"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 10:35:00",
-    "arrDateTime": "2026-09-29 12:50:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ8477 / 9C7369",
-    "airline": "南航 / 春秋",
-    "journeyType": "中转",
-    "duration": "1575",
-    "price": "880.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2vknni",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 10:35:00",
-        "arrDateTime": "2026-09-28 13:10:00",
-        "flightNo": "CZ8477"
-      },
-      {
-        "depDateTime": "2026-09-29 08:15:00",
-        "arrDateTime": "2026-09-29 12:50:00",
-        "flightNo": "9C7369"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 21:40:00",
-    "arrDateTime": "2026-09-29 15:20:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ8595 / 9C7651",
-    "airline": "南航 / 春秋",
-    "journeyType": "中转",
-    "duration": "1060",
-    "price": "780.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zqVfW",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 21:40:00",
-        "arrDateTime": "2026-09-28 23:45:00",
-        "flightNo": "CZ8595"
-      },
-      {
-        "depDateTime": "2026-09-29 09:55:00",
-        "arrDateTime": "2026-09-29 15:20:00",
-        "flightNo": "9C7651"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 22:00:00",
-    "arrDateTime": "2026-09-29 15:20:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "ZH9951 / 9C7651",
-    "airline": "深航 / 春秋",
-    "journeyType": "中转",
-    "duration": "1040",
-    "price": "620.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0rY7f5",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 22:00:00",
-        "arrDateTime": "2026-09-29 00:15:00",
-        "flightNo": "ZH9951"
-      },
-      {
-        "depDateTime": "2026-09-29 09:55:00",
-        "arrDateTime": "2026-09-29 15:20:00",
-        "flightNo": "9C7651"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 22:15:00",
-    "arrDateTime": "2026-09-29 15:20:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "DZ6219 / 9C7651",
-    "airline": "东海 / 春秋",
-    "journeyType": "中转",
-    "duration": "1025",
-    "price": "680.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1AWR6l",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 22:15:00",
-        "arrDateTime": "2026-09-29 00:15:00",
-        "flightNo": "DZ6219"
-      },
-      {
-        "depDateTime": "2026-09-29 09:55:00",
-        "arrDateTime": "2026-09-29 15:20:00",
-        "flightNo": "9C7651"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 22:25:00",
-    "arrDateTime": "2026-09-29 12:10:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ3974 / UQ3589",
-    "airline": "南航 / 新海航|乌航",
-    "journeyType": "中转",
-    "duration": "825",
-    "price": "660.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qNHok",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 22:25:00",
-        "arrDateTime": "2026-09-29 00:55:00",
-        "flightNo": "CZ3974"
-      },
-      {
-        "depDateTime": "2026-09-29 07:15:00",
-        "arrDateTime": "2026-09-29 12:10:00",
-        "flightNo": "UQ3589"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 22:25:00",
-    "arrDateTime": "2026-09-29 12:40:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ3974 / 9C7151",
-    "airline": "南航 / 春秋",
-    "journeyType": "中转",
-    "duration": "855",
-    "price": "660.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cVrA3",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 22:25:00",
-        "arrDateTime": "2026-09-29 00:55:00",
-        "flightNo": "CZ3974"
-      },
-      {
-        "depDateTime": "2026-09-29 07:30:00",
-        "arrDateTime": "2026-09-29 12:40:00",
-        "flightNo": "9C7151"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 23:00:00",
-    "arrDateTime": "2026-09-29 12:10:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "DZ6277 / UQ3589",
-    "airline": "东海 / 新海航|乌航",
-    "journeyType": "中转",
-    "duration": "790",
-    "price": "600.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2aeT5S",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 23:00:00",
-        "arrDateTime": "2026-09-29 01:25:00",
-        "flightNo": "DZ6277"
-      },
-      {
-        "depDateTime": "2026-09-29 07:15:00",
-        "arrDateTime": "2026-09-29 12:10:00",
-        "flightNo": "UQ3589"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 23:00:00",
-    "arrDateTime": "2026-09-29 12:40:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "DZ6277 / 9C7151",
-    "airline": "东海 / 春秋",
-    "journeyType": "中转",
-    "duration": "820",
-    "price": "600.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3tQQoP",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 23:00:00",
-        "arrDateTime": "2026-09-29 01:25:00",
-        "flightNo": "DZ6277"
-      },
-      {
-        "depDateTime": "2026-09-29 07:30:00",
-        "arrDateTime": "2026-09-29 12:40:00",
-        "flightNo": "9C7151"
-      }
-    ]
-  }
-]}
+{"route":"深圳→伊宁","date":"2026-09-28","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"深圳→阿勒泰","date":"2026-09-28","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
-{"route":"深圳→阿勒泰","date":"2026-09-28","apiCount":1,"dedup":"去重: 10 → 10 条","flights":[
-  {
-    "depDateTime": "2026-09-28 06:10:00",
-    "arrDateTime": "2026-09-28 21:55:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7679 / G52641",
-    "airline": "春秋 / 华夏",
-    "journeyType": "中转",
-    "duration": "945",
-    "price": "1260.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0BZu61",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 06:10:00",
-        "arrDateTime": "2026-09-28 15:15:00",
-        "flightNo": "9C7679"
-      },
-      {
-        "depDateTime": "2026-09-28 18:30:00",
-        "arrDateTime": "2026-09-28 21:55:00",
-        "flightNo": "G52641"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 06:10:00",
-    "arrDateTime": "2026-09-29 22:25:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7679 / G52641",
-    "airline": "春秋 / 华夏",
-    "journeyType": "中转",
-    "duration": "2415",
-    "price": "1260.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2AVAIR",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 06:10:00",
-        "arrDateTime": "2026-09-28 15:15:00",
-        "flightNo": "9C7679"
-      },
-      {
-        "depDateTime": "2026-09-29 19:00:00",
-        "arrDateTime": "2026-09-29 22:25:00",
-        "flightNo": "G52641"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 06:10:00",
-    "arrDateTime": "2026-09-29 17:10:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7679 / 9C6677",
-    "airline": "春秋 / 春秋",
-    "journeyType": "中转",
-    "duration": "2100",
-    "price": "910.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2wSq2j",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 06:10:00",
-        "arrDateTime": "2026-09-28 10:00:00",
-        "flightNo": "9C7679"
-      },
-      {
-        "depDateTime": "2026-09-29 14:05:00",
-        "arrDateTime": "2026-09-29 17:10:00",
-        "flightNo": "9C6677"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 06:10:00",
-    "arrDateTime": "2026-09-29 14:05:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7679 / AQ1485",
-    "airline": "春秋 / 九元",
-    "journeyType": "中转",
-    "duration": "1915",
-    "price": "910.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2N7VSx",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 06:10:00",
-        "arrDateTime": "2026-09-28 10:00:00",
-        "flightNo": "9C7679"
-      },
-      {
-        "depDateTime": "2026-09-29 10:50:00",
-        "arrDateTime": "2026-09-29 14:05:00",
-        "flightNo": "AQ1485"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 09:20:00",
-    "arrDateTime": "2026-09-29 12:55:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "CZ3621 / 3U6575",
-    "airline": "南航 / 川航",
-    "journeyType": "中转",
-    "duration": "1655",
-    "price": "1850.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1iGvUV",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 09:20:00",
-        "arrDateTime": "2026-09-28 11:55:00",
-        "flightNo": "CZ3621"
-      },
-      {
-        "depDateTime": "2026-09-29 09:20:00",
-        "arrDateTime": "2026-09-29 12:55:00",
-        "flightNo": "3U6575"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 10:35:00",
-    "arrDateTime": "2026-09-29 12:55:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "CZ8477 / 3U6575",
-    "airline": "南航 / 川航",
-    "journeyType": "中转",
-    "duration": "1580",
-    "price": "1850.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3U6C8Z",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 10:35:00",
-        "arrDateTime": "2026-09-28 13:10:00",
-        "flightNo": "CZ8477"
-      },
-      {
-        "depDateTime": "2026-09-29 09:20:00",
-        "arrDateTime": "2026-09-29 12:55:00",
-        "flightNo": "3U6575"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 15:10:00",
-    "arrDateTime": "2026-09-29 17:10:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "DZ6221 / 9C6677",
-    "airline": "东海 / 春秋",
-    "journeyType": "中转",
-    "duration": "1560",
-    "price": "990.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3cvN2R",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 15:10:00",
-        "arrDateTime": "2026-09-28 19:20:00",
-        "flightNo": "DZ6221"
-      },
-      {
-        "depDateTime": "2026-09-29 14:05:00",
-        "arrDateTime": "2026-09-29 17:10:00",
-        "flightNo": "9C6677"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 15:10:00",
-    "arrDateTime": "2026-09-29 14:05:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "DZ6221 / AQ1485",
-    "airline": "东海 / 九元",
-    "journeyType": "中转",
-    "duration": "1375",
-    "price": "990.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3N536i",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 15:10:00",
-        "arrDateTime": "2026-09-28 19:20:00",
-        "flightNo": "DZ6221"
-      },
-      {
-        "depDateTime": "2026-09-29 10:50:00",
-        "arrDateTime": "2026-09-29 14:05:00",
-        "flightNo": "AQ1485"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 17:40:00",
-    "arrDateTime": "2026-09-29 09:40:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "CZ6890 / CZ6845",
-    "airline": "南航 / 南航",
-    "journeyType": "中转",
-    "duration": "960",
-    "price": "1970.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3sZpuM",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 17:40:00",
-        "arrDateTime": "2026-09-28 23:15:00",
-        "flightNo": "CZ6890"
-      },
-      {
-        "depDateTime": "2026-09-29 08:15:00",
-        "arrDateTime": "2026-09-29 09:40:00",
-        "flightNo": "CZ6845"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-28 20:35:00",
-    "arrDateTime": "2026-09-29 17:10:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "ZH9415 / 9C6677",
-    "airline": "深航 / 春秋",
-    "journeyType": "中转",
-    "duration": "1235",
-    "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4HON2Y",
-    "segments": [
-      {
-        "depDateTime": "2026-09-28 20:35:00",
-        "arrDateTime": "2026-09-28 23:00:00",
-        "flightNo": "ZH9415"
-      },
-      {
-        "depDateTime": "2026-09-29 11:45:00",
-        "arrDateTime": "2026-09-29 17:10:00",
-        "flightNo": "9C6677"
-      }
-    ]
-  }
-]}
+{"route":"深圳→阿勒泰","date":"2026-09-28","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"深圳→石河子","date":"2026-09-28","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"深圳→石河子","date":"2026-09-28","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"广州→乌鲁木齐","date":"2026-09-28","apiCount":3,"dedup":"去重: 24 → 14 条","flights":[
@@ -709,7 +187,7 @@
     "journeyType": "直达",
     "duration": "435",
     "price": "1309.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dOWob",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cLM4l",
     "segments": [
       {
         "depDateTime": "2026-09-28 06:40:00",
@@ -730,7 +208,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1NT2hA",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3pffL3",
     "segments": [
       {
         "depDateTime": "2026-09-28 07:00:00",
@@ -751,7 +229,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "1550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F46gh3f",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1tuBWx",
     "segments": [
       {
         "depDateTime": "2026-09-28 07:35:00",
@@ -772,7 +250,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "1890.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2UiVsv",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2V6X4Q",
     "segments": [
       {
         "depDateTime": "2026-09-28 07:35:00",
@@ -793,7 +271,7 @@
     "journeyType": "直达",
     "duration": "300",
     "price": "1950.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nE9bS",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ui7Ij",
     "segments": [
       {
         "depDateTime": "2026-09-28 08:10:00",
@@ -814,7 +292,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "1550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Y48eo",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Ixfcj",
     "segments": [
       {
         "depDateTime": "2026-09-28 08:10:00",
@@ -835,7 +313,7 @@
     "journeyType": "直达",
     "duration": "300",
     "price": "3450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F03dzBl",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3JU6oO",
     "segments": [
       {
         "depDateTime": "2026-09-28 09:05:00",
@@ -856,7 +334,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0bXpCh",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F13M82I",
     "segments": [
       {
         "depDateTime": "2026-09-28 10:00:00",
@@ -877,7 +355,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "2520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3hcRt9",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QfqVy",
     "segments": [
       {
         "depDateTime": "2026-09-28 11:25:00",
@@ -898,7 +376,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "1810.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2SOQFa",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2S45LF",
     "segments": [
       {
         "depDateTime": "2026-09-28 13:20:00",
@@ -919,7 +397,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "1790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0J5b5k",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3nIt62",
     "segments": [
       {
         "depDateTime": "2026-09-28 15:40:00",
@@ -940,7 +418,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "1500.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22S3Si",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1tb9QT",
     "segments": [
       {
         "depDateTime": "2026-09-28 16:40:00",
@@ -961,7 +439,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "1620.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3nmdlg",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F088qK2",
     "segments": [
       {
         "depDateTime": "2026-09-28 17:15:00",
@@ -982,7 +460,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "1510.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2OVwdi",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ZuCsb",
     "segments": [
       {
         "depDateTime": "2026-09-28 19:20:00",
@@ -1005,7 +483,7 @@
     "journeyType": "直达",
     "duration": "500",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ekDAb",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3yavuE",
     "segments": [
       {
         "depDateTime": "2026-09-28 07:15:00",
@@ -1029,7 +507,7 @@
     "journeyType": "中转",
     "duration": "2080",
     "price": "630.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3CFpuH",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4UinX6",
     "segments": [
       {
         "depDateTime": "2026-09-28 06:30:00",
@@ -1055,7 +533,7 @@
     "journeyType": "中转",
     "duration": "1895",
     "price": "630.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2E9BND",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1rFzZn",
     "segments": [
       {
         "depDateTime": "2026-09-28 06:30:00",
@@ -1081,7 +559,7 @@
     "journeyType": "中转",
     "duration": "2045",
     "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F288gMx",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ZvpCF",
     "segments": [
       {
         "depDateTime": "2026-09-28 07:05:00",
@@ -1107,7 +585,7 @@
     "journeyType": "中转",
     "duration": "1860",
     "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Wsbm6",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3MTOZl",
     "segments": [
       {
         "depDateTime": "2026-09-28 07:05:00",
@@ -1133,7 +611,7 @@
     "journeyType": "中转",
     "duration": "1920",
     "price": "719.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2LAk8N",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F29iWE2",
     "segments": [
       {
         "depDateTime": "2026-09-28 09:10:00",
@@ -1159,7 +637,7 @@
     "journeyType": "中转",
     "duration": "1735",
     "price": "719.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F05PRyp",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Pu5MV",
     "segments": [
       {
         "depDateTime": "2026-09-28 09:10:00",
@@ -1185,7 +663,7 @@
     "journeyType": "中转",
     "duration": "1120",
     "price": "1600.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1rHwjF",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Fuf7f",
     "segments": [
       {
         "depDateTime": "2026-09-28 17:00:00",
@@ -1211,7 +689,7 @@
     "journeyType": "中转",
     "duration": "1170",
     "price": "1490.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0XHqmn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3bJObh",
     "segments": [
       {
         "depDateTime": "2026-09-28 17:25:00",
@@ -1237,7 +715,7 @@
     "journeyType": "中转",
     "duration": "1385",
     "price": "840.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3hGJBR",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2q1jsc",
     "segments": [
       {
         "depDateTime": "2026-09-28 18:05:00",
@@ -1263,7 +741,7 @@
     "journeyType": "中转",
     "duration": "1010",
     "price": "1500.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0uHGtq",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2tCUVH",
     "segments": [
       {
         "depDateTime": "2026-09-28 20:05:00",
@@ -1293,7 +771,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "1700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2HC2OV",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2CnUxY",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:50:00",
@@ -1314,7 +792,7 @@
     "journeyType": "直达",
     "duration": "455",
     "price": "2170.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F33WNz0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3i40W1",
     "segments": [
       {
         "depDateTime": "2026-09-29 08:00:00",
@@ -1335,7 +813,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "2170.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Qcxar",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F47Kbu6",
     "segments": [
       {
         "depDateTime": "2026-09-29 09:10:00",
@@ -1356,7 +834,7 @@
     "journeyType": "直达",
     "duration": "450",
     "price": "1750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F14qiT3",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38HXIF",
     "segments": [
       {
         "depDateTime": "2026-09-29 09:15:00",
@@ -1377,7 +855,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "1940.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1R8bBE",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2WUJVv",
     "segments": [
       {
         "depDateTime": "2026-09-29 10:45:00",
@@ -1398,7 +876,7 @@
     "journeyType": "直达",
     "duration": "350",
     "price": "1960.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1EGpw9",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2v7Eht",
     "segments": [
       {
         "depDateTime": "2026-09-29 11:40:00",
@@ -1419,7 +897,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "1800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F12TDKo",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nvSMr",
     "segments": [
       {
         "depDateTime": "2026-09-29 12:55:00",
@@ -1440,7 +918,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "1960.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1DHW1j",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0uqQ9O",
     "segments": [
       {
         "depDateTime": "2026-09-29 16:15:00",
@@ -1461,7 +939,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "2170.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dypE5",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F07SPcM",
     "segments": [
       {
         "depDateTime": "2026-09-29 17:40:00",
@@ -1485,7 +963,7 @@
     "journeyType": "中转",
     "duration": "800",
     "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0BfTHs",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3J0u9k",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:25:00",
@@ -1496,32 +974,6 @@
         "depDateTime": "2026-09-29 15:00:00",
         "arrDateTime": "2026-09-29 19:45:00",
         "flightNo": "CZ2019"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 07:55:00",
-    "arrDateTime": "2026-09-29 19:25:00",
-    "depStation": "宝安",
-    "arrStation": "伊宁",
-    "depStationCode": "SZX",
-    "arrStationCode": "YIN",
-    "flightNo": "8L7175 / MU6175",
-    "airline": "新海航|祥鹏航空 / 东航",
-    "journeyType": "中转",
-    "duration": "690",
-    "price": "890.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F248ur9",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 07:55:00",
-        "arrDateTime": "2026-09-29 10:25:00",
-        "flightNo": "8L7175"
-      },
-      {
-        "depDateTime": "2026-09-29 14:55:00",
-        "arrDateTime": "2026-09-29 19:25:00",
-        "flightNo": "MU6175"
       }
     ]
   },
@@ -1537,7 +989,7 @@
     "journeyType": "中转",
     "duration": "1850",
     "price": "620.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Widdr",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2L3Gx4",
     "segments": [
       {
         "depDateTime": "2026-09-29 08:30:00",
@@ -1563,7 +1015,7 @@
     "journeyType": "中转",
     "duration": "1820",
     "price": "680.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0KRSeF",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QxRmR",
     "segments": [
       {
         "depDateTime": "2026-09-29 09:00:00",
@@ -1589,7 +1041,7 @@
     "journeyType": "中转",
     "duration": "580",
     "price": "1010.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Wm5xR",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F083uKE",
     "segments": [
       {
         "depDateTime": "2026-09-29 09:45:00",
@@ -1615,7 +1067,7 @@
     "journeyType": "中转",
     "duration": "1255",
     "price": "940.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F12jKqv",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1DFplP",
     "segments": [
       {
         "depDateTime": "2026-09-29 15:55:00",
@@ -1641,7 +1093,7 @@
     "journeyType": "中转",
     "duration": "1040",
     "price": "720.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nxOsz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3KqO3j",
     "segments": [
       {
         "depDateTime": "2026-09-29 22:00:00",
@@ -1667,7 +1119,7 @@
     "journeyType": "中转",
     "duration": "1025",
     "price": "680.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Wbi6J",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F418Z1p",
     "segments": [
       {
         "depDateTime": "2026-09-29 22:15:00",
@@ -1693,7 +1145,7 @@
     "journeyType": "中转",
     "duration": "790",
     "price": "950.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1EEsSC",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4DkD4V",
     "segments": [
       {
         "depDateTime": "2026-09-29 23:00:00",
@@ -1704,6 +1156,32 @@
         "depDateTime": "2026-09-30 07:15:00",
         "arrDateTime": "2026-09-30 12:10:00",
         "flightNo": "UQ3589"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-09-29 23:00:00",
+    "arrDateTime": "2026-09-30 12:40:00",
+    "depStation": "宝安",
+    "arrStation": "伊宁",
+    "depStationCode": "SZX",
+    "arrStationCode": "YIN",
+    "flightNo": "DZ6277 / 9C7151",
+    "airline": "东海 / 春秋",
+    "journeyType": "中转",
+    "duration": "820",
+    "price": "950.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3OJq1e",
+    "segments": [
+      {
+        "depDateTime": "2026-09-29 23:00:00",
+        "arrDateTime": "2026-09-30 01:25:00",
+        "flightNo": "DZ6277"
+      },
+      {
+        "depDateTime": "2026-09-30 07:30:00",
+        "arrDateTime": "2026-09-30 12:40:00",
+        "flightNo": "9C7151"
       }
     ]
   },
@@ -1719,7 +1197,7 @@
     "journeyType": "中转",
     "duration": "940",
     "price": "660.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1unkdh",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Dc1MS",
     "segments": [
       {
         "depDateTime": "2026-09-29 23:40:00",
@@ -1735,268 +1213,7 @@
   }
 ]}
 {"route":"深圳→阿勒泰","date":"2026-09-29","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
-{"route":"深圳→阿勒泰","date":"2026-09-29","apiCount":1,"dedup":"去重: 10 → 10 条","flights":[
-  {
-    "depDateTime": "2026-09-29 06:40:00",
-    "arrDateTime": "2026-09-29 17:10:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7355 / 9C6677",
-    "airline": "春秋 / 春秋",
-    "journeyType": "中转",
-    "duration": "630",
-    "price": "2040.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ZMPtZ",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 06:40:00",
-        "arrDateTime": "2026-09-29 10:10:00",
-        "flightNo": "9C7355"
-      },
-      {
-        "depDateTime": "2026-09-29 14:05:00",
-        "arrDateTime": "2026-09-29 17:10:00",
-        "flightNo": "9C6677"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 06:40:00",
-    "arrDateTime": "2026-09-29 20:50:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7355 / G52895",
-    "airline": "春秋 / 华夏",
-    "journeyType": "中转",
-    "duration": "850",
-    "price": "1790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NIu3V",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 06:40:00",
-        "arrDateTime": "2026-09-29 15:00:00",
-        "flightNo": "9C7355"
-      },
-      {
-        "depDateTime": "2026-09-29 19:20:00",
-        "arrDateTime": "2026-09-29 20:50:00",
-        "flightNo": "G52895"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 06:40:00",
-    "arrDateTime": "2026-09-30 20:20:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "9C7355 / G52895",
-    "airline": "春秋 / 华夏",
-    "journeyType": "中转",
-    "duration": "2260",
-    "price": "1790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3GyN5Y",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 06:40:00",
-        "arrDateTime": "2026-09-29 15:00:00",
-        "flightNo": "9C7355"
-      },
-      {
-        "depDateTime": "2026-09-30 18:50:00",
-        "arrDateTime": "2026-09-30 20:20:00",
-        "flightNo": "G52895"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 06:55:00",
-    "arrDateTime": "2026-09-29 22:45:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "Y87565 / CZ6860",
-    "airline": "新海航|金鹏航空 / 南航",
-    "journeyType": "中转",
-    "duration": "950",
-    "price": "450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F46Idij",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 06:55:00",
-        "arrDateTime": "2026-09-29 09:10:00",
-        "flightNo": "Y87565"
-      },
-      {
-        "depDateTime": "2026-09-29 17:05:00",
-        "arrDateTime": "2026-09-29 22:45:00",
-        "flightNo": "CZ6860"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 07:15:00",
-    "arrDateTime": "2026-09-29 22:45:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "MU5332 / CZ6860",
-    "airline": "东航 / 南航",
-    "journeyType": "中转",
-    "duration": "930",
-    "price": "500.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Oo6Cr",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 07:15:00",
-        "arrDateTime": "2026-09-29 09:45:00",
-        "flightNo": "MU5332"
-      },
-      {
-        "depDateTime": "2026-09-29 17:05:00",
-        "arrDateTime": "2026-09-29 22:45:00",
-        "flightNo": "CZ6860"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 07:55:00",
-    "arrDateTime": "2026-09-30 12:40:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "8L7175 / 3U6575",
-    "airline": "新海航|祥鹏航空 / 川航",
-    "journeyType": "中转",
-    "duration": "1725",
-    "price": "890.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4HYIHL",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 07:55:00",
-        "arrDateTime": "2026-09-29 10:25:00",
-        "flightNo": "8L7175"
-      },
-      {
-        "depDateTime": "2026-09-30 09:05:00",
-        "arrDateTime": "2026-09-30 12:40:00",
-        "flightNo": "3U6575"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 09:30:00",
-    "arrDateTime": "2026-09-29 19:00:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "CZ3175 / MU6865",
-    "airline": "南航 / 东航",
-    "journeyType": "中转",
-    "duration": "570",
-    "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F27SYnG",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 09:30:00",
-        "arrDateTime": "2026-09-29 12:40:00",
-        "flightNo": "CZ3175"
-      },
-      {
-        "depDateTime": "2026-09-29 14:30:00",
-        "arrDateTime": "2026-09-29 19:00:00",
-        "flightNo": "MU6865"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 15:55:00",
-    "arrDateTime": "2026-09-30 12:40:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "HU7475 / 3U6575",
-    "airline": "新海航|海南航空 / 川航",
-    "journeyType": "中转",
-    "duration": "1245",
-    "price": "890.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3IYEZ1",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 15:55:00",
-        "arrDateTime": "2026-09-29 18:30:00",
-        "flightNo": "HU7475"
-      },
-      {
-        "depDateTime": "2026-09-30 09:05:00",
-        "arrDateTime": "2026-09-30 12:40:00",
-        "flightNo": "3U6575"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 16:15:00",
-    "arrDateTime": "2026-09-30 15:55:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "CZ8924 / CZ6843",
-    "airline": "南航 / 南航",
-    "journeyType": "中转",
-    "duration": "1420",
-    "price": "2230.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0tccnr",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 16:15:00",
-        "arrDateTime": "2026-09-29 21:55:00",
-        "flightNo": "CZ8924"
-      },
-      {
-        "depDateTime": "2026-09-30 14:40:00",
-        "arrDateTime": "2026-09-30 15:55:00",
-        "flightNo": "CZ6843"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 16:15:00",
-    "arrDateTime": "2026-09-30 23:10:00",
-    "depStation": "宝安",
-    "arrStation": "雪都",
-    "depStationCode": "SZX",
-    "arrStationCode": "AAT",
-    "flightNo": "CZ8924 / CZ6845",
-    "airline": "南航 / 南航",
-    "journeyType": "中转",
-    "duration": "1855",
-    "price": "2230.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1wNR2J",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 16:15:00",
-        "arrDateTime": "2026-09-29 21:55:00",
-        "flightNo": "CZ8924"
-      },
-      {
-        "depDateTime": "2026-09-30 21:50:00",
-        "arrDateTime": "2026-09-30 23:10:00",
-        "flightNo": "CZ6845"
-      }
-    ]
-  }
-]}
+{"route":"深圳→阿勒泰","date":"2026-09-29","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"深圳→石河子","date":"2026-09-29","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"深圳→石河子","date":"2026-09-29","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"广州→乌鲁木齐","date":"2026-09-29","apiCount":3,"dedup":"去重: 22 → 12 条","flights":[
@@ -2012,7 +1229,7 @@
     "journeyType": "直达",
     "duration": "435",
     "price": "1479.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3wFg5k",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2RFTuL",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:40:00",
@@ -2032,8 +1249,8 @@
     "airline": "国航",
     "journeyType": "直达",
     "duration": "325",
-    "price": "1800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2isnKp",
+    "price": "1840.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1P02GR",
     "segments": [
       {
         "depDateTime": "2026-09-29 07:00:00",
@@ -2054,7 +1271,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "1740.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4dBgfj",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18yQE9",
     "segments": [
       {
         "depDateTime": "2026-09-29 07:20:00",
@@ -2075,7 +1292,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "1840.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F244zMU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F27Z5ZR",
     "segments": [
       {
         "depDateTime": "2026-09-29 08:10:00",
@@ -2096,7 +1313,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0X41g2",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ni0h6",
     "segments": [
       {
         "depDateTime": "2026-09-29 08:10:00",
@@ -2117,7 +1334,7 @@
     "journeyType": "直达",
     "duration": "300",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22GGLM",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2fnex0",
     "segments": [
       {
         "depDateTime": "2026-09-29 09:05:00",
@@ -2138,7 +1355,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4BRTe5",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3F4eRu",
     "segments": [
       {
         "depDateTime": "2026-09-29 10:00:00",
@@ -2159,7 +1376,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2330.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2LkzM9",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F26BoP4",
     "segments": [
       {
         "depDateTime": "2026-09-29 11:45:00",
@@ -2180,7 +1397,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F34KklJ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0USxyV",
     "segments": [
       {
         "depDateTime": "2026-09-29 15:40:00",
@@ -2201,7 +1418,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "1800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1kf4BG",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F41RMpj",
     "segments": [
       {
         "depDateTime": "2026-09-29 16:40:00",
@@ -2222,7 +1439,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2050.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3xa9KN",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2EFD3f",
     "segments": [
       {
         "depDateTime": "2026-09-29 17:10:00",
@@ -2243,7 +1460,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "1770.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2m3ESX",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2DeLJm",
     "segments": [
       {
         "depDateTime": "2026-09-29 19:20:00",
@@ -2267,7 +1484,7 @@
     "journeyType": "中转",
     "duration": "1790",
     "price": "619.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4gVasd",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0pwayN",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:20:00",
@@ -2293,7 +1510,7 @@
     "journeyType": "中转",
     "duration": "1820",
     "price": "619.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nOu8o",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F25tLuQ",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:20:00",
@@ -2319,7 +1536,7 @@
     "journeyType": "中转",
     "duration": "710",
     "price": "619.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0cZ8j1",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19M7fR",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:20:00",
@@ -2334,28 +1551,28 @@
     ]
   },
   {
-    "depDateTime": "2026-09-29 06:30:00",
-    "arrDateTime": "2026-09-30 11:00:00",
+    "depDateTime": "2026-09-29 06:40:00",
+    "arrDateTime": "2026-09-30 12:50:00",
     "depStation": "白云",
     "arrStation": "伊宁",
     "depStationCode": "CAN",
     "arrStationCode": "YIN",
-    "flightNo": "9C7395 / 9C7125",
-    "airline": "春秋 / 春秋",
+    "flightNo": "MU6141 / 9C7369",
+    "airline": "东航 / 春秋",
     "journeyType": "中转",
-    "duration": "1710",
-    "price": "1560.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4PNZyG",
+    "duration": "1810",
+    "price": "730.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1WhDhf",
     "segments": [
       {
-        "depDateTime": "2026-09-29 06:30:00",
-        "arrDateTime": "2026-09-29 09:40:00",
-        "flightNo": "9C7395"
+        "depDateTime": "2026-09-29 06:40:00",
+        "arrDateTime": "2026-09-29 09:05:00",
+        "flightNo": "MU6141"
       },
       {
-        "depDateTime": "2026-09-30 07:15:00",
-        "arrDateTime": "2026-09-30 11:00:00",
-        "flightNo": "9C7125"
+        "depDateTime": "2026-09-30 08:15:00",
+        "arrDateTime": "2026-09-30 12:50:00",
+        "flightNo": "9C7369"
       }
     ]
   },
@@ -2371,7 +1588,7 @@
     "journeyType": "中转",
     "duration": "770",
     "price": "700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Fgo6O",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4cFfzN",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:55:00",
@@ -2397,12 +1614,38 @@
     "journeyType": "中转",
     "duration": "1760",
     "price": "740.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1gRDis",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F28LnO0",
     "segments": [
       {
         "depDateTime": "2026-09-29 07:30:00",
         "arrDateTime": "2026-09-29 09:55:00",
         "flightNo": "JD5161"
+      },
+      {
+        "depDateTime": "2026-09-30 08:15:00",
+        "arrDateTime": "2026-09-30 12:50:00",
+        "flightNo": "9C7369"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-09-29 07:55:00",
+    "arrDateTime": "2026-09-30 12:50:00",
+    "depStation": "白云",
+    "arrStation": "伊宁",
+    "depStationCode": "CAN",
+    "arrStationCode": "YIN",
+    "flightNo": "CA4310 / 9C7369",
+    "airline": "国航 / 春秋",
+    "journeyType": "中转",
+    "duration": "1735",
+    "price": "760.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1EBFhF",
+    "segments": [
+      {
+        "depDateTime": "2026-09-29 07:55:00",
+        "arrDateTime": "2026-09-29 10:15:00",
+        "flightNo": "CA4310"
       },
       {
         "depDateTime": "2026-09-30 08:15:00",
@@ -2422,8 +1665,8 @@
     "airline": "新海航|海南航空 / 东航",
     "journeyType": "中转",
     "duration": "655",
-    "price": "790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F13ROpq",
+    "price": "760.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1yoq4P",
     "segments": [
       {
         "depDateTime": "2026-09-29 08:30:00",
@@ -2434,6 +1677,32 @@
         "depDateTime": "2026-09-29 14:55:00",
         "arrDateTime": "2026-09-29 19:25:00",
         "flightNo": "MU6175"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-09-29 08:30:00",
+    "arrDateTime": "2026-09-30 12:50:00",
+    "depStation": "白云",
+    "arrStation": "伊宁",
+    "depStationCode": "CAN",
+    "arrStationCode": "YIN",
+    "flightNo": "HU7151 / 9C7369",
+    "airline": "新海航|海南航空 / 春秋",
+    "journeyType": "中转",
+    "duration": "1700",
+    "price": "760.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0ac5qn",
+    "segments": [
+      {
+        "depDateTime": "2026-09-29 08:30:00",
+        "arrDateTime": "2026-09-29 10:45:00",
+        "flightNo": "HU7151"
+      },
+      {
+        "depDateTime": "2026-09-30 08:15:00",
+        "arrDateTime": "2026-09-30 12:50:00",
+        "flightNo": "9C7369"
       }
     ]
   },
@@ -2449,7 +1718,7 @@
     "journeyType": "中转",
     "duration": "1470",
     "price": "729.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Du1WU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qpIhY",
     "segments": [
       {
         "depDateTime": "2026-09-29 12:20:00",
@@ -2460,58 +1729,6 @@
         "depDateTime": "2026-09-30 08:15:00",
         "arrDateTime": "2026-09-30 12:50:00",
         "flightNo": "9C7369"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 21:30:00",
-    "arrDateTime": "2026-09-30 12:10:00",
-    "depStation": "白云",
-    "arrStation": "伊宁",
-    "depStationCode": "CAN",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ3392 / UQ3589",
-    "airline": "南航 / 新海航|乌航",
-    "journeyType": "中转",
-    "duration": "880",
-    "price": "770.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3FpMyB",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 21:30:00",
-        "arrDateTime": "2026-09-29 23:55:00",
-        "flightNo": "CZ3392"
-      },
-      {
-        "depDateTime": "2026-09-30 07:15:00",
-        "arrDateTime": "2026-09-30 12:10:00",
-        "flightNo": "UQ3589"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-09-29 21:30:00",
-    "arrDateTime": "2026-09-30 12:40:00",
-    "depStation": "白云",
-    "arrStation": "伊宁",
-    "depStationCode": "CAN",
-    "arrStationCode": "YIN",
-    "flightNo": "CZ3392 / 9C7151",
-    "airline": "南航 / 春秋",
-    "journeyType": "中转",
-    "duration": "910",
-    "price": "770.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0BK4D7",
-    "segments": [
-      {
-        "depDateTime": "2026-09-29 21:30:00",
-        "arrDateTime": "2026-09-29 23:55:00",
-        "flightNo": "CZ3392"
-      },
-      {
-        "depDateTime": "2026-09-30 07:30:00",
-        "arrDateTime": "2026-09-30 12:40:00",
-        "flightNo": "9C7151"
       }
     ]
   }
@@ -2529,7 +1746,7 @@
     "journeyType": "直达",
     "duration": "450",
     "price": "1739.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4EDZUg",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Qb9f4",
     "segments": [
       {
         "depDateTime": "2026-09-29 06:35:00",
@@ -2550,7 +1767,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "3280.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19appw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2GYDOO",
     "segments": [
       {
         "depDateTime": "2026-09-29 10:30:00",
@@ -2575,7 +1792,7 @@
     "journeyType": "直达",
     "duration": "350",
     "price": "2300.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1kR8ff",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0ydRUU",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:40:00",
@@ -2596,7 +1813,7 @@
     "journeyType": "直达",
     "duration": "455",
     "price": "2550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0D7vKG",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2yYkOg",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:00:00",
@@ -2617,7 +1834,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "3120.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F49nFUA",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F48bNxH",
     "segments": [
       {
         "depDateTime": "2026-09-30 09:10:00",
@@ -2638,7 +1855,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3CU6cq",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19VrKA",
     "segments": [
       {
         "depDateTime": "2026-09-30 10:45:00",
@@ -2659,7 +1876,7 @@
     "journeyType": "直达",
     "duration": "350",
     "price": "2740.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0VEVgm",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3yVz0n",
     "segments": [
       {
         "depDateTime": "2026-09-30 11:40:00",
@@ -2680,7 +1897,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ONCgM",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1pD89F",
     "segments": [
       {
         "depDateTime": "2026-09-30 12:55:00",
@@ -2701,7 +1918,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "3030.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1FMj7t",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0S6c20",
     "segments": [
       {
         "depDateTime": "2026-09-30 16:15:00",
@@ -2722,7 +1939,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "3030.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2uh5qz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2UbrDl",
     "segments": [
       {
         "depDateTime": "2026-09-30 17:40:00",
@@ -2746,7 +1963,7 @@
     "journeyType": "中转",
     "duration": "550",
     "price": "890.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dTpCq",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Tgchu",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:25:00",
@@ -2772,7 +1989,7 @@
     "journeyType": "中转",
     "duration": "3115",
     "price": "2140.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FwTyD",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F14Tj2b",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:55:00",
@@ -2798,7 +2015,7 @@
     "journeyType": "中转",
     "duration": "555",
     "price": "1340.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0BafBP",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2kG48c",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:55:00",
@@ -2824,7 +2041,7 @@
     "journeyType": "中转",
     "duration": "1490",
     "price": "2220.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Tv8CF",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1f7ROX",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:00:00",
@@ -2850,7 +2067,7 @@
     "journeyType": "中转",
     "duration": "1545",
     "price": "2220.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3g3sGo",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4MQQsn",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:00:00",
@@ -2876,7 +2093,7 @@
     "journeyType": "中转",
     "duration": "1625",
     "price": "1400.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3D01jD",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3vYw2s",
     "segments": [
       {
         "depDateTime": "2026-09-30 09:45:00",
@@ -2902,7 +2119,7 @@
     "journeyType": "中转",
     "duration": "2915",
     "price": "2400.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3BYp5q",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F15G7u7",
     "segments": [
       {
         "depDateTime": "2026-09-30 10:15:00",
@@ -2928,7 +2145,7 @@
     "journeyType": "中转",
     "duration": "1270",
     "price": "2480.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0HK3Wb",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ahTtZ",
     "segments": [
       {
         "depDateTime": "2026-09-30 11:40:00",
@@ -2954,7 +2171,7 @@
     "journeyType": "中转",
     "duration": "2600",
     "price": "2450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3QdQQ3",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4PDKSA",
     "segments": [
       {
         "depDateTime": "2026-09-30 15:30:00",
@@ -2980,7 +2197,7 @@
     "journeyType": "中转",
     "duration": "2530",
     "price": "2450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2KrdEN",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Hmr9D",
     "segments": [
       {
         "depDateTime": "2026-09-30 16:40:00",
@@ -3009,7 +2226,7 @@
     "journeyType": "中转",
     "duration": "945",
     "price": "2390.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F45C4iz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4P3rFy",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:10:00",
@@ -3035,7 +2252,7 @@
     "journeyType": "中转",
     "duration": "2415",
     "price": "2390.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Ymq7Z",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0RQyc4",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:10:00",
@@ -3061,7 +2278,7 @@
     "journeyType": "中转",
     "duration": "1915",
     "price": "1930.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19EsZk",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1k25JI",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:10:00",
@@ -3087,7 +2304,7 @@
     "journeyType": "中转",
     "duration": "910",
     "price": "2760.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3CH8ZQ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JYcRm",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:00:00",
@@ -3113,7 +2330,7 @@
     "journeyType": "中转",
     "duration": "560",
     "price": "1460.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0y6qzQ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1CFInm",
     "segments": [
       {
         "depDateTime": "2026-09-30 09:20:00",
@@ -3139,7 +2356,7 @@
     "journeyType": "中转",
     "duration": "535",
     "price": "1400.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3HFQWS",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F31XBcM",
     "segments": [
       {
         "depDateTime": "2026-09-30 09:45:00",
@@ -3165,7 +2382,7 @@
     "journeyType": "中转",
     "duration": "1670",
     "price": "2100.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1OXRiY",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4KPgBz",
     "segments": [
       {
         "depDateTime": "2026-09-30 10:15:00",
@@ -3191,7 +2408,7 @@
     "journeyType": "中转",
     "duration": "3320",
     "price": "2670.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0T6EKV",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ytg5r",
     "segments": [
       {
         "depDateTime": "2026-09-30 11:40:00",
@@ -3217,7 +2434,7 @@
     "journeyType": "中转",
     "duration": "690",
     "price": "3030.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ch066",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F05Qx0P",
     "segments": [
       {
         "depDateTime": "2026-09-30 11:40:00",
@@ -3243,7 +2460,7 @@
     "journeyType": "中转",
     "duration": "3080",
     "price": "2920.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F45FSef",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2iNGUt",
     "segments": [
       {
         "depDateTime": "2026-09-30 15:40:00",
@@ -3273,7 +2490,7 @@
     "journeyType": "直达",
     "duration": "435",
     "price": "1819.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4GSWY4",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0L9Rj7",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:45:00",
@@ -3294,7 +2511,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2050.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2zaObd",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0YRujw",
     "segments": [
       {
         "depDateTime": "2026-09-30 07:00:00",
@@ -3315,7 +2532,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "2050.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3DQY3q",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2rppPx",
     "segments": [
       {
         "depDateTime": "2026-09-30 07:35:00",
@@ -3336,7 +2553,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2330.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0LBZ4G",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Twd3d",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:10:00",
@@ -3357,7 +2574,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "2220.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oh9RG",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F120JTE",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:10:00",
@@ -3378,7 +2595,7 @@
     "journeyType": "直达",
     "duration": "290",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F42ad1K",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0O96z2",
     "segments": [
       {
         "depDateTime": "2026-09-30 09:05:00",
@@ -3399,7 +2616,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "2370.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1x4wkU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4TcN0V",
     "segments": [
       {
         "depDateTime": "2026-09-30 10:00:00",
@@ -3420,7 +2637,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "2330.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4RtxUc",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1lDRXe",
     "segments": [
       {
         "depDateTime": "2026-09-30 11:25:00",
@@ -3441,7 +2658,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2200.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2CwPy7",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3VFwJw",
     "segments": [
       {
         "depDateTime": "2026-09-30 13:20:00",
@@ -3462,7 +2679,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2620.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37YhLz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1aIg0R",
     "segments": [
       {
         "depDateTime": "2026-09-30 15:40:00",
@@ -3483,7 +2700,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2250.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3w9z69",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1LFhvS",
     "segments": [
       {
         "depDateTime": "2026-09-30 16:40:00",
@@ -3504,7 +2721,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2340.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1F276E",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4RL5AU",
     "segments": [
       {
         "depDateTime": "2026-09-30 17:15:00",
@@ -3525,7 +2742,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3FTlyt",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2JssSM",
     "segments": [
       {
         "depDateTime": "2026-09-30 19:20:00",
@@ -3535,25 +2752,83 @@
     ]
   }
 ]}
-{"route":"广州→伊宁","date":"2026-09-30","apiCount":1,"dedup":"去重: 1 → 1 条","flights":[
+{"route":"广州→伊宁","date":"2026-09-30","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
+{"route":"广州→伊宁","date":"2026-09-30","apiCount":1,"dedup":"去重: 3 → 3 条","flights":[
   {
-    "depDateTime": "2026-09-30 07:15:00",
-    "arrDateTime": "2026-09-30 15:35:00",
+    "depDateTime": "2026-09-30 07:05:00",
+    "arrDateTime": "2026-09-30 14:50:00",
     "depStation": "白云",
     "arrStation": "伊宁",
     "depStationCode": "CAN",
     "arrStationCode": "YIN",
-    "flightNo": "CZ2369",
-    "airline": "南航",
-    "journeyType": "直达",
-    "duration": "500",
-    "price": "3490.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1yuE72",
+    "flightNo": "3U6710 / 3U6916",
+    "airline": "川航 / 川航",
+    "journeyType": "中转",
+    "duration": "465",
+    "price": "1980.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Eqj6V",
     "segments": [
       {
-        "depDateTime": "2026-09-30 07:15:00",
-        "arrDateTime": "2026-09-30 15:35:00",
-        "flightNo": "CZ2369"
+        "depDateTime": "2026-09-30 07:05:00",
+        "arrDateTime": "2026-09-30 09:20:00",
+        "flightNo": "3U6710"
+      },
+      {
+        "depDateTime": "2026-09-30 10:35:00",
+        "arrDateTime": "2026-09-30 14:50:00",
+        "flightNo": "3U6916"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-09-30 10:00:00",
+    "arrDateTime": "2026-09-30 23:10:00",
+    "depStation": "白云",
+    "arrStation": "伊宁",
+    "depStationCode": "CAN",
+    "arrStationCode": "YIN",
+    "flightNo": "CZ6882 / CZ6827",
+    "airline": "南航 / 南航",
+    "journeyType": "中转",
+    "duration": "790",
+    "price": "1680.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Gi7Cl",
+    "segments": [
+      {
+        "depDateTime": "2026-09-30 10:00:00",
+        "arrDateTime": "2026-09-30 15:10:00",
+        "flightNo": "CZ6882"
+      },
+      {
+        "depDateTime": "2026-09-30 21:50:00",
+        "arrDateTime": "2026-09-30 23:10:00",
+        "flightNo": "CZ6827"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-09-30 19:20:00",
+    "arrDateTime": "2026-10-01 08:50:00",
+    "depStation": "白云",
+    "arrStation": "伊宁",
+    "depStationCode": "CAN",
+    "arrStationCode": "YIN",
+    "flightNo": "CZ6884 / CZ6821",
+    "airline": "南航 / 南航",
+    "journeyType": "中转",
+    "duration": "810",
+    "price": "1680.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1fYqsI",
+    "segments": [
+      {
+        "depDateTime": "2026-09-30 19:20:00",
+        "arrDateTime": "2026-10-01 00:40:00",
+        "flightNo": "CZ6884"
+      },
+      {
+        "depDateTime": "2026-10-01 07:20:00",
+        "arrDateTime": "2026-10-01 08:50:00",
+        "flightNo": "CZ6821"
       }
     ]
   }
@@ -3572,7 +2847,7 @@
     "journeyType": "中转",
     "duration": "1895",
     "price": "1360.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22zyyd",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F109sII",
     "segments": [
       {
         "depDateTime": "2026-09-30 06:30:00",
@@ -3598,7 +2873,7 @@
     "journeyType": "中转",
     "duration": "3215",
     "price": "1990.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0T6Ct8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ZzGtG",
     "segments": [
       {
         "depDateTime": "2026-09-30 07:05:00",
@@ -3624,7 +2899,7 @@
     "journeyType": "中转",
     "duration": "465",
     "price": "1950.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NzoKd",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0B4QdO",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:10:00",
@@ -3650,7 +2925,7 @@
     "journeyType": "中转",
     "duration": "900",
     "price": "1950.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ghH5g",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3IQ6YK",
     "segments": [
       {
         "depDateTime": "2026-09-30 08:10:00",
@@ -3676,7 +2951,7 @@
     "journeyType": "中转",
     "duration": "1735",
     "price": "1269.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2LDQEe",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4S1fWJ",
     "segments": [
       {
         "depDateTime": "2026-09-30 09:10:00",
@@ -3702,7 +2977,7 @@
     "journeyType": "中转",
     "duration": "790",
     "price": "1950.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0OsXXj",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ouWMs",
     "segments": [
       {
         "depDateTime": "2026-09-30 10:00:00",
@@ -3728,7 +3003,7 @@
     "journeyType": "中转",
     "duration": "705",
     "price": "2210.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1o5FvD",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3JA5C1",
     "segments": [
       {
         "depDateTime": "2026-09-30 11:25:00",
@@ -3754,7 +3029,7 @@
     "journeyType": "中转",
     "duration": "2920",
     "price": "2220.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nvGon",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0QQr1U",
     "segments": [
       {
         "depDateTime": "2026-09-30 12:00:00",
@@ -3780,7 +3055,7 @@
     "journeyType": "中转",
     "duration": "590",
     "price": "2470.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zQ4hR",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F212pW9",
     "segments": [
       {
         "depDateTime": "2026-09-30 13:20:00",
@@ -3806,7 +3081,7 @@
     "journeyType": "中转",
     "duration": "2595",
     "price": "2440.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2u8SC1",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0tLNkW",
     "segments": [
       {
         "depDateTime": "2026-09-30 17:25:00",
@@ -3836,7 +3111,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "3110.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1AXvPA",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Anih2",
     "segments": [
       {
         "depDateTime": "2026-10-01 06:40:00",
@@ -3857,7 +3132,7 @@
     "journeyType": "直达",
     "duration": "500",
     "price": "3000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NMUfe",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Ap7j2",
     "segments": [
       {
         "depDateTime": "2026-10-01 07:40:00",
@@ -3878,7 +3153,7 @@
     "journeyType": "直达",
     "duration": "455",
     "price": "3120.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2SiSgp",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3TdtJR",
     "segments": [
       {
         "depDateTime": "2026-10-01 08:00:00",
@@ -3899,7 +3174,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "3120.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0OgYO9",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4E9CTc",
     "segments": [
       {
         "depDateTime": "2026-10-01 09:10:00",
@@ -3920,7 +3195,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "3460.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0SDgWJ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F41uWws",
     "segments": [
       {
         "depDateTime": "2026-10-01 10:45:00",
@@ -3941,7 +3216,7 @@
     "journeyType": "直达",
     "duration": "350",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3iy5E4",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F15u95S",
     "segments": [
       {
         "depDateTime": "2026-10-01 11:40:00",
@@ -3962,7 +3237,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "3270.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3XuarK",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Vvpjx",
     "segments": [
       {
         "depDateTime": "2026-10-01 12:55:00",
@@ -3983,7 +3258,7 @@
     "journeyType": "直达",
     "duration": "345",
     "price": "2660.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1cq401",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4BY3zf",
     "segments": [
       {
         "depDateTime": "2026-10-01 16:15:00",
@@ -4004,7 +3279,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "2550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2eNEWK",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3LvQ4h",
     "segments": [
       {
         "depDateTime": "2026-10-01 17:40:00",
@@ -4028,7 +3303,7 @@
     "journeyType": "中转",
     "duration": "1020",
     "price": "2030.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0xBPd0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2zQR2R",
     "segments": [
       {
         "depDateTime": "2026-10-01 17:50:00",
@@ -4054,7 +3329,7 @@
     "journeyType": "中转",
     "duration": "940",
     "price": "1190.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2SnF7C",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Ea2ts",
     "segments": [
       {
         "depDateTime": "2026-10-01 21:10:00",
@@ -4080,7 +3355,7 @@
     "journeyType": "中转",
     "duration": "1025",
     "price": "1010.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4UHNWC",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3gx2NT",
     "segments": [
       {
         "depDateTime": "2026-10-01 22:15:00",
@@ -4106,7 +3381,7 @@
     "journeyType": "中转",
     "duration": "1185",
     "price": "1200.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F462FTj",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0gXCxG",
     "segments": [
       {
         "depDateTime": "2026-10-01 22:25:00",
@@ -4132,7 +3407,7 @@
     "journeyType": "中转",
     "duration": "825",
     "price": "1200.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4duJwd",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3G8h1c",
     "segments": [
       {
         "depDateTime": "2026-10-01 22:25:00",
@@ -4158,7 +3433,7 @@
     "journeyType": "中转",
     "duration": "1150",
     "price": "1120.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3CAcUI",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JYGbg",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:00:00",
@@ -4184,7 +3459,7 @@
     "journeyType": "中转",
     "duration": "790",
     "price": "1120.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1fXbn0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0AjUG5",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:00:00",
@@ -4210,7 +3485,7 @@
     "journeyType": "中转",
     "duration": "775",
     "price": "1150.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qN0Uu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NXEEB",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:15:00",
@@ -4236,7 +3511,7 @@
     "journeyType": "中转",
     "duration": "750",
     "price": "1050.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2lzYf0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0JFajB",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:15:00",
@@ -4262,7 +3537,7 @@
     "journeyType": "中转",
     "duration": "940",
     "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1d6OXk",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19mYcV",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:40:00",
@@ -4291,7 +3566,7 @@
     "journeyType": "中转",
     "duration": "3200",
     "price": "2590.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2M8XrT",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zBdOF",
     "segments": [
       {
         "depDateTime": "2026-10-01 13:40:00",
@@ -4317,7 +3592,7 @@
     "journeyType": "中转",
     "duration": "1305",
     "price": "1570.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1F6ERW",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3jGk85",
     "segments": [
       {
         "depDateTime": "2026-10-01 14:55:00",
@@ -4343,7 +3618,7 @@
     "journeyType": "中转",
     "duration": "3090",
     "price": "2630.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Tp9uN",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4cznt7",
     "segments": [
       {
         "depDateTime": "2026-10-01 15:30:00",
@@ -4369,7 +3644,7 @@
     "journeyType": "中转",
     "duration": "1125",
     "price": "2627.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4DBIj5",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0KPadN",
     "segments": [
       {
         "depDateTime": "2026-10-01 18:45:00",
@@ -4395,7 +3670,7 @@
     "journeyType": "中转",
     "duration": "1560",
     "price": "2627.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1mWCX2",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2fDRHR",
     "segments": [
       {
         "depDateTime": "2026-10-01 18:45:00",
@@ -4421,7 +3696,7 @@
     "journeyType": "中转",
     "duration": "2565",
     "price": "2630.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dmqef",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1E18UX",
     "segments": [
       {
         "depDateTime": "2026-10-01 18:45:00",
@@ -4447,7 +3722,7 @@
     "journeyType": "中转",
     "duration": "2485",
     "price": "2420.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Dfbnn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1IKnW1",
     "segments": [
       {
         "depDateTime": "2026-10-01 20:30:00",
@@ -4473,7 +3748,7 @@
     "journeyType": "中转",
     "duration": "965",
     "price": "1550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HORcn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2pPO4n",
     "segments": [
       {
         "depDateTime": "2026-10-01 20:35:00",
@@ -4499,7 +3774,7 @@
     "journeyType": "中转",
     "duration": "930",
     "price": "1190.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4KGnou",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2u3lxh",
     "segments": [
       {
         "depDateTime": "2026-10-01 21:10:00",
@@ -4525,7 +3800,7 @@
     "journeyType": "中转",
     "duration": "2425",
     "price": "2420.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ajP2W",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0zJm91",
     "segments": [
       {
         "depDateTime": "2026-10-01 21:30:00",
@@ -4555,7 +3830,7 @@
     "journeyType": "直达",
     "duration": "435",
     "price": "2329.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0OrNbZ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1yd0W0",
     "segments": [
       {
         "depDateTime": "2026-10-01 06:40:00",
@@ -4576,7 +3851,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2730.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cjdzw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Aq72T",
     "segments": [
       {
         "depDateTime": "2026-10-01 07:00:00",
@@ -4597,7 +3872,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2650.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38xJHa",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2KMNEz",
     "segments": [
       {
         "depDateTime": "2026-10-01 07:20:00",
@@ -4618,7 +3893,7 @@
     "journeyType": "直达",
     "duration": "340",
     "price": "2730.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2S8Dhj",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2LopQz",
     "segments": [
       {
         "depDateTime": "2026-10-01 08:10:00",
@@ -4639,7 +3914,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1GloRn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0dyP5o",
     "segments": [
       {
         "depDateTime": "2026-10-01 08:10:00",
@@ -4660,7 +3935,7 @@
     "journeyType": "直达",
     "duration": "300",
     "price": "3450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3C607Z",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0SAvRY",
     "segments": [
       {
         "depDateTime": "2026-10-01 09:05:00",
@@ -4681,7 +3956,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3080.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0pFxje",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F25RUYq",
     "segments": [
       {
         "depDateTime": "2026-10-01 10:00:00",
@@ -4702,7 +3977,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4cAdi7",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3OetLd",
     "segments": [
       {
         "depDateTime": "2026-10-01 11:45:00",
@@ -4723,7 +3998,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F34v2ll",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F43zUTX",
     "segments": [
       {
         "depDateTime": "2026-10-01 13:20:00",
@@ -4744,7 +4019,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4DvIKO",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1jvhO3",
     "segments": [
       {
         "depDateTime": "2026-10-01 15:40:00",
@@ -4765,7 +4040,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2220.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ASMe5",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0KDv4j",
     "segments": [
       {
         "depDateTime": "2026-10-01 16:40:00",
@@ -4786,7 +4061,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2140.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Yu3eY",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F26xW9y",
     "segments": [
       {
         "depDateTime": "2026-10-01 17:10:00",
@@ -4807,7 +4082,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2140.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3hsguB",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0O8VJ0",
     "segments": [
       {
         "depDateTime": "2026-10-01 19:20:00",
@@ -4831,7 +4106,7 @@
     "journeyType": "中转",
     "duration": "1000",
     "price": "849.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0f4rtM",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zxup3",
     "segments": [
       {
         "depDateTime": "2026-10-01 19:05:00",
@@ -4857,7 +4132,7 @@
     "journeyType": "中转",
     "duration": "1370",
     "price": "1070.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4gOHBI",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4FpozS",
     "segments": [
       {
         "depDateTime": "2026-10-01 19:20:00",
@@ -4883,7 +4158,7 @@
     "journeyType": "中转",
     "duration": "1310",
     "price": "1060.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F05BuAU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F20GVgh",
     "segments": [
       {
         "depDateTime": "2026-10-01 20:20:00",
@@ -4909,7 +4184,7 @@
     "journeyType": "中转",
     "duration": "1240",
     "price": "1050.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2747qO",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0dahgB",
     "segments": [
       {
         "depDateTime": "2026-10-01 21:30:00",
@@ -4935,7 +4210,7 @@
     "journeyType": "中转",
     "duration": "820",
     "price": "830.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0DwhQ0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4PpOJd",
     "segments": [
       {
         "depDateTime": "2026-10-01 22:05:00",
@@ -4961,7 +4236,7 @@
     "journeyType": "中转",
     "duration": "1140",
     "price": "1020.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1fM6T2",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0NJ1Ok",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:10:00",
@@ -4987,7 +4262,7 @@
     "journeyType": "中转",
     "duration": "1140",
     "price": "1030.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0RCXbB",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0DgvFD",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:10:00",
@@ -5013,7 +4288,7 @@
     "journeyType": "中转",
     "duration": "780",
     "price": "1020.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FAORb",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2IiN4h",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:10:00",
@@ -5039,7 +4314,7 @@
     "journeyType": "中转",
     "duration": "780",
     "price": "1030.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eQn2Q",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4SXcxG",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:10:00",
@@ -5065,7 +4340,7 @@
     "journeyType": "中转",
     "duration": "725",
     "price": "800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3xrq8p",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2GR763",
     "segments": [
       {
         "depDateTime": "2026-10-01 23:40:00",
@@ -5093,7 +4368,7 @@
     "journeyType": "直达",
     "duration": "450",
     "price": "3990.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3AkfBu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3okBqY",
     "segments": [
       {
         "depDateTime": "2026-10-01 06:35:00",
@@ -5118,7 +4393,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3d421h",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1jOrLQ",
     "segments": [
       {
         "depDateTime": "2026-10-06 06:30:00",
@@ -5139,7 +4414,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2sSU8R",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nlXPX",
     "segments": [
       {
         "depDateTime": "2026-10-06 09:40:00",
@@ -5160,7 +4435,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0R0pvE",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F03qcvP",
     "segments": [
       {
         "depDateTime": "2026-10-06 10:55:00",
@@ -5181,7 +4456,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JSf7T",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1tNl1X",
     "segments": [
       {
         "depDateTime": "2026-10-06 16:05:00",
@@ -5202,7 +4477,7 @@
     "journeyType": "直达",
     "duration": "435",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F33xgo0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dxMeq",
     "segments": [
       {
         "depDateTime": "2026-10-06 16:40:00",
@@ -5223,7 +4498,7 @@
     "journeyType": "直达",
     "duration": "445",
     "price": "3300.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1L9GRb",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Pa4YF",
     "segments": [
       {
         "depDateTime": "2026-10-06 17:55:00",
@@ -5244,7 +4519,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3qHfWN",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3oZXy1",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:00:00",
@@ -5265,7 +4540,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1nEPFk",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3PaKyT",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:40:00",
@@ -5286,7 +4561,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "3460.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0v7Ae4",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0rW4bp",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -5309,7 +4584,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3GiLre",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ScN6N",
     "segments": [
       {
         "depDateTime": "2026-10-06 08:45:00",
@@ -5330,7 +4605,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3280.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zeWKR",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4QoO6Q",
     "segments": [
       {
         "depDateTime": "2026-10-06 10:15:00",
@@ -5351,7 +4626,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3pNjX4",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2gAiHE",
     "segments": [
       {
         "depDateTime": "2026-10-06 10:15:00",
@@ -5372,7 +4647,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nCeak",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4KNXiO",
     "segments": [
       {
         "depDateTime": "2026-10-06 10:45:00",
@@ -5393,7 +4668,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Oxuwl",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2i3QAM",
     "segments": [
       {
         "depDateTime": "2026-10-06 12:45:00",
@@ -5414,7 +4689,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4IjXlo",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0UpDGo",
     "segments": [
       {
         "depDateTime": "2026-10-06 14:45:00",
@@ -5435,7 +4710,7 @@
     "journeyType": "直达",
     "duration": "405",
     "price": "2839.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1lvJx8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nFzfe",
     "segments": [
       {
         "depDateTime": "2026-10-06 14:55:00",
@@ -5456,7 +4731,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2kBROt",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2tyWvz",
     "segments": [
       {
         "depDateTime": "2026-10-06 15:45:00",
@@ -5477,7 +4752,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3d2KhQ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ASFSw",
     "segments": [
       {
         "depDateTime": "2026-10-06 16:45:00",
@@ -5498,7 +4773,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3240.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F32sf2C",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2rC6kE",
     "segments": [
       {
         "depDateTime": "2026-10-06 17:15:00",
@@ -5519,7 +4794,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3240.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F49I0FY",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1SNDDA",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:40:00",
@@ -5540,7 +4815,7 @@
     "journeyType": "直达",
     "duration": "305",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2hlR9Q",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Ar4cX",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:45:00",
@@ -5561,7 +4836,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3070.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2bVOOv",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1hoeyp",
     "segments": [
       {
         "depDateTime": "2026-10-06 19:55:00",
@@ -5585,7 +4860,7 @@
     "journeyType": "中转",
     "duration": "2705",
     "price": "2800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0TdW8B",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1yzP5Z",
     "segments": [
       {
         "depDateTime": "2026-10-06 11:55:00",
@@ -5611,7 +4886,7 @@
     "journeyType": "中转",
     "duration": "3025",
     "price": "2800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3JJQNM",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F30gkDi",
     "segments": [
       {
         "depDateTime": "2026-10-06 11:55:00",
@@ -5637,7 +4912,7 @@
     "journeyType": "中转",
     "duration": "3100",
     "price": "2800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1KF7BV",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F45DGsc",
     "segments": [
       {
         "depDateTime": "2026-10-06 11:55:00",
@@ -5663,7 +4938,7 @@
     "journeyType": "中转",
     "duration": "575",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eKPPy",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F15wD1O",
     "segments": [
       {
         "depDateTime": "2026-10-06 16:10:00",
@@ -5689,7 +4964,7 @@
     "journeyType": "中转",
     "duration": "945",
     "price": "1980.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3hBwE8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4UKBLS",
     "segments": [
       {
         "depDateTime": "2026-10-06 16:10:00",
@@ -5715,7 +4990,7 @@
     "journeyType": "中转",
     "duration": "840",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0UFANV",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0M5AdU",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -5741,7 +5016,7 @@
     "journeyType": "中转",
     "duration": "1760",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0PcMCk",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4MMqVM",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -5767,7 +5042,7 @@
     "journeyType": "中转",
     "duration": "1860",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1S3xjr",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4SuyFG",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -5793,7 +5068,7 @@
     "journeyType": "中转",
     "duration": "930",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3HqT5m",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0f4mGv",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -5819,7 +5094,7 @@
     "journeyType": "中转",
     "duration": "915",
     "price": "1720.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0FDDqS",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0CtmO7",
     "segments": [
       {
         "depDateTime": "2026-10-06 20:30:00",
@@ -5848,7 +5123,7 @@
     "journeyType": "中转",
     "duration": "1335",
     "price": "1530.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MPFY5",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eoIxz",
     "segments": [
       {
         "depDateTime": "2026-10-06 11:45:00",
@@ -5874,7 +5149,7 @@
     "journeyType": "中转",
     "duration": "2730",
     "price": "2410.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0hCutC",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Rr839",
     "segments": [
       {
         "depDateTime": "2026-10-06 11:55:00",
@@ -5900,7 +5175,7 @@
     "journeyType": "中转",
     "duration": "2765",
     "price": "2410.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3lfUCY",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1RkPSU",
     "segments": [
       {
         "depDateTime": "2026-10-06 11:55:00",
@@ -5926,7 +5201,7 @@
     "journeyType": "中转",
     "duration": "1265",
     "price": "1530.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F431Btm",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F42KghR",
     "segments": [
       {
         "depDateTime": "2026-10-06 12:55:00",
@@ -5952,7 +5227,7 @@
     "journeyType": "中转",
     "duration": "2555",
     "price": "2410.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1M4sBv",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ZkbQp",
     "segments": [
       {
         "depDateTime": "2026-10-06 15:50:00",
@@ -5978,7 +5253,7 @@
     "journeyType": "中转",
     "duration": "905",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3LnW1F",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FnDwQ",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -6004,7 +5279,7 @@
     "journeyType": "中转",
     "duration": "990",
     "price": "1450.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4XpViD",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F276PK4",
     "segments": [
       {
         "depDateTime": "2026-10-06 18:55:00",
@@ -6030,7 +5305,7 @@
     "journeyType": "中转",
     "duration": "2345",
     "price": "2570.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4XzihO",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JHLWb",
     "segments": [
       {
         "depDateTime": "2026-10-06 20:25:00",
@@ -6056,7 +5331,7 @@
     "journeyType": "中转",
     "duration": "3040",
     "price": "2570.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F35qGLu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2I2bHz",
     "segments": [
       {
         "depDateTime": "2026-10-06 20:25:00",
@@ -6082,7 +5357,7 @@
     "journeyType": "中转",
     "duration": "905",
     "price": "2610.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Ql9US",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1EGpd2",
     "segments": [
       {
         "depDateTime": "2026-10-06 20:25:00",
@@ -6111,7 +5386,7 @@
     "journeyType": "中转",
     "duration": "2305",
     "price": "400.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F41HIAn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3jlmTU",
     "segments": [
       {
         "depDateTime": "2026-10-06 10:05:00",
@@ -6126,54 +5401,80 @@
     ]
   },
   {
-    "depDateTime": "2026-10-06 14:15:00",
-    "arrDateTime": "2026-10-07 11:30:00",
+    "depDateTime": "2026-10-06 14:50:00",
+    "arrDateTime": "2026-10-07 01:15:00",
     "depStation": "雪都",
     "arrStation": "宝安",
     "depStationCode": "AAT",
     "arrStationCode": "SZX",
-    "flightNo": "MU6246 / MU2269",
-    "airline": "东航 / 东航",
+    "flightNo": "AQ1486 / DZ6222",
+    "airline": "九元 / 东海",
     "journeyType": "中转",
-    "duration": "1275",
-    "price": "3960.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2y8nAW",
+    "duration": "625",
+    "price": "1199.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4SGPm6",
     "segments": [
       {
-        "depDateTime": "2026-10-06 14:15:00",
-        "arrDateTime": "2026-10-06 17:35:00",
-        "flightNo": "MU6246"
+        "depDateTime": "2026-10-06 14:50:00",
+        "arrDateTime": "2026-10-06 17:55:00",
+        "flightNo": "AQ1486"
       },
       {
-        "depDateTime": "2026-10-07 08:45:00",
-        "arrDateTime": "2026-10-07 11:30:00",
-        "flightNo": "MU2269"
+        "depDateTime": "2026-10-06 20:10:00",
+        "arrDateTime": "2026-10-07 01:15:00",
+        "flightNo": "DZ6222"
       }
     ]
   },
   {
-    "depDateTime": "2026-10-06 14:15:00",
-    "arrDateTime": "2026-10-07 14:10:00",
+    "depDateTime": "2026-10-06 14:50:00",
+    "arrDateTime": "2026-10-07 00:30:00",
     "depStation": "雪都",
     "arrStation": "宝安",
     "depStationCode": "AAT",
     "arrStationCode": "SZX",
-    "flightNo": "MU6246 / MU2331",
-    "airline": "东航 / 东航",
+    "flightNo": "AQ1486 / 9C7356",
+    "airline": "九元 / 春秋",
     "journeyType": "中转",
-    "duration": "1435",
-    "price": "3960.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3eR59I",
+    "duration": "580",
+    "price": "1199.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2zXKIv",
     "segments": [
       {
-        "depDateTime": "2026-10-06 14:15:00",
-        "arrDateTime": "2026-10-06 17:35:00",
-        "flightNo": "MU6246"
+        "depDateTime": "2026-10-06 14:50:00",
+        "arrDateTime": "2026-10-06 17:55:00",
+        "flightNo": "AQ1486"
       },
       {
-        "depDateTime": "2026-10-07 11:30:00",
-        "arrDateTime": "2026-10-07 14:10:00",
-        "flightNo": "MU2331"
+        "depDateTime": "2026-10-06 21:15:00",
+        "arrDateTime": "2026-10-07 00:30:00",
+        "flightNo": "9C7356"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-06 14:50:00",
+    "arrDateTime": "2026-10-07 13:50:00",
+    "depStation": "雪都",
+    "arrStation": "宝安",
+    "depStationCode": "AAT",
+    "arrStationCode": "SZX",
+    "flightNo": "AQ1486 / HU7764",
+    "airline": "九元 / 新海航|海南航空",
+    "journeyType": "中转",
+    "duration": "1380",
+    "price": "1199.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0aqJ7H",
+    "segments": [
+      {
+        "depDateTime": "2026-10-06 14:50:00",
+        "arrDateTime": "2026-10-06 17:55:00",
+        "flightNo": "AQ1486"
+      },
+      {
+        "depDateTime": "2026-10-07 10:35:00",
+        "arrDateTime": "2026-10-07 13:50:00",
+        "flightNo": "HU7764"
       }
     ]
   },
@@ -6189,7 +5490,7 @@
     "journeyType": "中转",
     "duration": "1835",
     "price": "1170.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3PbTAf",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4UHhfe",
     "segments": [
       {
         "depDateTime": "2026-10-06 17:55:00",
@@ -6214,8 +5515,8 @@
     "airline": "春秋 / 新海航|海南航空",
     "journeyType": "中转",
     "duration": "1195",
-    "price": "1626.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4VhcyU",
+    "price": "1170.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3qhKbG",
     "segments": [
       {
         "depDateTime": "2026-10-06 17:55:00",
@@ -6226,32 +5527,6 @@
         "depDateTime": "2026-10-07 10:35:00",
         "arrDateTime": "2026-10-07 13:50:00",
         "flightNo": "HU7764"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-10-06 20:00:00",
-    "arrDateTime": "2026-10-09 00:10:00",
-    "depStation": "雪都",
-    "arrStation": "宝安",
-    "depStationCode": "AAT",
-    "arrStationCode": "SZX",
-    "flightNo": "MU6866 / MU6669",
-    "airline": "东航 / 东航",
-    "journeyType": "中转",
-    "duration": "3130",
-    "price": "3760.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ZjuEq",
-    "segments": [
-      {
-        "depDateTime": "2026-10-06 20:00:00",
-        "arrDateTime": "2026-10-07 00:15:00",
-        "flightNo": "MU6866"
-      },
-      {
-        "depDateTime": "2026-10-08 20:40:00",
-        "arrDateTime": "2026-10-09 00:10:00",
-        "flightNo": "MU6669"
       }
     ]
   },
@@ -6267,7 +5542,7 @@
     "journeyType": "中转",
     "duration": "840",
     "price": "1790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0YAfbc",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F44a3CV",
     "segments": [
       {
         "depDateTime": "2026-10-06 21:35:00",
@@ -6293,7 +5568,7 @@
     "journeyType": "中转",
     "duration": "730",
     "price": "1790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0FzH22",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1656XT",
     "segments": [
       {
         "depDateTime": "2026-10-06 21:35:00",
@@ -6319,7 +5594,7 @@
     "journeyType": "中转",
     "duration": "835",
     "price": "3590.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Unx6I",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0rwq7b",
     "segments": [
       {
         "depDateTime": "2026-10-06 21:35:00",
@@ -6345,7 +5620,7 @@
     "journeyType": "中转",
     "duration": "995",
     "price": "3590.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1141IZ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2gfGxK",
     "segments": [
       {
         "depDateTime": "2026-10-06 21:35:00",
@@ -6360,50 +5635,8 @@
     ]
   }
 ]}
-{"route":"阿勒泰→广州","date":"2026-10-06","apiCount":1,"dedup":"去重: 2 → 2 条","flights":[
-  {
-    "depDateTime": "2026-10-06 14:50:00",
-    "arrDateTime": "2026-10-06 21:55:00",
-    "depStation": "雪都",
-    "arrStation": "白云",
-    "depStationCode": "AAT",
-    "arrStationCode": "CAN",
-    "flightNo": "AQ1178",
-    "airline": "九元",
-    "journeyType": "直达",
-    "duration": "425",
-    "price": "3139.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1myV74",
-    "segments": [
-      {
-        "depDateTime": "2026-10-06 14:50:00",
-        "arrDateTime": "2026-10-06 21:55:00",
-        "flightNo": "AQ1178"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-10-06 19:35:00",
-    "arrDateTime": "2026-10-07 01:05:00",
-    "depStation": "雪都",
-    "arrStation": "白云",
-    "depStationCode": "AAT",
-    "arrStationCode": "CAN",
-    "flightNo": "CZ5834",
-    "airline": "南航",
-    "journeyType": "直达",
-    "duration": "330",
-    "price": "3990.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1DXIvu",
-    "segments": [
-      {
-        "depDateTime": "2026-10-06 19:35:00",
-        "arrDateTime": "2026-10-07 01:05:00",
-        "flightNo": "CZ5834"
-      }
-    ]
-  }
-]}
+{"route":"阿勒泰→广州","date":"2026-10-06","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
+{"route":"阿勒泰→广州","date":"2026-10-06","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"石河子→深圳","date":"2026-10-06","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"石河子→深圳","date":"2026-10-06","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"石河子→广州","date":"2026-10-06","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
@@ -6421,7 +5654,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3760.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Ae8Eu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1uuOsv",
     "segments": [
       {
         "depDateTime": "2026-10-07 06:30:00",
@@ -6442,7 +5675,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3BrIjA",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F32Vipl",
     "segments": [
       {
         "depDateTime": "2026-10-07 09:50:00",
@@ -6463,7 +5696,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1L728I",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F31Mw8T",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:05:00",
@@ -6484,7 +5717,7 @@
     "journeyType": "直达",
     "duration": "445",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1rRz0r",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0TkqLQ",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:40:00",
@@ -6505,7 +5738,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Axbbu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0YiY2c",
     "segments": [
       {
         "depDateTime": "2026-10-07 17:50:00",
@@ -6526,7 +5759,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3800.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1juig8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F48JMzZ",
     "segments": [
       {
         "depDateTime": "2026-10-07 18:40:00",
@@ -6547,7 +5780,7 @@
     "journeyType": "直达",
     "duration": "300",
     "price": "3460.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0JP4vf",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0VI7Hw",
     "segments": [
       {
         "depDateTime": "2026-10-07 18:55:00",
@@ -6570,7 +5803,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1FRrFn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3tUb6z",
     "segments": [
       {
         "depDateTime": "2026-10-07 08:45:00",
@@ -6591,7 +5824,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3620.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2hTSco",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F03dppH",
     "segments": [
       {
         "depDateTime": "2026-10-07 10:15:00",
@@ -6612,7 +5845,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2U1Jxh",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1WUdF8",
     "segments": [
       {
         "depDateTime": "2026-10-07 10:45:00",
@@ -6633,7 +5866,7 @@
     "journeyType": "直达",
     "duration": "305",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4EEh2w",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0DSPao",
     "segments": [
       {
         "depDateTime": "2026-10-07 12:45:00",
@@ -6654,7 +5887,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0a26xw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F14U1zp",
     "segments": [
       {
         "depDateTime": "2026-10-07 14:45:00",
@@ -6674,8 +5907,8 @@
     "airline": "九元",
     "journeyType": "直达",
     "duration": "400",
-    "price": "2839.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0BKJXt",
+    "price": "2849.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3WwdMe",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:15:00",
@@ -6696,7 +5929,7 @@
     "journeyType": "直达",
     "duration": "300",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1v31kU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0di9DJ",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:00:00",
@@ -6717,7 +5950,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Wb0iD",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F28KEwX",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:45:00",
@@ -6738,7 +5971,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3240.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F02njLY",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0CUyHu",
     "segments": [
       {
         "depDateTime": "2026-10-07 17:15:00",
@@ -6759,7 +5992,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3240.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4GuAkw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F43TxVB",
     "segments": [
       {
         "depDateTime": "2026-10-07 18:40:00",
@@ -6780,7 +6013,7 @@
     "journeyType": "直达",
     "duration": "305",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4LeQ5W",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2kmUTY",
     "segments": [
       {
         "depDateTime": "2026-10-07 18:45:00",
@@ -6801,7 +6034,7 @@
     "journeyType": "直达",
     "duration": "305",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3glDoU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2aA6XQ",
     "segments": [
       {
         "depDateTime": "2026-10-07 19:45:00",
@@ -6822,7 +6055,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3070.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MtR8B",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2sinzF",
     "segments": [
       {
         "depDateTime": "2026-10-07 19:55:00",
@@ -6846,7 +6079,7 @@
     "journeyType": "中转",
     "duration": "3090",
     "price": "2570.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3iSEDj",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2PEcpl",
     "segments": [
       {
         "depDateTime": "2026-10-07 08:00:00",
@@ -6872,7 +6105,7 @@
     "journeyType": "中转",
     "duration": "2705",
     "price": "2540.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2tKOCr",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0OdfSN",
     "segments": [
       {
         "depDateTime": "2026-10-07 11:55:00",
@@ -6898,7 +6131,7 @@
     "journeyType": "中转",
     "duration": "3100",
     "price": "2540.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2njgUy",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F04sIBH",
     "segments": [
       {
         "depDateTime": "2026-10-07 11:55:00",
@@ -6924,7 +6157,7 @@
     "journeyType": "中转",
     "duration": "3245",
     "price": "2540.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1bXUxm",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0gkQVd",
     "segments": [
       {
         "depDateTime": "2026-10-07 11:55:00",
@@ -6950,7 +6183,7 @@
     "journeyType": "中转",
     "duration": "2020",
     "price": "605.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Gu2xw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Ibm8M",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:20:00",
@@ -6976,7 +6209,7 @@
     "journeyType": "中转",
     "duration": "2010",
     "price": "605.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1VH76x",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4DFaDP",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:30:00",
@@ -7002,7 +6235,7 @@
     "journeyType": "中转",
     "duration": "3150",
     "price": "2490.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3YAMwc",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1JsfGW",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:00:00",
@@ -7028,7 +6261,7 @@
     "journeyType": "中转",
     "duration": "840",
     "price": "1610.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3wqb2S",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2d1cPt",
     "segments": [
       {
         "depDateTime": "2026-10-07 18:55:00",
@@ -7054,7 +6287,7 @@
     "journeyType": "中转",
     "duration": "1785",
     "price": "550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2rpDdw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4KAVmo",
     "segments": [
       {
         "depDateTime": "2026-10-07 19:15:00",
@@ -7080,7 +6313,7 @@
     "journeyType": "中转",
     "duration": "2410",
     "price": "2570.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0AC8p0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zQVx8",
     "segments": [
       {
         "depDateTime": "2026-10-07 19:20:00",
@@ -7108,7 +6341,7 @@
     "journeyType": "直达",
     "duration": "450",
     "price": "3790.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3r4sNg",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3U5Api",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:20:00",
@@ -7132,7 +6365,7 @@
     "journeyType": "中转",
     "duration": "865",
     "price": "400.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4YIH8B",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0vCx8K",
     "segments": [
       {
         "depDateTime": "2026-10-07 10:05:00",
@@ -7158,7 +6391,7 @@
     "journeyType": "中转",
     "duration": "2325",
     "price": "1010.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0RfmVA",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2JYTQX",
     "segments": [
       {
         "depDateTime": "2026-10-07 10:10:00",
@@ -7184,7 +6417,7 @@
     "journeyType": "中转",
     "duration": "820",
     "price": "480.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2JDJrE",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Texuf",
     "segments": [
       {
         "depDateTime": "2026-10-07 10:50:00",
@@ -7210,7 +6443,7 @@
     "journeyType": "中转",
     "duration": "2715",
     "price": "3310.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2uDHI0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oajb2",
     "segments": [
       {
         "depDateTime": "2026-10-07 14:15:00",
@@ -7236,7 +6469,7 @@
     "journeyType": "中转",
     "duration": "1935",
     "price": "700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4aQXTy",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0b2g62",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:40:00",
@@ -7262,7 +6495,7 @@
     "journeyType": "中转",
     "duration": "1860",
     "price": "700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4QzdOd",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3pGi3o",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:40:00",
@@ -7288,7 +6521,7 @@
     "journeyType": "中转",
     "duration": "1680",
     "price": "320.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0LbAPL",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2epcjH",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:00:00",
@@ -7314,7 +6547,7 @@
     "journeyType": "中转",
     "duration": "2275",
     "price": "2930.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4UCeV8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0TuyVF",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:35:00",
@@ -7340,7 +6573,7 @@
     "journeyType": "中转",
     "duration": "2435",
     "price": "3110.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F16XvBn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F46OnoA",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:35:00",
@@ -7366,7 +6599,7 @@
     "journeyType": "中转",
     "duration": "840",
     "price": "2160.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3dEASv",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1shMc1",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:35:00",
@@ -7395,7 +6628,7 @@
     "journeyType": "中转",
     "duration": "2200",
     "price": "550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0xtn6a",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3WUnGG",
     "segments": [
       {
         "depDateTime": "2026-10-07 11:35:00",
@@ -7421,7 +6654,7 @@
     "journeyType": "中转",
     "duration": "2195",
     "price": "620.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1CPATa",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Cbnof",
     "segments": [
       {
         "depDateTime": "2026-10-07 11:40:00",
@@ -7447,7 +6680,7 @@
     "journeyType": "中转",
     "duration": "2015",
     "price": "610.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2gBbc5",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1v7QQm",
     "segments": [
       {
         "depDateTime": "2026-10-07 14:40:00",
@@ -7473,7 +6706,7 @@
     "journeyType": "中转",
     "duration": "1650",
     "price": "1720.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3FBuzB",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3d342m",
     "segments": [
       {
         "depDateTime": "2026-10-07 14:55:00",
@@ -7499,7 +6732,7 @@
     "journeyType": "中转",
     "duration": "2030",
     "price": "380.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2IkkEB",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F26DO98",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:55:00",
@@ -7525,7 +6758,7 @@
     "journeyType": "中转",
     "duration": "1950",
     "price": "700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2tblKz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0GMdo1",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:40:00",
@@ -7551,7 +6784,7 @@
     "journeyType": "中转",
     "duration": "1740",
     "price": "700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1p6kOK",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ZWv6c",
     "segments": [
       {
         "depDateTime": "2026-10-07 16:40:00",
@@ -7577,7 +6810,7 @@
     "journeyType": "中转",
     "duration": "1955",
     "price": "400.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3X6Ial",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4HK9A4",
     "segments": [
       {
         "depDateTime": "2026-10-07 17:10:00",
@@ -7603,7 +6836,7 @@
     "journeyType": "中转",
     "duration": "1610",
     "price": "390.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0pYchk",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2X8NLk",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:00:00",
@@ -7619,17 +6852,17 @@
   },
   {
     "depDateTime": "2026-10-07 21:35:00",
-    "arrDateTime": "2026-10-08 17:30:00",
+    "arrDateTime": "2026-10-09 01:45:00",
     "depStation": "雪都",
     "arrStation": "白云",
     "depStationCode": "AAT",
     "arrStationCode": "CAN",
-    "flightNo": "MU2378 / MU5167",
-    "airline": "东航 / 东航",
+    "flightNo": "MU2378 / AQ1106",
+    "airline": "东航 / 九元",
     "journeyType": "中转",
-    "duration": "1195",
-    "price": "2803.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F12fVJp",
+    "duration": "1690",
+    "price": "2160.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3gj3Vd",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:35:00",
@@ -7637,9 +6870,9 @@
         "flightNo": "MU2378"
       },
       {
-        "depDateTime": "2026-10-08 14:30:00",
-        "arrDateTime": "2026-10-08 17:30:00",
-        "flightNo": "MU5167"
+        "depDateTime": "2026-10-08 23:00:00",
+        "arrDateTime": "2026-10-09 01:45:00",
+        "flightNo": "AQ1106"
       }
     ]
   }
@@ -7658,7 +6891,7 @@
     "journeyType": "中转",
     "duration": "2050",
     "price": "1550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ID52r",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Z89Vw",
     "segments": [
       {
         "depDateTime": "2026-10-07 14:10:00",
@@ -7684,7 +6917,7 @@
     "journeyType": "中转",
     "duration": "1230",
     "price": "1550.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3h3Pfo",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3eqijs",
     "segments": [
       {
         "depDateTime": "2026-10-07 14:10:00",
@@ -7710,7 +6943,7 @@
     "journeyType": "中转",
     "duration": "1955",
     "price": "1520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0IxuMU",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0EHpHx",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:45:00",
@@ -7736,7 +6969,7 @@
     "journeyType": "中转",
     "duration": "1135",
     "price": "1520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ApWXE",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Hp2f0",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:45:00",
@@ -7762,7 +6995,7 @@
     "journeyType": "中转",
     "duration": "1120",
     "price": "2630.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1c18kY",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F06216R",
     "segments": [
       {
         "depDateTime": "2026-10-07 15:45:00",
@@ -7788,7 +7021,7 @@
     "journeyType": "中转",
     "duration": "1400",
     "price": "2340.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3h74tu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37jlhM",
     "segments": [
       {
         "depDateTime": "2026-10-07 17:35:00",
@@ -7814,7 +7047,7 @@
     "journeyType": "中转",
     "duration": "1405",
     "price": "2590.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Hv9jA",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3qH0SB",
     "segments": [
       {
         "depDateTime": "2026-10-07 17:35:00",
@@ -7840,7 +7073,7 @@
     "journeyType": "中转",
     "duration": "965",
     "price": "1360.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2zI1H9",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3j4dGS",
     "segments": [
       {
         "depDateTime": "2026-10-07 17:35:00",
@@ -7866,7 +7099,7 @@
     "journeyType": "中转",
     "duration": "1645",
     "price": "320.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0amUtS",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4YlOKJ",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:35:00",
@@ -7892,7 +7125,7 @@
     "journeyType": "中转",
     "duration": "1645",
     "price": "420.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F24mjKy",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1cVRiw",
     "segments": [
       {
         "depDateTime": "2026-10-07 21:35:00",
@@ -7922,7 +7155,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F23aI8a",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4GWJ5h",
     "segments": [
       {
         "depDateTime": "2026-10-08 06:30:00",
@@ -7943,7 +7176,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3500.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HP7BD",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4RrFQE",
     "segments": [
       {
         "depDateTime": "2026-10-08 09:40:00",
@@ -7964,7 +7197,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3500.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3UGHj6",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2HtkF6",
     "segments": [
       {
         "depDateTime": "2026-10-08 11:00:00",
@@ -7985,7 +7218,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3500.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0gIoTL",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3VEkdl",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:05:00",
@@ -8006,7 +7239,7 @@
     "journeyType": "直达",
     "duration": "435",
     "price": "2740.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2sOPT3",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2RuJYr",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:40:00",
@@ -8027,7 +7260,7 @@
     "journeyType": "直达",
     "duration": "460",
     "price": "2200.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3xe9uc",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3sFqNU",
     "segments": [
       {
         "depDateTime": "2026-10-08 17:15:00",
@@ -8048,7 +7281,7 @@
     "journeyType": "直达",
     "duration": "320",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2zrD2d",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37Oohg",
     "segments": [
       {
         "depDateTime": "2026-10-08 18:00:00",
@@ -8069,7 +7302,7 @@
     "journeyType": "直达",
     "duration": "335",
     "price": "2740.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Pamog",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3YYZ77",
     "segments": [
       {
         "depDateTime": "2026-10-08 18:40:00",
@@ -8090,7 +7323,7 @@
     "journeyType": "直达",
     "duration": "285",
     "price": "2420.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cJ5lr",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F08kzuZ",
     "segments": [
       {
         "depDateTime": "2026-10-08 18:55:00",
@@ -8113,7 +7346,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2eZ95D",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Y5OzF",
     "segments": [
       {
         "depDateTime": "2026-10-08 08:45:00",
@@ -8134,7 +7367,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "2600.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2iySU0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4OdxC2",
     "segments": [
       {
         "depDateTime": "2026-10-08 10:15:00",
@@ -8155,7 +7388,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "3750.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0RfqUr",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2mQpLJ",
     "segments": [
       {
         "depDateTime": "2026-10-08 10:45:00",
@@ -8176,7 +7409,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3080.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2LH3N8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Mr3XI",
     "segments": [
       {
         "depDateTime": "2026-10-08 12:45:00",
@@ -8197,7 +7430,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2700.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NoLBu",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0aeNb5",
     "segments": [
       {
         "depDateTime": "2026-10-08 14:45:00",
@@ -8218,7 +7451,7 @@
     "journeyType": "直达",
     "duration": "405",
     "price": "2159.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2DHsSy",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3k1SJu",
     "segments": [
       {
         "depDateTime": "2026-10-08 14:55:00",
@@ -8239,7 +7472,7 @@
     "journeyType": "直达",
     "duration": "310",
     "price": "3080.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0tYVav",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F46gsor",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:45:00",
@@ -8260,7 +7493,7 @@
     "journeyType": "直达",
     "duration": "325",
     "price": "3410.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3GdUsn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3m7yhF",
     "segments": [
       {
         "depDateTime": "2026-10-08 17:15:00",
@@ -8281,7 +7514,7 @@
     "journeyType": "直达",
     "duration": "330",
     "price": "3240.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0rny3C",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3EIW0B",
     "segments": [
       {
         "depDateTime": "2026-10-08 18:40:00",
@@ -8302,7 +7535,7 @@
     "journeyType": "直达",
     "duration": "305",
     "price": "2520.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1gGKeQ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3WCx4C",
     "segments": [
       {
         "depDateTime": "2026-10-08 18:45:00",
@@ -8323,7 +7556,7 @@
     "journeyType": "直达",
     "duration": "305",
     "price": "2330.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3l1gUn",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3SWd1d",
     "segments": [
       {
         "depDateTime": "2026-10-08 19:45:00",
@@ -8344,7 +7577,7 @@
     "journeyType": "直达",
     "duration": "315",
     "price": "2050.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1fWAeR",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2tZkkf",
     "segments": [
       {
         "depDateTime": "2026-10-08 19:55:00",
@@ -8357,6 +7590,32 @@
 {"route":"伊宁→深圳","date":"2026-10-08","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"伊宁→深圳","date":"2026-10-08","apiCount":1,"dedup":"去重: 10 → 10 条","flights":[
   {
+    "depDateTime": "2026-10-08 16:00:00",
+    "arrDateTime": "2026-10-09 11:35:00",
+    "depStation": "伊宁",
+    "arrStation": "宝安",
+    "depStationCode": "YIN",
+    "arrStationCode": "SZX",
+    "flightNo": "9C6462 / BK2763",
+    "airline": "春秋 / 奥凯",
+    "journeyType": "中转",
+    "duration": "1175",
+    "price": "1000.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Sj6qs",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 16:00:00",
+        "arrDateTime": "2026-10-08 19:55:00",
+        "flightNo": "9C6462"
+      },
+      {
+        "depDateTime": "2026-10-09 07:20:00",
+        "arrDateTime": "2026-10-09 11:35:00",
+        "flightNo": "BK2763"
+      }
+    ]
+  },
+  {
     "depDateTime": "2026-10-08 16:05:00",
     "arrDateTime": "2026-10-10 01:25:00",
     "depStation": "伊宁",
@@ -8367,8 +7626,8 @@
     "airline": "春秋 / 春秋",
     "journeyType": "中转",
     "duration": "2000",
-    "price": "1918.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Koi60",
+    "price": "1380.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0OLXbq",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:05:00",
@@ -8383,6 +7642,32 @@
     ]
   },
   {
+    "depDateTime": "2026-10-08 16:05:00",
+    "arrDateTime": "2026-10-09 01:15:00",
+    "depStation": "伊宁",
+    "arrStation": "宝安",
+    "depStationCode": "YIN",
+    "arrStationCode": "SZX",
+    "flightNo": "9C6254 / 9C6540",
+    "airline": "春秋 / 春秋",
+    "journeyType": "中转",
+    "duration": "550",
+    "price": "1800.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F43OIH5",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 16:05:00",
+        "arrDateTime": "2026-10-08 20:35:00",
+        "flightNo": "9C6254"
+      },
+      {
+        "depDateTime": "2026-10-08 21:50:00",
+        "arrDateTime": "2026-10-09 01:15:00",
+        "flightNo": "9C6540"
+      }
+    ]
+  },
+  {
     "depDateTime": "2026-10-08 16:10:00",
     "arrDateTime": "2026-10-10 01:45:00",
     "depStation": "伊宁",
@@ -8393,8 +7678,8 @@
     "airline": "春秋 / 深航",
     "journeyType": "中转",
     "duration": "2015",
-    "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2lxnec",
+    "price": "1080.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0G8chz",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:10:00",
@@ -8419,8 +7704,8 @@
     "airline": "春秋 / 东海",
     "journeyType": "中转",
     "duration": "945",
-    "price": "1390.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F47zM0x",
+    "price": "1080.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0X4Hcf",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:10:00",
@@ -8431,32 +7716,6 @@
         "depDateTime": "2026-10-09 06:00:00",
         "arrDateTime": "2026-10-09 07:55:00",
         "flightNo": "DZ6220"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-10-08 16:10:00",
-    "arrDateTime": "2026-10-09 09:30:00",
-    "depStation": "伊宁",
-    "arrStation": "宝安",
-    "depStationCode": "YIN",
-    "arrStationCode": "SZX",
-    "flightNo": "9C7652 / ZH9952",
-    "airline": "春秋 / 深航",
-    "journeyType": "中转",
-    "duration": "1040",
-    "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3TMNDz",
-    "segments": [
-      {
-        "depDateTime": "2026-10-08 16:10:00",
-        "arrDateTime": "2026-10-08 21:00:00",
-        "flightNo": "9C7652"
-      },
-      {
-        "depDateTime": "2026-10-09 07:05:00",
-        "arrDateTime": "2026-10-09 09:30:00",
-        "flightNo": "ZH9952"
       }
     ]
   },
@@ -8472,7 +7731,7 @@
     "journeyType": "中转",
     "duration": "1705",
     "price": "1130.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1RfTyB",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F36SSdF",
     "segments": [
       {
         "depDateTime": "2026-10-08 18:55:00",
@@ -8498,7 +7757,7 @@
     "journeyType": "中转",
     "duration": "915",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3wjiJB",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Df3Pu",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8524,7 +7783,7 @@
     "journeyType": "中转",
     "duration": "745",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3BtHl8",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1zHIAj",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8550,7 +7809,7 @@
     "journeyType": "中转",
     "duration": "725",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Ua1JZ",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1kYx3z",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8576,7 +7835,7 @@
     "journeyType": "中转",
     "duration": "770",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3H8ltR",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4FBKOI",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8589,36 +7848,36 @@
         "flightNo": "CA4343"
       }
     ]
-  },
-  {
-    "depDateTime": "2026-10-08 20:30:00",
-    "arrDateTime": "2026-10-09 09:10:00",
-    "depStation": "伊宁",
-    "arrStation": "宝安",
-    "depStationCode": "YIN",
-    "arrStationCode": "SZX",
-    "flightNo": "CZ2020 / 3U8781",
-    "airline": "南航 / 川航",
-    "journeyType": "中转",
-    "duration": "760",
-    "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0aExnI",
-    "segments": [
-      {
-        "depDateTime": "2026-10-08 20:30:00",
-        "arrDateTime": "2026-10-09 00:55:00",
-        "flightNo": "CZ2020"
-      },
-      {
-        "depDateTime": "2026-10-09 07:10:00",
-        "arrDateTime": "2026-10-09 09:10:00",
-        "flightNo": "3U8781"
-      }
-    ]
   }
 ]}
 {"route":"伊宁→广州","date":"2026-10-08","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"伊宁→广州","date":"2026-10-08","apiCount":1,"dedup":"去重: 10 → 10 条","flights":[
+  {
+    "depDateTime": "2026-10-08 15:50:00",
+    "arrDateTime": "2026-10-09 10:25:00",
+    "depStation": "伊宁",
+    "arrStation": "白云",
+    "depStationCode": "YIN",
+    "arrStationCode": "CAN",
+    "flightNo": "3U6915 / 3U6701",
+    "airline": "川航 / 川航",
+    "journeyType": "中转",
+    "duration": "1115",
+    "price": "1480.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4gVt5r",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 15:50:00",
+        "arrDateTime": "2026-10-08 19:30:00",
+        "flightNo": "3U6915"
+      },
+      {
+        "depDateTime": "2026-10-09 08:00:00",
+        "arrDateTime": "2026-10-09 10:25:00",
+        "flightNo": "3U6701"
+      }
+    ]
+  },
   {
     "depDateTime": "2026-10-08 15:50:00",
     "arrDateTime": "2026-10-09 15:50:00",
@@ -8631,7 +7890,7 @@
     "journeyType": "中转",
     "duration": "1440",
     "price": "1480.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3UCR5m",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0V74eq",
     "segments": [
       {
         "depDateTime": "2026-10-08 15:50:00",
@@ -8657,7 +7916,7 @@
     "journeyType": "中转",
     "duration": "1800",
     "price": "1480.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0zhcOw",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F253Skh",
     "segments": [
       {
         "depDateTime": "2026-10-08 15:50:00",
@@ -8668,6 +7927,32 @@
         "depDateTime": "2026-10-09 19:30:00",
         "arrDateTime": "2026-10-09 21:50:00",
         "flightNo": "3U6709"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 16:05:00",
+    "arrDateTime": "2026-10-09 11:05:00",
+    "depStation": "伊宁",
+    "arrStation": "白云",
+    "depStationCode": "YIN",
+    "arrStationCode": "CAN",
+    "flightNo": "9C6254 / CZ3132",
+    "airline": "春秋 / 南航",
+    "journeyType": "中转",
+    "duration": "1140",
+    "price": "970.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2CWKHI",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 16:05:00",
+        "arrDateTime": "2026-10-08 20:35:00",
+        "flightNo": "9C6254"
+      },
+      {
+        "depDateTime": "2026-10-09 08:00:00",
+        "arrDateTime": "2026-10-09 11:05:00",
+        "flightNo": "CZ3132"
       }
     ]
   },
@@ -8683,7 +7968,7 @@
     "journeyType": "中转",
     "duration": "1705",
     "price": "1390.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1wPnZi",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2sBrxW",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:10:00",
@@ -8709,7 +7994,7 @@
     "journeyType": "中转",
     "duration": "1935",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18gPWh",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1jvgp5",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:10:00",
@@ -8735,7 +8020,7 @@
     "journeyType": "中转",
     "duration": "1045",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F06wDG0",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F34suN1",
     "segments": [
       {
         "depDateTime": "2026-10-08 16:10:00",
@@ -8746,32 +8031,6 @@
         "depDateTime": "2026-10-09 07:25:00",
         "arrDateTime": "2026-10-09 09:35:00",
         "flightNo": "MU5287"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-10-08 16:10:00",
-    "arrDateTime": "2026-10-09 01:40:00",
-    "depStation": "伊宁",
-    "arrStation": "白云",
-    "depStationCode": "YIN",
-    "arrStationCode": "CAN",
-    "flightNo": "9C7652 / HU7204",
-    "airline": "春秋 / 新海航|海南航空",
-    "journeyType": "中转",
-    "duration": "570",
-    "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F466fPb",
-    "segments": [
-      {
-        "depDateTime": "2026-10-08 16:10:00",
-        "arrDateTime": "2026-10-08 21:00:00",
-        "flightNo": "9C7652"
-      },
-      {
-        "depDateTime": "2026-10-08 23:35:00",
-        "arrDateTime": "2026-10-09 01:40:00",
-        "flightNo": "HU7204"
       }
     ]
   },
@@ -8787,7 +8046,7 @@
     "journeyType": "中转",
     "duration": "1560",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3LkvJg",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0dy97U",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8813,7 +8072,7 @@
     "journeyType": "中转",
     "duration": "720",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3bg1Rz",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1VG6Mv",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8839,7 +8098,7 @@
     "journeyType": "中转",
     "duration": "790",
     "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3DyDau",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1eEuAD",
     "segments": [
       {
         "depDateTime": "2026-10-08 20:30:00",
@@ -8850,32 +8109,6 @@
         "depDateTime": "2026-10-09 07:30:00",
         "arrDateTime": "2026-10-09 09:40:00",
         "flightNo": "CZ2305"
-      }
-    ]
-  },
-  {
-    "depDateTime": "2026-10-08 20:30:00",
-    "arrDateTime": "2026-10-09 11:40:00",
-    "depStation": "伊宁",
-    "arrStation": "白云",
-    "depStationCode": "YIN",
-    "arrStationCode": "CAN",
-    "flightNo": "CZ2020 / HU7342",
-    "airline": "南航 / 新海航|海南航空",
-    "journeyType": "中转",
-    "duration": "910",
-    "price": "1000.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0p1ro9",
-    "segments": [
-      {
-        "depDateTime": "2026-10-08 20:30:00",
-        "arrDateTime": "2026-10-09 00:55:00",
-        "flightNo": "CZ2020"
-      },
-      {
-        "depDateTime": "2026-10-09 09:30:00",
-        "arrDateTime": "2026-10-09 11:40:00",
-        "flightNo": "HU7342"
       }
     ]
   }
@@ -8895,7 +8128,7 @@
     "journeyType": "直达",
     "duration": "425",
     "price": "1939.00",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1YdZtG",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4WsGiT",
     "segments": [
       {
         "depDateTime": "2026-10-08 14:50:00",
@@ -8908,4 +8141,265 @@
 {"route":"石河子→深圳","date":"2026-10-08","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"石河子→深圳","date":"2026-10-08","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
 {"route":"石河子→广州","date":"2026-10-08","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
-{"route":"石河子→广州","date":"2026-10-08","apiCount":1,"dedup":"去重: 0 → 0 条","flights":[]}
+{"route":"石河子→广州","date":"2026-10-08","apiCount":1,"dedup":"去重: 10 → 10 条","flights":[
+  {
+    "depDateTime": "2026-10-08 12:40:00",
+    "arrDateTime": "2026-10-10 01:45:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "G54956 / AQ1192",
+    "airline": "华夏 / 九元",
+    "journeyType": "中转",
+    "duration": "2225",
+    "price": "580.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0WrbTu",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 12:40:00",
+        "arrDateTime": "2026-10-08 15:55:00",
+        "flightNo": "G54956"
+      },
+      {
+        "depDateTime": "2026-10-09 16:50:00",
+        "arrDateTime": "2026-10-10 01:45:00",
+        "flightNo": "AQ1192"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 13:05:00",
+    "arrDateTime": "2026-10-10 00:15:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "G52678 / 9C7396",
+    "airline": "华夏 / 春秋",
+    "journeyType": "中转",
+    "duration": "2110",
+    "price": "340.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3XGwOj",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 13:05:00",
+        "arrDateTime": "2026-10-08 14:20:00",
+        "flightNo": "G52678"
+      },
+      {
+        "depDateTime": "2026-10-09 16:50:00",
+        "arrDateTime": "2026-10-10 00:15:00",
+        "flightNo": "9C7396"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 13:05:00",
+    "arrDateTime": "2026-10-09 00:15:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "G52678 / 9C7396",
+    "airline": "华夏 / 春秋",
+    "journeyType": "中转",
+    "duration": "670",
+    "price": "340.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0eJdzK",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 13:05:00",
+        "arrDateTime": "2026-10-08 14:20:00",
+        "flightNo": "G52678"
+      },
+      {
+        "depDateTime": "2026-10-08 16:20:00",
+        "arrDateTime": "2026-10-09 00:15:00",
+        "flightNo": "9C7396"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 14:10:00",
+    "arrDateTime": "2026-10-10 00:05:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "SC8728 / CZ3708",
+    "airline": "山航 / 南航",
+    "journeyType": "中转",
+    "duration": "2035",
+    "price": "1550.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1DrNle",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 14:10:00",
+        "arrDateTime": "2026-10-08 18:50:00",
+        "flightNo": "SC8728"
+      },
+      {
+        "depDateTime": "2026-10-09 21:05:00",
+        "arrDateTime": "2026-10-10 00:05:00",
+        "flightNo": "CZ3708"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 17:05:00",
+    "arrDateTime": "2026-10-09 11:05:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "HU7686 / CZ3132",
+    "airline": "新海航|海南航空 / 南航",
+    "journeyType": "中转",
+    "duration": "1080",
+    "price": "1160.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Pq5Yb",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 17:05:00",
+        "arrDateTime": "2026-10-08 21:00:00",
+        "flightNo": "HU7686"
+      },
+      {
+        "depDateTime": "2026-10-09 08:00:00",
+        "arrDateTime": "2026-10-09 11:05:00",
+        "flightNo": "CZ3132"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 17:05:00",
+    "arrDateTime": "2026-10-09 14:50:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "HU7686 / 9C7392",
+    "airline": "新海航|海南航空 / 春秋",
+    "journeyType": "中转",
+    "duration": "1305",
+    "price": "1160.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F32zmrz",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 17:05:00",
+        "arrDateTime": "2026-10-08 21:00:00",
+        "flightNo": "HU7686"
+      },
+      {
+        "depDateTime": "2026-10-09 11:35:00",
+        "arrDateTime": "2026-10-09 14:50:00",
+        "flightNo": "9C7392"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 17:05:00",
+    "arrDateTime": "2026-10-10 01:30:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "HU7686 / JD5348",
+    "airline": "新海航|海南航空 / 新海航|首都航空",
+    "journeyType": "中转",
+    "duration": "1945",
+    "price": "2020.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F42LhfO",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 17:05:00",
+        "arrDateTime": "2026-10-08 21:00:00",
+        "flightNo": "HU7686"
+      },
+      {
+        "depDateTime": "2026-10-09 22:45:00",
+        "arrDateTime": "2026-10-10 01:30:00",
+        "flightNo": "JD5348"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 17:05:00",
+    "arrDateTime": "2026-10-09 01:30:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "HU7686 / JD5348",
+    "airline": "新海航|海南航空 / 新海航|首都航空",
+    "journeyType": "中转",
+    "duration": "505",
+    "price": "1160.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Ol7y1",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 17:05:00",
+        "arrDateTime": "2026-10-08 21:00:00",
+        "flightNo": "HU7686"
+      },
+      {
+        "depDateTime": "2026-10-08 22:45:00",
+        "arrDateTime": "2026-10-09 01:30:00",
+        "flightNo": "JD5348"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 21:35:00",
+    "arrDateTime": "2026-10-10 00:15:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "G54384 / 9C7396",
+    "airline": "华夏 / 春秋",
+    "journeyType": "中转",
+    "duration": "1600",
+    "price": "300.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JH1K5",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 21:35:00",
+        "arrDateTime": "2026-10-09 00:05:00",
+        "flightNo": "G54384"
+      },
+      {
+        "depDateTime": "2026-10-09 16:50:00",
+        "arrDateTime": "2026-10-10 00:15:00",
+        "flightNo": "9C7396"
+      }
+    ]
+  },
+  {
+    "depDateTime": "2026-10-08 22:50:00",
+    "arrDateTime": "2026-10-09 23:50:00",
+    "depStation": "花园",
+    "arrStation": "白云",
+    "depStationCode": "SHF",
+    "arrStationCode": "CAN",
+    "flightNo": "EU2825 / CZ2370",
+    "airline": "成都航 / 南航",
+    "journeyType": "中转",
+    "duration": "1500",
+    "price": "250.00",
+    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F00jZQh",
+    "segments": [
+      {
+        "depDateTime": "2026-10-08 22:50:00",
+        "arrDateTime": "2026-10-08 23:50:00",
+        "flightNo": "EU2825"
+      },
+      {
+        "depDateTime": "2026-10-09 16:20:00",
+        "arrDateTime": "2026-10-09 23:50:00",
+        "flightNo": "CZ2370"
+      }
+    ]
+  }
+]}
