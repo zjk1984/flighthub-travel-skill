@@ -79,6 +79,7 @@ done
 mkdir -p "$(dirname "$OUTPUT")"
 node "$SCRIPT_DIR/format-xinjiang-report.js" < "$TMP_RESULTS" > "$OUTPUT"
 node "$SCRIPT_DIR/format-ranked-report.js" < "$TMP_RESULTS" > "$RANKED_OUTPUT"
+cp "$TMP_RESULTS" "$ROOT_DIR/reports/xinjiang-results.jsonl"
 echo "Report saved to: $OUTPUT" >&2
 echo "Ranked report saved to: $RANKED_OUTPUT" >&2
 rm -f "$TMP_RESULTS"
