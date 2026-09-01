@@ -85,8 +85,10 @@ function showConfig(cfg, asJson) {
   console.log(`返程日期     ${cfg.returnDates.join(", ")}  (${formatDateRange(cfg.returnDates)})`);
   console.log(`仅查直达机场 ${cfg.directOnlyAirports.join("、")}`);
   if (cfg.customTransfer?.enabled) {
+    const ct = cfg.customTransfer;
     console.log(
-      `自定义中转   开启 | Top${cfg.customTransfer.firstLegTopN} | 枢纽 ${cfg.customTransfer.transferHubs.join("、")}`
+      `自定义中转   开启 | Top${ct.firstLegTopN} | 枢纽 ${ct.transferHubs.join("、")} | ` +
+        `主查询≥${ct.skipIfMainResultsAtLeast}条跳过 | leg2并发${ct.leg2Concurrency}`
     );
   } else {
     console.log("自定义中转   关闭");

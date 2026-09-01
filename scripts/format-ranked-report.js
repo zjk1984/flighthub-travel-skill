@@ -270,6 +270,19 @@ function markPriceReliability(flights) {
     const isBackFromRemote =
       f.direction === "inbound" && DESTINATIONS.includes(f.xjAirport) && retFloor;
 
+    if (f.customTransfer) {
+      if (isOutToRemote && f.leg2PriceNum != null && f.leg2PriceNum < outFloor) {
+        f.priceVerified = false;
+        f.priceWarning =
+          `自定义中转第二段 ${labelCity(f.transitCity)}→${labelCity(f.xjAirport)} API ¥${f.leg2PriceNum.toFixed(0)} 低于参考线 ¥${outFloor}，**已排除在 TOP3 外**`;
+      }
+      if (isBackFromRemote && f.leg1PriceNum != null && f.leg1PriceNum < retFloor) {
+        f.priceVerified = false;
+        f.priceWarning =
+          `自定义中转第一段 ${labelCity(f.xjAirport)}→${labelCity(f.transitCity)} API ¥${f.leg1PriceNum.toFixed(0)} 低于返程参考线 ¥${retFloor}，**已排除在 TOP3 外**`;
+      }
+    }
+
     if (isOutToRemote && f.priceNum < outFloor) {
       f.priceVerified = false;
       f.priceWarning =
@@ -389,7 +402,8 @@ function buildDeductions(f) {
   if (f.customTransfer) {
     items.push(
       `自定义中转：${labelCity(f.transitCity)} 衔接 ${formatDuration(f.connectionMin)}，` +
-        `第一段 ${f.leg1FlightNo || ""} + 第二段 ${f.leg2FlightNo || ""}`
+        `第一段 ${f.leg1FlightNo || ""} (¥${(f.leg1PriceNum || 0).toFixed(0)}) + ` +
+        `第二段 ${f.leg2FlightNo || ""} (¥${(f.leg2PriceNum || 0).toFixed(0)})，需分段购票`
     );
   }
 
@@ -458,7 +472,7 @@ function renderScoringGuide() {
 
 **TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
 
-**自定义中转：** 从出发地选低价 Top3 第一程至中转枢纽（默认乌鲁木齐/西安/兰州），再拼接枢纽→目的地第二程；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟，评分标准与直达/联程相同。
+**自定义中转：** 按目的地选 Top3 枢纽（默认乌鲁木齐/西安/兰州），按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.skipIfMainResultsAtLeast ?? 5} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询。
 
 ### ⚠️ 关于 API 价格
 
@@ -467,6 +481,13 @@ function renderScoringGuide() {
 3. 链接跳转后请以 **App/网页实际价格** 为准
 
 `;
+}
+
+function renderBookingLinks(f) {
+  if (f.customTransfer && f.leg1JumpUrl && f.leg2JumpUrl) {
+    return `   - 第一段 [预订](${f.leg1JumpUrl}) | 第二段 [预订](${f.leg2JumpUrl})（分段购票，无联程保障）\n\n`;
+  }
+  return `   - [点击预订](${f.jumpUrl || "#"})\n\n`;
 }
 
 function renderDailySections(days, title, direction) {
@@ -502,7 +523,7 @@ function renderDailySections(days, title, direction) {
     flights.forEach((f, i) => {
       md += `${i + 1}. **${routeDisplay(f)} ${f.flightNo}**（综合 ${f.score}）\n`;
       for (const line of buildDeductions(f)) md += `   - ${line}\n`;
-      md += `   - [点击预订](${f.jumpUrl || "#"})\n\n`;
+      md += renderBookingLinks(f);
     });
   }
   return md;
@@ -527,6 +548,32 @@ function renderPerDestTop1(days, title) {
   return md;
 }
 
+function renderCustomTransferTop3(flights, title, direction) {
+  const custom = flights.filter((f) => f.customTransfer && f.priceVerified !== false);
+  if (!custom.length) return "";
+  const days = topByDay(custom, TOP_N);
+  let md = `## ${title}\n\n`;
+  md += `> 分段购票方案，已与 API 联程去重；评分标准与 v2 相同。\n\n`;
+  const col1 = direction === "outbound" ? "出发地" : "新疆出发";
+  const col2 = direction === "outbound" ? "目的地" : "到达地";
+  for (const { date, flights: dayFlights } of days) {
+    if (!dayFlights.length) continue;
+    md += `### ${date.slice(5)}（${date}）\n\n`;
+    md += `| 排名 | 评分 | ${col1} | ${col2} | 航线 | 航班 | 中转 | 价格 | 时长 | 出发 | 到达 |\n`;
+    md += "|------|------|--------|--------|------|------|------|------|------|------|------|\n";
+    dayFlights.forEach((f, i) => {
+      md += `| ${i + 1} | ${f.score} | ${f.origin} | ${labelCity(f.xjAirport)} | ${routeDisplay(f)} | ${f.flightNo} | ${labelCity(f.transitCity)} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+    });
+    md += "\n";
+    dayFlights.forEach((f, i) => {
+      md += `${i + 1}. **${routeDisplay(f)} ${f.flightNo}**（${f.score} 分）\n`;
+      for (const line of buildDeductions(f)) md += `   - ${line}\n`;
+      md += renderBookingLinks(f);
+    });
+  }
+  return md;
+}
+
 function renderRoundTrips(combos) {
   let md = `## 🔄 推荐往返组合 TOP3\n\n`;
   md += `综合去程/返程评分（各 45%）与往返总价（10%），仅含可信价格航班。\n\n`;
@@ -535,8 +582,10 @@ function renderRoundTrips(combos) {
     const o = c.outbound;
     const n = c.inbound;
     md += `${i + 1}. **¥${c.totalPrice.toFixed(0)}**（组合分 ${c.comboScore.toFixed(1)}）\n`;
-    md += `   - 去 ${o.date} ${routeDisplay(o)} ${o.flightNo} ¥${o.priceNum.toFixed(0)}（${o.score} 分）\n`;
-    md += `   - 回 ${n.date} ${routeDisplay(n)} ${n.flightNo} ¥${n.priceNum.toFixed(0)}（${n.score} 分）\n\n`;
+    const oTag = c.outbound.customTransfer ? " [自定义中转]" : "";
+    const nTag = c.inbound.customTransfer ? " [自定义中转]" : "";
+    md += `   - 去 ${o.date} ${routeDisplay(o)} ${o.flightNo} ¥${o.priceNum.toFixed(0)}（${o.score} 分）${oTag}\n`;
+    md += `   - 回 ${n.date} ${routeDisplay(n)} ${n.flightNo} ¥${n.priceNum.toFixed(0)}（${n.score} 分）${nTag}\n\n`;
   });
   return md;
 }
@@ -581,8 +630,10 @@ md += `\n\n`;
 md += renderScoringGuide();
 md += renderDailySections(outByDay, "🛫 去程每日 TOP3（目的地多样化）", "outbound");
 md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
+md += renderCustomTransferTop3(outbound, "🔗 去程自定义中转 TOP3", "outbound");
 md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
 md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
+md += renderCustomTransferTop3(inbound, "🔗 返程自定义中转 TOP3", "inbound");
 md += renderRoundTrips(roundTrips);
 md += renderExcludedFlights([...outbound, ...inbound]);
 

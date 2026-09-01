@@ -20,7 +20,12 @@
     "minConnectionMinutes": 90,
     "maxConnectionMinutes": 480,
     "transferHubs": ["乌鲁木齐", "西安", "兰州"],
-    "leg2NextDayIfNeeded": true
+    "leg2NextDayIfNeeded": true,
+    "lateArrivalHour": 18,
+    "skipIfMainResultsAtLeast": 5,
+    "leg2Concurrency": 4,
+    "maxCombosPerRoute": 5,
+    "leg2CacheEnabled": true
   },
   "scoring": {
     "originScores": { "深圳": 100, "广州": 80 },

@@ -84,31 +84,9 @@ for date in "${RETURN_DATES[@]}"; do
   done
 done
 
-# Custom transfer: first-leg hub routes (origin/xj → hub)
+# Custom transfer: build combined itineraries (hub leg1 + leg2 inside script)
 if [[ "${CUSTOM_TRANSFER_ENABLED:-false}" == "true" ]]; then
-  echo "Custom transfer: searching hub first-leg routes (top${CUSTOM_TRANSFER_TOPN}, hubs: ${TRANSFER_HUBS[*]}) ..." >&2
-  for date in "${OUTBOUND_DATES[@]}"; do
-    for origin in "${ORIGINS[@]}"; do
-      for hub in "${TRANSFER_HUBS[@]}"; do
-        # 已在主查询中搜过的 origin→hub（hub 即目的地）不再重复查询
-        if [[ " ${DESTINATIONS[*]} " == *" $hub "* ]]; then
-          continue
-        fi
-        run_search_smart "$origin" "$hub" "$date"
-      done
-    done
-  done
-  for date in "${RETURN_DATES[@]}"; do
-    for dest in "${DESTINATIONS[@]}"; do
-      for hub in "${TRANSFER_HUBS[@]}"; do
-        if [[ "$dest" == "$hub" ]]; then
-          continue
-        fi
-        run_search_smart "$dest" "$hub" "$date"
-      done
-    done
-  done
-  echo "Custom transfer: building combined itineraries ..." >&2
+  echo "Custom transfer: building itineraries (top${CUSTOM_TRANSFER_TOPN}, hubs: ${TRANSFER_HUBS[*]}) ..." >&2
   node "$SCRIPT_DIR/custom-transfer.js" "$TMP_RESULTS"
 fi
 

@@ -3,3 +3,6 @@
 
 # Dependencies
 node_modules/
+
+# Custom transfer leg2 cache (local API cache)
+reports/leg2-cache.jsonl
