@@ -16,6 +16,7 @@ GUANGDONG=(深圳 广州)
 XINJIANG=(乌鲁木齐 伊宁 阿勒泰 石河子)
 
 OUTPUT="${1:-$ROOT_DIR/reports/xinjiang-flights-latest.md}"
+RANKED_OUTPUT="${2:-$ROOT_DIR/reports/xinjiang-flights-ranked.md}"
 TMP_RESULTS=$(mktemp /tmp/xinjiang-results-XXXX.jsonl)
 
 flight_count() {
@@ -77,5 +78,7 @@ done
 
 mkdir -p "$(dirname "$OUTPUT")"
 node "$SCRIPT_DIR/format-xinjiang-report.js" < "$TMP_RESULTS" > "$OUTPUT"
+node "$SCRIPT_DIR/format-ranked-report.js" < "$TMP_RESULTS" > "$RANKED_OUTPUT"
 echo "Report saved to: $OUTPUT" >&2
+echo "Ranked report saved to: $RANKED_OUTPUT" >&2
 rm -f "$TMP_RESULTS"
