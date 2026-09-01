@@ -4,6 +4,7 @@
   "description": "OpenClaw Skill，基于飞猪 MCP 接口，提供机票、酒店、门票、景点等一站式旅行搜索能力。",
   "main": "index.js",
   "scripts": {
+    "monitor:xinjiang": "bash scripts/monitor-xinjiang.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
