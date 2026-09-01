@@ -1,71 +1,187 @@
-# ✈️ 广东 ↔ 新疆 综合评分 TOP10 推荐
+# ✈️ 广东 ↔ 新疆 综合评分 TOP3 推荐
 
-> 生成时间：2026-09-01 08:22:23 UTC
+> 生成时间：2026-09-01 08:33:19 UTC
 
 > 覆盖机场：乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子
 
 - 去程范围：9/28 - 10/1 | 返程范围：10/6 - 10/8
 - 候选航班：去程 207 条，返程 173 条
+- **深圳优先**：去程优先深圳出发，返程优先深圳到达
 
-## 🛫 去程 TOP10（深圳/广州 → 新疆）
+## 🛫 去程 TOP3（深圳出发优先）
 
-> 评分公式：综合分 = 价格×50% + 飞行时长×25% + 转机次数×25%（归一化后，**越低越好**）
+> 综合评分最优的去程航班，已纳入出发地偏好
 
-| 排名 | 评分 | 日期 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |
-|------|------|------|------|------|------|------|----------|------|------|------|
-| 1 | 13.3 | 09-28 | 广州→乌鲁木齐 | AQ1165 | 直达 | ¥1309 | 7h15m | 0 | 06:40 | 13:55 |
-| 2 | 15 | 09-28 | 广州→乌鲁木齐 | UQ2592 | 直达 | ¥1500 | 5h15m | 0 | 16:40 | 21:55 |
-| 3 | 15.2 | 09-28 | 广州→乌鲁木齐 | CZ6884 | 直达 | ¥1510 | 5h20m | 0 | 19:20 | 00:40 |
-| 4 | 15.7 | 09-28 | 广州→乌鲁木齐 | HU7223 | 直达 | ¥1550 | 5h10m | 0 | 07:35 | 12:45 |
-| 5 | 15.8 | 09-28 | 广州→乌鲁木齐 | CA9673 | 直达 | ¥1550 | 5h25m | 0 | 07:00 | 12:25 |
-| 6 | 15.9 | 09-29 | 广州→乌鲁木齐 | AQ1165 | 直达 | ¥1489 | 7h15m | 0 | 06:40 | 13:55 |
-| 7 | 16.1 | 09-28 | 深圳→乌鲁木齐 | ZH9241 | 直达 | ¥1560 | 5h45m | 0 | 10:45 | 16:30 |
-| 8 | 16.1 | 09-28 | 深圳→乌鲁木齐 | SC2326 | 直达 | ¥1570 | 5h30m | 0 | 12:55 | 18:25 |
-| 9 | 16.2 | 09-28 | 广州→乌鲁木齐 | CA4370 | 直达 | ¥1570 | 5h40m | 0 | 08:10 | 13:50 |
-| 10 | 16.8 | 09-28 | 广州→乌鲁木齐 | CZ6896 | 直达 | ¥1620 | 5h25m | 0 | 17:15 | 22:40 |
+> 综合分 = 价格×40% + 飞行时长×20% + 转机次数×20% + 出发地偏好×20%（归一化后，**越低越好**；去程优先深圳出发，返程优先深圳到达）
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |
+|------|------|------|--------|------|------|------|------|----------|------|------|------|
+| 1 | 12.9 | 09-28 | 深圳 | 深圳→乌鲁木齐 | ZH9241 | 直达 | ¥1560 | 5h45m | 0 | 10:45 | 16:30 |
+| 2 | 12.9 | 09-28 | 深圳 | 深圳→乌鲁木齐 | SC2326 | 直达 | ¥1570 | 5h30m | 0 | 12:55 | 18:25 |
+| 3 | 14.1 | 09-28 | 深圳 | 深圳→乌鲁木齐 | HU7851 | 直达 | ¥1660 | 5h50m | 0 | 06:40 | 12:30 |
 
 ### 预订链接
 
-1. **09-28 广州→乌鲁木齐** AQ1165 ¥1309 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4CBjuS)
-2. **09-28 广州→乌鲁木齐** UQ2592 ¥1500 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1rvfs8)
-3. **09-28 广州→乌鲁木齐** CZ6884 ¥1510 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3fO75f)
-4. **09-28 广州→乌鲁木齐** HU7223 ¥1550 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3nxR5k)
-5. **09-28 广州→乌鲁木齐** CA9673 ¥1550 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0HcioR)
-6. **09-29 广州→乌鲁木齐** AQ1165 ¥1489 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3kWejW)
-7. **09-28 深圳→乌鲁木齐** ZH9241 ¥1560 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ISLZE)
-8. **09-28 深圳→乌鲁木齐** SC2326 ¥1570 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2BSbQl)
-9. **09-28 广州→乌鲁木齐** CA4370 ¥1570 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1C1V2a)
-10. **09-28 广州→乌鲁木齐** CZ6896 ¥1620 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2sHUmr)
+1. **09-28 深圳→乌鲁木齐** ZH9241 ¥1560 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1TnHSD)
+2. **09-28 深圳→乌鲁木齐** SC2326 ¥1570 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4TelFz)
+3. **09-28 深圳→乌鲁木齐** HU7851 ¥1660 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3RRdRH)
 
-## 🛬 返程 TOP10（新疆 → 深圳/广州）
+## 🛬 返程 TOP3（深圳到达优先）
 
-> 评分公式：综合分 = 价格×50% + 飞行时长×25% + 转机次数×25%（归一化后，**越低越好**）
+> 综合评分最优的返程航班，已纳入到达地偏好
 
-| 排名 | 评分 | 日期 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |
-|------|------|------|------|------|------|------|----------|------|------|------|
-| 1 | 23.8 | 10-08 | 乌鲁木齐→广州 | HU7224 | 直达 | ¥2050 | 5h15m | 0 | 19:55 | 01:10 |
-| 2 | 26.1 | 10-08 | 乌鲁木齐→广州 | AQ1166 | 直达 | ¥2159 | 6h45m | 0 | 14:55 | 21:40 |
-| 3 | 27.1 | 10-08 | 乌鲁木齐→深圳 | Y87570 | 直达 | ¥2200 | 7h40m | 0 | 17:15 | 00:55 |
-| 4 | 27.6 | 10-08 | 乌鲁木齐→广州 | CZ8468 | 直达 | ¥2330 | 5h5m | 0 | 19:45 | 00:50 |
-| 5 | 28.6 | 10-08 | 乌鲁木齐→深圳 | HU7852 | 直达 | ¥2420 | 4h45m | 0 | 18:55 | 23:40 |
-| 6 | 29.4 | 10-08 | 乌鲁木齐→广州 | UQ2591 | 直达 | ¥2460 | 5h10m | 0 | 10:15 | 15:25 |
-| 7 | 30.2 | 10-08 | 乌鲁木齐→广州 | CZ6887 | 直达 | ¥2520 | 5h5m | 0 | 18:45 | 23:50 |
-| 8 | 30.9 | 10-07 | 阿勒泰→深圳 | G52642 / 9C7680 | 中转 | ¥400 | 14h25m | 1 | 10:05 | 00:30 |
-| 9 | 32.7 | 10-08 | 乌鲁木齐→深圳 | SC2325 | 直达 | ¥2700 | 5h20m | 0 | 06:30 | 11:50 |
-| 10 | 32.7 | 10-08 | 乌鲁木齐→深圳 | ZH9242 | 直达 | ¥2700 | 5h20m | 0 | 18:00 | 23:20 |
+> 综合分 = 价格×40% + 飞行时长×20% + 转机次数×20% + 出发地偏好×20%（归一化后，**越低越好**；去程优先深圳出发，返程优先深圳到达）
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |
+|------|------|------|--------|------|------|------|------|----------|------|------|------|
+| 1 | 21.7 | 10-08 | 乌鲁木齐 | 乌鲁木齐→深圳 | Y87570 | 直达 | ¥2200 | 7h40m | 0 | 17:15 | 00:55 |
+| 2 | 22.9 | 10-08 | 乌鲁木齐 | 乌鲁木齐→深圳 | HU7852 | 直达 | ¥2420 | 4h45m | 0 | 18:55 | 23:40 |
+| 3 | 24.7 | 10-07 | 阿勒泰 | 阿勒泰→深圳 | G52642 / 9C7680 | 中转 | ¥400 | 14h25m | 1 | 10:05 | 00:30 |
 
 ### 预订链接
 
-1. **10-08 乌鲁木齐→广州** HU7224 ¥2050 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2dKJLI)
-2. **10-08 乌鲁木齐→广州** AQ1166 ¥2159 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0QCv1X)
-3. **10-08 乌鲁木齐→深圳** Y87570 ¥2200 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3zEbaC)
-4. **10-08 乌鲁木齐→广州** CZ8468 ¥2330 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oIQ4o)
-5. **10-08 乌鲁木齐→深圳** HU7852 ¥2420 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0P4rwT)
-6. **10-08 乌鲁木齐→广州** UQ2591 ¥2460 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3qefkO)
-7. **10-08 乌鲁木齐→广州** CZ6887 ¥2520 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2XYDp4)
-8. **10-07 阿勒泰→深圳** G52642 / 9C7680 ¥400 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3lRcIz)
-9. **10-08 乌鲁木齐→深圳** SC2325 ¥2700 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1X6rLk)
-10. **10-08 乌鲁木齐→深圳** ZH9242 ¥2700 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2pafJm)
+1. **10-08 乌鲁木齐→深圳** Y87570 ¥2200 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2iRmkS)
+2. **10-08 乌鲁木齐→深圳** HU7852 ¥2420 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F21EJM1)
+3. **10-07 阿勒泰→深圳** G52642 / 9C7680 ¥400 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FKEBx)
+
+## 🗺️ 新疆机场去程 TOP3（各机场最优代表）
+
+> 每个新疆机场取评分最高 1 条，再按综合分排序取前 3 个机场
+
+> 综合分 = 价格×40% + 飞行时长×20% + 转机次数×20% + 出发地偏好×20%（归一化后，**越低越好**；去程优先深圳出发，返程优先深圳到达）
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |
+|------|------|------|--------|------|------|------|------|----------|------|------|------|
+| 1 | 12.9 | 09-28 | 深圳 | 深圳→乌鲁木齐 | ZH9241 | 直达 | ¥1560 | 5h45m | 0 | 10:45 | 16:30 |
+| 2 | 24.4 | 09-29 | 深圳 | 深圳→阿勒泰 | Y87565 / CZ6860 | 中转 | ¥450 | 15h50m | 1 | 06:55 | 22:45 |
+| 3 | 25.9 | 09-28 | 深圳 | 深圳→伊犁（伊宁） | CZ3974 / UQ3589 | 中转 | ¥660 | 13h45m | 1 | 22:25 | 12:10 |
+
+### 预订链接
+
+1. **09-28 深圳→乌鲁木齐** ZH9241 ¥1560 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1TnHSD)
+2. **09-29 深圳→阿勒泰** Y87565 / CZ6860 ¥450 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3t6DsZ)
+3. **09-28 深圳→伊犁（伊宁）** CZ3974 / UQ3589 ¥660 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2fSrN5)
+
+## 🗺️ 新疆机场返程 TOP3（各机场最优代表）
+
+> 每个新疆机场取评分最高 1 条，再按综合分排序取前 3 个机场
+
+> 综合分 = 价格×40% + 飞行时长×20% + 转机次数×20% + 出发地偏好×20%（归一化后，**越低越好**；去程优先深圳出发，返程优先深圳到达）
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 | 出发 | 到达 |
+|------|------|------|--------|------|------|------|------|----------|------|------|------|
+| 1 | 21.7 | 10-08 | 乌鲁木齐 | 乌鲁木齐→深圳 | Y87570 | 直达 | ¥2200 | 7h40m | 0 | 17:15 | 00:55 |
+| 2 | 24.7 | 10-07 | 阿勒泰 | 阿勒泰→深圳 | G52642 / 9C7680 | 中转 | ¥400 | 14h25m | 1 | 10:05 | 00:30 |
+| 3 | 29.1 | 10-07 | 石河子 | 石河子→深圳 | G54384 / 9C7356 | 中转 | ¥320 | 27h25m | 1 | 21:35 | 01:00 |
+
+### 预订链接
+
+1. **10-08 乌鲁木齐→深圳** Y87570 ¥2200 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2iRmkS)
+2. **10-07 阿勒泰→深圳** G52642 / 9C7680 ¥400 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FKEBx)
+3. **10-07 石河子→深圳** G54384 / 9C7356 ¥320 — [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1YMdiW)
+
+## 📍 各新疆机场去程 TOP3 明细
+
+> 综合分 = 价格×40% + 飞行时长×20% + 转机次数×20% + 出发地偏好×20%（归一化后，**越低越好**；去程优先深圳出发，返程优先深圳到达）
+
+### 乌鲁木齐 TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 12.9 | 09-28 | 深圳 | 深圳→乌鲁木齐 | ZH9241 | 直达 | ¥1560 | 5h45m | 0 |
+| 2 | 12.9 | 09-28 | 深圳 | 深圳→乌鲁木齐 | SC2326 | 直达 | ¥1570 | 5h30m | 0 |
+| 3 | 14.1 | 09-28 | 深圳 | 深圳→乌鲁木齐 | HU7851 | 直达 | ¥1660 | 5h50m | 0 |
+
+**预订链接：**
+- 1. [09-28 深圳→乌鲁木齐 ¥1560](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1TnHSD)
+- 2. [09-28 深圳→乌鲁木齐 ¥1570](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4TelFz)
+- 3. [09-28 深圳→乌鲁木齐 ¥1660](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3RRdRH)
+
+### 伊犁（伊宁） TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 25.9 | 09-28 | 深圳 | 深圳→伊犁（伊宁） | CZ3974 / UQ3589 | 中转 | ¥660 | 13h45m | 1 |
+| 2 | 26.1 | 09-28 | 深圳 | 深圳→伊犁（伊宁） | CZ3974 / 9C7151 | 中转 | ¥660 | 14h15m | 1 |
+| 3 | 26.7 | 09-29 | 深圳 | 深圳→伊犁（伊宁） | PN6322 / 9C7651 | 中转 | ¥660 | 15h40m | 1 |
+
+**预订链接：**
+- 1. [09-28 深圳→伊犁（伊宁） ¥660](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2fSrN5)
+- 2. [09-28 深圳→伊犁（伊宁） ¥660](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2H9srF)
+- 3. [09-29 深圳→伊犁（伊宁） ¥660](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2tzNya)
+
+### 阿勒泰 TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 24.4 | 09-29 | 深圳 | 深圳→阿勒泰 | Y87565 / CZ6860 | 中转 | ¥450 | 15h50m | 1 |
+| 2 | 24.6 | 09-29 | 深圳 | 深圳→阿勒泰 | HU7721 / CZ6860 | 中转 | ¥550 | 13h30m | 1 |
+| 3 | 24.8 | 09-29 | 深圳 | 深圳→阿勒泰 | MU5332 / CZ6860 | 中转 | ¥500 | 15h30m | 1 |
+
+**预订链接：**
+- 1. [09-29 深圳→阿勒泰 ¥450](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3t6DsZ)
+- 2. [09-29 深圳→阿勒泰 ¥550](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3IQNDQ)
+- 3. [09-29 深圳→阿勒泰 ¥500](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4cahbI)
+
+### 石河子
+
+暂无航班
+
+## 📍 各新疆机场返程 TOP3 明细
+
+> 综合分 = 价格×40% + 飞行时长×20% + 转机次数×20% + 出发地偏好×20%（归一化后，**越低越好**；去程优先深圳出发，返程优先深圳到达）
+
+### 乌鲁木齐 TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 21.7 | 10-08 | 乌鲁木齐 | 乌鲁木齐→深圳 | Y87570 | 直达 | ¥2200 | 7h40m | 0 |
+| 2 | 22.9 | 10-08 | 乌鲁木齐 | 乌鲁木齐→深圳 | HU7852 | 直达 | ¥2420 | 4h45m | 0 |
+| 3 | 26.2 | 10-08 | 乌鲁木齐 | 乌鲁木齐→深圳 | SC2325 | 直达 | ¥2700 | 5h20m | 0 |
+
+**预订链接：**
+- 1. [10-08 乌鲁木齐→深圳 ¥2200](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2iRmkS)
+- 2. [10-08 乌鲁木齐→深圳 ¥2420](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F21EJM1)
+- 3. [10-08 乌鲁木齐→深圳 ¥2700](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F33IHr7)
+
+### 伊犁（伊宁） TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 30.4 | 10-08 | 伊宁 | 伊犁（伊宁）→深圳 | CZ2020 / PN6229 | 中转 | ¥1000 | 12h5m | 1 |
+| 2 | 30.5 | 10-08 | 伊宁 | 伊犁（伊宁）→深圳 | CZ2020 / HU7558 | 中转 | ¥1000 | 12h25m | 1 |
+| 3 | 30.7 | 10-08 | 伊宁 | 伊犁（伊宁）→深圳 | CZ2020 / CA4343 | 中转 | ¥1000 | 12h50m | 1 |
+
+**预订链接：**
+- 1. [10-08 伊犁（伊宁）→深圳 ¥1000](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3M0Hel)
+- 2. [10-08 伊犁（伊宁）→深圳 ¥1000](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2z4Cjp)
+- 3. [10-08 伊犁（伊宁）→深圳 ¥1000](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22iWLx)
+
+### 阿勒泰 TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 24.7 | 10-07 | 阿勒泰 | 阿勒泰→深圳 | G52642 / 9C7680 | 中转 | ¥400 | 14h25m | 1 |
+| 2 | 29.3 | 10-07 | 阿勒泰 | 阿勒泰→深圳 | G52896 / 9C7356 | 中转 | ¥320 | 28h | 1 |
+| 3 | 30.8 | 10-08 | 阿勒泰 | 阿勒泰→深圳 | 9C6678 / HU7764 | 中转 | ¥751 | 19h55m | 1 |
+
+**预订链接：**
+- 1. [10-07 阿勒泰→深圳 ¥400](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FKEBx)
+- 2. [10-07 阿勒泰→深圳 ¥320](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3knewU)
+- 3. [10-08 阿勒泰→深圳 ¥751](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3DDjRd)
+
+### 石河子 TOP3
+
+| 排名 | 评分 | 日期 | 出发地 | 航线 | 航班 | 类型 | 价格 | 飞行时间 | 转机 |
+|------|------|------|--------|------|------|------|------|----------|------|
+| 1 | 29.1 | 10-07 | 石河子 | 石河子→深圳 | G54384 / 9C7356 | 中转 | ¥320 | 27h25m | 1 |
+| 2 | 30.2 | 10-07 | 石河子 | 石河子→深圳 | SC3786 / 9C7356 | 中转 | ¥420 | 27h25m | 1 |
+| 3 | 35.6 | 10-06 | 石河子 | 石河子→深圳 | SC8728 / 9C6596 | 中转 | ¥1550 | 10h10m | 1 |
+
+**预订链接：**
+- 1. [10-07 石河子→深圳 ¥320](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1YMdiW)
+- 2. [10-07 石河子→深圳 ¥420](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4G2R7s)
+- 3. [10-06 石河子→深圳 ¥1550](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Jz3hs)
 
 ---
 基于飞猪 fly.ai 实时数据
