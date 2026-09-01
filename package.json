@@ -1,0 +1,23 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "OpenClaw Skill，基于飞猪 MCP 接口，提供机票、酒店、门票、景点等一站式旅行搜索能力。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjk1984/flighthub-travel-skill.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zjk1984/flighthub-travel-skill/issues"
+  },
+  "homepage": "https://github.com/zjk1984/flighthub-travel-skill#readme",
+  "dependencies": {
+    "@fly-ai/flyai-cli": "^1.0.16"
+  }
+}
