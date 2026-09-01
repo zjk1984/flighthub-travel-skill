@@ -4,6 +4,7 @@
  * Usage: node format-xinjiang-report.js < results.jsonl
  */
 const fs = require("fs");
+const { formatShanghaiTime } = require("./format-time");
 
 const CITY_LABEL = {
   伊宁: "伊犁（伊宁）",
@@ -92,7 +93,7 @@ function renderRouteDate(r) {
 
 let totalApi = 0;
 let md = `# ✈️ 广东 ↔ 新疆 低价机票监控报告\n\n`;
-md += `> 生成时间：${new Date().toISOString().slice(0, 19).replace("T", " ")} UTC\n\n`;
+md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
 md += `> 覆盖机场：乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子\n\n`;
 
 const outbound = results.filter(r => isOutbound(r.route));

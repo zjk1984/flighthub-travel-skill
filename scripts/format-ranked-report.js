@@ -4,6 +4,7 @@
  * Higher score = better. Reads monitor JSONL from stdin.
  */
 const fs = require("fs");
+const { formatShanghaiTime } = require("./format-time");
 
 const XINJIANG = ["乌鲁木齐", "伊宁", "阿勒泰", "石河子"];
 const GUANGDONG = ["深圳", "广州"];
@@ -387,7 +388,7 @@ const outByDay = topByDay(outbound);
 const inByDay = topByDay(inbound);
 
 let md = `# ✈️ 广东 ↔ 新疆 每日 TOP3 评分推荐\n\n`;
-md += `> 生成时间：${new Date().toISOString().slice(0, 19).replace("T", " ")} UTC\n\n`;
+md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
 md += `> 覆盖机场：乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子\n\n`;
 md += `- 去程：9/28 - 10/1 | 返程：10/6 - 10/8\n`;
 md += `- 候选航班：去程 ${outbound.length} 条，返程 ${inbound.length} 条\n\n`;
