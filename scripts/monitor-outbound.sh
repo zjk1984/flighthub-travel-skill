@@ -11,9 +11,16 @@ source "$SCRIPT_DIR/load-env.sh"
 RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 OUTPUT="$ROOT_DIR/reports/xinjiang-outbound-latest.md"
 RANKED="$ROOT_DIR/reports/xinjiang-outbound-ranked.md"
+FLIGHTS_LATEST="$ROOT_DIR/reports/xinjiang-flights-latest.md"
+FLIGHTS_RANKED="$ROOT_DIR/reports/xinjiang-flights-ranked.md"
 
 echo "▶ 去程 Skill：广东 → 新疆（仅主查询，不含自定义中转）" >&2
 node "$SCRIPT_DIR/monitor-run.js" --phase outbound "$RESULTS" "$OUTPUT" "$RANKED"
+
+# 同步到通用报告路径（返程 skill 运行前，此处为去程数据）
+cp "$OUTPUT" "$FLIGHTS_LATEST"
+cp "$RANKED" "$FLIGHTS_RANKED"
+echo "Synced outbound reports → xinjiang-flights-latest.md, xinjiang-flights-ranked.md" >&2
 
 if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
   echo "Sending Feishu (outbound ranked)..." >&2
