@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Monitor low-price flights: Guangdong ↔ Xinjiang (unified orchestrator)
-# Usage: bash scripts/monitor-xinjiang.sh [latest.md] [ranked.md]
+# Usage:
+#   bash scripts/monitor-xinjiang.sh [latest.md] [ranked.md]
+#   bash scripts/monitor-xinjiang.sh --phase outbound|return|all [latest.md] [ranked.md]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -9,14 +11,32 @@ cd "$ROOT_DIR"
 # shellcheck source=load-env.sh
 source "$SCRIPT_DIR/load-env.sh"
 
-OUTPUT="${1:-$ROOT_DIR/reports/xinjiang-flights-latest.md}"
-RANKED_OUTPUT="${2:-$ROOT_DIR/reports/xinjiang-flights-ranked.md}"
+PHASE="all"
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --phase)
+      PHASE="${2:-all}"
+      shift 2
+      ;;
+    --phase=*)
+      PHASE="${1#*=}"
+      shift
+      ;;
+    *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
+  esac
+done
+
+OUTPUT="${POSITIONAL[0]:-$ROOT_DIR/reports/xinjiang-flights-latest.md}"
+RANKED_OUTPUT="${POSITIONAL[1]:-$ROOT_DIR/reports/xinjiang-flights-ranked.md}"
 RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 
-node "$SCRIPT_DIR/monitor-run.js" "$RESULTS" "$OUTPUT" "$RANKED_OUTPUT"
+node "$SCRIPT_DIR/monitor-run.js" --phase "$PHASE" "$RESULTS" "$OUTPUT" "$RANKED_OUTPUT"
 
-# Feishu card notification (optional)
-if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
+if [[ -n "${FEISHU_WEBHOOK_URL:-}" && ("$PHASE" == "all" || "$PHASE" == "return") ]]; then
   FEISHU_REPORT="${FEISHU_REPORT:-ranked}"
   echo "Sending Feishu notification ($FEISHU_REPORT)..." >&2
   send_feishu() {

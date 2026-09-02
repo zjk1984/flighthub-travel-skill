@@ -6,10 +6,20 @@ const path = require("path");
 const { execFile } = require("child_process");
 const { promisify } = require("util");
 const { mergeRouteEntry, routeKey } = require("./flight-store");
-const { getCachedRoute, appendCacheEntries, todayIso } = require("./flight-cache");
+const {
+  getCachedRoute,
+  appendCacheEntries,
+  todayIso,
+  isResultCacheable,
+  isRateLimitError,
+} = require("./flight-cache");
 
 const execFileAsync = promisify(execFile);
 const ADAPTIVE_SEARCH = path.join(__dirname, "flyai-adaptive-search.sh");
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 async function runAdaptiveSearch(origin, dest, date, journeyType = 2) {
   const env = {
@@ -33,7 +43,14 @@ async function runAdaptiveSearch(origin, dest, date, journeyType = 2) {
         /* fall through */
       }
     }
-    return { route: `${origin}→${dest}`, date, apiCount: 0, dedup: "error", flights: [] };
+    return {
+      route: `${origin}→${dest}`,
+      date,
+      apiCount: 0,
+      dedup: "error",
+      flights: [],
+      apiError: "exec_error",
+    };
   }
 }
 
@@ -64,7 +81,7 @@ async function searchTask(task) {
     return runAdaptiveSearch(origin, dest, date, 1);
   }
   const r1 = await runAdaptiveSearch(origin, dest, date, 1);
-  if ((r1.flights || []).length > 0) return r1;
+  if (r1.apiError || (r1.flights || []).length > 0) return r1;
   return runAdaptiveSearch(origin, dest, date, 2);
 }
 
@@ -73,19 +90,24 @@ async function searchTask(task) {
  */
 async function runSearchQueue(tasks, map, options = {}) {
   const {
-    concurrency = 4,
+    concurrency = 2,
     cache = null,
     useCache = true,
     label = "search",
+    requestDelayMs = 1500,
+    rateLimitPauseMs = 60000,
+    rateLimitRetries = 1,
   } = options;
 
   const cacheWrites = [];
   const toRun = [];
+  let rateLimitHits = 0;
 
   for (const task of tasks) {
     const { origin, dest, date } = task;
     const rk = routeKey(`${origin}→${dest}`, date);
-    if (map.has(rk) && (map.get(rk).flights || []).length > 0) continue;
+    const existing = map.get(rk);
+    if (existing && (existing.flights || []).length > 0) continue;
 
     if (useCache && cache) {
       const cached = getCachedRoute(cache, origin, dest, date);
@@ -100,9 +122,26 @@ async function runSearchQueue(tasks, map, options = {}) {
   await mapPool(toRun, concurrency, async (task) => {
     const { origin, dest, date } = task;
     process.stderr.write(`${label}: ${origin} → ${dest} | ${date} | ${task.mode || "full"}\n`);
-    const result = await searchTask(task);
+
+    let result = await searchTask(task);
+    let retries = 0;
+    while (isRateLimitError(result) && retries < rateLimitRetries) {
+      rateLimitHits++;
+      process.stderr.write(
+        `${label}: rate limit (${result.apiError}) — pausing ${rateLimitPauseMs / 1000}s before retry\n`
+      );
+      await sleep(rateLimitPauseMs);
+      result = await searchTask(task);
+      retries++;
+    }
+
+    if (result.apiError) {
+      process.stderr.write(`${label}: ${origin} → ${dest} | ${date} failed: ${result.apiError}\n`);
+    }
+
     mergeRouteEntry(map, result);
-    if (useCache && cache) {
+
+    if (useCache && cache && isResultCacheable(result)) {
       cacheWrites.push({
         origin,
         dest,
@@ -111,11 +150,17 @@ async function runSearchQueue(tasks, map, options = {}) {
         cachedOn: todayIso(),
       });
     }
+
+    if (requestDelayMs > 0) await sleep(requestDelayMs);
     return result;
   });
 
   appendCacheEntries(cacheWrites);
-  return { ran: toRun.length, cached: tasks.length - toRun.length };
+  return {
+    ran: toRun.length,
+    cached: tasks.length - toRun.length,
+    rateLimitHits,
+  };
 }
 
 module.exports = {
@@ -123,4 +168,6 @@ module.exports = {
   searchTask,
   runSearchQueue,
   mapPool,
+  sleep,
+  isRateLimitError,
 };

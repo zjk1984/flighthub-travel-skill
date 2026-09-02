@@ -68,6 +68,11 @@ function mergeRouteEntry(map, entry) {
   if (entry.dedup && entry.dedup !== existing.dedup) {
     existing.dedup = `${existing.dedup || ""}; ${entry.dedup}`.trim();
   }
+  if ((entry.flights || []).length > 0) {
+    delete existing.apiError;
+  } else if (entry.apiError && !(existing.flights || []).length) {
+    existing.apiError = entry.apiError;
+  }
 }
 
 function addFlightsToEntry(entry, flights, { skipSignatures } = {}) {

@@ -15,6 +15,18 @@ function cacheEntryKey(origin, dest, date) {
   return `${origin}|${dest}|${date}`;
 }
 
+function isRateLimitError(result) {
+  const err = String(result?.apiError || "");
+  return /429|451|risk_control|trial_limit/i.test(err);
+}
+
+/** Only cache successful API responses (never rate-limit / error responses). */
+function isResultCacheable(result) {
+  if (!result) return false;
+  if (result.apiError) return false;
+  return true;
+}
+
 function loadCache(cachePath = DEFAULT_CACHE_PATH) {
   const map = new Map();
   if (!fs.existsSync(cachePath)) return map;
@@ -23,6 +35,7 @@ function loadCache(cachePath = DEFAULT_CACHE_PATH) {
     for (const line of fs.readFileSync(cachePath, "utf8").split("\n").filter(Boolean)) {
       const row = JSON.parse(line);
       if (row.cachedOn && row.cachedOn < today) continue;
+      if (!isResultCacheable(row.result)) continue;
       map.set(cacheEntryKey(row.origin, row.dest, row.date), row);
     }
   } catch (_) {
@@ -32,13 +45,16 @@ function loadCache(cachePath = DEFAULT_CACHE_PATH) {
 }
 
 function getCachedRoute(cache, origin, dest, date) {
-  return cache.get(cacheEntryKey(origin, dest, date))?.result || null;
+  const row = cache.get(cacheEntryKey(origin, dest, date));
+  if (!row?.result || !isResultCacheable(row.result)) return null;
+  return row.result;
 }
 
 function appendCacheEntries(entries, cachePath = DEFAULT_CACHE_PATH) {
-  if (!entries.length) return;
+  const cacheable = entries.filter((e) => isResultCacheable(e.result));
+  if (!cacheable.length) return;
   fs.mkdirSync(path.dirname(cachePath), { recursive: true });
-  const lines = entries.map((e) => JSON.stringify(e)).join("\n") + "\n";
+  const lines = cacheable.map((e) => JSON.stringify(e)).join("\n") + "\n";
   fs.appendFileSync(cachePath, lines);
 }
 
@@ -49,7 +65,7 @@ function pruneCache(cachePath = DEFAULT_CACHE_PATH) {
   for (const line of fs.readFileSync(cachePath, "utf8").split("\n").filter(Boolean)) {
     try {
       const row = JSON.parse(line);
-      if (row.cachedOn >= today) kept.push(line);
+      if (row.cachedOn >= today && isResultCacheable(row.result)) kept.push(line);
     } catch (_) {
       /* drop */
     }
@@ -65,4 +81,6 @@ module.exports = {
   pruneCache,
   cacheEntryKey,
   todayIso,
+  isResultCacheable,
+  isRateLimitError,
 };

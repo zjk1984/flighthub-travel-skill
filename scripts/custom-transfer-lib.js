@@ -271,26 +271,28 @@ async function appendCustomResults(map, options = {}) {
     `Custom transfer: ${outbound.length} outbound + ${inbound.length} inbound routes need enrichment\n`
   );
 
-  const concurrency = options.concurrency || CT.leg2Concurrency;
-  const cache = options.cache || null;
+  const queueBase = {
+    concurrency: options.concurrency || CT.leg2Concurrency,
+    cache: options.cache || null,
+    useCache: CFG.search.useRouteCache,
+    requestDelayMs: options.requestDelayMs ?? CFG.search.requestDelayMs,
+    rateLimitPauseMs: options.rateLimitPauseMs ?? CFG.search.rateLimitPauseMs,
+    rateLimitRetries: options.rateLimitRetries ?? CFG.search.rateLimitRetries,
+  };
 
   const hubTasks = [
     ...hubLeg1Tasks(map, outbound, "outbound"),
     ...hubLeg1Tasks(map, inbound, "inbound"),
   ];
   const hubStats = await runSearchQueue(hubTasks, map, {
-    concurrency,
-    cache,
-    useCache: CFG.search.useRouteCache,
+    ...queueBase,
     label: "Custom hub leg1",
   });
   process.stderr.write(`Custom hub leg1: ${hubStats.ran} fetched, ${hubStats.cached} cached\n`);
 
   const leg2Tasks = [...planLeg2Tasks(map, outbound, "outbound"), ...planLeg2Tasks(map, inbound, "inbound")];
   const leg2Stats = await runSearchQueue(leg2Tasks, map, {
-    concurrency,
-    cache,
-    useCache: CFG.search.useRouteCache,
+    ...queueBase,
     label: "Custom leg2",
   });
   process.stderr.write(`Custom leg2: ${leg2Stats.ran} fetched, ${leg2Stats.cached} cached\n`);

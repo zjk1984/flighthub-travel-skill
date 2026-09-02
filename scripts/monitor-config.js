@@ -85,7 +85,7 @@ function showConfig(cfg, asJson) {
   console.log(`返程日期     ${cfg.returnDates.join(", ")}  (${formatDateRange(cfg.returnDates)})`);
   console.log(`仅查直达机场 ${cfg.directOnlyAirports.join("、")}`);
   console.log(
-    `搜索         并发 ${cfg.search.concurrency} | 航线缓存 ${cfg.search.useRouteCache ? "开启" : "关闭"}`
+    `搜索         并发 ${cfg.search.concurrency} | 间隔 ${cfg.search.requestDelayMs}ms | 去返批次间隔 ${cfg.search.batchDelayMs / 1000}s | 缓存 ${cfg.search.useRouteCache ? "开启" : "关闭"}`
   );
   if (cfg.customTransfer?.enabled) {
     const ct = cfg.customTransfer;

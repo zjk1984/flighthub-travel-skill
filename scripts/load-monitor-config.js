@@ -47,8 +47,12 @@ function saveConfig(config) {
 function normalizeSearch(raw) {
   const d = raw || {};
   return {
-    concurrency: Math.max(1, Math.min(8, parseInt(d.concurrency, 10) || 4)),
+    concurrency: Math.max(1, Math.min(4, parseInt(d.concurrency, 10) || 2)),
     useRouteCache: d.useRouteCache !== false,
+    requestDelayMs: Math.max(0, parseInt(d.requestDelayMs, 10) || 1500),
+    batchDelayMs: Math.max(0, parseInt(d.batchDelayMs, 10) || 300000),
+    rateLimitPauseMs: Math.max(1000, parseInt(d.rateLimitPauseMs, 10) || 60000),
+    rateLimitRetries: Math.max(0, Math.min(3, parseInt(d.rateLimitRetries, 10) || 1)),
   };
 }
 
@@ -73,7 +77,7 @@ function normalizeCustomTransfer(raw) {
     trigger: {
       maxMainResults: Math.max(0, maxMain >= 0 ? maxMain : 5),
     },
-    leg2Concurrency: Math.max(1, Math.min(8, parseInt(d.leg2Concurrency, 10) || 4)),
+    leg2Concurrency: Math.max(1, Math.min(4, parseInt(d.leg2Concurrency, 10) || 2)),
     maxCombosPerRoute: Math.max(1, parseInt(d.maxCombosPerRoute, 10) || 5),
     leg2CacheEnabled: d.leg2CacheEnabled !== false,
     excludeFromMainTop3: d.excludeFromMainTop3 !== false,

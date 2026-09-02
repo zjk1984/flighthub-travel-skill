@@ -15,8 +15,12 @@
   ],
   "directOnlyAirports": ["乌鲁木齐"],
   "search": {
-    "concurrency": 4,
-    "useRouteCache": true
+    "concurrency": 2,
+    "useRouteCache": true,
+    "requestDelayMs": 1500,
+    "batchDelayMs": 300000,
+    "rateLimitPauseMs": 60000,
+    "rateLimitRetries": 1
   },
   "customTransfer": {
     "enabled": true,
@@ -35,7 +39,7 @@
     "leg2NextDayIfNeeded": true,
     "lateArrivalHour": 18,
     "trigger": { "maxMainResults": 5 },
-    "leg2Concurrency": 4,
+    "leg2Concurrency": 2,
     "maxCombosPerRoute": 5,
     "excludeFromMainTop3": true
   },

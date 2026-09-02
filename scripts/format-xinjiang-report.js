@@ -70,6 +70,9 @@ function renderBookingLinks(f) {
 
 function renderRouteDate(r) {
   const flights = r.flights || [];
+  if (r.apiError && !flights.length) {
+    return `### ${r.route} | ${r.date}\n\n⚠️ API 查询失败：\`${r.apiError}\`（非无航班，请稍后重试）\n\n`;
+  }
   if (!flights.length) return `### ${r.route} | ${r.date}\n\n暂无航班数据\n`;
 
   const sorted = [...flights].sort((a, b) => a.depDateTime.localeCompare(b.depDateTime));
@@ -177,6 +180,18 @@ for (const city of DESTINATIONS) {
 }
 
 md += `\n---\n📊 本次查询总 API 消耗：**${totalApi}** 次\n\n`;
+
+const apiErrors = results.filter((r) => r.apiError);
+if (apiErrors.length) {
+  md += `## ⚠️ API 查询失败（${apiErrors.length} 条航线）\n\n`;
+  md += `以下航线因限流/风控等原因未拿到数据，**不代表无航班**：\n\n`;
+  for (const r of apiErrors.slice(0, 20)) {
+    md += `- ${r.date} ${r.route}：\`${r.apiError}\`\n`;
+  }
+  if (apiErrors.length > 20) md += `- … 另有 ${apiErrors.length - 20} 条\n`;
+  md += `\n`;
+}
+
 md += `基于飞猪 fly.ai 实时数据\n`;
 
 process.stdout.write(md);
