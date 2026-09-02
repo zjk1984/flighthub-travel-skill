@@ -6,13 +6,32 @@
 
 ## 一、返程机票（伊宁 → 广州）
 
+### 10/7 推荐（5 人）
+
+> 10/7 返程当天几乎无法游玩，需上午从那拉提赶回伊宁机场。
+
+| 场景 | 航班 | 时间 | 单价 | 5人合计 | 预订 |
+|------|------|------|------|---------|------|
+| 最低价 | **MU9940 / MU2303** | 19:20→10-08 10:30 | **¥2498** | **¥12490** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2g92Q2) |
+| 次日上午到 | **9C7138 / PN6453** | 18:55→10-08 08:25 | **¥2720** | **¥13600** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1DQxOV) |
+| 当日到广州 | **UQ3590 / CZ6632** | 12:55→23:30 | **¥3068** | **¥15340** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3LGO69) |
+| 当日到（最早） | **MU2364 / ZH9222** | 08:00→17:05 | **¥3300** | **¥16500** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2b5udo) |
+
 ### 10/8 推荐（5 人）
 
 | 场景 | 航班 | 时间 | 单价 | 5人合计 | 预订 |
 |------|------|------|------|---------|------|
 | 最低价 | **9C7652 / HU7204** | 16:10→10-09 01:40 | **¥1658** | **¥8290** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HmPR3) |
-| 老人推荐（次日上午到） | **9C7652 / HU7204** | 16:10→10-09 01:40 | **¥1658** | **¥8290** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HmPR3) |
+| 老人推荐（次日上午到） | **CZ2020 / CZ2305** | 20:30→10-09 09:40 | **¥1760** | **¥8800** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F40Ppjd) |
 | 当日到广州 | **3U8562 / 3U8737** | 11:55→22:55 | **¥2040** | **¥10200** | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2icDsF) |
+
+### 10/7 vs 10/8 怎么选
+
+| 对比 | 10/7 返程 | 10/8 返程 |
+|------|-----------|-----------|
+| 5人机票 | ¥12490 起 | **¥8290 起**（便宜约 ¥4200） |
+| 多玩一天 | 否（当天赶路飞回） | **是**（10/7 缓冲回伊宁） |
+| 推荐 | 假期只到 10/7 时选 | **更推荐**（轻松 + 更便宜） |
 
 ### 2026-10-08
 
@@ -109,6 +128,7 @@
 
 | 项目 | 估算 |
 |------|------|
+| 返程机票（10/7，5人） | ¥12490 – ¥16500 |
 | 返程机票（10/8，5人） | ¥8290 – ¥10200 |
 | 住宿 7晚×2间 | ¥3500 – ¥5500 |
 | 租车7天 + 油费 | ¥5000 – ¥6800 |
