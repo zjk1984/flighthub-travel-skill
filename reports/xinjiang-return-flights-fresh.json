@@ -1,0 +1,536 @@
+[
+  {
+    "route": "伊宁→广州",
+    "date": "2026-10-07",
+    "count": 10,
+    "flights": [
+      {
+        "flightNo": "MU2364 / ZH9222",
+        "airline": "东航 / 深航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 08:00:00",
+        "arrDateTime": "2026-10-07 17:05:00",
+        "price": "1610.00",
+        "durationMin": "545",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0LnPV0",
+        "segments": [
+          {
+            "flightNo": "MU2364",
+            "dep": "2026-10-07 08:00:00",
+            "arr": "2026-10-07 11:40:00",
+            "from": "伊宁",
+            "to": "咸阳"
+          },
+          {
+            "flightNo": "ZH9222",
+            "dep": "2026-10-07 14:00:00",
+            "arr": "2026-10-07 17:05:00",
+            "from": "咸阳",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7138 / PN6453",
+        "airline": "春秋 / 新海航|西部航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 18:55:00",
+        "arrDateTime": "2026-10-08 08:25:00",
+        "price": "1610.00",
+        "durationMin": "810",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2IsDZN",
+        "segments": [
+          {
+            "flightNo": "9C7138",
+            "dep": "2026-10-07 18:55:00",
+            "arr": "2026-10-07 23:20:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "PN6453",
+            "dep": "2026-10-08 06:10:00",
+            "arr": "2026-10-08 08:25:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7138 / CZ3391",
+        "airline": "春秋 / 南航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 18:55:00",
+        "arrDateTime": "2026-10-08 10:00:00",
+        "price": "1610.00",
+        "durationMin": "905",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F46fIWk",
+        "segments": [
+          {
+            "flightNo": "9C7138",
+            "dep": "2026-10-07 18:55:00",
+            "arr": "2026-10-07 23:20:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "CZ3391",
+            "dep": "2026-10-08 07:30:00",
+            "arr": "2026-10-08 10:00:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7652 / HU7204",
+        "airline": "春秋 / 新海航|海南航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 16:10:00",
+        "arrDateTime": "2026-10-08 01:40:00",
+        "price": "1890.00",
+        "durationMin": "570",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F45AANs",
+        "segments": [
+          {
+            "flightNo": "9C7652",
+            "dep": "2026-10-07 16:10:00",
+            "arr": "2026-10-07 21:00:00",
+            "from": "伊宁",
+            "to": "新桥"
+          },
+          {
+            "flightNo": "HU7204",
+            "dep": "2026-10-07 23:35:00",
+            "arr": "2026-10-08 01:40:00",
+            "from": "新桥",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "UQ3590 / HU7286",
+        "airline": "新海航|乌航 / 新海航|海南航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 12:55:00",
+        "arrDateTime": "2026-10-07 22:55:00",
+        "price": "1910.00",
+        "durationMin": "600",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3EoZUx",
+        "segments": [
+          {
+            "flightNo": "UQ3590",
+            "dep": "2026-10-07 12:55:00",
+            "arr": "2026-10-07 17:10:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "HU7286",
+            "dep": "2026-10-07 20:30:00",
+            "arr": "2026-10-07 22:55:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "UQ3590 / CZ6632",
+        "airline": "新海航|乌航 / 南航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 12:55:00",
+        "arrDateTime": "2026-10-07 23:30:00",
+        "price": "1910.00",
+        "durationMin": "635",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F42aAGP",
+        "segments": [
+          {
+            "flightNo": "UQ3590",
+            "dep": "2026-10-07 12:55:00",
+            "arr": "2026-10-07 17:10:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "CZ6632",
+            "dep": "2026-10-07 21:00:00",
+            "arr": "2026-10-07 23:30:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "UQ3590 / PN6451",
+        "airline": "新海航|乌航 / 新海航|西部航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 12:55:00",
+        "arrDateTime": "2026-10-07 22:00:00",
+        "price": "1910.00",
+        "durationMin": "545",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Z5ofL",
+        "segments": [
+          {
+            "flightNo": "UQ3590",
+            "dep": "2026-10-07 12:55:00",
+            "arr": "2026-10-07 17:10:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "PN6451",
+            "dep": "2026-10-07 19:45:00",
+            "arr": "2026-10-07 22:00:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7152 / CZ3959",
+        "airline": "春秋 / 南航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 11:45:00",
+        "arrDateTime": "2026-10-07 20:25:00",
+        "price": "1930.00",
+        "durationMin": "520",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3o1und",
+        "segments": [
+          {
+            "flightNo": "9C7152",
+            "dep": "2026-10-07 11:45:00",
+            "arr": "2026-10-07 15:55:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "CZ3959",
+            "dep": "2026-10-07 18:00:00",
+            "arr": "2026-10-07 20:25:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7152 / CZ6632",
+        "airline": "春秋 / 南航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 11:45:00",
+        "arrDateTime": "2026-10-07 23:30:00",
+        "price": "1930.00",
+        "durationMin": "705",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2a83pM",
+        "segments": [
+          {
+            "flightNo": "9C7152",
+            "dep": "2026-10-07 11:45:00",
+            "arr": "2026-10-07 15:55:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "CZ6632",
+            "dep": "2026-10-07 21:00:00",
+            "arr": "2026-10-07 23:30:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "MU9940 / MU2303",
+        "airline": "东航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-07 19:20:00",
+        "arrDateTime": "2026-10-08 10:30:00",
+        "price": "2498.00",
+        "durationMin": "910",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F24AlZX",
+        "segments": [
+          {
+            "flightNo": "MU9940",
+            "dep": "2026-10-07 19:20:00",
+            "arr": "2026-10-07 23:05:00",
+            "from": "伊宁",
+            "to": "咸阳"
+          },
+          {
+            "flightNo": "MU2303",
+            "dep": "2026-10-08 07:30:00",
+            "arr": "2026-10-08 10:30:00",
+            "from": "咸阳",
+            "to": "白云"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "伊宁→广州",
+    "date": "2026-10-08",
+    "count": 10,
+    "flights": [
+      {
+        "flightNo": "QW6214 / HU7254",
+        "airline": "青岛航 / 新海航|海南航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 16:35:00",
+        "arrDateTime": "2026-10-09 01:15:00",
+        "price": "930.00",
+        "durationMin": "520",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F42uUSs",
+        "segments": [
+          {
+            "flightNo": "QW6214",
+            "dep": "2026-10-08 16:35:00",
+            "arr": "2026-10-08 19:40:00",
+            "from": "伊宁",
+            "to": "中川"
+          },
+          {
+            "flightNo": "HU7254",
+            "dep": "2026-10-08 21:55:00",
+            "arr": "2026-10-09 01:15:00",
+            "from": "中川",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C6462 / AQ1106",
+        "airline": "春秋 / 九元",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 16:00:00",
+        "arrDateTime": "2026-10-09 01:45:00",
+        "price": "1110.00",
+        "durationMin": "585",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4VCund",
+        "segments": [
+          {
+            "flightNo": "9C6462",
+            "dep": "2026-10-08 16:00:00",
+            "arr": "2026-10-08 19:55:00",
+            "from": "伊宁",
+            "to": "咸阳"
+          },
+          {
+            "flightNo": "AQ1106",
+            "dep": "2026-10-08 23:00:00",
+            "arr": "2026-10-09 01:45:00",
+            "from": "咸阳",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7370 / JD5162",
+        "airline": "春秋 / 新海航|首都航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 13:35:00",
+        "arrDateTime": "2026-10-08 22:20:00",
+        "price": "1200.00",
+        "durationMin": "525",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1j1RjE",
+        "segments": [
+          {
+            "flightNo": "9C7370",
+            "dep": "2026-10-08 13:35:00",
+            "arr": "2026-10-08 17:45:00",
+            "from": "伊宁",
+            "to": "天府"
+          },
+          {
+            "flightNo": "JD5162",
+            "dep": "2026-10-08 20:00:00",
+            "arr": "2026-10-08 22:20:00",
+            "from": "天府",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "CZ2020 / CA4383",
+        "airline": "南航 / 国航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 20:30:00",
+        "arrDateTime": "2026-10-09 08:30:00",
+        "price": "1220.00",
+        "durationMin": "720",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1xVrZo",
+        "segments": [
+          {
+            "flightNo": "CZ2020",
+            "dep": "2026-10-08 20:30:00",
+            "arr": "2026-10-09 00:55:00",
+            "from": "伊宁",
+            "to": "江北"
+          },
+          {
+            "flightNo": "CA4383",
+            "dep": "2026-10-09 06:30:00",
+            "arr": "2026-10-09 08:30:00",
+            "from": "江北",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "CZ2020 / CZ2305",
+        "airline": "南航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 20:30:00",
+        "arrDateTime": "2026-10-09 09:40:00",
+        "price": "1220.00",
+        "durationMin": "790",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0CeF8H",
+        "segments": [
+          {
+            "flightNo": "CZ2020",
+            "dep": "2026-10-08 20:30:00",
+            "arr": "2026-10-09 00:55:00",
+            "from": "伊宁",
+            "to": "江北"
+          },
+          {
+            "flightNo": "CZ2305",
+            "dep": "2026-10-09 07:30:00",
+            "arr": "2026-10-09 09:40:00",
+            "from": "江北",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "UQ3590 / HU7288",
+        "airline": "新海航|乌航 / 新海航|海南航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 12:55:00",
+        "arrDateTime": "2026-10-08 22:15:00",
+        "price": "1340.00",
+        "durationMin": "560",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4QtAUj",
+        "segments": [
+          {
+            "flightNo": "UQ3590",
+            "dep": "2026-10-08 12:55:00",
+            "arr": "2026-10-08 17:15:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "HU7288",
+            "dep": "2026-10-08 19:30:00",
+            "arr": "2026-10-08 22:15:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "UQ3590 / CZ3972",
+        "airline": "新海航|乌航 / 南航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 12:55:00",
+        "arrDateTime": "2026-10-08 22:10:00",
+        "price": "1340.00",
+        "durationMin": "555",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1FRQnX",
+        "segments": [
+          {
+            "flightNo": "UQ3590",
+            "dep": "2026-10-08 12:55:00",
+            "arr": "2026-10-08 17:15:00",
+            "from": "伊宁",
+            "to": "新郑"
+          },
+          {
+            "flightNo": "CZ3972",
+            "dep": "2026-10-08 19:45:00",
+            "arr": "2026-10-08 22:10:00",
+            "from": "新郑",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C6254 / JD5348",
+        "airline": "春秋 / 新海航|首都航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 16:05:00",
+        "arrDateTime": "2026-10-09 01:30:00",
+        "price": "1460.00",
+        "durationMin": "565",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2bOyla",
+        "segments": [
+          {
+            "flightNo": "9C6254",
+            "dep": "2026-10-08 16:05:00",
+            "arr": "2026-10-08 20:35:00",
+            "from": "伊宁",
+            "to": "正定"
+          },
+          {
+            "flightNo": "JD5348",
+            "dep": "2026-10-08 22:45:00",
+            "arr": "2026-10-09 01:30:00",
+            "from": "正定",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "9C7652 / HU7204",
+        "airline": "春秋 / 新海航|海南航空",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 16:10:00",
+        "arrDateTime": "2026-10-09 01:40:00",
+        "price": "1501.00",
+        "durationMin": "570",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0AFJ1x",
+        "segments": [
+          {
+            "flightNo": "9C7652",
+            "dep": "2026-10-08 16:10:00",
+            "arr": "2026-10-08 21:00:00",
+            "from": "伊宁",
+            "to": "新桥"
+          },
+          {
+            "flightNo": "HU7204",
+            "dep": "2026-10-08 23:35:00",
+            "arr": "2026-10-09 01:40:00",
+            "from": "新桥",
+            "to": "白云"
+          }
+        ]
+      },
+      {
+        "flightNo": "3U8562 / 3U8737",
+        "airline": "川航",
+        "journeyType": "中转",
+        "depDateTime": "2026-10-08 11:55:00",
+        "arrDateTime": "2026-10-08 22:55:00",
+        "price": "2040.00",
+        "durationMin": "660",
+        "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Tga31",
+        "segments": [
+          {
+            "flightNo": "3U8562",
+            "dep": "2026-10-08 11:55:00",
+            "arr": "2026-10-08 15:55:00",
+            "from": "伊宁",
+            "to": "双流"
+          },
+          {
+            "flightNo": "3U8737",
+            "dep": "2026-10-08 20:30:00",
+            "arr": "2026-10-08 22:55:00",
+            "from": "双流",
+            "to": "白云"
+          }
+        ]
+      }
+    ]
+  }
+]
