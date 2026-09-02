@@ -12,8 +12,6 @@
     "博乐"
   ],
   "outboundDates": [
-    "2026-09-28",
-    "2026-09-29",
     "2026-09-30",
     "2026-10-01"
   ],
@@ -45,23 +43,45 @@
     "firstLegTopN": 3,
     "minConnectionMinutes": 90,
     "maxConnectionMinutes": 480,
-    "transferHubs": ["西安", "兰州"],
+    "transferHubs": [
+      "西安",
+      "兰州"
+    ],
     "preferredHubsByDest": {
-      "伊宁": ["兰州", "西安"],
-      "阿勒泰": ["西安", "兰州"],
-      "石河子": ["西安", "兰州"],
-      "博乐": ["西安", "兰州"]
+      "伊宁": [
+        "兰州",
+        "西安"
+      ],
+      "阿勒泰": [
+        "西安",
+        "兰州"
+      ],
+      "石河子": [
+        "西安",
+        "兰州"
+      ],
+      "博乐": [
+        "西安",
+        "兰州"
+      ]
     },
     "dynamicHubsFromApi": false,
     "leg2NextDayIfNeeded": true,
     "lateArrivalHour": 18,
-    "trigger": { "maxMainResults": 3 },
+    "skipIfMainResultsAtLeast": 3,
+    "trigger": {
+      "maxMainResults": 3
+    },
     "leg2Concurrency": 1,
     "maxCombosPerRoute": 5,
+    "leg2CacheEnabled": true,
     "excludeFromMainTop3": true
   },
   "scoring": {
-    "originScores": { "深圳": 100, "广州": 80 },
+    "originScores": {
+      "深圳": 100,
+      "广州": 80
+    },
     "destinationScores": {
       "乌鲁木齐": 100,
       "伊宁": 100,
@@ -69,7 +89,15 @@
       "石河子": 100,
       "博乐": 100
     },
-    "apiPriceFloor": { "伊宁": 750, "阿勒泰": 750, "博乐": 750 },
-    "apiPriceFloorReturn": { "伊宁": 650, "阿勒泰": 650, "博乐": 650 }
+    "apiPriceFloor": {
+      "伊宁": 750,
+      "阿勒泰": 750,
+      "博乐": 750
+    },
+    "apiPriceFloorReturn": {
+      "伊宁": 650,
+      "阿勒泰": 650,
+      "博乐": 650
+    }
   }
 }

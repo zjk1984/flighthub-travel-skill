@@ -32,7 +32,7 @@ metadata:
 
 ## 何时使用
 
-- 用户要求查/监控**去程**、广东飞新疆、9/28–10/1 等去程日期
+- 用户要求查/监控**去程**、广东飞新疆、9/30–10/1 等去程日期
 - 用户说「执行去程 skill」「运行去程监控」
 - **不要**在本 Skill 中查询返程；返程使用 `xinjiang-return-monitor`
 
@@ -71,7 +71,7 @@ bash scripts/monitor-outbound.sh
 
 ```bash
 npm run monitor:config
-npm run monitor:set -- --outbound-dates 2026-09-28,2026-09-29
+npm run monitor:set -- --outbound-dates 2026-09-30,2026-10-01
 ```
 
 ## 风控说明
