@@ -7,6 +7,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT_DIR"
 source "$SCRIPT_DIR/load-env.sh"
+# shellcheck source=feishu-env.sh
+source "$SCRIPT_DIR/feishu-env.sh"
 
 RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 OUTPUT="$ROOT_DIR/reports/xinjiang-outbound-latest.md"
@@ -22,7 +24,7 @@ cp "$OUTPUT" "$FLIGHTS_LATEST"
 cp "$RANKED" "$FLIGHTS_RANKED"
 echo "Synced outbound reports → xinjiang-flights-latest.md, xinjiang-flights-ranked.md" >&2
 
-if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then
+if feishu_notify_enabled; then
   echo "Sending Feishu (outbound ranked)..." >&2
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 去程 TOP3 推荐" "$RANKED" || true

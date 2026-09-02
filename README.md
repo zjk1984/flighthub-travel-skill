@@ -116,10 +116,13 @@ npm run monitor:ranked    # 全量 + 每日 TOP3 评分报告
 **一键配置：**
 
 ```bash
-# 方式 1：交互式（推荐）
+# 方式 1：Open API 应用机器人（推荐）
+bash scripts/setup-feishu.sh --app cli_xxx <app-secret> oc_xxxxxxxx
+
+# 方式 2：交互式 Webhook
 npm run setup:feishu
 
-# 方式 2：直接传入 Webhook
+# 方式 3：直接传入 Webhook
 bash scripts/setup-feishu.sh "https://open.feishu.cn/open-apis/bot/v2/hook/你的key" ranked
 ```
 
@@ -127,10 +130,24 @@ bash scripts/setup-feishu.sh "https://open.feishu.cn/open-apis/bot/v2/hook/你�
 
 **获取 Webhook：** 飞书群 → 设置 → 群机器人 → 添加机器人 → **自定义机器人** → 复制 Webhook 地址
 
+**配置（Open API 应用机器人，推荐）：**
+
+```bash
+./scripts/setup-feishu.sh --app cli_xxx <app-secret> oc_xxxxxxxx
+npm run notify:feishu:test   # 发送测试消息
+```
+
+**或 Webhook 模式：**
+
+```bash
+./scripts/setup-feishu.sh https://open.feishu.cn/open-apis/bot/v2/hook/...
+```
+
 **测试推送 / 监控推送：**
 
 ```bash
-npm run notify:feishu        # 推送当前 TOP3 报告（测试用）
+npm run notify:feishu:test   # 发送测试消息
+npm run notify:feishu        # 推送当前 TOP3 报告
 npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 ```
 
@@ -138,7 +155,9 @@ npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 
 | 变量 | 说明 | 默认 |
 |------|------|------|
-| `FEISHU_WEBHOOK_URL` | 飞书自定义机器人 Webhook | 必填 |
+| `FEISHU_APP_ID` + `FEISHU_APP_SECRET` + `FEISHU_CHAT_ID` | Open API 应用机器人（推荐） | — |
+| `FEISHU_WEBHOOK_URL` | 自定义机器人 Webhook（二选一） | — |
+| `FEISHU_WEBHOOK_SECRET` | Webhook 签名校验密钥 | 空 |
 | `FEISHU_REPORT` | `ranked` / `latest` / `both` | `ranked` |
 | `FEISHU_MAX_BYTES` | 单条消息最大字节，超长分批 | `20000` |
 

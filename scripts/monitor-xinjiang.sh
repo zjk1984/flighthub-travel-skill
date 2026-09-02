@@ -10,6 +10,8 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT_DIR"
 # shellcheck source=load-env.sh
 source "$SCRIPT_DIR/load-env.sh"
+# shellcheck source=feishu-env.sh
+source "$SCRIPT_DIR/feishu-env.sh"
 
 PHASE="all"
 POSITIONAL=()
@@ -36,7 +38,7 @@ RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 
 node "$SCRIPT_DIR/monitor-run.js" --phase "$PHASE" "$RESULTS" "$OUTPUT" "$RANKED_OUTPUT"
 
-if [[ -n "${FEISHU_WEBHOOK_URL:-}" && ("$PHASE" == "all" || "$PHASE" == "return") ]]; then
+if feishu_notify_enabled && [[ "$PHASE" == "all" || "$PHASE" == "return" ]]; then
   FEISHU_REPORT="${FEISHU_REPORT:-ranked}"
   echo "Sending Feishu notification ($FEISHU_REPORT)..." >&2
   send_feishu() {

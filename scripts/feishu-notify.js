@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /**
  * Feishu (Lark) interactive card notification — adapted from daily_stock_analysis.
- * Sends markdown reports via custom bot webhook (lark_md card, chunked if needed).
+ * Sends markdown reports via Open API app bot or custom bot webhook (lark_md card, chunked if needed).
  *
  * Usage:
- *   FEISHU_WEBHOOK_URL=https://... node feishu-notify.js reports/xinjiang-flights-ranked.md
- *   node feishu-notify.js --title "标题" path/to/report.md
+ *   FEISHU_APP_ID + FEISHU_APP_SECRET + FEISHU_CHAT_ID  (preferred)
+ *   FEISHU_WEBHOOK_URL=https://...                        (legacy webhook)
+ *   node feishu-notify.js --test
+ *   node feishu-notify.js [--title "标题"] path/to/report.md
  */
 const fs = require("fs");
 const path = require("path");
@@ -40,12 +42,12 @@ try {
 }
 
 function parseArgs(argv) {
-  const args = { title: DEFAULT_TITLE, file: null, webhook: process.env.FEISHU_WEBHOOK_URL || "" };
+  const args = { title: DEFAULT_TITLE, file: null, test: false };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--title" && argv[i + 1]) args.title = argv[++i];
-    else if (a === "--webhook" && argv[i + 1]) args.webhook = argv[++i];
     else if (a === "--max-bytes" && argv[i + 1]) args.maxBytes = parseInt(argv[++i], 10);
+    else if (a === "--test") args.test = true;
     else if (!a.startsWith("-")) args.file = a;
   }
   args.maxBytes = args.maxBytes || DEFAULT_MAX_BYTES;
@@ -125,21 +127,25 @@ function formatFeishuMarkdown(content) {
   return lines.join("\n").trim();
 }
 
+function buildInteractiveCard(title, content) {
+  return {
+    config: { wide_screen_mode: true },
+    header: {
+      title: { tag: "plain_text", content: title },
+    },
+    elements: [
+      {
+        tag: "div",
+        text: { tag: "lark_md", content },
+      },
+    ],
+  };
+}
+
 function buildCardPayload(title, content) {
   return {
     msg_type: "interactive",
-    card: {
-      config: { wide_screen_mode: true },
-      header: {
-        title: { tag: "plain_text", content: title },
-      },
-      elements: [
-        {
-          tag: "div",
-          text: { tag: "lark_md", content },
-        },
-      ],
-    },
+    card: buildInteractiveCard(title, content),
   };
 }
 
@@ -162,12 +168,38 @@ function withFeishuAuth(payload) {
   return { timestamp, sign: feishuSign(secret, timestamp), ...payload };
 }
 
-async function postPayload(webhookUrl, payload) {
-  const res = await fetch(webhookUrl, {
+function resolveFeishuTransport() {
+  const appId = process.env.FEISHU_APP_ID || "";
+  const appSecret = process.env.FEISHU_APP_SECRET || "";
+  const chatId = process.env.FEISHU_CHAT_ID || "";
+  if (appId && appSecret && chatId) {
+    return { mode: "app", appId, appSecret, chatId };
+  }
+  const webhook = process.env.FEISHU_WEBHOOK_URL || "";
+  if (webhook) return { mode: "webhook", webhook };
+  return null;
+}
+
+let tenantTokenCache = { token: "", expireAt: 0 };
+
+async function getTenantAccessToken(appId, appSecret) {
+  if (tenantTokenCache.token && Date.now() < tenantTokenCache.expireAt - 60_000) {
+    return tenantTokenCache.token;
+  }
+  const res = await fetch("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(withFeishuAuth(payload)),
+    body: JSON.stringify({ app_id: appId, app_secret: appSecret }),
   });
+  const body = await parseFeishuResponse(res);
+  tenantTokenCache = {
+    token: body.tenant_access_token,
+    expireAt: Date.now() + (body.expire || 7200) * 1000,
+  };
+  return body.tenant_access_token;
+}
+
+async function parseFeishuResponse(res) {
   const text = await res.text();
   let body;
   try {
@@ -175,7 +207,6 @@ async function postPayload(webhookUrl, payload) {
   } catch {
     body = { raw: text };
   }
-
   if (res.status !== 200) {
     throw new Error(`HTTP ${res.status}: ${text.slice(0, 200)}`);
   }
@@ -184,16 +215,65 @@ async function postPayload(webhookUrl, payload) {
     const msg = body.msg || body.StatusMessage || "unknown error";
     throw new Error(`Feishu error [code=${code}]: ${msg}`);
   }
+  return body;
+}
+
+async function postAppMessage(transport, msgType, payload) {
+  const token = await getTenantAccessToken(transport.appId, transport.appSecret);
+  const body =
+    msgType === "interactive"
+      ? {
+          receive_id: transport.chatId,
+          msg_type: "interactive",
+          content: JSON.stringify(buildInteractiveCard(payload.title, payload.content)),
+        }
+      : {
+          receive_id: transport.chatId,
+          msg_type: "text",
+          content: JSON.stringify({ text: payload }),
+        };
+  const res = await fetch(
+    "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    }
+  );
+  await parseFeishuResponse(res);
   return true;
 }
 
-async function sendFeishuMessage(webhookUrl, title, content) {
+async function postPayload(webhookUrl, payload) {
+  const res = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(withFeishuAuth(payload)),
+  });
+  await parseFeishuResponse(res);
+  return true;
+}
+
+async function sendFeishuMessage(transport, title, content) {
+  if (transport.mode === "app") {
+    try {
+      await postAppMessage(transport, "interactive", { title, content });
+      return true;
+    } catch (cardErr) {
+      console.error(`Feishu app card failed, fallback to text: ${cardErr.message}`);
+      await postAppMessage(transport, "text", content);
+      return true;
+    }
+  }
   try {
-    await postPayload(webhookUrl, buildCardPayload(title, content));
+    await postPayload(transport.webhook, buildCardPayload(title, content));
     return true;
   } catch (cardErr) {
     console.error(`Feishu card failed, fallback to text: ${cardErr.message}`);
-    await postPayload(webhookUrl, buildTextPayload(content));
+    await postPayload(transport.webhook, buildTextPayload(content));
     return true;
   }
 }
@@ -212,9 +292,9 @@ function splitSections(content) {
   return null;
 }
 
-async function sendFeishuChunked(webhookUrl, title, content, maxBytes) {
+async function sendFeishuChunked(transport, title, content, maxBytes) {
   const split = splitSections(content);
-  if (!split) return sendFeishuForceChunked(webhookUrl, title, content, maxBytes);
+  if (!split) return sendFeishuForceChunked(transport, title, content, maxBytes);
 
   const { sections, separator } = split;
   const sepBytes = byteLength(separator);
@@ -249,7 +329,7 @@ async function sendFeishuChunked(webhookUrl, title, content, maxBytes) {
     const marker = chunks.length > 1 ? `\n\n📄 (${i + 1}/${chunks.length})` : "";
     const chunkTitle = chunks.length > 1 ? `${title} (${i + 1}/${chunks.length})` : title;
     try {
-      await sendFeishuMessage(webhookUrl, chunkTitle, chunks[i] + marker);
+      await sendFeishuMessage(transport, chunkTitle, chunks[i] + marker);
       console.error(`Feishu chunk ${i + 1}/${chunks.length} sent`);
     } catch (e) {
       console.error(`Feishu chunk ${i + 1}/${chunks.length} failed: ${e.message}`);
@@ -260,7 +340,7 @@ async function sendFeishuChunked(webhookUrl, title, content, maxBytes) {
   return ok;
 }
 
-async function sendFeishuForceChunked(webhookUrl, title, content, maxBytes) {
+async function sendFeishuForceChunked(transport, title, content, maxBytes) {
   const lines = content.split("\n");
   const chunks = [];
   let current = "";
@@ -281,7 +361,7 @@ async function sendFeishuForceChunked(webhookUrl, title, content, maxBytes) {
     const marker = chunks.length > 1 ? `\n\n📄 (${i + 1}/${chunks.length})` : "";
     const chunkTitle = chunks.length > 1 ? `${title} (${i + 1}/${chunks.length})` : title;
     try {
-      await sendFeishuMessage(webhookUrl, chunkTitle, chunks[i] + marker);
+      await sendFeishuMessage(transport, chunkTitle, chunks[i] + marker);
     } catch (e) {
       console.error(`Feishu force chunk ${i + 1} failed: ${e.message}`);
       ok = false;
@@ -295,27 +375,46 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function sendFeishuReport(webhookUrl, markdown, options = {}) {
+async function sendFeishuReport(transport, markdown, options = {}) {
   const title = options.title || DEFAULT_TITLE;
   const maxBytes = options.maxBytes || DEFAULT_MAX_BYTES;
   const formatted = formatFeishuMarkdown(markdown);
 
   if (byteLength(formatted) <= maxBytes) {
-    await sendFeishuMessage(webhookUrl, title, formatted);
+    await sendFeishuMessage(transport, title, formatted);
     return true;
   }
   console.error(`Feishu content ${byteLength(formatted)} bytes > ${maxBytes}, chunking...`);
-  return sendFeishuChunked(webhookUrl, title, formatted, maxBytes);
+  return sendFeishuChunked(transport, title, formatted, maxBytes);
 }
 
 async function main() {
   const args = parseArgs(process.argv);
-  if (!args.webhook) {
-    console.error("FEISHU_WEBHOOK_URL not set. Configure custom bot webhook in Feishu group.");
+  const transport = resolveFeishuTransport();
+
+  if (!transport) {
+    console.error(
+      "Feishu not configured. Set either:\n" +
+        "  FEISHU_APP_ID + FEISHU_APP_SECRET + FEISHU_CHAT_ID\n" +
+        "  or FEISHU_WEBHOOK_URL\n" +
+        "Run: ./scripts/setup-feishu.sh --app <app-id> <app-secret> <chat-id>"
+    );
     process.exit(1);
   }
+
+  if (transport.mode === "app") {
+    console.error(`[feishu] app mode → chat_id=${transport.chatId}`);
+  }
+
+  if (args.test) {
+    await sendFeishuMessage(transport, "FlightHub 飞书通知测试", "✅ 若收到此消息，配置成功。");
+    const chatHint = transport.chatId ? ` (群 ${transport.chatId})` : "";
+    console.error(`Feishu test sent${chatHint}`);
+    return;
+  }
+
   if (!args.file) {
-    console.error("Usage: node feishu-notify.js [--title TITLE] [--webhook URL] report.md");
+    console.error("Usage: node feishu-notify.js [--test] [--title TITLE] report.md");
     process.exit(1);
   }
 
@@ -326,8 +425,8 @@ async function main() {
   }
 
   const markdown = fs.readFileSync(filePath, "utf8");
-  await sendFeishuReport(args.webhook, markdown, { title: args.title, maxBytes: args.maxBytes });
-  const chatHint = process.env.FEISHU_CHAT_ID ? ` (群 ${process.env.FEISHU_CHAT_ID})` : "";
+  await sendFeishuReport(transport, markdown, { title: args.title, maxBytes: args.maxBytes });
+  const chatHint = transport.chatId ? ` (群 ${transport.chatId})` : "";
   console.error(`Feishu notification sent${chatHint}: ${filePath}`);
 }
 
@@ -339,7 +438,9 @@ if (require.main === module) {
 }
 
 module.exports = {
+  resolveFeishuTransport,
   formatFeishuMarkdown,
   sendFeishuReport,
+  sendFeishuMessage,
   buildCardPayload,
 };

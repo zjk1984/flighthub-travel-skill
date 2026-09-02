@@ -15,6 +15,7 @@
     "monitor:reset": "node scripts/monitor-config.js reset",
     "monitor:set": "node scripts/monitor-config.js set",
     "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
+    "notify:feishu:test": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js --test'",
     "setup:feishu": "bash scripts/setup-feishu.sh",
     "lvji:dev": "pnpm --dir apps/lvji dev",
     "lvji:build": "pnpm --dir apps/lvji build",
