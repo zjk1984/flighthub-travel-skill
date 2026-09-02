@@ -17,15 +17,25 @@
 
 10/1 当晚住 **伊宁市区**，不赶夜路。
 
-### 返程（10/8，**正式 API 实价 2026-09-03 07:43**）
+### 返程 10/7（**正式 API 实价**）
 
 | 优先级 | 航班 | 出发→到达 | 实价 | 5人合计 |
 |--------|------|-----------|------|---------|
-| 最低 | **9C7652 / HU7204** | 10-08 16:10 | **¥1658** | **¥8290** |
-| 老人推荐 | **9C7652 / HU7204** | 10-08 16:10 | **¥1658** | **¥8290** |
+| 最低 | **MU9940 / MU2303** | 10-07 19:20→10-08 10:30 | **¥2498** | **¥12490** |
+| 次日上午到 | **9C7138 / PN6453** | 10-07 18:55→10-08 08:25 | **¥2720** | **¥13600** |
+| 当日到 | **UQ3590 / CZ6632** | 10-07 12:55→23:30 | **¥3068** | **¥15340** |
+
+**预订：** [MU9940/MU2303](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2g92Q2) · [9C7138/PN6453](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1DQxOV) · [UQ3590/CZ6632](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3LGO69)
+
+### 返程 10/8（**更推荐：便宜 + 多玩一天**）
+
+| 优先级 | 航班 | 出发→到达 | 实价 | 5人合计 |
+|--------|------|-----------|------|---------|
+| 最低 | **9C7652 / HU7204** | 10-08 16:10→10-09 01:40 | **¥1658** | **¥8290** |
+| 老人推荐 | **CZ2020 / CZ2305** | 10-08 20:30→10-09 09:40 | **¥1760** | **¥8800** |
 | 当日到 | **3U8562 / 3U8737** | 10/8 11:55→22:55 | **¥2040** | **¥10200** |
 
-**预订：** [9C7652 / HU7204](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HmPR3) · [9C7652 / HU7204](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HmPR3) · [3U8562 / 3U8737](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2icDsF)
+**预订：** [9C7652/HU7204](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HmPR3) · [CZ2020/CZ2305](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F40Ppjd) · [3U8562/3U8737](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2icDsF)
 
 
 ---
@@ -98,7 +108,8 @@
 
 | 项目 | 金额 |
 |------|------|
-| 返程机票 | ¥8290–¥8290 |
+| 返程机票（10/8） | ¥8290–¥10200 |
+| 返程机票（10/7） | ¥12490–¥15340 |
 | 租车 7 天 | ¥3500–5000 |
 | 油费+过路 | ¥1500–1800 |
 | 住宿 7 晚×2 间 | ¥5600–9000 |
@@ -109,7 +120,7 @@
 
 ## 七、本周待办
 
-1. **订 10/8 返程** — 最低 9C7652 / HU7204 ¥1658；老人选 9C7652 / HU7204 ¥1658
+1. **订返程** — 优先 10/8（9C7652/HU7204 ¥1658）；若只能 10/7 选 MU9940/MU2303 ¥2498
 2. **订 10/5–6 那拉提 + 10/2–3 赛湖** 住宿
 3. **租 7 座车**（伊宁 10/2–10/8）
 4. 老人出行前咨询医生（如有基础病）
