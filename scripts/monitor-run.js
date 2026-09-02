@@ -245,7 +245,8 @@ async function main() {
   }
 
   fs.mkdirSync(path.dirname(latestOut), { recursive: true });
-  const scopeArgs = phase === "return" ? ["--scope", "return"] : [];
+  // Return phase merges outbound JSONL + new return data → full round-trip report
+  const scopeArgs = [];
   fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
   fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
   process.stderr.write(`Report saved: ${latestOut}\n`);
