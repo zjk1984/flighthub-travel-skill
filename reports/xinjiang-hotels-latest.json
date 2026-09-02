@@ -6,10 +6,10 @@
     "checkout": "2026-10-02",
     "rank": 1,
     "name": "全季伊宁北京路酒店",
-    "price": "¥4xx",
+    "price": "¥432",
     "star": "舒适型",
     "poi": "近伊犁哈萨克自治州博物馆",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38RbtK"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F43stmy"
   },
   {
     "segment": "10/1 晚到",
@@ -18,10 +18,10 @@
     "checkout": "2026-10-02",
     "rank": 2,
     "name": "星程伊宁宁远路国际机场酒店",
-    "price": "¥3xx",
+    "price": "¥369",
     "star": "舒适型",
     "poi": "近伊犁职业技术学院",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Cllf0"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2L12WH"
   },
   {
     "segment": "10/1 晚到",
@@ -30,10 +30,10 @@
     "checkout": "2026-10-02",
     "rank": 3,
     "name": "伊宁友谊宾馆",
-    "price": "¥2xx",
+    "price": "¥252",
     "star": "三星级",
     "poi": "近喀赞其民俗旅游区",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F36a0ab"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2CRhra"
   },
   {
     "segment": "10/1 晚到",
@@ -42,10 +42,10 @@
     "checkout": "2026-10-02",
     "rank": 4,
     "name": "全季伊宁万容广场酒店",
-    "price": "¥3xx",
+    "price": "¥369",
     "star": "舒适型",
     "poi": "近汉宾公园",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4YQ4rs"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4VTvhN"
   },
   {
     "segment": "10/1 晚到",
@@ -54,140 +54,10 @@
     "checkout": "2026-10-02",
     "rank": 5,
     "name": "真中酒店(伊宁火车站店)",
-    "price": "¥2xx",
+    "price": "¥299",
     "star": "舒适型",
     "poi": "近伊宁站",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Pdl1X"
-  },
-  {
-    "segment": "10/4 休整",
-    "city": "伊宁",
-    "checkin": "2026-10-04",
-    "checkout": "2026-10-05",
-    "rank": 1,
-    "name": "全季伊宁北京路酒店",
-    "price": "¥4xx",
-    "star": "舒适型",
-    "poi": "近伊犁哈萨克自治州博物馆",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2ubeYQ"
-  },
-  {
-    "segment": "10/4 休整",
-    "city": "伊宁",
-    "checkin": "2026-10-04",
-    "checkout": "2026-10-05",
-    "rank": 2,
-    "name": "星程伊宁宁远路国际机场酒店",
-    "price": "¥3xx",
-    "star": "舒适型",
-    "poi": "近伊犁职业技术学院",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1J2kP3"
-  },
-  {
-    "segment": "10/4 休整",
-    "city": "伊宁",
-    "checkin": "2026-10-04",
-    "checkout": "2026-10-05",
-    "rank": 3,
-    "name": "全季伊宁万容广场酒店",
-    "price": "¥3xx",
-    "star": "舒适型",
-    "poi": "近汉宾公园",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1hnK9y"
-  },
-  {
-    "segment": "10/4 休整",
-    "city": "伊宁",
-    "checkin": "2026-10-04",
-    "checkout": "2026-10-05",
-    "rank": 4,
-    "name": "真中酒店(伊宁火车站店)",
-    "price": "¥3xx",
-    "star": "舒适型",
-    "poi": "近伊宁站",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0WQfLc"
-  },
-  {
-    "segment": "10/4 休整",
-    "city": "伊宁",
-    "checkin": "2026-10-04",
-    "checkout": "2026-10-05",
-    "rank": 5,
-    "name": "伊宁城与晚民宿",
-    "price": "¥3xx",
-    "star": "舒适型",
-    "poi": "近六星美食街",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0bWoP9"
-  },
-  {
-    "segment": "10/7 近机场",
-    "city": "伊宁",
-    "checkin": "2026-10-07",
-    "checkout": "2026-10-08",
-    "rank": 1,
-    "name": "全季伊宁北京路酒店",
-    "price": "¥2xx",
-    "star": "舒适型",
-    "poi": "近伊犁哈萨克自治州博物馆",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4V2hP8"
-  },
-  {
-    "segment": "10/7 近机场",
-    "city": "伊宁",
-    "checkin": "2026-10-07",
-    "checkout": "2026-10-08",
-    "rank": 2,
-    "name": "星程伊宁宁远路国际机场酒店",
-    "price": "¥2xx",
-    "star": "舒适型",
-    "poi": "近伊犁职业技术学院",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F02JV3r"
-  },
-  {
-    "segment": "10/7 近机场",
-    "city": "伊宁",
-    "checkin": "2026-10-07",
-    "checkout": "2026-10-08",
-    "rank": 3,
-    "name": "全季伊宁万容广场酒店",
-    "price": "¥2xx",
-    "star": "舒适型",
-    "poi": "近汉宾公园",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Fe6Ea"
-  },
-  {
-    "segment": "10/7 近机场",
-    "city": "伊宁",
-    "checkin": "2026-10-07",
-    "checkout": "2026-10-08",
-    "rank": 4,
-    "name": "真中酒店(伊宁火车站店)",
-    "price": "¥4xx",
-    "star": "舒适型",
-    "poi": "近伊宁站",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0gMxiv"
-  },
-  {
-    "segment": "10/7 近机场",
-    "city": "伊宁",
-    "checkin": "2026-10-07",
-    "checkout": "2026-10-08",
-    "rank": 5,
-    "name": "伊宁城与晚民宿",
-    "price": "¥3xx",
-    "star": "舒适型",
-    "poi": "近六星美食街",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1C3C9O"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2D7qG9"
   },
   {
     "segment": "10/2-3 赛湖",
@@ -196,11 +66,10 @@
     "checkout": "2026-10-04",
     "rank": 1,
     "name": "博乐滨江半岛酒店",
-    "price": "¥3xx",
+    "price": "¥365",
     "star": "舒适型",
     "poi": "近博乐锦绣小学",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0rjSKI"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HM9vc"
   },
   {
     "segment": "10/2-3 赛湖",
@@ -209,11 +78,10 @@
     "checkout": "2026-10-04",
     "rank": 2,
     "name": "博乐夏尔希里大酒店(滨河公园店)",
-    "price": "¥7xx",
+    "price": "¥759",
     "star": "豪华型",
     "poi": "近博尔塔拉纪念公园",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Curze"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0YhCx6"
   },
   {
     "segment": "10/2-3 赛湖",
@@ -222,11 +90,10 @@
     "checkout": "2026-10-04",
     "rank": 3,
     "name": "桔子博乐开屏湖公园酒店",
-    "price": "¥4xx",
+    "price": "¥432",
     "star": "舒适型",
     "poi": "近赛里木湖路",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4bScTv"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1uhD2m"
   },
   {
     "segment": "10/2-3 赛湖",
@@ -235,11 +102,10 @@
     "checkout": "2026-10-04",
     "rank": 4,
     "name": "博乐博尔塔拉宾馆",
-    "price": "¥5xx",
+    "price": "¥575",
     "star": "高档型",
     "poi": "近博尔塔拉蒙古自治州广播电视大学",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4OuSxt"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1u2G9p"
   },
   {
     "segment": "10/2-3 赛湖",
@@ -248,11 +114,70 @@
     "checkout": "2026-10-04",
     "rank": 5,
     "name": "怡致酒店(博乐店)",
-    "price": "¥3xx",
+    "price": "¥347",
     "star": "舒适型",
     "poi": "近博乐商业步行街(博乐市文化中心楼东南)",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1MbeLO"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2pN70u"
+  },
+  {
+    "segment": "10/4 休整",
+    "city": "伊宁",
+    "checkin": "2026-10-04",
+    "checkout": "2026-10-05",
+    "rank": 1,
+    "name": "全季伊宁北京路酒店",
+    "price": "¥432",
+    "star": "舒适型",
+    "poi": "近伊犁哈萨克自治州博物馆",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F36m87Z"
+  },
+  {
+    "segment": "10/4 休整",
+    "city": "伊宁",
+    "checkin": "2026-10-04",
+    "checkout": "2026-10-05",
+    "rank": 2,
+    "name": "星程伊宁宁远路国际机场酒店",
+    "price": "¥358",
+    "star": "舒适型",
+    "poi": "近伊犁职业技术学院",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nMcKQ"
+  },
+  {
+    "segment": "10/4 休整",
+    "city": "伊宁",
+    "checkin": "2026-10-04",
+    "checkout": "2026-10-05",
+    "rank": 3,
+    "name": "全季伊宁万容广场酒店",
+    "price": "¥378",
+    "star": "舒适型",
+    "poi": "近汉宾公园",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2OoITL"
+  },
+  {
+    "segment": "10/4 休整",
+    "city": "伊宁",
+    "checkin": "2026-10-04",
+    "checkout": "2026-10-05",
+    "rank": 4,
+    "name": "真中酒店(伊宁火车站店)",
+    "price": "¥354",
+    "star": "舒适型",
+    "poi": "近伊宁站",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3pPjbS"
+  },
+  {
+    "segment": "10/4 休整",
+    "city": "伊宁",
+    "checkin": "2026-10-04",
+    "checkout": "2026-10-05",
+    "rank": 5,
+    "name": "伊宁城与晚民宿",
+    "price": "¥375",
+    "star": "舒适型",
+    "poi": "近六星美食街",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0zP9Kf"
   },
   {
     "segment": "10/5-6 那拉提",
@@ -261,11 +186,10 @@
     "checkout": "2026-10-07",
     "rank": 1,
     "name": "新源那拉提国际酒店（县人民政府店）",
-    "price": "¥3xx",
+    "price": "¥308",
     "star": "豪华型",
     "poi": "近开元美食休闲广场",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1r6Dki"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F32WGbA"
   },
   {
     "segment": "10/5-6 那拉提",
@@ -274,11 +198,10 @@
     "checkout": "2026-10-07",
     "rank": 2,
     "name": "新源栖岸大酒店",
-    "price": "¥1xx",
+    "price": "¥133",
     "star": "舒适型",
     "poi": "近新源镇",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2WJbfj"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F19efUh"
   },
   {
     "segment": "10/5-6 那拉提",
@@ -287,11 +210,10 @@
     "checkout": "2026-10-07",
     "rank": 3,
     "name": "那拉提美旅民宿(那拉提空中乐园店)",
-    "price": "¥3xx",
+    "price": "¥390",
     "star": "舒适型",
     "poi": "近天马旅游点",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1SjQgK"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3nJiIL"
   },
   {
     "segment": "10/5-6 那拉提",
@@ -300,11 +222,10 @@
     "checkout": "2026-10-07",
     "rank": 4,
     "name": "那拉提拾光里客栈（那拉提景区店）",
-    "price": "¥5xx",
+    "price": "¥597",
     "star": "舒适型",
     "poi": null,
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Dn4Bx"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Q3XOZ"
   },
   {
     "segment": "10/5-6 那拉提",
@@ -313,88 +234,141 @@
     "checkout": "2026-10-07",
     "rank": 5,
     "name": "新源万达悦华酒店",
-    "price": "¥3xx",
+    "price": "¥375",
     "star": "高档型",
     "poi": "近开元美食休闲广场",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oB5LM"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1TBxRX"
   },
   {
-    "segment": "赛湖景区",
+    "segment": "10/7 返日前",
+    "city": "伊宁",
+    "checkin": "2026-10-07",
+    "checkout": "2026-10-08",
+    "rank": 1,
+    "name": "全季伊宁北京路酒店",
+    "price": "¥270",
+    "star": "舒适型",
+    "poi": "近伊犁哈萨克自治州博物馆",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1a0dvM"
+  },
+  {
+    "segment": "10/7 返日前",
+    "city": "伊宁",
+    "checkin": "2026-10-07",
+    "checkout": "2026-10-08",
+    "rank": 2,
+    "name": "星程伊宁宁远路国际机场酒店",
+    "price": "¥252",
+    "star": "舒适型",
+    "poi": "近伊犁职业技术学院",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3wZlJy"
+  },
+  {
+    "segment": "10/7 返日前",
+    "city": "伊宁",
+    "checkin": "2026-10-07",
+    "checkout": "2026-10-08",
+    "rank": 3,
+    "name": "全季伊宁万容广场酒店",
+    "price": "¥252",
+    "star": "舒适型",
+    "poi": "近汉宾公园",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0MczOp"
+  },
+  {
+    "segment": "10/7 返日前",
+    "city": "伊宁",
+    "checkin": "2026-10-07",
+    "checkout": "2026-10-08",
+    "rank": 4,
+    "name": "真中酒店(伊宁火车站店)",
+    "price": "¥400",
+    "star": "舒适型",
+    "poi": "近伊宁站",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0zzOzj"
+  },
+  {
+    "segment": "10/7 返日前",
+    "city": "伊宁",
+    "checkin": "2026-10-07",
+    "checkout": "2026-10-08",
+    "rank": 5,
+    "name": "伊宁城与晚民宿",
+    "price": "¥375",
+    "star": "舒适型",
+    "poi": "近六星美食街",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3xaac0"
+  },
+  {
+    "segment": "赛湖景区旁",
     "city": "博乐",
     "checkin": "2026-10-02",
     "checkout": "2026-10-04",
     "rank": 1,
     "name": "博乐赛湖云上酒店",
-    "price": "¥4xx",
+    "price": "¥464",
     "star": "经济型",
     "poi": "近赛里木湖国家级风景名胜区",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2yP6YM"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1rpYgu"
   },
   {
-    "segment": "赛湖景区",
+    "segment": "赛湖景区旁",
     "city": "博乐",
     "checkin": "2026-10-02",
     "checkout": "2026-10-04",
     "rank": 2,
     "name": "云湖兰山民宿",
-    "price": "¥5xx",
+    "price": "¥556",
     "star": "经济型",
     "poi": "近赛里木湖国家级风景名胜区",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1tEYSz"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0B2mg4"
   },
   {
-    "segment": "赛湖景区",
+    "segment": "赛湖景区旁",
     "city": "博乐",
     "checkin": "2026-10-02",
     "checkout": "2026-10-04",
     "rank": 3,
     "name": "知原青旅（赛里木湖景区白鸟湖口景点店）",
-    "price": "¥7xx",
+    "price": "¥700",
     "star": "经济型",
     "poi": "近赛里木湖国家级风景名胜区",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4XJvu0"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1GSyoS"
   },
   {
-    "segment": "那拉提景区",
+    "segment": "那拉提景区旁",
     "city": "新源",
     "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "rank": 1,
     "name": "山楂小院驿站（花海那拉提景区店）",
-    "price": "¥1xx",
+    "price": "¥168",
     "star": "经济型",
     "poi": "近花海那拉提",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1bqMYT"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4WODuI"
   },
   {
-    "segment": "那拉提景区",
+    "segment": "那拉提景区旁",
     "city": "新源",
     "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "rank": 2,
     "name": "那拉提客来轩民宿",
-    "price": "¥1xx",
+    "price": "¥186",
     "star": "经济型",
     "poi": null,
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0SQ9Ea"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4LekSS"
   },
   {
-    "segment": "那拉提景区",
+    "segment": "那拉提景区旁",
     "city": "新源",
     "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "rank": 3,
     "name": "那拉提镇悠山庭院民宿",
-    "price": "¥1xx",
+    "price": "¥189",
     "star": "经济型",
     "poi": "近花海那拉提",
-    "score": null,
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3XeB7V"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MxAMv"
   }
 ]
