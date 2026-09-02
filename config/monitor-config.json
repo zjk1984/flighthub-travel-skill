@@ -71,6 +71,7 @@
     "leg2NextDayIfNeeded": true,
     "lateArrivalHour": 18,
     "skipIfMainResultsAtLeast": 3,
+    "inboundSkipIfMainResultsAtLeast": 0,
     "trigger": {
       "maxMainResults": 3
     },

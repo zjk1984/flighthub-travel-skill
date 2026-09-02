@@ -71,6 +71,10 @@ function normalizeCustomTransfer(raw) {
     trigger.maxMainResults != null
       ? parseInt(trigger.maxMainResults, 10)
       : parseInt(d.skipIfMainResultsAtLeast, 10);
+  const inboundMax =
+    d.inboundSkipIfMainResultsAtLeast != null
+      ? parseInt(d.inboundSkipIfMainResultsAtLeast, 10)
+      : null;
   return {
     enabled: d.enabled !== false,
     outboundEnabled: d.outboundEnabled !== false,
@@ -84,6 +88,10 @@ function normalizeCustomTransfer(raw) {
     leg2NextDayIfNeeded: d.leg2NextDayIfNeeded !== false,
     lateArrivalHour: Math.min(23, Math.max(0, parseInt(d.lateArrivalHour, 10) || 18)),
     skipIfMainResultsAtLeast: Math.max(0, maxMain >= 0 ? maxMain : 3),
+    inboundSkipIfMainResultsAtLeast:
+      inboundMax != null && !Number.isNaN(inboundMax)
+        ? Math.max(0, inboundMax)
+        : 0,
     trigger: {
       maxMainResults: Math.max(0, maxMain >= 0 ? maxMain : 3),
     },

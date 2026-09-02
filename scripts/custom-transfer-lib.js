@@ -46,9 +46,12 @@ function hubsForDestination(finalDest, { map, fromCity, date } = {}) {
   return merged.filter((hub) => hub !== finalDest);
 }
 
-function needsCustomTransfer(map, route, date) {
+function needsCustomTransfer(map, route, date, direction = "outbound") {
   if (!map.has(routeKey(route, date))) return false;
-  const max = CT.trigger?.maxMainResults ?? CT.skipIfMainResultsAtLeast;
+  const max =
+    direction === "inbound"
+      ? CT.inboundSkipIfMainResultsAtLeast ?? CT.trigger?.maxMainResults ?? CT.skipIfMainResultsAtLeast
+      : CT.trigger?.maxMainResults ?? CT.skipIfMainResultsAtLeast;
   if (max <= 0) return true;
   return countMainFlights(map, route, date) < max;
 }
@@ -61,7 +64,7 @@ function collectRoutesNeedingCustom(map) {
     for (const origin of CFG.origins) {
       for (const dest of CFG.destinations) {
         const route = `${origin}→${dest}`;
-        if (needsCustomTransfer(map, route, date)) {
+        if (needsCustomTransfer(map, route, date, "outbound")) {
           outbound.push({ origin, dest, date, route });
         }
       }
@@ -71,7 +74,7 @@ function collectRoutesNeedingCustom(map) {
     for (const dest of CFG.destinations) {
       for (const origin of CFG.origins) {
         const route = `${dest}→${origin}`;
-        if (needsCustomTransfer(map, route, date)) {
+        if (needsCustomTransfer(map, route, date, "inbound")) {
           inbound.push({ xjCity: dest, gdCity: origin, date, route });
         }
       }
@@ -226,9 +229,9 @@ function existingApiSignatures(map, route, date) {
   return sigs;
 }
 
-function buildCombos(map, fromCity, date, leg2Dest, excludeHub) {
+function buildCombos(map, fromCity, date, leg2Dest, excludeHub, direction = "inbound") {
   const route = `${fromCity}→${leg2Dest}`;
-  if (!needsCustomTransfer(map, route, date)) return [];
+  if (!needsCustomTransfer(map, route, date, direction)) return [];
 
   const hubs = hubsForDestination(leg2Dest, { map, fromCity, date });
   const perHub = cheapestPerHub(map, fromCity, date, hubs, excludeHub);
@@ -304,17 +307,17 @@ async function appendCustomResults(map, options = {}) {
 
   let merged = 0;
   for (const { origin, dest, date } of outbound) {
-    const flights = buildCombos(map, origin, date, dest, dest);
+    const flights = buildCombos(map, origin, date, dest, dest, "outbound");
     const entry = map.get(routeKey(`${origin}→${dest}`, date));
     if (entry) merged += addFlightsToEntry(entry, flights, { skipSignatures: existingApiSignatures(map, `${origin}→${dest}`, date) });
   }
   for (const { xjCity, gdCity, date } of inbound) {
-    const flights = buildCombos(map, xjCity, date, gdCity, gdCity);
+    const flights = buildCombos(map, xjCity, date, gdCity, gdCity, "inbound");
     const entry = map.get(routeKey(`${xjCity}→${gdCity}`, date));
     if (entry) merged += addFlightsToEntry(entry, flights, { skipSignatures: existingApiSignatures(map, `${xjCity}→${gdCity}`, date) });
   }
 
-  process.stderr.write(`Custom transfer: merged ${merged} combos\n`);
+  process.stderr.write(`Custom transfer: merged ${merged} new combos\n`);
   return merged;
 }
 

@@ -326,7 +326,7 @@ function rankCompare(a, b) {
   return b.score - a.score || a.priceNum - b.priceNum;
 }
 
-function pickTopDiverse(flights, n = TOP_N) {
+function pickTopDiverse(flights, n = TOP_N, { ensureCustom = false } = {}) {
   const sorted = [...flights].sort(rankCompare);
   const verified = sorted.filter(f => f.priceVerified !== false);
   const picked = [];
@@ -343,10 +343,26 @@ function pickTopDiverse(flights, n = TOP_N) {
     if (picked.length >= n) break;
     if (!picked.includes(f)) picked.push(f);
   }
-  return picked.slice(0, n);
+  let result = picked.slice(0, n);
+
+  if (ensureCustom && !result.some(f => f.customTransfer)) {
+    const customs = verified.filter(f => f.customTransfer).sort(rankCompare);
+    if (customs.length) {
+      const used = new Set(result.map(f => f.xjAirport));
+      const bestCustom = customs.find(f => !used.has(f.xjAirport)) || customs[0];
+      const replaceAt =
+        result.findIndex(f => f.xjAirport === bestCustom.xjAirport) >= 0
+          ? result.findIndex(f => f.xjAirport === bestCustom.xjAirport)
+          : result.length - 1;
+      result = [...result];
+      result[replaceAt] = bestCustom;
+    }
+  }
+
+  return result.slice(0, n);
 }
 
-function topByDay(flights, n = TOP_N) {
+function topByDay(flights, n = TOP_N, options = {}) {
   const byDate = new Map();
   for (const f of flights) {
     if (!byDate.has(f.date)) byDate.set(f.date, []);
@@ -356,7 +372,7 @@ function topByDay(flights, n = TOP_N) {
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([date, list]) => ({
       date,
-      flights: pickTopDiverse(list, n),
+      flights: pickTopDiverse(list, n, options),
     }));
 }
 
@@ -500,7 +516,7 @@ function renderScoringGuide() {
 
 **TOP3 规则：** 优先覆盖不同目的地；API 联程与自定义中转**统一按综合分排序**；不可信 API 低价不参与排名且价格分封顶 50。
 
-**自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询。转机评分中**跨日 -25** 与 **自定义 -25** 分开计算、可叠加。
+**自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；返程**始终**查询自定义中转，去程主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询。转机评分中**跨日 -25** 与 **自定义 -25** 分开计算、可叠加。
 
 ### ⚠️ 关于 API 价格
 
@@ -633,7 +649,7 @@ const customOutCount = outbound.filter(f => f.customTransfer).length;
 const customInCount = inbound.filter(f => f.customTransfer).length;
 
 const outByDay = topByDay(outbound);
-const inByDay = topByDay(inbound);
+const inByDay = topByDay(inbound, TOP_N, { ensureCustom: true });
 const outPerDest = topByDayPerDest(outbound);
 const inPerDest = topByDayPerDest(inbound);
 const roundTrips = recommendRoundTrips(outbound, inbound);
