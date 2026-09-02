@@ -10,7 +10,7 @@
     "monitor:return": "bash scripts/monitor-return.sh",
     "skill:outbound": "bash scripts/monitor-outbound.sh",
     "skill:return": "bash scripts/monitor-return.sh",
-    "skill:custom-outbound": "bash -c 'source scripts/load-env.sh && node scripts/custom-transfer.js --direction outbound reports/xinjiang-results.jsonl && node scripts/format-ranked-report.js reports/xinjiang-results.jsonl > reports/xinjiang-outbound-ranked.md'",
+    "skill:custom-outbound": "bash -c 'source scripts/load-env.sh && node scripts/custom-transfer.js --direction outbound reports/xinjiang-results.jsonl && node scripts/format-ranked-report.js reports/xinjiang-results.jsonl --scope outbound > reports/xinjiang-outbound-ranked.md'",
     "monitor:config": "node scripts/monitor-config.js show",
     "monitor:reset": "node scripts/monitor-config.js reset",
     "monitor:set": "node scripts/monitor-config.js set",
