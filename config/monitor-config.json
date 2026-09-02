@@ -75,7 +75,7 @@
     "leg2Concurrency": 1,
     "maxCombosPerRoute": 5,
     "leg2CacheEnabled": true,
-    "excludeFromMainTop3": true
+    "excludeFromMainTop3": false
   },
   "scoring": {
     "originScores": {

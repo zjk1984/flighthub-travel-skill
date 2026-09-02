@@ -45,31 +45,6 @@ function parseReportArgs(argv) {
   return { scope, inputPath: positional[0] || 0 };
 }
 
-function renderCustomTransferSummary(allFlights) {
-  const custom = allFlights.filter((f) => f.customTransfer && isOutbound(f.route));
-  if (!custom.length) return "";
-
-  const byKey = new Map();
-  for (const f of custom) {
-    const key = `${f.date}|${xinjiangCity(f.route)}|${parseRoute(f.route).origin}`;
-    const cur = byKey.get(key);
-    if (!cur || parsePrice(f.price) < parsePrice(cur.price)) byKey.set(key, f);
-  }
-  const rows = [...byKey.values()].sort(
-    (a, b) => a.date.localeCompare(b.date) || parsePrice(a.price) - parsePrice(b.price)
-  );
-
-  let md = `## 🔗 去程自定义中转速览\n\n`;
-  md += `> 经西安/兰州分段拼接，需分段购票；详见下方各目的地详情。\n\n`;
-  md += "| 日期 | 航线 | 中转 | 航班 | 价格 | 出发 | 到达 |\n";
-  md += "|------|------|------|------|------|------|------|\n";
-  for (const f of rows) {
-    md += `| ${f.date.slice(5)} | ${f.route} | ${f.transitCity || "枢纽"} | ${f.flightNo} | ¥${parseFloat(f.price).toFixed(0)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
-  }
-  md += "\n";
-  return md;
-}
-
 const { scope, inputPath } = parseReportArgs(process.argv);
 const raw = fs.readFileSync(inputPath, "utf8");
 const results = compactMap(buildRouteMap(parseJsonl(raw))).filter((r) =>
@@ -162,9 +137,6 @@ const showOut = scope === "all" || scope === "outbound";
 const showIn = scope === "all" || scope === "return";
 
 const allFlights = results.flatMap(r => (r.flights || []).map(f => ({ ...f, route: r.route, date: r.date })));
-if (showOut) {
-  md += renderCustomTransferSummary(allFlights);
-}
 
 md += `## 📋 最低价速览\n\n`;
 md += "| 方向 | 日期 | 航线 | 类型 | 最低价 | 航班 | 出发时间 |\n";

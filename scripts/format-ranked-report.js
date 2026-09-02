@@ -498,7 +498,7 @@ function renderScoringGuide() {
 
 **公式：** 综合分 = Σ(子分 ÷ 100 × 权重) × 100
 
-**TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
+**TOP3 规则：** 优先覆盖不同目的地；API 联程与自定义中转**统一按综合分排序**；不可信 API 低价不参与排名且价格分封顶 50。
 
 **自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询。转机评分中**跨日 -25** 与 **自定义 -25** 分开计算、可叠加。
 
@@ -576,32 +576,6 @@ function renderPerDestTop1(days, title) {
   return md;
 }
 
-function renderCustomTransferTop3(flights, title, direction) {
-  const custom = flights.filter((f) => f.customTransfer && f.priceVerified !== false);
-  if (!custom.length) return "";
-  const days = topByDay(custom, TOP_N);
-  let md = `## ${title}\n\n`;
-  md += `> 分段购票方案，已与 API 联程去重；评分标准与 v2 相同。\n\n`;
-  const col1 = direction === "outbound" ? "出发地" : "新疆出发";
-  const col2 = direction === "outbound" ? "目的地" : "到达地";
-  for (const { date, flights: dayFlights } of days) {
-    if (!dayFlights.length) continue;
-    md += `### ${date.slice(5)}（${date}）\n\n`;
-    md += `| 排名 | 评分 | ${col1} | ${col2} | 航线 | 航班 | 中转 | 价格 | 时长 | 出发 | 到达 |\n`;
-    md += "|------|------|--------|--------|------|------|------|------|------|------|------|\n";
-    dayFlights.forEach((f, i) => {
-      md += `| ${i + 1} | ${f.score} | ${f.origin} | ${labelCity(f.xjAirport)} | ${routeDisplay(f)} | ${f.flightNo} | ${labelCity(f.transitCity)} | ¥${f.priceNum.toFixed(0)} | ${formatDuration(f.durationMin)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
-    });
-    md += "\n";
-    dayFlights.forEach((f, i) => {
-      md += `${i + 1}. **${routeDisplay(f)} ${f.flightNo}**（${f.score} 分）\n`;
-      for (const line of buildDeductions(f)) md += `   - ${line}\n`;
-      md += renderBookingLinks(f);
-    });
-  }
-  return md;
-}
-
 function renderRoundTrips(combos) {
   let md = `## 🔄 推荐往返组合 TOP3\n\n`;
   md += `综合去程/返程评分（各 45%）与往返总价（10%），仅含可信价格航班。\n\n`;
@@ -645,38 +619,6 @@ function parseReportArgs(argv) {
   return { scope, inputPath: positional[0] || 0 };
 }
 
-function renderCustomTransferSummary(flights, title, direction) {
-  const custom = flights.filter((f) => f.customTransfer && f.priceVerified !== false);
-  if (!custom.length) return "";
-
-  const byKey = new Map();
-  for (const f of custom) {
-    const key = `${f.date}|${f.xjAirport}|${f.origin}`;
-    const cur = byKey.get(key);
-    if (!cur || rankCompare(f, cur) < 0) byKey.set(key, f);
-  }
-  const rows = [...byKey.values()].sort(
-    (a, b) => a.date.localeCompare(b.date) || rankCompare(a, b)
-  );
-
-  let md = `## ${title}\n\n`;
-  md += `> 主查询结果 <3 条时，经 **西安/兰州** 分段拼接；需**分段购票**，价格 = leg1 + leg2 估算。\n\n`;
-  md += "| 日期 | 出发地 | 目的地 | 中转 | 航班 | 价格 | 出发 | 到达 |\n";
-  md += "|------|--------|--------|------|------|------|------|------|\n";
-  for (const f of rows) {
-    md += `| ${f.date.slice(5)} | ${f.origin} | ${labelCity(f.xjAirport)} | ${labelCity(f.transitCity)} | ${f.flightNo} | ¥${f.priceNum.toFixed(0)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
-  }
-  md += "\n";
-  return md;
-}
-
-function mainTop3Pool(flights) {
-  if (CFG.customTransfer?.excludeFromMainTop3) {
-    return flights.filter((f) => !f.customTransfer);
-  }
-  return flights;
-}
-
 const { scope, inputPath } = parseReportArgs(process.argv);
 const raw = fs.readFileSync(inputPath, "utf8");
 const results = compactMap(buildRouteMap(parseJsonl(raw))).filter((r) =>
@@ -690,8 +632,8 @@ const inbound = markPriceReliability(inboundScored);
 const customOutCount = outbound.filter(f => f.customTransfer).length;
 const customInCount = inbound.filter(f => f.customTransfer).length;
 
-const outByDay = topByDay(mainTop3Pool(outbound));
-const inByDay = topByDay(mainTop3Pool(inbound));
+const outByDay = topByDay(outbound);
+const inByDay = topByDay(inbound);
 const outPerDest = topByDayPerDest(outbound);
 const inPerDest = topByDayPerDest(inbound);
 const roundTrips = recommendRoundTrips(outbound, inbound);
@@ -726,23 +668,14 @@ if (showIn && scope === "all") {
 }
 md += `\n`;
 
-if (showOut && customOutCount > 0) {
-  md += renderCustomTransferSummary(outbound, "🔗 去程自定义中转速览", "outbound");
-}
-if (showIn && customInCount > 0) {
-  md += renderCustomTransferSummary(inbound, "🔗 返程自定义中转速览", "inbound");
-}
-
 md += renderScoringGuide();
 if (showOut) {
   md += renderDailySections(outByDay, "🛫 去程每日 TOP3（目的地多样化）", "outbound");
   md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
-  md += renderCustomTransferTop3(outbound, "🔗 去程自定义中转 TOP3 详情", "outbound");
 }
 if (showIn) {
   md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
   md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
-  md += renderCustomTransferTop3(inbound, "🔗 返程自定义中转 TOP3 详情", "inbound");
 }
 if (scope === "all") {
   md += renderRoundTrips(roundTrips);

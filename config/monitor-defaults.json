@@ -45,7 +45,7 @@
     "trigger": { "maxMainResults": 3 },
     "leg2Concurrency": 1,
     "maxCombosPerRoute": 5,
-    "excludeFromMainTop3": true
+    "excludeFromMainTop3": false
   },
   "scoring": {
     "originScores": { "深圳": 100, "广州": 80 },
