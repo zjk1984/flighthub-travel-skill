@@ -124,6 +124,7 @@ function transferPoints(count, f) {
   if (count >= 2) pts = 50;
   else if (count === 1) pts = 75;
   if (isCrossDay(f)) pts = Math.max(0, pts - 25);
+  if (f.customTransfer) pts = Math.max(0, pts - 25);
   return pts;
 }
 
@@ -420,6 +421,7 @@ function buildDeductions(f) {
   if (f.transfers >= 2) transferParts.push(`转机 ≥2 次，转机分封顶 50`);
   else if (f.transfers > 0) transferParts.push(`转机 ${f.transfers} 次 → 75 分`);
   if (f.crossDay) transferParts.push(`跨天/航段跨日 -25`);
+  if (f.customTransfer) transferParts.push(`自定义中转 -25`);
   if (transferParts.length) {
     items.push(`转机分 ${f.transferPts}：${transferParts.join("，")}`);
   } else {
@@ -455,7 +457,7 @@ function renderScoringGuide() {
 |------|------|----------|
 | 机票价格 | 35% | 绝对档（<500→70，500–749→85，750–999→92，¥1000+ 每档-25）与**当日相对价**各 50% 加权 |
 | 飞行时长 | 15% | 同日内归一化；>8h 封顶 85 分，>10h 封顶 70 分 |
-| 转机 | 20% | 直达 100；1 次 75；≥2 次 50；跨日再 -25 |
+| 转机 | 20% | 直达 100；1 次 75；≥2 次 50；跨日再 -25；**自定义中转再 -25** |
 | 出发/到达地 | 10% | 可配置（默认深圳 100、广州 80） |
 | 起飞时间 | 10% | 07–10 / 10–20 → 100；20–22 → 95；其余 75 |
 | 落地时间 | 10% | 同起飞 |
@@ -464,7 +466,7 @@ function renderScoringGuide() {
 
 **TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
 
-**自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询。
+**自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询；**转机分额外 -25**（分段购票风险）。
 
 ### ⚠️ 关于 API 价格
 
