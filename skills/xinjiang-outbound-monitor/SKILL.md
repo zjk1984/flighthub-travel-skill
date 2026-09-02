@@ -28,7 +28,7 @@ metadata:
 
 # 广东 → 新疆 去程监控 Skill
 
-独立 Skill，**只跑广东 → 新疆去程**，不与返程同批调用 API，降低 451 风控概率。
+独立 Skill，**只跑广东 → 新疆去程 + 去程自定义中转**（主查询 <3 条时经西安/兰州拼接），不与返程同批调用 API。
 
 ## 何时使用
 
@@ -57,7 +57,7 @@ bash scripts/monitor-outbound.sh
 |------|------|
 | `reports/xinjiang-results.jsonl` | 去程原始数据（返程 Skill 会追加） |
 | `reports/xinjiang-outbound-latest.md` | 去程全量价格报告 |
-| `reports/xinjiang-outbound-ranked.md` | 去程 TOP3 评分报告 |
+| `reports/xinjiang-outbound-ranked.md` | 去程 TOP3 + **自定义中转 TOP3** 评分报告 |
 
 ## 与返程 Skill 配合
 

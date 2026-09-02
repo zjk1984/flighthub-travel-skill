@@ -139,6 +139,18 @@ async function main() {
     saveToFile(map, resultsPath);
 
     if (phase === "outbound") {
+      if (CFG.customTransfer.enabled && !outStats.circuitOpen) {
+        await appendCustomResults(map, {
+          concurrency: CFG.customTransfer.leg2Concurrency,
+          cache,
+          directions: ["outbound"],
+          ...queueOptions("Custom outbound"),
+        });
+        saveToFile(map, resultsPath);
+      } else if (outStats.circuitOpen && CFG.customTransfer.enabled) {
+        process.stderr.write("Custom transfer: skipped (outbound circuit breaker open)\n");
+      }
+
       const errs = countApiErrors(map);
       process.stderr.write(`Outbound phase saved: ${resultsPath} (${errs} API errors)\n`);
       fs.mkdirSync(path.dirname(latestOut), { recursive: true });
@@ -173,6 +185,16 @@ async function main() {
       );
       await sleep(delayMs);
     }
+
+    if (CFG.customTransfer.enabled) {
+      await appendCustomResults(map, {
+        concurrency: CFG.customTransfer.leg2Concurrency,
+        cache,
+        directions: ["outbound"],
+        ...queueOptions("Custom outbound"),
+      });
+      saveToFile(map, resultsPath);
+    }
   }
 
   let returnCircuitOpen = false;
@@ -193,7 +215,8 @@ async function main() {
     await appendCustomResults(map, {
       concurrency: CFG.customTransfer.leg2Concurrency,
       cache,
-      ...queueOptions("Custom"),
+      directions: ["inbound"],
+      ...queueOptions("Custom inbound"),
     });
   } else if (returnCircuitOpen && CFG.customTransfer.enabled) {
     process.stderr.write("Custom transfer: skipped (return phase circuit breaker open)\n");

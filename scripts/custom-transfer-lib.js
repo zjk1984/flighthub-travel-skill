@@ -259,16 +259,21 @@ function buildCombos(map, fromCity, date, leg2Dest, excludeHub) {
 async function appendCustomResults(map, options = {}) {
   if (!CT.enabled) return 0;
 
-  const { outbound, inbound } = collectRoutesNeedingCustom(map);
+  const directions = options.directions || ["outbound", "inbound"];
+  const { outbound: allOut, inbound: allIn } = collectRoutesNeedingCustom(map);
+  const outbound = directions.includes("outbound") ? allOut : [];
+  const inbound = directions.includes("inbound") ? allIn : [];
+
   if (!outbound.length && !inbound.length) {
     process.stderr.write(
-      `Custom transfer: skipped (all routes have ≥${CT.trigger.maxMainResults} main results)\n`
+      `Custom transfer: skipped (no ${directions.join("/")} routes need enrichment; ` +
+        `threshold ≥${CT.trigger.maxMainResults} main results)\n`
     );
     return 0;
   }
 
   process.stderr.write(
-    `Custom transfer: ${outbound.length} outbound + ${inbound.length} inbound routes need enrichment\n`
+    `Custom transfer (${directions.join("+")}): ${outbound.length} outbound + ${inbound.length} inbound routes need enrichment\n`
   );
 
   const queueBase = {
