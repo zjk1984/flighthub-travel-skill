@@ -47,7 +47,7 @@ function saveConfig(config) {
 function normalizeSearch(raw) {
   const d = raw || {};
   return {
-    concurrency: Math.max(1, Math.min(4, parseInt(d.concurrency, 10) || 2)),
+    concurrency: Math.max(1, Math.min(4, parseInt(d.concurrency, 10) || 1)),
     useRouteCache: d.useRouteCache !== false,
     requestDelayMs: Math.max(0, parseInt(d.requestDelayMs, 10) || 1500),
     batchDelayMs: Math.max(0, parseInt(d.batchDelayMs, 10) || 300000),
@@ -68,16 +68,16 @@ function normalizeCustomTransfer(raw) {
     firstLegTopN: Math.max(1, parseInt(d.firstLegTopN, 10) || 3),
     minConnectionMinutes: Math.max(30, parseInt(d.minConnectionMinutes, 10) || 90),
     maxConnectionMinutes: Math.max(120, parseInt(d.maxConnectionMinutes, 10) || 480),
-    transferHubs: uniqStrings(d.transferHubs || ["乌鲁木齐", "西安", "兰州"]),
+    transferHubs: uniqStrings(d.transferHubs || ["西安", "兰州"]),
     preferredHubsByDest: d.preferredHubsByDest || {},
-    dynamicHubsFromApi: d.dynamicHubsFromApi !== false,
+    dynamicHubsFromApi: d.dynamicHubsFromApi === true,
     leg2NextDayIfNeeded: d.leg2NextDayIfNeeded !== false,
     lateArrivalHour: Math.min(23, Math.max(0, parseInt(d.lateArrivalHour, 10) || 18)),
-    skipIfMainResultsAtLeast: Math.max(0, maxMain >= 0 ? maxMain : 5),
+    skipIfMainResultsAtLeast: Math.max(0, maxMain >= 0 ? maxMain : 3),
     trigger: {
-      maxMainResults: Math.max(0, maxMain >= 0 ? maxMain : 5),
+      maxMainResults: Math.max(0, maxMain >= 0 ? maxMain : 3),
     },
-    leg2Concurrency: Math.max(1, Math.min(4, parseInt(d.leg2Concurrency, 10) || 2)),
+    leg2Concurrency: Math.max(1, Math.min(4, parseInt(d.leg2Concurrency, 10) || 1)),
     maxCombosPerRoute: Math.max(1, parseInt(d.maxCombosPerRoute, 10) || 5),
     leg2CacheEnabled: d.leg2CacheEnabled !== false,
     excludeFromMainTop3: d.excludeFromMainTop3 !== false,

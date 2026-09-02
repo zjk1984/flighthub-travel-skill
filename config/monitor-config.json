@@ -28,7 +28,7 @@
     "乌鲁木齐"
   ],
   "search": {
-    "concurrency": 2,
+    "concurrency": 1,
     "useRouteCache": true,
     "requestDelayMs": 1500,
     "batchDelayMs": 300000,
@@ -40,19 +40,19 @@
     "firstLegTopN": 3,
     "minConnectionMinutes": 90,
     "maxConnectionMinutes": 480,
-    "transferHubs": ["乌鲁木齐", "西安", "兰州"],
+    "transferHubs": ["西安", "兰州"],
     "preferredHubsByDest": {
-      "伊宁": ["乌鲁木齐", "兰州"],
-      "阿勒泰": ["乌鲁木齐", "西安"],
-      "博乐": ["乌鲁木齐", "西安"],
-      "哈密": ["乌鲁木齐", "西安"],
-      "吐鲁番": ["乌鲁木齐", "兰州"]
+      "伊宁": ["兰州", "西安"],
+      "阿勒泰": ["西安", "兰州"],
+      "博乐": ["西安", "兰州"],
+      "哈密": ["西安", "兰州"],
+      "吐鲁番": ["兰州", "西安"]
     },
-    "dynamicHubsFromApi": true,
+    "dynamicHubsFromApi": false,
     "leg2NextDayIfNeeded": true,
     "lateArrivalHour": 18,
-    "trigger": { "maxMainResults": 5 },
-    "leg2Concurrency": 2,
+    "trigger": { "maxMainResults": 3 },
+    "leg2Concurrency": 1,
     "maxCombosPerRoute": 5,
     "excludeFromMainTop3": true
   },
