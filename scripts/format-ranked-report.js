@@ -110,8 +110,11 @@ function dayOf(dt) {
   return dt ? dt.slice(0, 10) : "";
 }
 
-function isCrossDay(f) {
-  if (dayOf(f.depDateTime) !== dayOf(f.arrDateTime)) return true;
+function isCrossDayOverall(f) {
+  return dayOf(f.depDateTime) !== dayOf(f.arrDateTime);
+}
+
+function isCrossDaySegment(f) {
   const segs = f.segments || [];
   for (let i = 0; i < segs.length - 1; i++) {
     if (dayOf(segs[i].arrDateTime) !== dayOf(segs[i + 1].depDateTime)) return true;
@@ -119,13 +122,26 @@ function isCrossDay(f) {
   return false;
 }
 
+/** Cross-day penalty: API 联程看整体或航段跨日；自定义中转仅看整体到达是否跨日（枢纽隔夜不计入跨日扣分）。 */
+function isCrossDayForPenalty(f) {
+  if (f.customTransfer) return isCrossDayOverall(f);
+  return isCrossDayOverall(f) || isCrossDaySegment(f);
+}
+
+function transferScoreBreakdown(f) {
+  let basePts = 100;
+  if (f.transfers >= 2) basePts = 50;
+  else if (f.transfers === 1) basePts = 75;
+
+  const crossDayPenalty = isCrossDayForPenalty(f) ? 25 : 0;
+  const customPenalty = f.customTransfer ? 25 : 0;
+  const transferPts = Math.max(0, basePts - crossDayPenalty - customPenalty);
+
+  return { transferPts, basePts, crossDayPenalty, customPenalty };
+}
+
 function transferPoints(count, f) {
-  let pts = 100;
-  if (count >= 2) pts = 50;
-  else if (count === 1) pts = 75;
-  if (isCrossDay(f)) pts = Math.max(0, pts - 25);
-  if (f.customTransfer) pts = Math.max(0, pts - 25);
-  return pts;
+  return transferScoreBreakdown({ ...f, transfers: count }).transferPts;
 }
 
 function timeSlotPoints(dateTimeStr) {
@@ -190,7 +206,8 @@ function scoreFlights(flights, direction) {
   return flights.map((f, i) => {
     const depPref = guangdongPref(f, direction);
     const pricePts = pricePointsCombined(f.priceNum, dayPrices);
-    const transferPts = transferPoints(f.transfers, f);
+    const transferBreakdown = transferScoreBreakdown(f);
+    const transferPts = transferBreakdown.transferPts;
     const depTimePts = timeSlotPoints(f.depDateTime);
     const arrTimePts = timeSlotPoints(f.arrDateTime);
     const durationPts = durationPointsFromNorm(normD[i], f.durationMin);
@@ -201,10 +218,13 @@ function scoreFlights(flights, direction) {
       xjPref: xjAirportPref(f.xjAirport),
       pricePts,
       transferPts,
+      transferBasePts: transferBreakdown.basePts,
+      crossDayPenalty: transferBreakdown.crossDayPenalty,
+      customPenalty: transferBreakdown.customPenalty,
       depTimePts,
       arrTimePts,
       durationPts,
-      crossDay: isCrossDay(f),
+      crossDay: transferBreakdown.crossDayPenalty > 0,
     };
     row.score = computeTotalScore(row);
     return row;
@@ -417,15 +437,27 @@ function buildDeductions(f) {
     items.push(`飞行时长 ${formatDuration(f.durationMin)}：时长分 100（当日较短）`);
   }
 
-  const transferParts = [];
-  if (f.transfers >= 2) transferParts.push(`转机 ≥2 次，转机分封顶 50`);
-  else if (f.transfers > 0) transferParts.push(`转机 ${f.transfers} 次 → 75 分`);
-  if (f.crossDay) transferParts.push(`跨天/航段跨日 -25`);
-  if (f.customTransfer) transferParts.push(`自定义中转 -25`);
-  if (transferParts.length) {
-    items.push(`转机分 ${f.transferPts}：${transferParts.join("，")}`);
+  if (f.crossDayPenalty > 0 || f.customPenalty > 0) {
+    if (f.transfers >= 2) {
+      items.push(`转机基础分 ${f.transferBasePts}：转机 ≥2 次 → 50 分`);
+    } else if (f.transfers > 0) {
+      items.push(`转机基础分 ${f.transferBasePts}：转机 ${f.transfers} 次 → 75 分`);
+    } else {
+      items.push(`转机基础分 ${f.transferBasePts}：直达 → 100 分`);
+    }
+    if (f.crossDayPenalty > 0) {
+      items.push(`跨日扣分 -${f.crossDayPenalty} → 转机分 ${f.transferBasePts - f.crossDayPenalty}`);
+    }
+    if (f.customPenalty > 0) {
+      items.push(`自定义中转扣分 -${f.customPenalty} → 转机分 ${f.transferPts}`);
+    }
+    items.push(`转机分合计 ${f.transferPts}`);
+  } else if (f.transfers >= 2) {
+    items.push(`转机分 ${f.transferPts}：转机 ≥2 次 → 50 分`);
+  } else if (f.transfers > 0) {
+    items.push(`转机分 ${f.transferPts}：转机 1 次 → 75 分`);
   } else {
-    items.push(`转机分 100：直达且当日到达（满分）`);
+    items.push(`转机分 ${f.transferPts}：直达且当日到达（满分）`);
   }
 
   if (f.depPref < 100) {
@@ -457,7 +489,9 @@ function renderScoringGuide() {
 |------|------|----------|
 | 机票价格 | 35% | 绝对档（<500→70，500–749→85，750–999→92，¥1000+ 每档-25）与**当日相对价**各 50% 加权 |
 | 飞行时长 | 15% | 同日内归一化；>8h 封顶 85 分，>10h 封顶 70 分 |
-| 转机 | 20% | 直达 100；1 次 75；≥2 次 50；跨日再 -25；**自定义中转再 -25** |
+| 转机（基础） | 20% | 直达 100；1 次 75；≥2 次 50 |
+| 跨日扣分 | （转机维度内） | 整体到达跨日 **-25**（API 联程含航段跨日；自定义中转仅看整体到达日） |
+| 自定义中转扣分 | （转机维度内） | 分段购票方案 **-25**，与跨日扣分**独立叠加** |
 | 出发/到达地 | 10% | 可配置（默认深圳 100、广州 80） |
 | 起飞时间 | 10% | 07–10 / 10–20 → 100；20–22 → 95；其余 75 |
 | 落地时间 | 10% | 同起飞 |
@@ -466,7 +500,7 @@ function renderScoringGuide() {
 
 **TOP3 规则：** 优先覆盖不同目的地；不可信 API 低价不参与排名且价格分封顶 50。
 
-**自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询；**转机分额外 -25**（分段购票风险）。
+**自定义中转：** 固定枢纽 ${(CFG.customTransfer?.transferHubs || ["西安", "兰州"]).join("/")}，按 leg1+leg2 估价排序；主查询已有 ≥${CFG.customTransfer?.trigger?.maxMainResults ?? CFG.customTransfer?.skipIfMainResultsAtLeast ?? 3} 条时跳过；衔接 ${CFG.customTransfer?.minConnectionMinutes ?? 90}–${CFG.customTransfer?.maxConnectionMinutes ?? 480} 分钟；次日 leg2 仅在晚到或当日无衔接时查询。转机评分中**跨日 -25** 与 **自定义 -25** 分开计算、可叠加。
 
 ### ⚠️ 关于 API 价格
 
