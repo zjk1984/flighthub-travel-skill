@@ -11,7 +11,8 @@ const {
   appendCacheEntries,
   todayIso,
   isResultCacheable,
-  isRateLimitError,
+  isRiskControlError,
+  isRetryableError,
 } = require("./flight-cache");
 
 const execFileAsync = promisify(execFile);
@@ -85,28 +86,44 @@ async function searchTask(task) {
   return runAdaptiveSearch(origin, dest, date, 2);
 }
 
+function skippedResult(origin, dest, date, reason) {
+  return {
+    route: `${origin}→${dest}`,
+    date,
+    apiCount: 0,
+    dedup: "skipped",
+    flights: [],
+    apiError: reason,
+  };
+}
+
 /**
  * Run tasks concurrently; merge into map; optional cache write.
  */
 async function runSearchQueue(tasks, map, options = {}) {
   const {
-    concurrency = 2,
+    concurrency = 1,
     cache = null,
     useCache = true,
     label = "search",
-    requestDelayMs = 1500,
+    requestDelayMs = 3000,
     rateLimitPauseMs = 60000,
     rateLimitRetries = 1,
+    circuitBreakerEnabled = true,
+    circuitBreakerThreshold = 3,
+    circuitBreakerCooldownMs = 1800000,
   } = options;
 
   const cacheWrites = [];
   const toRun = [];
   let rateLimitHits = 0;
+  let circuitSkipped = 0;
+  let consecutiveRiskControl = 0;
+  let circuitOpen = false;
 
   for (const task of tasks) {
     const { origin, dest, date } = task;
-    const rk = routeKey(`${origin}→${dest}`, date);
-    const existing = map.get(rk);
+    const existing = map.get(routeKey(`${origin}→${dest}`, date));
     if (existing && (existing.flights || []).length > 0) continue;
 
     if (useCache && cache) {
@@ -121,21 +138,52 @@ async function runSearchQueue(tasks, map, options = {}) {
 
   await mapPool(toRun, concurrency, async (task) => {
     const { origin, dest, date } = task;
+
+    if (circuitOpen) {
+      circuitSkipped++;
+      const skipped = skippedResult(origin, dest, date, "451:circuit_open_skipped");
+      mergeRouteEntry(map, skipped);
+      return skipped;
+    }
+
     process.stderr.write(`${label}: ${origin} → ${dest} | ${date} | ${task.mode || "full"}\n`);
 
     let result = await searchTask(task);
-    let retries = 0;
-    while (isRateLimitError(result) && retries < rateLimitRetries) {
+
+    if (isRiskControlError(result)) {
       rateLimitHits++;
+      consecutiveRiskControl++;
       process.stderr.write(
-        `${label}: rate limit (${result.apiError}) — pausing ${rateLimitPauseMs / 1000}s before retry\n`
+        `${label}: risk control ${result.apiError} (${consecutiveRiskControl}/${circuitBreakerThreshold})\n`
       );
-      await sleep(rateLimitPauseMs);
-      result = await searchTask(task);
-      retries++;
+      if (
+        circuitBreakerEnabled &&
+        consecutiveRiskControl >= circuitBreakerThreshold &&
+        !circuitOpen
+      ) {
+        circuitOpen = true;
+        process.stderr.write(
+          `${label}: ⚡ circuit breaker OPEN — skipping remaining tasks. ` +
+            `Wait ${Math.round(circuitBreakerCooldownMs / 60000)} min before next phase/run.\n`
+        );
+      }
+    } else if (isRetryableError(result)) {
+      let retries = 0;
+      while (isRetryableError(result) && retries < rateLimitRetries) {
+        rateLimitHits++;
+        process.stderr.write(
+          `${label}: quota limit (${result.apiError}) — pausing ${rateLimitPauseMs / 1000}s before retry\n`
+        );
+        await sleep(rateLimitPauseMs);
+        result = await searchTask(task);
+        retries++;
+      }
+      if (!result.apiError) consecutiveRiskControl = 0;
+    } else if (!result.apiError) {
+      consecutiveRiskControl = 0;
     }
 
-    if (result.apiError) {
+    if (result.apiError && !result.apiError.includes("circuit_open_skipped")) {
       process.stderr.write(`${label}: ${origin} → ${dest} | ${date} failed: ${result.apiError}\n`);
     }
 
@@ -160,6 +208,8 @@ async function runSearchQueue(tasks, map, options = {}) {
     ran: toRun.length,
     cached: tasks.length - toRun.length,
     rateLimitHits,
+    circuitSkipped,
+    circuitOpen,
   };
 }
 
@@ -169,5 +219,6 @@ module.exports = {
   runSearchQueue,
   mapPool,
   sleep,
-  isRateLimitError,
+  isRiskControlError,
+  isRetryableError,
 };

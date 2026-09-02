@@ -17,10 +17,17 @@
   "search": {
     "concurrency": 1,
     "useRouteCache": true,
-    "requestDelayMs": 1500,
-    "batchDelayMs": 300000,
+    "requestDelayMs": 3000,
+    "batchDelayMs": 600000,
+    "batchDelayAfterErrorsMs": 1800000,
     "rateLimitPauseMs": 60000,
-    "rateLimitRetries": 1
+    "rateLimitRetries": 1,
+    "maxApiCallsPerRoute": 8,
+    "circuitBreaker": {
+      "enabled": true,
+      "threshold": 3,
+      "cooldownMs": 1800000
+    }
   },
   "customTransfer": {
     "enabled": true,

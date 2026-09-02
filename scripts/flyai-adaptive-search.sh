@@ -13,6 +13,7 @@ journey_type="${4:-1}"
 TMPFILE=$(mktemp /tmp/flyai-XXXX.json)
 API_COUNT=0
 API_ERROR=""
+MAX_API_CALLS="${FLYAI_MAX_API_CALLS:-8}"
 
 extract_api_error() {
   local text="$1"
@@ -38,7 +39,10 @@ append_json_lines() {
 query_window() {
   local start=$1 end=$2
   local sort_type="${3:-}"
-  sleep 1
+  if [[ "$API_COUNT" -ge "$MAX_API_CALLS" ]]; then
+    return
+  fi
+  sleep 2
   local extra=()
   if [[ -n "$sort_type" ]]; then
     extra=(--sort-type "$sort_type")
@@ -78,6 +82,7 @@ count_last() {
 
 slice_recursive() {
   [[ -n "$API_ERROR" ]] && return
+  [[ "$API_COUNT" -ge "$MAX_API_CALLS" ]] && return
   local start=$1 end=$2 min_hours=${3:-1}
   query_window "$start" "$end"
   [[ -n "$API_ERROR" ]] && return

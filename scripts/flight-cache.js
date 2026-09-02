@@ -17,7 +17,21 @@ function cacheEntryKey(origin, dest, date) {
 
 function isRateLimitError(result) {
   const err = String(result?.apiError || "");
-  return /429|451|risk_control|trial_limit/i.test(err);
+  return /429|451|risk_control|trial_limit|circuit_open/i.test(err);
+}
+
+function isRiskControlError(result) {
+  const err = String(result?.apiError || "");
+  return /451|risk_control|circuit_open/i.test(err);
+}
+
+function isQuotaError(result) {
+  const err = String(result?.apiError || "");
+  return /429|trial_limit/i.test(err);
+}
+
+function isRetryableError(result) {
+  return isQuotaError(result);
 }
 
 /** Only cache successful API responses (never rate-limit / error responses). */
@@ -83,4 +97,7 @@ module.exports = {
   todayIso,
   isResultCacheable,
   isRateLimitError,
+  isRiskControlError,
+  isQuotaError,
+  isRetryableError,
 };

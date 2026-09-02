@@ -46,13 +46,21 @@ function saveConfig(config) {
 
 function normalizeSearch(raw) {
   const d = raw || {};
+  const circuit = d.circuitBreaker || {};
   return {
     concurrency: Math.max(1, Math.min(4, parseInt(d.concurrency, 10) || 1)),
     useRouteCache: d.useRouteCache !== false,
-    requestDelayMs: Math.max(0, parseInt(d.requestDelayMs, 10) || 1500),
-    batchDelayMs: Math.max(0, parseInt(d.batchDelayMs, 10) || 300000),
+    requestDelayMs: Math.max(0, parseInt(d.requestDelayMs, 10) || 3000),
+    batchDelayMs: Math.max(0, parseInt(d.batchDelayMs, 10) || 600000),
+    batchDelayAfterErrorsMs: Math.max(0, parseInt(d.batchDelayAfterErrorsMs, 10) || 1800000),
     rateLimitPauseMs: Math.max(1000, parseInt(d.rateLimitPauseMs, 10) || 60000),
     rateLimitRetries: Math.max(0, Math.min(3, parseInt(d.rateLimitRetries, 10) || 1)),
+    maxApiCallsPerRoute: Math.max(1, parseInt(d.maxApiCallsPerRoute, 10) || 8),
+    circuitBreaker: {
+      enabled: circuit.enabled !== false,
+      threshold: Math.max(1, parseInt(circuit.threshold, 10) || 3),
+      cooldownMs: Math.max(60000, parseInt(circuit.cooldownMs, 10) || 1800000),
+    },
   };
 }
 

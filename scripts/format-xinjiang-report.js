@@ -71,7 +71,11 @@ function renderBookingLinks(f) {
 function renderRouteDate(r) {
   const flights = r.flights || [];
   if (r.apiError && !flights.length) {
-    return `### ${r.route} | ${r.date}\n\n⚠️ API 查询失败：\`${r.apiError}\`（非无航班，请稍后重试）\n\n`;
+    const msg =
+      r.apiError === "451:circuit_open_skipped"
+        ? "⚡ 风控熔断，本航线已跳过（请稍后单独重跑）"
+        : `⚠️ API 查询失败：\`${r.apiError}\`（非无航班，请稍后重试）`;
+    return `### ${r.route} | ${r.date}\n\n${msg}\n\n`;
   }
   if (!flights.length) return `### ${r.route} | ${r.date}\n\n暂无航班数据\n`;
 

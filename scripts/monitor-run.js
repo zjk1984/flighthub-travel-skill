@@ -75,12 +75,16 @@ function buildReturnTasks() {
 }
 
 function queueOptions(label) {
+  const cb = CFG.search.circuitBreaker || {};
   return {
     concurrency: CFG.search.concurrency,
     useCache: CFG.search.useRouteCache,
     requestDelayMs: CFG.search.requestDelayMs,
     rateLimitPauseMs: CFG.search.rateLimitPauseMs,
     rateLimitRetries: CFG.search.rateLimitRetries,
+    circuitBreakerEnabled: cb.enabled !== false,
+    circuitBreakerThreshold: cb.threshold ?? 3,
+    circuitBreakerCooldownMs: cb.cooldownMs ?? 1800000,
     label,
   };
 }
@@ -110,8 +114,10 @@ async function main() {
   );
   process.stderr.write(`  去程 ${CFG.outboundDates.join(" ")} | 返程 ${CFG.returnDates.join(" ")}\n`);
   process.stderr.write(
-    `  并发 ${CFG.search.concurrency} | 请求间隔 ${CFG.search.requestDelayMs}ms | 批次间隔 ${CFG.search.batchDelayMs / 1000}s\n`
+    `  并发 ${CFG.search.concurrency} | 请求间隔 ${CFG.search.requestDelayMs}ms | 批次间隔 ${CFG.search.batchDelayMs / 1000}s | 熔断 ${CFG.search.circuitBreaker?.threshold ?? 3}×451\n`
   );
+
+  process.env.FLYAI_MAX_API_CALLS = String(CFG.search.maxApiCallsPerRoute);
 
   pruneCache();
   const cache = CFG.search.useRouteCache ? loadCache() : null;
@@ -126,40 +132,66 @@ async function main() {
       cache,
     });
     process.stderr.write(
-      `Outbound: ${outStats.ran} fetched, ${outStats.cached} cached, ${outStats.rateLimitHits} rate-limit pauses\n`
+      `Outbound: ${outStats.ran} fetched, ${outStats.cached} cached, ${outStats.rateLimitHits} limits` +
+        (outStats.circuitOpen ? `, circuit OPEN (${outStats.circuitSkipped} skipped)` : "") +
+        `\n`
     );
     saveToFile(map, resultsPath);
 
     if (phase === "outbound") {
-      process.stderr.write(`Outbound phase saved: ${resultsPath} (${countApiErrors(map)} API errors)\n`);
-      process.stderr.write(`Run return phase later: npm run monitor:return\n`);
+      const errs = countApiErrors(map);
+      process.stderr.write(`Outbound phase saved: ${resultsPath} (${errs} API errors)\n`);
+      if (outStats.circuitOpen) {
+        process.stderr.write(
+          `⚡ 风控熔断已触发，请等待 ${Math.round(CFG.search.circuitBreaker.cooldownMs / 60000)} 分钟后再跑返程\n`
+        );
+      } else if (errs > 0) {
+        process.stderr.write(
+          `建议等待 ${Math.round(CFG.search.batchDelayAfterErrorsMs / 60000)} 分钟后再跑: npm run monitor:return\n`
+        );
+      } else {
+        process.stderr.write(`Run return phase later: npm run monitor:return\n`);
+      }
       return;
     }
 
-    if (CFG.search.batchDelayMs > 0) {
+    const errsAfterOut = countApiErrors(map);
+    const delayMs =
+      outStats.circuitOpen || errsAfterOut > 0
+        ? CFG.search.batchDelayAfterErrorsMs
+        : CFG.search.batchDelayMs;
+    if (delayMs > 0) {
       process.stderr.write(
-        `Waiting ${CFG.search.batchDelayMs / 1000}s before return search (avoid API rate limit)...\n`
+        `Waiting ${Math.round(delayMs / 60000)} min before return` +
+          (outStats.circuitOpen || errsAfterOut > 0 ? " (风控/错误延长等待)" : "") +
+          `...\n`
       );
-      await sleep(CFG.search.batchDelayMs);
+      await sleep(delayMs);
     }
   }
 
+  let returnCircuitOpen = false;
   if (phase === "all" || phase === "return") {
     const inStats = await runSearchQueue(buildReturnTasks(), map, {
       ...queueOptions("Return"),
       cache,
     });
+    returnCircuitOpen = inStats.circuitOpen;
     process.stderr.write(
-      `Return: ${inStats.ran} fetched, ${inStats.cached} cached, ${inStats.rateLimitHits} rate-limit pauses\n`
+      `Return: ${inStats.ran} fetched, ${inStats.cached} cached, ${inStats.rateLimitHits} limits` +
+        (inStats.circuitOpen ? `, circuit OPEN (${inStats.circuitSkipped} skipped)` : "") +
+        `\n`
     );
   }
 
-  if (CFG.customTransfer.enabled && (phase === "all" || phase === "return")) {
+  if (CFG.customTransfer.enabled && (phase === "all" || phase === "return") && !returnCircuitOpen) {
     await appendCustomResults(map, {
       concurrency: CFG.customTransfer.leg2Concurrency,
       cache,
       ...queueOptions("Custom"),
     });
+  } else if (returnCircuitOpen && CFG.customTransfer.enabled) {
+    process.stderr.write("Custom transfer: skipped (return phase circuit breaker open)\n");
   }
 
   saveToFile(map, resultsPath);
