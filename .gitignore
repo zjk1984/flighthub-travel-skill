@@ -3,6 +3,8 @@
 
 # Dependencies
 node_modules/
+apps/lvji/node_modules/
+apps/lvji/.next/
 
 # Unified route cache (local API cache)
 reports/flight-route-cache.jsonl

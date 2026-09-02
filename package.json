@@ -16,6 +16,9 @@
     "monitor:set": "node scripts/monitor-config.js set",
     "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
     "setup:feishu": "bash scripts/setup-feishu.sh",
+    "lvji:dev": "pnpm --dir apps/lvji dev",
+    "lvji:build": "pnpm --dir apps/lvji build",
+    "lvji:test": "pnpm --dir apps/lvji test",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

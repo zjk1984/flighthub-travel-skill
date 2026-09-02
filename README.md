@@ -40,7 +40,7 @@ CLI 安装：`npm i -g @fly-ai/flyai-cli`
 | 方向 | 日期 | 航线 |
 |------|------|------|
 | 去程 | 9/30 - 10/1 | 深圳/广州 → 乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子 |
-| 返程 | 10/6 - 10/8 | 乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子 → 深圳/广州 |
+| 返程 | 10/7 - 10/8 | 乌鲁木齐、伊犁（伊宁）、阿勒泰、石河子、博乐 → 深圳/广州 |
 
 无直飞时自动查询中转航班。
 
@@ -142,5 +142,20 @@ npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 | `FEISHU_REPORT` | `ranked` / `latest` / `both` | `ranked` |
 | `FEISHU_MAX_BYTES` | 单条消息最大字节，超长分批 | `20000` |
 
+## 旅迹 AI 规划应用（lvji-travel）
+
+[旅迹](apps/lvji/) 已合并到本仓库，机票/酒店查询复用根目录 FlyAI skill（`SKILL.md`、`references/`、`scripts/flyai-*.sh|js`），不再维护独立 skill 副本。
+
+```bash
+cd apps/lvji && pnpm install && pnpm dev   # http://127.0.0.1:4173
+# 或从仓库根目录：
+pnpm --dir apps/lvji dev
+```
+
+Docker 构建（需在仓库根目录执行）：
+
+```bash
+docker build -f apps/lvji/Dockerfile -t lvji-travel .
+```
 
 MIT

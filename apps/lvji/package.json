@@ -1,0 +1,46 @@
+{
+  "name": "lvji-travel",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.17.0",
+  "engines": {
+    "node": ">=22.15.0"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 4173",
+    "build": "next build",
+    "build:pages": "node scripts/build-pages-demo.mjs",
+    "preview:pages": "node scripts/preview-pages.mjs",
+    "start": "next start --hostname 0.0.0.0 --port 4173",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern outputs",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@fly-ai/flyai-cli": "^1.0.16",
+    "drizzle-orm": "0.45.2",
+    "lucide-react": "^1.25.0",
+    "next": "16.2.6",
+    "postgres": "^3.4.7",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "react-server-dom-webpack": "19.2.6",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3"
+  },
+  "type": "module"
+}
