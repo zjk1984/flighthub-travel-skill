@@ -6,8 +6,10 @@
   "scripts": {
     "monitor:xinjiang": "bash scripts/monitor-xinjiang.sh",
     "monitor:ranked": "bash scripts/monitor-xinjiang.sh reports/xinjiang-flights-latest.md reports/xinjiang-flights-ranked.md",
-    "monitor:outbound": "bash scripts/monitor-xinjiang.sh --phase outbound",
-    "monitor:return": "bash scripts/monitor-xinjiang.sh --phase return",
+    "monitor:outbound": "bash scripts/monitor-outbound.sh",
+    "monitor:return": "bash scripts/monitor-return.sh",
+    "skill:outbound": "bash scripts/monitor-outbound.sh",
+    "skill:return": "bash scripts/monitor-return.sh",
     "monitor:config": "node scripts/monitor-config.js show",
     "monitor:reset": "node scripts/monitor-config.js reset",
     "monitor:set": "node scripts/monitor-config.js set",

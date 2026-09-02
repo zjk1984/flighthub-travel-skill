@@ -141,6 +141,11 @@ async function main() {
     if (phase === "outbound") {
       const errs = countApiErrors(map);
       process.stderr.write(`Outbound phase saved: ${resultsPath} (${errs} API errors)\n`);
+      fs.mkdirSync(path.dirname(latestOut), { recursive: true });
+      fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath));
+      fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath));
+      process.stderr.write(`Outbound report saved: ${latestOut}\n`);
+      process.stderr.write(`Outbound ranked saved: ${rankedOut}\n`);
       if (outStats.circuitOpen) {
         process.stderr.write(
           `⚡ 风控熔断已触发，请等待 ${Math.round(CFG.search.circuitBreaker.cooldownMs / 60000)} 分钟后再跑返程\n`

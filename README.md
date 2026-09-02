@@ -75,10 +75,21 @@ node scripts/monitor-config.js reset --destinations     # 仅重置目的地
 
 ### 运行监控
 
+**推荐：拆成两个 Skill 分时段运行（降低 API 风控）**
+
 ```bash
 npm install
-npm run monitor:xinjiang    # 全量价格报告
-npm run monitor:ranked      # 全量 + 每日 TOP3 评分报告
+npm run skill:outbound    # 去程 Skill → reports/xinjiang-outbound-ranked.md
+# 等待 ≥30 分钟
+npm run skill:return      # 返程 Skill → reports/xinjiang-flights-ranked.md
+```
+
+Skill 文档：`skills/xinjiang-outbound-monitor/SKILL.md`、`skills/xinjiang-return-monitor/SKILL.md`
+
+一次性全流程（内置去返间隔，耗时更长）：
+
+```bash
+npm run monitor:ranked    # 全量 + 每日 TOP3 评分报告
 ```
 
 报告输出：
