@@ -45,9 +45,8 @@ function buildMainSearchTasks() {
   return tasks;
 }
 
-function runScript(script, input) {
-  const r = spawnSync("node", [path.join(__dirname, script)], {
-    input,
+function runScript(script, inputPath) {
+  const r = spawnSync("node", [path.join(__dirname, script), inputPath], {
     encoding: "utf8",
     cwd: ROOT,
     env: process.env,
@@ -91,10 +90,9 @@ async function main() {
 
   saveToFile(map, resultsPath);
 
-  const jsonl = compactMap(map).map((r) => JSON.stringify(r)).join("\n") + "\n";
   fs.mkdirSync(path.dirname(latestOut), { recursive: true });
-  fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", jsonl));
-  fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", jsonl));
+  fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath));
+  fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath));
   process.stderr.write(`Report saved: ${latestOut}\n`);
   process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
 }

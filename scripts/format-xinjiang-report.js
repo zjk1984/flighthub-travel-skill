@@ -28,7 +28,7 @@ function xinjiangCity(route) {
   return remoteCity(route, CFG);
 }
 
-const raw = fs.readFileSync("/dev/stdin", "utf8");
+const raw = fs.readFileSync(process.argv[2] || 0, "utf8");
 const results = compactMap(buildRouteMap(parseJsonl(raw)));
 
 const timeSlot = t => {

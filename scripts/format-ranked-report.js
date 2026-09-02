@@ -599,7 +599,7 @@ function mainTop3Pool(flights) {
   return flights;
 }
 
-const raw = fs.readFileSync("/dev/stdin", "utf8");
+const raw = fs.readFileSync(process.argv[2] || 0, "utf8");
 const results = compactMap(buildRouteMap(parseJsonl(raw)));
 const all = flattenFlights(results);
 const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "outbound");
