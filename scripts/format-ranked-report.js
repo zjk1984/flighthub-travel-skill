@@ -13,7 +13,7 @@ const {
   formatCoverage,
   parseRoute,
   isOutboundRoute,
-  isMonitorRoute,
+  isConfiguredMonitorEntry,
   remoteCity,
 } = require("./load-monitor-config");
 
@@ -638,7 +638,7 @@ function parseReportArgs(argv) {
 const { scope, inputPath } = parseReportArgs(process.argv);
 const raw = fs.readFileSync(inputPath, "utf8");
 const results = compactMap(buildRouteMap(parseJsonl(raw))).filter((r) =>
-  isMonitorRoute(r.route, CFG)
+  isConfiguredMonitorEntry(r, CFG)
 );
 const all = flattenFlights(results);
 const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "outbound");

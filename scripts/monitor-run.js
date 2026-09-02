@@ -8,7 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
-const { loadConfig, formatCoverage, isMonitorRoute } = require("./load-monitor-config");
+const { loadConfig, formatCoverage, isConfiguredMonitorEntry } = require("./load-monitor-config");
 const { compactMap, saveToFile, loadFromFile } = require("./flight-store");
 const { loadCache, pruneCache } = require("./flight-cache");
 const { runSearchQueue, sleep } = require("./search-queue");
@@ -91,7 +91,7 @@ function queueOptions(label) {
 
 function saveResults(map, resultsPath) {
   saveToFile(map, resultsPath, {
-    filter: (r) => isMonitorRoute(r.route, CFG),
+    filter: (r) => isConfiguredMonitorEntry(r, CFG),
   });
 }
 

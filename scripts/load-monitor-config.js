@@ -194,6 +194,16 @@ function isMonitorRoute(route, cfg) {
   return false;
 }
 
+/** Monitor route entry whose date is in the current outbound/return date lists. */
+function isConfiguredMonitorEntry(entry, cfg) {
+  const c = cfg || loadConfig();
+  if (!entry?.route || !entry?.date) return false;
+  if (!isMonitorRoute(entry.route, c)) return false;
+  return isOutboundRoute(entry.route, c)
+    ? c.outboundDates.includes(entry.date)
+    : c.returnDates.includes(entry.date);
+}
+
 function remoteCity(route, cfg) {
   const c = cfg || loadConfig();
   const { origin, dest } = parseRoute(route);
@@ -237,6 +247,7 @@ module.exports = {
   parseRoute,
   isOutboundRoute,
   isMonitorRoute,
+  isConfiguredMonitorEntry,
   remoteCity,
   isDirectOnlyAirport,
   exportBash,
