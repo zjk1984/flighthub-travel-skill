@@ -13,6 +13,7 @@ const {
   formatCoverage,
   parseRoute,
   isOutboundRoute,
+  isMonitorRoute,
   remoteCity,
 } = require("./load-monitor-config");
 
@@ -592,6 +593,47 @@ function renderExcludedFlights(flights, limit = 8) {
   return md;
 }
 
+function parseReportArgs(argv) {
+  const positional = [];
+  let scope = "all";
+  for (let i = 2; i < argv.length; i++) {
+    if (argv[i] === "--scope" && argv[i + 1]) {
+      scope = argv[++i];
+      continue;
+    }
+    positional.push(argv[i]);
+  }
+  if (!["all", "outbound", "return"].includes(scope)) {
+    throw new Error(`Invalid --scope ${scope} (use all|outbound|return)`);
+  }
+  return { scope, inputPath: positional[0] || 0 };
+}
+
+function renderCustomTransferSummary(flights, title, direction) {
+  const custom = flights.filter((f) => f.customTransfer && f.priceVerified !== false);
+  if (!custom.length) return "";
+
+  const byKey = new Map();
+  for (const f of custom) {
+    const key = `${f.date}|${f.xjAirport}|${f.origin}`;
+    const cur = byKey.get(key);
+    if (!cur || rankCompare(f, cur) < 0) byKey.set(key, f);
+  }
+  const rows = [...byKey.values()].sort(
+    (a, b) => a.date.localeCompare(b.date) || rankCompare(a, b)
+  );
+
+  let md = `## ${title}\n\n`;
+  md += `> 主查询结果 <3 条时，经 **西安/兰州** 分段拼接；需**分段购票**，价格 = leg1 + leg2 估算。\n\n`;
+  md += "| 日期 | 出发地 | 目的地 | 中转 | 航班 | 价格 | 出发 | 到达 |\n";
+  md += "|------|--------|--------|------|------|------|------|------|\n";
+  for (const f of rows) {
+    md += `| ${f.date.slice(5)} | ${f.origin} | ${labelCity(f.xjAirport)} | ${labelCity(f.transitCity)} | ${f.flightNo} | ¥${f.priceNum.toFixed(0)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+  }
+  md += "\n";
+  return md;
+}
+
 function mainTop3Pool(flights) {
   if (CFG.customTransfer?.excludeFromMainTop3) {
     return flights.filter((f) => !f.customTransfer);
@@ -599,8 +641,11 @@ function mainTop3Pool(flights) {
   return flights;
 }
 
-const raw = fs.readFileSync(process.argv[2] || 0, "utf8");
-const results = compactMap(buildRouteMap(parseJsonl(raw)));
+const { scope, inputPath } = parseReportArgs(process.argv);
+const raw = fs.readFileSync(inputPath, "utf8");
+const results = compactMap(buildRouteMap(parseJsonl(raw))).filter((r) =>
+  isMonitorRoute(r.route, CFG)
+);
 const all = flattenFlights(results);
 const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "outbound");
 const inboundScored = scoreFlightsByDay(all.filter(f => !isOutbound(f.route)), "inbound");
@@ -611,29 +656,66 @@ const customInCount = inbound.filter(f => f.customTransfer).length;
 
 const outByDay = topByDay(mainTop3Pool(outbound));
 const inByDay = topByDay(mainTop3Pool(inbound));
-const outPerDest = topByDayPerDest(mainTop3Pool(outbound));
-const inPerDest = topByDayPerDest(mainTop3Pool(inbound));
+const outPerDest = topByDayPerDest(outbound);
+const inPerDest = topByDayPerDest(inbound);
 const roundTrips = recommendRoundTrips(outbound, inbound);
 
-let md = `# ✈️ ${CFG.routeLabel} 每日 TOP3 评分推荐\n\n`;
+const scopeLabel =
+  scope === "outbound" ? "去程" : scope === "return" ? "返程" : "往返";
+let md = `# ✈️ ${CFG.routeLabel} ${scopeLabel} TOP3 评分推荐\n\n`;
 md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
 md += `> 覆盖目的地：${formatCoverage(DESTINATIONS)}\n\n`;
-md += `- 去程：${formatDateRange(CFG.outboundDates)} | 返程：${formatDateRange(CFG.returnDates)}\n`;
-md += `- 候选航班：去程 ${outbound.length} 条，返程 ${inbound.length} 条`;
-if (customOutCount + customInCount > 0) {
-  md += `（含自定义中转 ${customOutCount + customInCount} 条）`;
+if (scope === "outbound") {
+  md += `- 去程：${formatDateRange(CFG.outboundDates)}\n`;
+} else if (scope === "return") {
+  md += `- 返程：${formatDateRange(CFG.returnDates)}\n`;
+} else {
+  md += `- 去程：${formatDateRange(CFG.outboundDates)} | 返程：${formatDateRange(CFG.returnDates)}\n`;
 }
-md += `\n\n`;
+const showOut = scope === "all" || scope === "outbound";
+const showIn = scope === "all" || scope === "return";
+if (showOut) {
+  md += `- 候选航班：去程 ${outbound.length} 条`;
+  if (customOutCount > 0) md += `（含自定义中转 ${customOutCount} 条）`;
+  md += `\n`;
+}
+if (showIn && scope === "all") {
+  md += `- 候选航班：返程 ${inbound.length} 条`;
+  if (customInCount > 0) md += `（含自定义中转 ${customInCount} 条）`;
+  md += `\n`;
+} else if (showIn && scope === "return") {
+  md += `- 候选航班：返程 ${inbound.length} 条`;
+  if (customInCount > 0) md += `（含自定义中转 ${customInCount} 条）`;
+  md += `\n`;
+}
+md += `\n`;
+
+if (showOut && customOutCount > 0) {
+  md += renderCustomTransferSummary(outbound, "🔗 去程自定义中转速览", "outbound");
+}
+if (showIn && customInCount > 0) {
+  md += renderCustomTransferSummary(inbound, "🔗 返程自定义中转速览", "inbound");
+}
 
 md += renderScoringGuide();
-md += renderDailySections(outByDay, "🛫 去程每日 TOP3（目的地多样化）", "outbound");
-md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
-md += renderCustomTransferTop3(outbound, "🔗 去程自定义中转 TOP3", "outbound");
-md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
-md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
-md += renderCustomTransferTop3(inbound, "🔗 返程自定义中转 TOP3", "inbound");
-md += renderRoundTrips(roundTrips);
-md += renderExcludedFlights([...outbound, ...inbound]);
+if (showOut) {
+  md += renderDailySections(outByDay, "🛫 去程每日 TOP3（目的地多样化）", "outbound");
+  md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
+  md += renderCustomTransferTop3(outbound, "🔗 去程自定义中转 TOP3 详情", "outbound");
+}
+if (showIn) {
+  md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
+  md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
+  md += renderCustomTransferTop3(inbound, "🔗 返程自定义中转 TOP3 详情", "inbound");
+}
+if (scope === "all") {
+  md += renderRoundTrips(roundTrips);
+}
+const excludedPool = [
+  ...(showOut ? outbound : []),
+  ...(showIn ? inbound : []),
+];
+md += renderExcludedFlights(excludedPool);
 
 md += `---\n基于飞猪 fly.ai 实时数据\n`;
 process.stdout.write(md);

@@ -8,7 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
-const { loadConfig, formatCoverage } = require("./load-monitor-config");
+const { loadConfig, formatCoverage, isMonitorRoute } = require("./load-monitor-config");
 const { compactMap, saveToFile, loadFromFile } = require("./flight-store");
 const { loadCache, pruneCache } = require("./flight-cache");
 const { runSearchQueue, sleep } = require("./search-queue");
@@ -89,8 +89,14 @@ function queueOptions(label) {
   };
 }
 
-function runScript(script, inputPath) {
-  const r = spawnSync("node", [path.join(__dirname, script), inputPath], {
+function saveResults(map, resultsPath) {
+  saveToFile(map, resultsPath, {
+    filter: (r) => isMonitorRoute(r.route, CFG),
+  });
+}
+
+function runScript(script, inputPath, extraArgs = []) {
+  const r = spawnSync("node", [path.join(__dirname, script), inputPath, ...extraArgs], {
     encoding: "utf8",
     cwd: ROOT,
     env: process.env,
@@ -136,7 +142,7 @@ async function main() {
         (outStats.circuitOpen ? `, circuit OPEN (${outStats.circuitSkipped} skipped)` : "") +
         `\n`
     );
-    saveToFile(map, resultsPath);
+    saveResults(map, resultsPath);
 
     if (phase === "outbound") {
       if (CFG.customTransfer.enabled && !outStats.circuitOpen) {
@@ -146,7 +152,7 @@ async function main() {
           directions: ["outbound"],
           ...queueOptions("Custom outbound"),
         });
-        saveToFile(map, resultsPath);
+        saveResults(map, resultsPath);
       } else if (outStats.circuitOpen && CFG.customTransfer.enabled) {
         process.stderr.write("Custom transfer: skipped (outbound circuit breaker open)\n");
       }
@@ -154,8 +160,9 @@ async function main() {
       const errs = countApiErrors(map);
       process.stderr.write(`Outbound phase saved: ${resultsPath} (${errs} API errors)\n`);
       fs.mkdirSync(path.dirname(latestOut), { recursive: true });
-      fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath));
-      fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath));
+      const scopeArgs = ["--scope", "outbound"];
+      fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
+      fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
       process.stderr.write(`Outbound report saved: ${latestOut}\n`);
       process.stderr.write(`Outbound ranked saved: ${rankedOut}\n`);
       if (outStats.circuitOpen) {
@@ -193,7 +200,7 @@ async function main() {
         directions: ["outbound"],
         ...queueOptions("Custom outbound"),
       });
-      saveToFile(map, resultsPath);
+      saveResults(map, resultsPath);
     }
   }
 
@@ -222,15 +229,16 @@ async function main() {
     process.stderr.write("Custom transfer: skipped (return phase circuit breaker open)\n");
   }
 
-  saveToFile(map, resultsPath);
+  saveResults(map, resultsPath);
   const apiErrors = countApiErrors(map);
   if (apiErrors > 0) {
     process.stderr.write(`Warning: ${apiErrors} routes have apiError (see JSONL / report)\n`);
   }
 
   fs.mkdirSync(path.dirname(latestOut), { recursive: true });
-  fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath));
-  fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath));
+  const scopeArgs = phase === "return" ? ["--scope", "return"] : [];
+  fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
+  fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
   process.stderr.write(`Report saved: ${latestOut}\n`);
   process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
 }

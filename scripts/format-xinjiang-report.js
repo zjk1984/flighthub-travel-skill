@@ -13,6 +13,7 @@ const {
   formatCoverage,
   parseRoute,
   isOutboundRoute,
+  isMonitorRoute,
   remoteCity,
 } = require("./load-monitor-config");
 
@@ -28,8 +29,52 @@ function xinjiangCity(route) {
   return remoteCity(route, CFG);
 }
 
-const raw = fs.readFileSync(process.argv[2] || 0, "utf8");
-const results = compactMap(buildRouteMap(parseJsonl(raw)));
+function parseReportArgs(argv) {
+  const positional = [];
+  let scope = "all";
+  for (let i = 2; i < argv.length; i++) {
+    if (argv[i] === "--scope" && argv[i + 1]) {
+      scope = argv[++i];
+      continue;
+    }
+    positional.push(argv[i]);
+  }
+  if (!["all", "outbound", "return"].includes(scope)) {
+    throw new Error(`Invalid --scope ${scope} (use all|outbound|return)`);
+  }
+  return { scope, inputPath: positional[0] || 0 };
+}
+
+function renderCustomTransferSummary(allFlights) {
+  const custom = allFlights.filter((f) => f.customTransfer && isOutbound(f.route));
+  if (!custom.length) return "";
+
+  const byKey = new Map();
+  for (const f of custom) {
+    const key = `${f.date}|${xinjiangCity(f.route)}|${parseRoute(f.route).origin}`;
+    const cur = byKey.get(key);
+    if (!cur || parsePrice(f.price) < parsePrice(cur.price)) byKey.set(key, f);
+  }
+  const rows = [...byKey.values()].sort(
+    (a, b) => a.date.localeCompare(b.date) || parsePrice(a.price) - parsePrice(b.price)
+  );
+
+  let md = `## 🔗 去程自定义中转速览\n\n`;
+  md += `> 经西安/兰州分段拼接，需分段购票；详见下方各目的地详情。\n\n`;
+  md += "| 日期 | 航线 | 中转 | 航班 | 价格 | 出发 | 到达 |\n";
+  md += "|------|------|------|------|------|------|------|\n";
+  for (const f of rows) {
+    md += `| ${f.date.slice(5)} | ${f.route} | ${f.transitCity || "枢纽"} | ${f.flightNo} | ¥${parseFloat(f.price).toFixed(0)} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+  }
+  md += "\n";
+  return md;
+}
+
+const { scope, inputPath } = parseReportArgs(process.argv);
+const raw = fs.readFileSync(inputPath, "utf8");
+const results = compactMap(buildRouteMap(parseJsonl(raw))).filter((r) =>
+  isMonitorRoute(r.route, CFG)
+);
 
 const timeSlot = t => {
   const h = parseInt(t.slice(11, 13), 10);
@@ -105,18 +150,27 @@ function renderRouteDate(r) {
 }
 
 let totalApi = 0;
-let md = `# ✈️ ${CFG.routeLabel} 低价机票监控报告\n\n`;
+const scopeLabel =
+  scope === "outbound" ? "去程" : scope === "return" ? "返程" : "";
+let md = `# ✈️ ${CFG.routeLabel}${scopeLabel ? ` ${scopeLabel}` : ""} 低价机票监控报告\n\n`;
 md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
 md += `> 覆盖目的地：${formatCoverage(DESTINATIONS)}\n\n`;
 
 const outbound = results.filter(r => isOutbound(r.route));
 const inbound = results.filter(r => !isOutbound(r.route));
+const showOut = scope === "all" || scope === "outbound";
+const showIn = scope === "all" || scope === "return";
+
+const allFlights = results.flatMap(r => (r.flights || []).map(f => ({ ...f, route: r.route, date: r.date })));
+if (showOut) {
+  md += renderCustomTransferSummary(allFlights);
+}
 
 md += `## 📋 最低价速览\n\n`;
 md += "| 方向 | 日期 | 航线 | 类型 | 最低价 | 航班 | 出发时间 |\n";
 md += "|------|------|------|------|--------|------|----------|\n";
 
-for (const r of [...outbound, ...inbound]) {
+for (const r of [...(showOut ? outbound : []), ...(showIn ? inbound : [])]) {
   totalApi += r.apiCount || 0;
   const flights = r.flights || [];
   if (!flights.length) continue;
@@ -126,10 +180,13 @@ for (const r of [...outbound, ...inbound]) {
   md += `| ${dir} | ${r.date} | ${r.route} | ${type} | ¥${parseFloat(best.price).toFixed(0)} | ${best.flightNo} | ${best.depDateTime.slice(11, 16)} |\n`;
 }
 
-const allFlights = results.flatMap(r => (r.flights || []).map(f => ({ ...f, route: r.route, date: r.date })));
 const globalBest = {
-  outbound: allFlights.filter(f => isOutbound(f.route)).sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0],
-  inbound: allFlights.filter(f => !isOutbound(f.route)).sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0],
+  outbound: showOut
+    ? allFlights.filter(f => isOutbound(f.route)).sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0]
+    : null,
+  inbound: showIn
+    ? allFlights.filter(f => !isOutbound(f.route)).sort((a, b) => parsePrice(a.price) - parsePrice(b.price))[0]
+    : null,
 };
 
 const outRange = formatDateRange(CFG.outboundDates);
@@ -164,23 +221,29 @@ for (const city of DESTINATIONS) {
 }
 
 md += `\n---\n\n## 去程详情（${outRange} ${ORIGINS.join("/")} → 目的地）\n\n`;
-for (const city of DESTINATIONS) {
-  const cityRoutes = outbound.filter(r => xinjiangCity(r.route) === city);
-  if (!cityRoutes.length) continue;
-  md += `### ${labelCity(city)}\n\n`;
-  for (const r of cityRoutes.sort((a, b) => a.date.localeCompare(b.date) || a.route.localeCompare(b.route))) {
-    md += renderRouteDate(r);
+if (showOut) {
+  for (const city of DESTINATIONS) {
+    const cityRoutes = outbound.filter(r => xinjiangCity(r.route) === city);
+    if (!cityRoutes.length) continue;
+    md += `### ${labelCity(city)}\n\n`;
+    for (const r of cityRoutes.sort((a, b) => a.date.localeCompare(b.date) || a.route.localeCompare(b.route))) {
+      md += renderRouteDate(r);
+    }
   }
 }
 
-md += `\n---\n\n## 返程详情（${inRange} 目的地 → ${ORIGINS.join("/")}）\n\n`;
-for (const city of DESTINATIONS) {
-  const cityRoutes = inbound.filter(r => xinjiangCity(r.route) === city);
-  if (!cityRoutes.length) continue;
-  md += `### ${labelCity(city)}\n\n`;
-  for (const r of cityRoutes.sort((a, b) => a.date.localeCompare(b.date) || a.route.localeCompare(b.route))) {
-    md += renderRouteDate(r);
+if (showIn) {
+  md += `\n---\n\n## 返程详情（${inRange} 目的地 → ${ORIGINS.join("/")}）\n\n`;
+  for (const city of DESTINATIONS) {
+    const cityRoutes = inbound.filter(r => xinjiangCity(r.route) === city);
+    if (!cityRoutes.length) continue;
+    md += `### ${labelCity(city)}\n\n`;
+    for (const r of cityRoutes.sort((a, b) => a.date.localeCompare(b.date) || a.route.localeCompare(b.route))) {
+      md += renderRouteDate(r);
+    }
   }
+} else if (scope === "outbound") {
+  md += `\n---\n\n> 返程数据请运行 \`npm run skill:return\` 后查看。\n\n`;
 }
 
 md += `\n---\n📊 本次查询总 API 消耗：**${totalApi}** 次\n\n`;

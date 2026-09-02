@@ -175,6 +175,15 @@ function isOutboundRoute(route, cfg) {
   return c.origins.includes(origin) && c.destinations.includes(dest);
 }
 
+/** True for configured monitor routes only (excludes custom-transfer hub legs like 深圳→西安). */
+function isMonitorRoute(route, cfg) {
+  const c = cfg || loadConfig();
+  const { origin, dest } = parseRoute(route);
+  if (c.origins.includes(origin) && c.destinations.includes(dest)) return true;
+  if (c.destinations.includes(origin) && c.origins.includes(dest)) return true;
+  return false;
+}
+
 function remoteCity(route, cfg) {
   const c = cfg || loadConfig();
   const { origin, dest } = parseRoute(route);
@@ -217,6 +226,7 @@ module.exports = {
   formatCoverage,
   parseRoute,
   isOutboundRoute,
+  isMonitorRoute,
   remoteCity,
   isDirectOnlyAirport,
   exportBash,

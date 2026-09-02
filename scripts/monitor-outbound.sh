@@ -12,7 +12,7 @@ RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 OUTPUT="$ROOT_DIR/reports/xinjiang-outbound-latest.md"
 RANKED="$ROOT_DIR/reports/xinjiang-outbound-ranked.md"
 
-echo "▶ 去程 Skill：仅查询广东 → 新疆（不跑返程/custom）" >&2
+echo "▶ 去程 Skill：广东 → 新疆（主查询 + 去程自定义中转）" >&2
 node "$SCRIPT_DIR/monitor-run.js" --phase outbound "$RESULTS" "$OUTPUT" "$RANKED"
 
 if [[ -n "${FEISHU_WEBHOOK_URL:-}" ]]; then

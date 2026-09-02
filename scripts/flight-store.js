@@ -102,8 +102,10 @@ function loadFromFile(filePath) {
   return buildRouteMap(parseJsonl(raw));
 }
 
-function saveToFile(map, filePath) {
-  const lines = compactMap(map).map((r) => JSON.stringify(r)).join("\n") + "\n";
+function saveToFile(map, filePath, { filter } = {}) {
+  let entries = compactMap(map);
+  if (filter) entries = entries.filter(filter);
+  const lines = entries.map((r) => JSON.stringify(r)).join("\n") + (entries.length ? "\n" : "");
   fs.mkdirSync(require("path").dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, lines);
 }
