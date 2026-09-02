@@ -43,6 +43,13 @@ async function main() {
     process.stderr.write("Custom transfer disabled\n");
     return;
   }
+  const allowed = directions.filter((d) =>
+    d === "outbound" ? CFG.customTransfer.outboundEnabled : CFG.customTransfer.inboundEnabled
+  );
+  if (!allowed.length) {
+    process.stderr.write(`Custom transfer disabled for ${directions.join("/")}\n`);
+    return;
+  }
 
   pruneCache();
   const cache = CFG.search.useRouteCache ? loadCache() : null;
@@ -50,7 +57,7 @@ async function main() {
   await appendCustomResults(map, {
     concurrency: CFG.customTransfer.leg2Concurrency,
     cache,
-    directions,
+    directions: allowed,
     requestDelayMs: CFG.search.requestDelayMs,
     rateLimitPauseMs: CFG.search.rateLimitPauseMs,
     rateLimitRetries: CFG.search.rateLimitRetries,

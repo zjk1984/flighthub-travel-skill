@@ -90,10 +90,17 @@ function showConfig(cfg, asJson) {
   );
   if (cfg.customTransfer?.enabled) {
     const ct = cfg.customTransfer;
+    const dir =
+      ct.outboundEnabled && ct.inboundEnabled
+        ? "去程+返程"
+        : ct.outboundEnabled
+          ? "仅去程"
+          : ct.inboundEnabled
+            ? "仅返程"
+            : "无（已禁用方向）";
     console.log(
-      `自定义中转   开启 | Top${ct.firstLegTopN} | 枢纽 ${ct.transferHubs.join("、")} | ` +
-        `主查询<${ct.trigger.maxMainResults}条触发 | leg2并发${ct.leg2Concurrency} | ` +
-        `主TOP3排除自定义 ${ct.excludeFromMainTop3 ? "是" : "否"}`
+      `自定义中转   开启（${dir}） | Top${ct.firstLegTopN} | 枢纽 ${ct.transferHubs.join("、")} | ` +
+        `主查询<${ct.trigger.maxMainResults}条触发 | leg2并发${ct.leg2Concurrency}`
     );
   } else {
     console.log("自定义中转   关闭");

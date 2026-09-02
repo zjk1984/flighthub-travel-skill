@@ -145,7 +145,11 @@ async function main() {
     saveResults(map, resultsPath);
 
     if (phase === "outbound") {
-      if (CFG.customTransfer.enabled && !outStats.circuitOpen) {
+      if (
+        CFG.customTransfer.enabled &&
+        CFG.customTransfer.outboundEnabled &&
+        !outStats.circuitOpen
+      ) {
         await appendCustomResults(map, {
           concurrency: CFG.customTransfer.leg2Concurrency,
           cache,
@@ -193,7 +197,7 @@ async function main() {
       await sleep(delayMs);
     }
 
-    if (CFG.customTransfer.enabled) {
+    if (CFG.customTransfer.enabled && CFG.customTransfer.outboundEnabled) {
       await appendCustomResults(map, {
         concurrency: CFG.customTransfer.leg2Concurrency,
         cache,
@@ -218,7 +222,12 @@ async function main() {
     );
   }
 
-  if (CFG.customTransfer.enabled && (phase === "all" || phase === "return") && !returnCircuitOpen) {
+  if (
+    CFG.customTransfer.enabled &&
+    CFG.customTransfer.inboundEnabled &&
+    (phase === "all" || phase === "return") &&
+    !returnCircuitOpen
+  ) {
     await appendCustomResults(map, {
       concurrency: CFG.customTransfer.leg2Concurrency,
       cache,

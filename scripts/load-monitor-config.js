@@ -73,6 +73,8 @@ function normalizeCustomTransfer(raw) {
       : parseInt(d.skipIfMainResultsAtLeast, 10);
   return {
     enabled: d.enabled !== false,
+    outboundEnabled: d.outboundEnabled !== false,
+    inboundEnabled: d.inboundEnabled !== false,
     firstLegTopN: Math.max(1, parseInt(d.firstLegTopN, 10) || 3),
     minConnectionMinutes: Math.max(30, parseInt(d.minConnectionMinutes, 10) || 90),
     maxConnectionMinutes: Math.max(120, parseInt(d.maxConnectionMinutes, 10) || 480),

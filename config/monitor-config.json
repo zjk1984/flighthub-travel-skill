@@ -40,6 +40,8 @@
   },
   "customTransfer": {
     "enabled": true,
+    "outboundEnabled": false,
+    "inboundEnabled": true,
     "firstLegTopN": 3,
     "minConnectionMinutes": 90,
     "maxConnectionMinutes": 480,
