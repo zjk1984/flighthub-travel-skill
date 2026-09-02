@@ -327,7 +327,8 @@ async function main() {
 
   const markdown = fs.readFileSync(filePath, "utf8");
   await sendFeishuReport(args.webhook, markdown, { title: args.title, maxBytes: args.maxBytes });
-  console.error(`Feishu notification sent: ${filePath}`);
+  const chatHint = process.env.FEISHU_CHAT_ID ? ` (群 ${process.env.FEISHU_CHAT_ID})` : "";
+  console.error(`Feishu notification sent${chatHint}: ${filePath}`);
 }
 
 if (require.main === module) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Configure Feishu webhook for flight monitor notifications.
 # Usage:
-#   bash scripts/setup-feishu.sh <webhook_url>
+#   bash scripts/setup-feishu.sh <webhook_url> [ranked|latest|both] [webhook_secret] [chat_id]
 #   bash scripts/setup-feishu.sh   # interactive
 set -euo pipefail
 
@@ -12,6 +12,7 @@ EXAMPLE="$ROOT_DIR/.env.example"
 webhook="${1:-}"
 report_type="${2:-ranked}"
 webhook_secret="${3:-${FEISHU_WEBHOOK_SECRET:-}}"
+chat_id="${4:-${FEISHU_CHAT_ID:-}}"
 
 if [[ -z "$webhook" ]]; then
   echo "飞书自定义机器人 Webhook 配置"
@@ -31,8 +32,13 @@ if [[ ! "$webhook" =~ ^https://open\.feishu\.cn/open-apis/bot/v2/hook/ ]]; then
   echo "警告：URL 格式不像飞书自定义机器人 Webhook，仍将写入 .env" >&2
 fi
 
-read -r -p "推送报告类型 [ranked/latest/both] (默认 ranked): " input_report
-report_type="${input_report:-$report_type}"
+if [[ -n "${1:-}" ]]; then
+  :
+elif [[ -t 0 ]]; then
+  read -r -p "签名校验密钥 FEISHU_WEBHOOK_SECRET（无则回车跳过）: " webhook_secret || true
+  read -r -p "推送报告类型 [ranked/latest/both] (默认 ranked): " input_report
+  report_type="${input_report:-$report_type}"
+fi
 
 mkdir -p "$(dirname "$ENV_FILE")"
 if [[ -f "$ENV_FILE" ]]; then
@@ -45,6 +51,7 @@ cat > "$ENV_FILE" <<EOF
 FEISHU_WEBHOOK_URL=$webhook
 FEISHU_REPORT=$report_type
 FEISHU_WEBHOOK_SECRET=$webhook_secret
+FEISHU_CHAT_ID=$chat_id
 # FEISHU_MAX_BYTES=20000
 EOF
 
@@ -54,6 +61,12 @@ echo ""
 echo "✅ 飞书通报已写入 $ENV_FILE"
 echo "   FEISHU_WEBHOOK_URL=${webhook:0:60}..."
 echo "   FEISHU_REPORT=$report_type"
+if [[ -n "$webhook_secret" ]]; then
+  echo "   FEISHU_WEBHOOK_SECRET=***（已配置签名校验）"
+fi
+if [[ -n "$chat_id" ]]; then
+  echo "   FEISHU_CHAT_ID=$chat_id"
+fi
 echo ""
 echo "测试推送：npm run notify:feishu"
 echo "监控+推送：npm run monitor:ranked"
