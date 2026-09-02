@@ -9,6 +9,7 @@
  */
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 function loadEnvFile() {
   const envPath = path.join(__dirname, "..", ".env");
@@ -149,11 +150,23 @@ function buildTextPayload(content) {
   };
 }
 
+function feishuSign(secret, timestamp) {
+  const stringToSign = `${timestamp}\n${secret}`;
+  return crypto.createHmac("sha256", stringToSign).update("").digest("base64");
+}
+
+function withFeishuAuth(payload) {
+  const secret = process.env.FEISHU_WEBHOOK_SECRET || "";
+  if (!secret) return payload;
+  const timestamp = String(Math.floor(Date.now() / 1000));
+  return { timestamp, sign: feishuSign(secret, timestamp), ...payload };
+}
+
 async function postPayload(webhookUrl, payload) {
   const res = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(withFeishuAuth(payload)),
   });
   const text = await res.text();
   let body;
