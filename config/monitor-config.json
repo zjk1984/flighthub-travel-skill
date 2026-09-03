@@ -1,9 +1,9 @@
 {
-  "routeLabel": "伊宁→广州（返程·酒店·计划）",
+  "routeLabel": "昭苏慢游 · 伊宁→广州 10/8",
   "origins": ["广州"],
   "destinations": ["伊宁"],
   "outboundDates": ["2026-10-01"],
-  "returnDates": ["2026-10-07", "2026-10-08"],
+  "returnDates": ["2026-10-08"],
   "directOnlyAirports": [],
   "tripProfilePath": "config/trip-profile.json",
   "focusMode": true,

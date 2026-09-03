@@ -49,8 +49,10 @@ function runHotelSearch(segment, overrides = {}) {
   if (segment.maxPrice && !overrides.ignoreMaxPrice) {
     args.push("--max-price", String(segment.maxPrice));
   }
-  if (segment.poiPrefer?.[0] && overrides.usePoi) {
-    args.push("--poi-name", segment.poiPrefer[0]);
+  const usePoi = overrides.usePoi || segment.poiPrefer?.[0];
+  if (usePoi && (overrides.usePoi || segment.segment?.includes("机场"))) {
+    const poi = segment.poiPrefer?.find((p) => !["市区", "县城"].includes(p)) || segment.poiPrefer?.[0];
+    if (poi) args.push("--poi-name", poi);
   }
   if (segment.keyWords || overrides.keyWords) {
     args.push("--key-words", segment.keyWords || overrides.keyWords);
@@ -97,18 +99,26 @@ function dedupeHotels(rows) {
 async function searchSegment(seg, elderFriendly) {
   const topN = seg.topN || 8;
   const rows = [];
-  const pricePayload = runHotelSearch(seg, { sort: "price_asc" });
+  const pricePayload = runHotelSearch(seg, {
+    sort: "price_asc",
+    usePoi: seg.segment?.includes("机场") || seg.poiPrefer?.includes("喀赞其"),
+  });
   if (pricePayload) rows.push(...mapHotels(seg, pricePayload, topN));
 
   if (elderFriendly) {
     const comfortPayload = runHotelSearch(seg, {
       sort: "rate_desc",
       hotelStars: seg.hotelStars || "4,5",
-      usePoi: true,
+      usePoi: !!seg.poiPrefer?.[0],
       keyWords: seg.keyWords || "全季 星程 舒适",
       ignoreMaxPrice: false,
     });
     if (comfortPayload) rows.push(...mapHotels(seg, comfortPayload, topN));
+    // Fallback: POI-only search when keyword+stars returns empty
+    if (!rows.length && seg.poiPrefer?.[0]) {
+      const poiPayload = runHotelSearch(seg, { sort: "rate_desc", usePoi: true });
+      if (poiPayload) rows.push(...mapHotels(seg, poiPayload, topN));
+    }
   }
   return dedupeHotels(rows);
 }
