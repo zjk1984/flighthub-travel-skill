@@ -4,7 +4,7 @@
  *
  * Usage:
  *   node format-travel-cards.js [--out reports/xinjiang-travel-cards.md]
- *   node format-travel-cards.js --variant duku --out reports/xinjiang-travel-cards-duku.md
+ *   node format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md
  */
 const fs = require("fs");
 const path = require("path");
@@ -16,7 +16,7 @@ const { roomCountForParty } = require("./hotel-scoring");
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
 
-/** Shared overrides when API has no match (Plan B default) */
+/** Shared overrides when API has no match (独库主方案) */
 const DEFAULT_HOTEL_OVERRIDES = {
   "2026-10-02": {
     name: "美豪丽致酒店(昭苏天马湖店)",
@@ -31,12 +31,12 @@ const DEFAULT_HOTEL_OVERRIDES = {
   "2026-10-06": {
     name: "博乐赛湖云上酒店 / 赛湖之畔",
     price: "¥463–890/间",
-    note: "D6 午后从伊宁赴赛湖东门；勿住博乐市区",
+    note: "D6 独库出来后住赛湖东门；勿住博乐市区",
   },
   "2026-10-05": {
-    name: "伊宁丽水之都 / 骏锦",
-    price: "¥300–450/间",
-    note: "D5 Plan B 回伊宁；喀赞其/六星街附近",
+    name: "新源/那拉提镇",
+    price: "¥250–350/间",
+    note: "D5 独库前置；搜「新源」或「那拉提镇」",
   },
 };
 
@@ -81,7 +81,7 @@ function buildContext(variant) {
     hotelOverrides: { ...DEFAULT_HOTEL_OVERRIDES, ...(v.hotelOverrides || {}) },
     rooms: roomCountForParty(trip.partySize, trip.roomCount),
     variantNote: v.fallbackNote ? `> **备选说明：** ${v.fallbackNote}\n\n` : "",
-    titleSuffix: " · 独库方案",
+    titleSuffix: variant === "planb" ? " · Plan B 备选" : "",
   };
 }
 

@@ -22,7 +22,7 @@
     "monitor:brief": "node scripts/format-travel-brief.js reports/xinjiang-results.jsonl",
     "monitor:plan": "node scripts/format-travel-plan.js reports/xinjiang-results.jsonl --out reports/xinjiang-travel-plan.md",
     "monitor:cards": "node scripts/format-travel-cards.js --out reports/xinjiang-travel-cards.md",
-    "monitor:cards:duku": "node scripts/format-travel-cards.js --variant duku --out reports/xinjiang-travel-cards-duku.md",
+    "monitor:cards:planb": "node scripts/format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md",
     "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-brief.md'",
     "notify:feishu:ranked": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
     "notify:feishu:test": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js --test'",

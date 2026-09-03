@@ -1,6 +1,6 @@
-# 伊犁8天自驾 · 伊昭+赛湖（Plan B）（5 人·自驾·10/1–10/8）
+# 伊犁8天自驾 · 伊昭+独库+赛湖（5 人·自驾·10/1–10/8）
 
-> 生成时间：2026-09-03 14:53:27 | **去程已订 · 聚焦返程/酒店/行程**
+> 生成时间：2026-09-03 16:16:55 | **去程已订 · 聚焦返程/酒店/行程**
 
 ---
 
@@ -30,41 +30,41 @@
 
 | 项目 | 建议 |
 |------|------|
-| 车型 | **7 座 SUV 或 MPV** |
+| 车型 | **7 座 SUV 或 MPV（独库建议 SUV）** |
 | 取还 | **10/2 上午伊宁机场取车 → 10/8 14:00 前伊宁机场还车** |
 | 费用 | ¥500–700/天 × 7 天 ≈ **¥3500–4900** |
-| 注意 | 验车拍视频、买全险、满油取还、伊昭封路改国道、山区备薄外套 |
+| 注意 | 验车拍视频、买全险、满油取还、独库/伊昭封路改国道、备晕车药、薄羽绒 |
 
 ---
 
 ## 三、7 日慢节奏行程
 
-原则：伊昭出发前必查路况；已采用 Plan B（不走独库）；老人不赶夜路。
+原则：独库+伊昭出发前必查路况；独库封路立即改 Plan B；老人不赶夜路。
 
 ```
-伊宁 → 伊昭 → 昭苏(2d) → 特克斯 → **伊宁** → 赛里木湖 → 果子沟 → 伊宁 → 10/8 返广州
+伊宁 → 伊昭 → 昭苏(2d) → 特克斯 → **独库北段** → 赛里木湖 → 果子沟 → 伊宁 → 10/8 返广州
 ```
 
 | 日期 | 安排 | 车程 | 住宿推荐 |
 |------|------|------|----------|
-| **10/1** | 23:10 抵达伊宁机场，住机场附近酒店，休整 | — | [星程伊宁宁远路国际机场酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2c2KKA) ¥369/晚 |
-| **10/2** | 机场取车，经 **伊昭公路** 赴昭苏（白石峰观景台可短停） | 约 2.5–3h（封路改 G577 约 4h） | 昭苏（连住 2 晚，含 D3） |
-| **10/3** | **夏塔** + **玉湖**（区间车为主；老人可二选一） | 各约 1–1.5h 往返 | 昭苏（同 D2） |
-| **10/4** | 赴特克斯，逛 **离街**， evening **太极坛** 夜景 | 约 1h | [特克斯八卦城迎宾南路亚朵酒店（V3.6）](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18aZ7n) ¥390/晚 |
-| **10/5** | 特克斯 → **伊宁**；下午轻逛 **喀赞其** 或休整（为 D6 城区日备力） | 约 2h | [全季丽水火车站酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QWR4x) ¥360/晚 |
-| **10/6** | **伊宁城区慢游**（喀赞其、六星街、采购）；**15:00 前** 出发 → **赛里木湖东门** 看日落 | 伊宁→赛湖东门约 2h（午后出发） | [博乐友好购物中心团结北路亚朵酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0PmHSX) ¥424/晚 |
-| **10/7** | 清晨赛湖环湖 → **果子沟金顶观景台** → 回 **伊宁**（下午可轻逛喀赞其/采购） | 赛湖→果子沟→伊宁约 2.5h | [星程伊宁宁远路国际机场酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MXSR3) ¥252/晚 |
-| **10/8** | 从容还车，**17:00 航班** 返程广州 | 酒店 → 机场约 20–30min | — |
+| **10/1** | 23:10 抵达伊宁机场，住机场附近酒店，休整 | — | [星程伊宁宁远路国际机场酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F36yhxw) ¥369/晚 |
+| **10/2** | 机场取车，经 **伊昭公路** 赴昭苏（白石峰观景台可短停） | 约 2.5–3h（封路改 G577 约 4h） | [美豪丽致酒店(昭苏天马湖店)](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1OOTUh) ¥206/晚 |
+| **10/3** | **夏塔** + **玉湖**（区间车为主；老人可二选一） | 各约 1–1.5h 往返 | [美豪丽致酒店(昭苏天马湖店)](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1OOTUh) ¥206/晚 |
+| **10/4** | 赴特克斯，逛 **离街**， evening **太极坛** 夜景 | 约 1h | [特克斯八卦城迎宾南路亚朵酒店（V3.6）](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0ukJ7f) ¥371/晚 |
+| **10/5** | 特克斯 → 巩留 → 新源 → **那拉提镇** 休整（为 D6 独库北段备力，不赶夜路） | 约 3–3.5h | **新源/那拉提镇**（2 间） |
+| **10/6** | **那拉提 → G217 独库公路北段**（乔尔玛、哈希勒根达坂）→ 独山子 → G30 → **赛里木湖东门**，看日落 | 约 **5–6h**（07:30 出发） | [博乐友好购物中心团结北路亚朵酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3hK73X) ¥403/晚 |
+| **10/7** | 清晨赛湖环湖 → **果子沟金顶观景台** → 回 **伊宁**（下午入住 **市区** 将军府/六星街附近） | 赛湖→果子沟→伊宁约 2.5h | [伊宁天缘商务酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4CC4eq) ¥155/晚 |
+| **10/8** | 09:00 **伊犁将军府**（慢游约 1–1.5h）→ **11:00** 回酒店取行李 → 机场还车，**17:00 航班** | 市区 → 机场约 30–40min | — |
 
-## 四、酒店（5 人 ≈ 3 间，**正式实价**）
+## 四、酒店（5 人 · **2 间**，**正式实价**）
 
 | 日期段 | 推荐 | 实价/晚 | 段合计 | 预订 |
 |--------|------|---------|--------|------|
-| D1 机场 (10-01→10-02) | **星程伊宁宁远路国际机场酒店** | ¥369 | ¥1107 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2c2KKA) |
-| D4 特克斯 (10-04→10-05) | **特克斯八卦城迎宾南路亚朵酒店（V3.6）** | ¥390 | ¥1170 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18aZ7n) |
-| D5 伊宁 (10-05→10-06) | **全季丽水火车站酒店** | ¥360 | ¥1080 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QWR4x) |
-| D6 赛湖东门 (10-06→10-07) | **博乐友好购物中心团结北路亚朵酒店** | ¥424 | ¥1272 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0PmHSX) |
-| D7 伊宁 (10-07→10-08) | **星程伊宁宁远路国际机场酒店** | ¥252 | ¥756 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MXSR3) |
+| D1 机场 (10-01→10-02) | **星程伊宁宁远路国际机场酒店** | ¥369 | ¥738 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F36yhxw) |
+| D2-D3 昭苏 (10-02→10-04) | **美豪丽致酒店(昭苏天马湖店)** | ¥206 | ¥824 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1OOTUh) |
+| D4 特克斯 (10-04→10-05) | **特克斯八卦城迎宾南路亚朵酒店（V3.6）** | ¥371 | ¥742 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0ukJ7f) |
+| D6 赛湖东门 (10-06→10-07) | **博乐友好购物中心团结北路亚朵酒店** | ¥403 | ¥806 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3hK73X) |
+| D7 伊宁 (10-07→10-08) | **伊宁天缘商务酒店** | ¥155 | ¥310 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4CC4eq) |
 
 > 完整 TOP3 与评分明细：`reports/xinjiang-hotels-ranked.md`
 
@@ -77,18 +77,18 @@
 | 返程机票 | ¥7400–10620 |
 | 租车 7 天 | ¥3500–4900 |
 | 油费+过路 | ¥1500–1800 |
-| 住宿（推荐合计） | ≈ ¥5385 |
+| 住宿（推荐合计） | ≈ ¥3420 |
 | 门票+餐饮 | ¥4500–6500 |
-| **合计** | **约 ¥2.23万–2.92万**（人均 ¥400–600） |
+| **合计** | **约 ¥2.03万–2.72万**（人均 ¥400–500） |
 
 ---
 
 ## 七、本周待办
 
-1. D2 查伊昭路况
-2. Plan B 已确认：D5 伊宁、D6 赛湖东门、D7 回伊宁
-3. 订 10/8 伊宁→广州；6 晚住宿（含天麓、伊宁 D5、赛湖东门）
-4. 预约夏塔（10/3）；备薄羽绒、防风外套
+1. D2 查伊昭；D5 晚 + D6 早查独库北段（新疆交警）
+2. 独库已确认；封路则改 Plan B
+3. 订 6 晚住宿（**2 间**；含天麓、新源/那拉提、赛湖东门、D7 市区）
+4. 预约夏塔（10/3）；备晕车药、薄羽绒
 
 ---
 基于飞猪 fly.ai 实时数据 · 由 `format-travel-plan.js` 自动生成

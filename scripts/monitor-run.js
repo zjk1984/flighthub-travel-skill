@@ -253,12 +253,12 @@ async function main() {
     const cardsOut = path.join(ROOT, "reports/xinjiang-travel-cards.md");
     runScript("format-travel-cards.js", resultsPath, ["--out", cardsOut]);
     process.stderr.write(`Travel cards saved: ${cardsOut}\n`);
-    const cardsDuku = path.join(ROOT, "reports/xinjiang-travel-cards-duku.md");
+    const cardsPlanb = path.join(ROOT, "reports/xinjiang-travel-cards-planb.md");
     try {
-      runScript("format-travel-cards.js", resultsPath, ["--variant", "duku", "--out", cardsDuku]);
-      process.stderr.write(`Travel cards saved: ${cardsDuku}\n`);
+      runScript("format-travel-cards.js", resultsPath, ["--variant", "planb", "--out", cardsPlanb]);
+      process.stderr.write(`Travel cards saved: ${cardsPlanb}\n`);
     } catch (e) {
-      process.stderr.write(`Duku cards skipped: ${e.message}\n`);
+      process.stderr.write(`Plan B cards skipped: ${e.message}\n`);
     }
   } catch (e) {
     process.stderr.write(`Travel plan skipped: ${e.message}\n`);

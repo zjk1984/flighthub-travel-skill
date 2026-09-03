@@ -54,11 +54,11 @@ if feishu_notify_enabled; then
       fi
       CARDS="$ROOT_DIR/reports/xinjiang-travel-cards.md"
       if [[ -f "$CARDS" ]]; then
-        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程卡片（Plan B）" "$CARDS" || true
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程（独库）" "$CARDS" || true
       fi
-      CARDS_DUKU="$ROOT_DIR/reports/xinjiang-travel-cards-duku.md"
-      if [[ -f "$CARDS_DUKU" ]]; then
-        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程卡片（独库方案）" "$CARDS_DUKU" || true
+      CARDS_PLANB="$ROOT_DIR/reports/xinjiang-travel-cards-planb.md"
+      if [[ -f "$CARDS_PLANB" ]]; then
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程（Plan B 备选）" "$CARDS_PLANB" || true
       fi
       ;;
   esac
