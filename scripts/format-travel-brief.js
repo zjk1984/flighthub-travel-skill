@@ -22,6 +22,14 @@ const {
   isSameDayArrival,
 } = require("./scoring-profiles");
 const { getDeltaForRoute, lowestPriceFromFlights } = require("./price-history");
+const {
+  loadHotelsBySegment,
+  renderItineraryTable,
+  renderHotelBookingSheet,
+  renderCarRentalBrief,
+  renderTodoBrief,
+  renderTipsBrief,
+} = require("./travel-plan-lib");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
@@ -132,7 +140,7 @@ function renderHotels(hotelsPath) {
 
   const start = full.indexOf("## 🏨 每日 TOP3");
   if (start < 0) return "";
-  let section = full.slice(start);
+  let section = full.slice(start).replace("## 🏨 每日 TOP3（按入住日）", "");
   section = section.replace(
     "---\n基于飞猪 fly.ai 实时数据\n",
     "> 完整评分标准与明细见 `reports/xinjiang-hotels-ranked.md`\n\n"
@@ -188,7 +196,7 @@ function main() {
     inboundByDate.get(f.date).push(f);
   }
 
-  let md = `# 旅行决策简报\n\n`;
+  let md = `# 旅行决策简报（返程 · 行程 · 酒店）\n\n`;
   md += `> 生成时间：${formatShanghaiTime()} | 评分画像：**${PROFILE.label}** | **${PARTY} 人**\n\n`;
   if (TRIP.label) md += `> 行程：${TRIP.label}\n\n`;
   if (TRIP.bookedOutbound) {
@@ -196,13 +204,22 @@ function main() {
     md += `**已订去程：** ${b.route} ${b.date} ${b.flightNo || ""} — ${b.note || ""}\n\n`;
   }
   if (TRIP.skipOutboundMonitor || TRIP.bookedOutbound) {
-    md += `> 模式：**返程 + 酒店聚焦**（去程已订，不再查询）\n\n`;
+    md += `> 模式：**返程 + 行程 + 酒店安排**（去程已订，不再查询）\n\n`;
   } else if (CFG.focusMode) {
     md += `> 模式：聚焦盯票（仅查询 trip-profile 指定航线）\n\n`;
   }
 
+  const hotelsBySegment = loadHotelsBySegment(hotelsPath, TRIP, PARTY);
+  md += renderItineraryTable(TRIP, hotelsBySegment);
+  md += renderHotelBookingSheet(TRIP, hotelsBySegment);
+  md += renderCarRentalBrief(TRIP.itinerary);
+  md += renderTodoBrief(TRIP, inboundByDate, PROFILE);
+  md += renderTipsBrief(TRIP.itinerary);
+
+  md += `---\n\n`;
   md += renderReturnCompare(inboundByDate);
   md += renderPriceDeltas(results);
+  md += `## 酒店评分明细（各段 TOP3）\n\n`;
   md += renderHotels(hotelsPath);
   md += `---\n基于飞猪 fly.ai 实时数据 · 决策简报由 \`format-travel-brief.js\` 自动生成\n`;
   process.stdout.write(md);

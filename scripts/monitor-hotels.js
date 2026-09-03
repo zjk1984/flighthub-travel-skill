@@ -31,7 +31,7 @@ function parseArgs(argv) {
   return { profilePath, outPath };
 }
 
-function runHotelSearch(segment) {
+function runHotelSearch(segment, overrides = {}) {
   const flyai = process.env.FLYAI || "npx flyai";
   const args = [
     "search-hotel",
@@ -42,9 +42,22 @@ function runHotelSearch(segment) {
     "--check-out-date",
     segment.checkOut,
     "--sort",
-    "price_asc",
+    overrides.sort || segment.sort || "price_asc",
+    "--hotel-types",
+    "酒店",
   ];
-  if (segment.maxPrice) args.push("--max-price", String(segment.maxPrice));
+  if (segment.maxPrice && !overrides.ignoreMaxPrice) {
+    args.push("--max-price", String(segment.maxPrice));
+  }
+  if (segment.poiPrefer?.[0] && overrides.usePoi) {
+    args.push("--poi-name", segment.poiPrefer[0]);
+  }
+  if (segment.keyWords || overrides.keyWords) {
+    args.push("--key-words", segment.keyWords || overrides.keyWords);
+  }
+  if (segment.hotelStars || overrides.hotelStars) {
+    args.push("--hotel-stars", segment.hotelStars || overrides.hotelStars);
+  }
   const cmd = flyai.split(/\s+/);
   try {
     const out = execFileSync(cmd[0], [...cmd.slice(1), ...args], {
@@ -67,6 +80,37 @@ function runHotelSearch(segment) {
     );
     return null;
   }
+}
+
+function dedupeHotels(rows) {
+  const seen = new Set();
+  const out = [];
+  for (const h of rows) {
+    const key = `${h.name}|${h.checkin}|${h.checkout}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(h);
+  }
+  return out;
+}
+
+async function searchSegment(seg, elderFriendly) {
+  const topN = seg.topN || 8;
+  const rows = [];
+  const pricePayload = runHotelSearch(seg, { sort: "price_asc" });
+  if (pricePayload) rows.push(...mapHotels(seg, pricePayload, topN));
+
+  if (elderFriendly) {
+    const comfortPayload = runHotelSearch(seg, {
+      sort: "rate_desc",
+      hotelStars: seg.hotelStars || "4,5",
+      usePoi: true,
+      keyWords: seg.keyWords || "全季 星程 舒适",
+      ignoreMaxPrice: false,
+    });
+    if (comfortPayload) rows.push(...mapHotels(seg, comfortPayload, topN));
+  }
+  return dedupeHotels(rows);
 }
 
 function mapHotels(segment, payload, topN) {
@@ -109,14 +153,14 @@ async function main() {
     process.stderr.write("Warning: FLYAI_API_KEY not set — hotel prices may be trial/masked\n");
   }
 
+  const elderFriendly = trip.scoringProfile === "family_elder";
   const all = [];
   for (const seg of segments) {
     process.stderr.write(`Hotels: ${seg.segment} → ${seg.destName} ${seg.checkIn}..${seg.checkOut}\n`);
-    const payload = runHotelSearch(seg);
-    if (payload) {
-      all.push(...mapHotels(seg, payload, seg.topN || 5));
-    }
-    await sleep(2000);
+    const rows = await searchSegment(seg, elderFriendly);
+    all.push(...rows);
+    process.stderr.write(`  → ${rows.length} candidates (price + comfort pool)\n`);
+    await sleep(2500);
   }
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });

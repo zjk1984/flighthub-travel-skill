@@ -61,7 +61,9 @@
       "checkIn": "2026-10-01",
       "checkOut": "2026-10-02",
       "maxPrice": 500,
-      "topN": 8,
+      "topN": 12,
+      "keyWords": "全季 星程 舒适",
+      "hotelStars": "4,5",
       "poiPrefer": ["机场", "伊宁站", "火车站", "喀赞其"]
     },
     {
@@ -70,7 +72,9 @@
       "checkIn": "2026-10-02",
       "checkOut": "2026-10-04",
       "maxPrice": 800,
-      "topN": 8,
+      "topN": 12,
+      "keyWords": "全季 星程 舒适",
+      "hotelStars": "4,5",
       "poiPrefer": ["赛里木", "博乐", "湖"]
     },
     {
@@ -79,7 +83,9 @@
       "checkIn": "2026-10-04",
       "checkOut": "2026-10-06",
       "maxPrice": 600,
-      "topN": 8,
+      "topN": 12,
+      "keyWords": "全季 星程 舒适",
+      "hotelStars": "4,5",
       "poiPrefer": ["那拉提", "新源", "草原"]
     },
     {
@@ -88,7 +94,9 @@
       "checkIn": "2026-10-06",
       "checkOut": "2026-10-08",
       "maxPrice": 500,
-      "topN": 8,
+      "topN": 12,
+      "keyWords": "全季 星程 舒适",
+      "hotelStars": "4,5",
       "poiPrefer": ["机场", "伊宁站", "市区", "喀赞其"]
     }
   ]

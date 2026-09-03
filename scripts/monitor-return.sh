@@ -21,7 +21,16 @@ node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel monitor skipped (non-fatal)"
 node "$SCRIPT_DIR/monitor-run.js" --phase return "$RESULTS" "$OUTPUT" "$RANKED"
 
 if feishu_notify_enabled; then
-  FEISHU_REPORT="${FEISHU_REPORT:-brief}"
+  # 去程已订时强制推送完整简报（含行程+酒店），不再只推 ranked 航班
+  if [[ -f "$ROOT_DIR/config/trip-profile.json" ]] && grep -q '"skipOutboundMonitor": true' "$ROOT_DIR/config/trip-profile.json" 2>/dev/null; then
+    FEISHU_REPORT="${FEISHU_REPORT:-brief}"
+    if [[ "$FEISHU_REPORT" == "ranked" ]]; then
+      FEISHU_REPORT="brief"
+      echo "去程已订 → 飞书改为推送决策简报（含行程+酒店）" >&2
+    fi
+  else
+    FEISHU_REPORT="${FEISHU_REPORT:-brief}"
+  fi
   echo "Sending Feishu ($FEISHU_REPORT)..." >&2
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   case "$FEISHU_REPORT" in
