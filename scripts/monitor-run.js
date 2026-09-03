@@ -250,6 +250,9 @@ async function main() {
   try {
     runScript("format-travel-plan.js", resultsPath, ["--out", planOut]);
     process.stderr.write(`Travel plan saved: ${planOut}\n`);
+    const cardsOut = path.join(ROOT, "reports/xinjiang-travel-cards.md");
+    runScript("format-travel-cards.js", resultsPath, ["--out", cardsOut]);
+    process.stderr.write(`Travel cards saved: ${cardsOut}\n`);
   } catch (e) {
     process.stderr.write(`Travel plan skipped: ${e.message}\n`);
   }

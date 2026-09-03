@@ -99,7 +99,8 @@ npm run skill:return
 - `reports/price-history.jsonl` — 每日最低价变动
 
 ```bash
-npm run monitor:hotels      # 酒店刷新
+npm run monitor:hotels      # 酒店刷新 + 自动生成 ranked 报告
+npm run monitor:hotels:ranked  # 仅从 JSON 重生酒店 TOP3 报告
 npm run monitor:resume      # 451 失败航线重试
 npm run monitor:presets     # 列出 preset
 ```
@@ -116,6 +117,8 @@ npm run monitor:presets     # 列出 preset
 | `scripts/feishu-notify.js` | 飞书交互卡片推送（借鉴 daily_stock_analysis） |
 | `scripts/format-travel-brief.js` | 一页决策简报（10/7 vs 10/8、酒店、价格变动） |
 | `scripts/monitor-hotels.js` | 按 trip-profile 查询酒店 |
+| `scripts/hotel-scoring.js` | 酒店评分画像（价格/位置/舒适度/口碑/品牌） |
+| `scripts/format-hotels-ranked.js` | 分段 TOP3 酒店评分报告 + 扣分项 |
 | `scripts/monitor-resume.js` | 451 失败航线重试 |
 | `scripts/price-history.js` | 每日最低价快照 |
 | `scripts/scoring-profiles.js` | 评分画像（default / family_elder / budget） |

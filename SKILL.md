@@ -282,6 +282,7 @@ npm run monitor:ranked    # 查询 + 全量报告 + TOP3 评分报告
 
 ```bash
 npm run monitor:hotels      # 按 trip-profile 刷新酒店
+npm run monitor:hotels:ranked  # 酒店 TOP3 评分报告（v1，对标机票 v2）
 npm run monitor:resume      # 重试 reports/failed-tasks.json 中的 451 失败航线
 npm run monitor:brief       # 仅从 JSONL 重新生成简报
 ```

@@ -52,6 +52,10 @@ if feishu_notify_enabled; then
       if [[ -f "$PLAN" ]]; then
         node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
       fi
+      CARDS="$ROOT_DIR/reports/xinjiang-travel-cards.md"
+      if [[ -f "$CARDS" ]]; then
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程卡片" "$CARDS" || true
+      fi
       ;;
   esac
 fi
