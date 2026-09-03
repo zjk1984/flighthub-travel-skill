@@ -235,16 +235,23 @@ async function main() {
   }
 
   fs.mkdirSync(path.dirname(latestOut), { recursive: true });
-  // Return phase merges outbound JSONL + new return data → full round-trip report
-  const scopeArgs = [];
+  const returnOnly = !!(CFG.trip?.skipOutboundMonitor || CFG.trip?.bookedOutbound);
+  const scopeArgs = returnOnly && phase === "return" ? ["--scope", "return"] : [];
   fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
   fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
   const briefOut = rankedOut.replace(/-ranked\.md$/, "-brief.md").replace(/outbound-ranked\.md$/, "outbound-brief.md");
+  const planOut = path.join(ROOT, "reports/xinjiang-travel-plan.md");
   try {
     fs.writeFileSync(briefOut, runScript("format-travel-brief.js", resultsPath));
     process.stderr.write(`Brief saved: ${briefOut}\n`);
   } catch (e) {
     process.stderr.write(`Brief generation skipped: ${e.message}\n`);
+  }
+  try {
+    runScript("format-travel-plan.js", resultsPath, ["--out", planOut]);
+    process.stderr.write(`Travel plan saved: ${planOut}\n`);
+  } catch (e) {
+    process.stderr.write(`Travel plan skipped: ${e.message}\n`);
   }
   process.stderr.write(`Report saved: ${latestOut}\n`);
   process.stderr.write(`Ranked report saved: ${rankedOut}\n`);

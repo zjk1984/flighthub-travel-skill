@@ -151,10 +151,14 @@ function normalizeHotelsForBrief(raw) {
 
 function renderPriceDeltas(results) {
   const rows = results.filter((r) => isConfiguredMonitorEntry(r, CFG));
-  if (!rows.length) return "";
-  let md = `## 价格变动（聚焦航线）\n\n`;
+  const inboundOnly = TRIP.skipOutboundMonitor || TRIP.bookedOutbound;
+  const filtered = inboundOnly
+    ? rows.filter((r) => !isOutboundRoute(r.route, CFG))
+    : rows;
+  if (!filtered.length) return "";
+  let md = `## 返程价格变动\n\n`;
   let any = false;
-  for (const r of rows) {
+  for (const r of filtered) {
     const delta = getDeltaForRoute(r.route, r.date);
     const low = lowestPriceFromFlights(r.flights);
     if (low == null) continue;
@@ -191,7 +195,9 @@ function main() {
     const b = TRIP.bookedOutbound;
     md += `**已订去程：** ${b.route} ${b.date} ${b.flightNo || ""} — ${b.note || ""}\n\n`;
   }
-  if (CFG.focusMode) {
+  if (TRIP.skipOutboundMonitor || TRIP.bookedOutbound) {
+    md += `> 模式：**返程 + 酒店聚焦**（去程已订，不再查询）\n\n`;
+  } else if (CFG.focusMode) {
     md += `> 模式：聚焦盯票（仅查询 trip-profile 指定航线）\n\n`;
   }
 

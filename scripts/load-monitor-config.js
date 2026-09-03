@@ -168,6 +168,7 @@ function applyPreset(name) {
 
 function buildOutboundTasks(cfg) {
   const c = cfg || loadConfig();
+  if (c.trip?.skipOutboundMonitor || c.trip?.bookedOutbound) return [];
   if (c.focusMode && c.trip?.focusRoutes?.outbound?.length) {
     return buildFocusTasks(c.trip.focusRoutes, "outbound", "full");
   }

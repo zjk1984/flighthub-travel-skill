@@ -25,10 +25,12 @@ function loadTripProfile(cfg) {
       partySize: 1,
       scoringProfile: "default",
       focusMode: cfg?.focusMode === true,
+      skipOutboundMonitor: false,
       bookedOutbound: null,
       focusRoutes: null,
       returnDateCompare: [],
       hotels: [],
+      itinerary: null,
       profilePath: null,
     };
   }
@@ -38,10 +40,12 @@ function loadTripProfile(cfg) {
     partySize: Math.max(1, parseInt(raw.partySize, 10) || 1),
     scoringProfile: raw.scoringProfile || "default",
     focusMode: raw.focusMode === true || cfg?.focusMode === true,
+    skipOutboundMonitor: raw.skipOutboundMonitor === true,
     bookedOutbound: raw.bookedOutbound || null,
     focusRoutes: raw.focusRoutes || null,
     returnDateCompare: Array.isArray(raw.returnDateCompare) ? raw.returnDateCompare : [],
     hotels: Array.isArray(raw.hotels) ? raw.hotels : [],
+    itinerary: raw.itinerary || null,
     profilePath,
   };
 }

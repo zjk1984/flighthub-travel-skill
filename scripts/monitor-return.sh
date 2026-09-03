@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Skill: 新疆 → 广东 返程监控（独立运行，需先去程 JSONL 或单独查返程）
+# Skill: 返程 + 酒店 + 旅行计划（去程已订，不再查询去程）
 # Usage: bash scripts/monitor-return.sh
 set -euo pipefail
 
@@ -13,34 +13,35 @@ source "$SCRIPT_DIR/feishu-env.sh"
 RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 OUTPUT="$ROOT_DIR/reports/xinjiang-flights-latest.md"
 RANKED="$ROOT_DIR/reports/xinjiang-flights-ranked.md"
+BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
+PLAN="$ROOT_DIR/reports/xinjiang-travel-plan.md"
 
-if [[ ! -f "$RESULTS" ]]; then
-  echo "Warning: $RESULTS 不存在，将仅查询返程航线" >&2
-fi
-
-echo "▶ 返程 Skill：查询新疆 → 广东 + custom + 合并报告" >&2
-echo "  建议距去程 Skill 至少 30 分钟" >&2
+echo "▶ 返程 Skill：伊宁→广州 + 酒店 + 旅行计划（去程已订）" >&2
 node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel monitor skipped (non-fatal)" >&2
 node "$SCRIPT_DIR/monitor-run.js" --phase return "$RESULTS" "$OUTPUT" "$RANKED"
 
-BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
 if feishu_notify_enabled; then
   FEISHU_REPORT="${FEISHU_REPORT:-brief}"
   echo "Sending Feishu ($FEISHU_REPORT)..." >&2
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   case "$FEISHU_REPORT" in
     ranked)
-      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
+      ;;
+    plan)
+      [[ -f "$PLAN" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
       ;;
     all)
-      [[ -f "$BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行决策简报" "$BRIEF" || true
-      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+      [[ -f "$BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 决策简报" "$BRIEF" || true
+      [[ -f "$PLAN" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
+      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
       ;;
     brief|*)
       if [[ -f "$BRIEF" ]]; then
-        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行决策简报" "$BRIEF" || true
-      else
-        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 决策简报" "$BRIEF" || true
+      fi
+      if [[ -f "$PLAN" ]]; then
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
       fi
       ;;
   esac

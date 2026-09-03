@@ -20,6 +20,7 @@
     "monitor:hotels:ranked": "node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json",
     "monitor:resume": "bash -c 'source scripts/load-env.sh && node scripts/monitor-resume.js'",
     "monitor:brief": "node scripts/format-travel-brief.js reports/xinjiang-results.jsonl",
+    "monitor:plan": "node scripts/format-travel-plan.js reports/xinjiang-results.jsonl --out reports/xinjiang-travel-plan.md",
     "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-brief.md'",
     "notify:feishu:ranked": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
     "notify:feishu:test": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js --test'",
