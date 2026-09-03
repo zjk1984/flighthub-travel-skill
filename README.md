@@ -75,26 +75,34 @@ node scripts/monitor-config.js reset --destinations     # 仅重置目的地
 
 ### 运行监控
 
-**推荐：拆成两个 Skill 分时段运行（降低 API 风控）**
+**推荐：聚焦盯票（伊宁↔广州，读 `config/trip-profile.json`）**
 
 ```bash
 npm install
-npm run skill:outbound    # 去程 Skill → reports/xinjiang-outbound-ranked.md
-# 等待 ≥30 分钟
-npm run skill:return      # 返程 Skill → reports/xinjiang-flights-ranked.md
+npm run monitor:preset -- xinjiang-focus-yining
+npm run skill:return      # 返程 + 酒店 + 决策简报 + 飞书
 ```
 
-Skill 文档：`skills/xinjiang-outbound-monitor/SKILL.md`、`skills/xinjiang-return-monitor/SKILL.md`
-
-一次性全流程（内置去返间隔，耗时更长）：
+**全量扫描（5 城 × 多日期，API 用量大）**
 
 ```bash
-npm run monitor:ranked    # 全量 + 每日 TOP3 评分报告
+npm run monitor:preset -- xinjiang-full
+npm run skill:outbound
+# 等待 ≥30 分钟
+npm run skill:return
 ```
 
 报告输出：
-- `reports/xinjiang-flights-latest.md` — 全量价格汇总
-- `reports/xinjiang-flights-ranked.md` — 每日 TOP3 评分推荐（含扣分项）
+- `reports/xinjiang-flights-brief.md` — **决策简报**（10/7 vs 10/8、5人合计、场景推荐）
+- `reports/xinjiang-flights-ranked.md` — TOP3 评分（family_elder 等画像）
+- `reports/xinjiang-flights-latest.md` — 全量价格
+- `reports/price-history.jsonl` — 每日最低价变动
+
+```bash
+npm run monitor:hotels      # 酒店刷新
+npm run monitor:resume      # 451 失败航线重试
+npm run monitor:presets     # 列出 preset
+```
 
 ### 脚本说明
 
@@ -106,7 +114,11 @@ npm run monitor:ranked    # 全量 + 每日 TOP3 评分报告
 | `scripts/format-xinjiang-report.js` | 格式化全量 Markdown 报告 |
 | `scripts/format-ranked-report.js` | 每日 TOP3 评分排名与扣分项 |
 | `scripts/feishu-notify.js` | 飞书交互卡片推送（借鉴 daily_stock_analysis） |
-| `scripts/monitor-config.js` | 查看/修改/重置监控配置（日期、出发地、目的地） |
+| `scripts/format-travel-brief.js` | 一页决策简报（10/7 vs 10/8、酒店、价格变动） |
+| `scripts/monitor-hotels.js` | 按 trip-profile 查询酒店 |
+| `scripts/monitor-resume.js` | 451 失败航线重试 |
+| `scripts/price-history.js` | 每日最低价快照 |
+| `scripts/scoring-profiles.js` | 评分画像（default / family_elder / budget） |
 | `scripts/load-monitor-config.js` | 配置加载模块（脚本内部使用） |
 
 ### 飞书卡片通报
@@ -158,7 +170,7 @@ npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 | `FEISHU_APP_ID` + `FEISHU_APP_SECRET` + `FEISHU_CHAT_ID` | Open API 应用机器人（推荐） | — |
 | `FEISHU_WEBHOOK_URL` | 自定义机器人 Webhook（二选一） | — |
 | `FEISHU_WEBHOOK_SECRET` | Webhook 签名校验密钥 | 空 |
-| `FEISHU_REPORT` | `ranked` / `latest` / `both` | `ranked` |
+| `FEISHU_REPORT` | `brief` / `ranked` / `latest` / `both` / `all` | `brief` |
 | `FEISHU_MAX_BYTES` | 单条消息最大字节，超长分批 | `20000` |
 
 ## 旅迹 AI 规划应用（lvji-travel）
