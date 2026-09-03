@@ -3,7 +3,7 @@
  * Unified monitor orchestrator: main search → custom transfer → reports
  *
  * Usage:
- *   node monitor-run.js [--phase all|outbound|return] [results.jsonl] [latest.md] [ranked.md]
+ *   node monitor-run.js [--phase all|outbound|return] [--flights-only] [results.jsonl] [latest.md] [ranked.md]
  */
 const fs = require("fs");
 const path = require("path");
@@ -20,9 +20,14 @@ const CFG = loadConfig();
 function parseArgs(argv) {
   const positional = [];
   let phase = "all";
+  let flightsOnly = false;
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === "--phase" && argv[i + 1]) {
       phase = argv[++i];
+      continue;
+    }
+    if (argv[i] === "--flights-only") {
+      flightsOnly = true;
       continue;
     }
     positional.push(argv[i]);
@@ -32,6 +37,7 @@ function parseArgs(argv) {
   }
   return {
     phase,
+    flightsOnly,
     resultsPath: positional[0] || path.join(ROOT, "reports/xinjiang-results.jsonl"),
     latestOut: positional[1] || path.join(ROOT, "reports/xinjiang-flights-latest.md"),
     rankedOut: positional[2] || path.join(ROOT, "reports/xinjiang-flights-ranked.md"),
@@ -90,10 +96,10 @@ function countApiErrors(map) {
 }
 
 async function main() {
-  const { phase, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
+  const { phase, flightsOnly, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
 
   process.stderr.write(
-    `Monitor (${phase}): ${CFG.routeLabel} | ${CFG.origins.join("/")} → ${formatCoverage(CFG.destinations)}` +
+    `Monitor (${phase}${flightsOnly ? ", flights-only" : ""}): ${CFG.routeLabel} | ${CFG.origins.join("/")} → ${formatCoverage(CFG.destinations)}` +
       (CFG.focusMode ? " [聚焦模式]" : "") +
       `\n`
   );
@@ -239,6 +245,11 @@ async function main() {
   const scopeArgs = returnOnly && phase === "return" ? ["--scope", "return"] : [];
   fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
   fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
+  if (flightsOnly) {
+    process.stderr.write(`Report saved: ${latestOut}\n`);
+    process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
+    return;
+  }
   const briefOut = rankedOut.replace(/-ranked\.md$/, "-brief.md").replace(/outbound-ranked\.md$/, "outbound-brief.md");
   const planOut = path.join(ROOT, "reports/xinjiang-travel-plan.md");
   try {

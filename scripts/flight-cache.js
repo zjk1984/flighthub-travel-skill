@@ -34,11 +34,11 @@ function isRetryableError(result) {
   return isQuotaError(result);
 }
 
-/** Only cache successful API responses (never rate-limit / error responses). */
+/** Only cache successful API responses with at least one flight. */
 function isResultCacheable(result) {
   if (!result) return false;
   if (result.apiError) return false;
-  return true;
+  return Array.isArray(result.flights) && result.flights.length > 0;
 }
 
 function loadCache(cachePath = DEFAULT_CACHE_PATH) {

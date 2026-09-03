@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 # Skill: 返程 + 酒店 + 旅行计划（去程已订，不再查询去程）
-# Usage: bash scripts/monitor-return.sh
+# Usage:
+#   bash scripts/monitor-return.sh              # 完整：酒店 + 航班 + 行程
+#   bash scripts/monitor-return.sh --flights-only  # 仅返程航班（见 monitor-return-flights.sh）
 set -euo pipefail
+
+if [[ "${1:-}" == "--flights-only" ]]; then
+  exec bash "$(dirname "$0")/monitor-return-flights.sh" "${@:2}"
+fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
