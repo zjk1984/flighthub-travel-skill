@@ -14,13 +14,19 @@
     "monitor:config": "node scripts/monitor-config.js show",
     "monitor:reset": "node scripts/monitor-config.js reset",
     "monitor:set": "node scripts/monitor-config.js set",
-    "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
+    "monitor:preset": "node scripts/monitor-config.js preset",
+    "monitor:presets": "node scripts/monitor-config.js list-presets",
+    "monitor:hotels": "bash -c 'source scripts/load-env.sh && node scripts/monitor-hotels.js'",
+    "monitor:resume": "bash -c 'source scripts/load-env.sh && node scripts/monitor-resume.js'",
+    "monitor:brief": "node scripts/format-travel-brief.js reports/xinjiang-results.jsonl",
+    "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-brief.md'",
+    "notify:feishu:ranked": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
     "notify:feishu:test": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js --test'",
     "setup:feishu": "bash scripts/setup-feishu.sh",
     "lvji:dev": "pnpm --dir apps/lvji dev",
     "lvji:build": "pnpm --dir apps/lvji build",
     "lvji:test": "pnpm --dir apps/lvji test",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test scripts/__tests__/*.test.js"
   },
   "repository": {
     "type": "git",

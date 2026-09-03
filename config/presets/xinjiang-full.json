@@ -1,0 +1,10 @@
+{
+  "routeLabel": "广东 ↔ 新疆",
+  "origins": ["深圳", "广州"],
+  "destinations": ["乌鲁木齐", "伊宁", "阿勒泰", "石河子", "博乐"],
+  "outboundDates": ["2026-09-30", "2026-10-01"],
+  "returnDates": ["2026-10-07", "2026-10-08"],
+  "directOnlyAirports": ["乌鲁木齐"],
+  "tripProfilePath": null,
+  "focusMode": false
+}

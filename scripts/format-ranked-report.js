@@ -16,6 +16,12 @@ const {
   isConfiguredMonitorEntry,
   remoteCity,
 } = require("./load-monitor-config");
+const {
+  getProfile,
+  timeSlotPoints: profileTimeSlot,
+  arrTimeSlotPoints,
+  pickScenario,
+} = require("./scoring-profiles");
 
 const CFG = loadConfig();
 const ORIGINS = CFG.origins;
@@ -23,14 +29,12 @@ const DESTINATIONS = CFG.destinations;
 const SCORING = CFG.scoring;
 const TOP_N = 3;
 
-const WEIGHTS = {
-  price: 0.35,
-  duration: 0.15,
-  transfer: 0.20,
-  depCity: 0.10,
-  depTime: 0.10,
-  arrTime: 0.10,
-};
+const TRIP = CFG.trip || {};
+const PARTY_SIZE = TRIP.partySize || 1;
+const SCORING_PROFILE = getProfile(
+  TRIP.scoringProfile || CFG.scoring?.profile || "default"
+);
+const WEIGHTS = { ...SCORING_PROFILE.weights };
 
 const DURATION_CAP_8H = 480;
 const DURATION_CAP_10H = 600;
@@ -145,11 +149,7 @@ function transferPoints(count, f) {
 }
 
 function timeSlotPoints(dateTimeStr) {
-  const hour = parseInt(dateTimeStr.slice(11, 13), 10);
-  if (hour >= 7 && hour < 10) return 100;
-  if (hour >= 10 && hour <= 20) return 100;
-  if (hour > 20 && hour <= 22) return 95;
-  return 75;
+  return profileTimeSlot(dateTimeStr, SCORING_PROFILE);
 }
 
 function durationPointsFromNorm(normVal, durationMin) {
@@ -209,7 +209,7 @@ function scoreFlights(flights, direction) {
     const transferBreakdown = transferScoreBreakdown(f);
     const transferPts = transferBreakdown.transferPts;
     const depTimePts = timeSlotPoints(f.depDateTime);
-    const arrTimePts = timeSlotPoints(f.arrDateTime);
+    const arrTimePts = arrTimeSlotPoints(f, SCORING_PROFILE);
     const durationPts = durationPointsFromNorm(normD[i], f.durationMin);
     const row = {
       ...f,
@@ -497,20 +497,22 @@ function buildDeductions(f) {
 }
 
 function renderScoringGuide() {
-  return `## 📐 评分标准说明（v2）
+  const w = WEIGHTS;
+  return `## 📐 评分标准说明（v2 · ${SCORING_PROFILE.label}）
 
 综合分 **越高越好**，满分 100。**按日期分组**评分（同日航班互相比较时长/价格）。
+${PARTY_SIZE > 1 ? `\n> 团队人数：**${PARTY_SIZE} 人**（表格单价 × ${PARTY_SIZE} = 合计）\n` : ""}
 
 | 维度 | 权重 | 计分规则 |
 |------|------|----------|
-| 机票价格 | 35% | 绝对档（<500→70，500–749→85，750–999→92，¥1000+ 每档-25）与**当日相对价**各 50% 加权 |
-| 飞行时长 | 15% | 同日内归一化；>8h 封顶 85 分，>10h 封顶 70 分 |
-| 转机（基础） | 20% | 直达 100；1 次 75；≥2 次 50 |
+| 机票价格 | ${Math.round(w.price * 100)}% | 绝对档（<500→70，500–749→85，750–999→92，¥1000+ 每档-25）与**当日相对价**各 50% 加权 |
+| 飞行时长 | ${Math.round(w.duration * 100)}% | 同日内归一化；>8h 封顶 85 分，>10h 封顶 70 分 |
+| 转机（基础） | ${Math.round(w.transfer * 100)}% | 直达 100；1 次 75；≥2 次 50 |
 | 跨日扣分 | （转机维度内） | 整体到达跨日 **-25**（API 联程含航段跨日；自定义中转仅看整体到达日） |
 | 自定义中转扣分 | （转机维度内） | 分段购票方案 **-25**，与跨日扣分**独立叠加** |
-| 出发/到达地 | 10% | 可配置（默认深圳 100、广州 80） |
-| 起飞时间 | 10% | 07–10 / 10–20 → 100；20–22 → 95；其余 75 |
-| 落地时间 | 10% | 同起飞 |
+| 出发/到达地 | ${Math.round(w.depCity * 100)}% | 可配置（默认深圳 100、广州 80） |
+| 起飞时间 | ${Math.round(w.depTime * 100)}% | 画像 ${SCORING_PROFILE.label} 时段偏好 |
+| 落地时间 | ${Math.round(w.arrTime * 100)}% | 同起飞；老人画像次日上午到达加分 |
 
 **公式：** 综合分 = Σ(子分 ÷ 100 × 权重) × 100
 
@@ -561,7 +563,7 @@ function renderDailySections(days, title, direction) {
       const typeLabel = f.customTransfer
         ? `自定义中转(${labelCity(f.transitCity)})`
         : f.journeyType;
-      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${typeLabel} | ¥${f.priceNum.toFixed(0)}${priceTag} | ${f.pricePts} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
+      md += `| ${i + 1} | ${f.score} | ${c1} | ${c2} | ${routeDisplay(f)} | ${f.flightNo} | ${typeLabel} | ¥${f.priceNum.toFixed(0)}${priceTag}${PARTY_SIZE > 1 ? ` / ¥${(f.priceNum * PARTY_SIZE).toFixed(0)}` : ""} | ${f.pricePts} | ${formatDuration(f.durationMin)} | ${f.transferPts} | ${f.depDateTime.slice(11, 16)} | ${f.arrDateTime.slice(11, 16)} |\n`;
     });
     md += "\n**扣分项明细：**\n\n";
     flights.forEach((f, i) => {
@@ -606,6 +608,27 @@ function renderRoundTrips(combos) {
     md += `   - 回 ${n.date} ${routeDisplay(n)} ${n.flightNo} ¥${n.priceNum.toFixed(0)}（${n.score} 分）${nTag}\n\n`;
   });
   return md;
+}
+
+function renderScenarioPicks(inbound) {
+  const dates = TRIP.returnDateCompare?.length ? TRIP.returnDateCompare : [];
+  if (!dates.length) return "";
+  let md = `## 👨‍👩‍👧 返程场景推荐（${SCORING_PROFILE.label}）\n\n`;
+  md += `| 日期 | 场景 | 航班 | 单价 | ${PARTY_SIZE}人合计 | 出发→到达 |\n`;
+  md += `|------|------|------|------|-----------|----------|\n`;
+  for (const d of dates) {
+    const dayFlights = inbound.filter((f) => f.date === d && f.priceVerified !== false);
+    const scenarios = [
+      ["最低价", pickScenario(dayFlights, "cheapest", SCORING_PROFILE)],
+      ["老人友好", pickScenario(dayFlights, "elder", SCORING_PROFILE)],
+      ["当日到达", pickScenario(dayFlights, "same_day", SCORING_PROFILE)],
+    ];
+    for (const [label, f] of scenarios) {
+      if (!f) continue;
+      md += `| ${d.slice(5)} | ${label} | ${f.flightNo} | ¥${f.priceNum.toFixed(0)} | ¥${(f.priceNum * PARTY_SIZE).toFixed(0)} | ${f.depDateTime.slice(11, 16)}→${f.arrDateTime.slice(11, 16)} |\n`;
+    }
+  }
+  return md + "\n";
 }
 
 function renderExcludedFlights(flights, limit = 8) {
@@ -692,6 +715,7 @@ if (showOut) {
 if (showIn) {
   md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
   md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
+  md += renderScenarioPicks(inbound);
 }
 if (scope === "all") {
   md += renderRoundTrips(roundTrips);

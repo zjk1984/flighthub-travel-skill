@@ -20,10 +20,28 @@ fi
 
 echo "▶ 返程 Skill：查询新疆 → 广东 + custom + 合并报告" >&2
 echo "  建议距去程 Skill 至少 30 分钟" >&2
+node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel monitor skipped (non-fatal)" >&2
 node "$SCRIPT_DIR/monitor-run.js" --phase return "$RESULTS" "$OUTPUT" "$RANKED"
 
+BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
 if feishu_notify_enabled; then
-  echo "Sending Feishu (full ranked)..." >&2
+  FEISHU_REPORT="${FEISHU_REPORT:-brief}"
+  echo "Sending Feishu ($FEISHU_REPORT)..." >&2
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
-  node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+  case "$FEISHU_REPORT" in
+    ranked)
+      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+      ;;
+    all)
+      [[ -f "$BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行决策简报" "$BRIEF" || true
+      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+      ;;
+    brief|*)
+      if [[ -f "$BRIEF" ]]; then
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行决策简报" "$BRIEF" || true
+      else
+        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 每日 TOP3 航班推荐" "$RANKED" || true
+      fi
+      ;;
+  esac
 fi

@@ -13,11 +13,15 @@ const {
   loadDefaults,
   loadConfig,
   saveConfig,
+  applyPreset,
   parseList,
   formatDateRange,
   formatCoverage,
   exportBash,
+  PRESETS_DIR,
 } = require("./load-monitor-config");
+const fs = require("fs");
+const path = require("path");
 
 function usage() {
   console.log(`用法:
@@ -25,6 +29,8 @@ function usage() {
   node scripts/monitor-config.js reset [--all | --origins | --destinations | --outbound-dates | --return-dates]
   node scripts/monitor-config.js set [选项]
   node scripts/monitor-config.js export-bash
+  node scripts/monitor-config.js preset <name>     # 应用 config/presets/<name>.json
+  node scripts/monitor-config.js list-presets
 
 set 选项:
   --route-label TEXT
@@ -88,6 +94,16 @@ function showConfig(cfg, asJson) {
     `搜索         并发 ${cfg.search.concurrency} | 间隔 ${cfg.search.requestDelayMs}ms | 批次 ${cfg.search.batchDelayMs / 1000}s` +
       ` | 风控后等 ${cfg.search.batchDelayAfterErrorsMs / 60000}min | 熔断 ${cfg.search.circuitBreaker?.threshold ?? 3}×451 | 缓存 ${cfg.search.useRouteCache ? "开" : "关"}`
   );
+  if (cfg.trip?.label) {
+    console.log(`行程画像     ${cfg.trip.label}（${cfg.trip.partySize} 人 · ${cfg.trip.scoringProfile}）`);
+  }
+  if (cfg.focusMode) {
+    console.log(`聚焦模式     开启（仅 trip-profile focusRoutes）`);
+  }
+  if (cfg.tripProfilePath) {
+    console.log(`行程配置     ${cfg.tripProfilePath}`);
+  }
+  console.log(`评分画像     ${cfg.scoring?.profile || "default"}`);
   if (cfg.customTransfer?.enabled) {
     const ct = cfg.customTransfer;
     const dir =
@@ -164,6 +180,26 @@ function cmdSet(args) {
   showConfig(loadConfig());
 }
 
+function cmdListPresets() {
+  if (!fs.existsSync(PRESETS_DIR)) {
+    console.log("无 preset");
+    return;
+  }
+  for (const f of fs.readdirSync(PRESETS_DIR).filter((n) => n.endsWith(".json")).sort()) {
+    console.log(`  ${f.replace(/\.json$/, "")}`);
+  }
+}
+
+function cmdPreset(name) {
+  if (!name) {
+    console.error("请指定 preset 名称，例如: npm run monitor:preset -- xinjiang-focus-yining");
+    process.exit(1);
+  }
+  applyPreset(name);
+  console.log(`已应用 preset: ${name}`);
+  showConfig(loadConfig());
+}
+
 function main() {
   const args = parseArgs(process.argv);
   switch (args.cmd) {
@@ -178,6 +214,12 @@ function main() {
       break;
     case "export-bash":
       console.log(exportBash(loadConfig()));
+      break;
+    case "list-presets":
+      cmdListPresets();
+      break;
+    case "preset":
+      cmdPreset(process.argv[3]);
       break;
     default:
       usage();

@@ -99,7 +99,97 @@ function skippedResult(origin, dest, date, reason) {
 
 /**
  * Run tasks concurrently; merge into map; optional cache write.
+ * Failed 451 routes are queued for a cooldown resume pass when enabled.
  */
+async function runOneTask(task, map, options, state) {
+  const {
+    label = "search",
+    requestDelayMs = 3000,
+    rateLimitPauseMs = 60000,
+    rateLimitRetries = 1,
+    circuitBreakerEnabled = true,
+    circuitBreakerThreshold = 3,
+    useCache = true,
+    cache = null,
+  } = options;
+
+  const { origin, dest, date } = task;
+
+  if (state.circuitOpen) {
+    state.circuitSkipped++;
+    const skipped = skippedResult(origin, dest, date, "451:circuit_open_skipped");
+    state.failed451Tasks.push({ ...task, reason: skipped.apiError });
+    mergeRouteEntry(map, skipped);
+    return skipped;
+  }
+
+  process.stderr.write(`${label}: ${origin} → ${dest} | ${date} | ${task.mode || "full"}\n`);
+
+  let result = await searchTask(task);
+
+  if (isRiskControlError(result)) {
+    state.rateLimitHits++;
+    state.consecutiveRiskControl++;
+    process.stderr.write(
+      `${label}: risk control ${result.apiError} (${state.consecutiveRiskControl}/${circuitBreakerThreshold})\n`
+    );
+    state.failed451Tasks.push({ ...task, reason: result.apiError });
+    if (
+      circuitBreakerEnabled &&
+      state.consecutiveRiskControl >= circuitBreakerThreshold &&
+      !state.circuitOpen
+    ) {
+      state.circuitOpen = true;
+      process.stderr.write(
+        `${label}: ⚡ circuit breaker OPEN — remaining tasks deferred to resume queue.\n`
+      );
+    }
+  } else if (isRetryableError(result)) {
+    let retries = 0;
+    while (isRetryableError(result) && retries < rateLimitRetries) {
+      state.rateLimitHits++;
+      process.stderr.write(
+        `${label}: quota limit (${result.apiError}) — pausing ${rateLimitPauseMs / 1000}s before retry\n`
+      );
+      await sleep(rateLimitPauseMs);
+      result = await searchTask(task);
+      retries++;
+    }
+    if (!result.apiError) {
+      state.consecutiveRiskControl = 0;
+      state.failed451Tasks = state.failed451Tasks.filter(
+        (t) => !(t.origin === origin && t.dest === dest && t.date === date)
+      );
+    } else if (isRiskControlError(result)) {
+      state.failed451Tasks.push({ ...task, reason: result.apiError });
+    }
+  } else if (!result.apiError) {
+    state.consecutiveRiskControl = 0;
+    state.failed451Tasks = state.failed451Tasks.filter(
+      (t) => !(t.origin === origin && t.dest === dest && t.date === date)
+    );
+  }
+
+  if (result.apiError && !result.apiError.includes("circuit_open_skipped")) {
+    process.stderr.write(`${label}: ${origin} → ${dest} | ${date} failed: ${result.apiError}\n`);
+  }
+
+  mergeRouteEntry(map, result);
+
+  if (useCache && cache && isResultCacheable(result)) {
+    state.cacheWrites.push({
+      origin,
+      dest,
+      date,
+      result,
+      cachedOn: todayIso(),
+    });
+  }
+
+  if (requestDelayMs > 0) await sleep(requestDelayMs);
+  return result;
+}
+
 async function runSearchQueue(tasks, map, options = {}) {
   const {
     concurrency = 1,
@@ -107,19 +197,13 @@ async function runSearchQueue(tasks, map, options = {}) {
     useCache = true,
     label = "search",
     requestDelayMs = 3000,
-    rateLimitPauseMs = 60000,
-    rateLimitRetries = 1,
-    circuitBreakerEnabled = true,
-    circuitBreakerThreshold = 3,
-    circuitBreakerCooldownMs = 1800000,
+    resumeAfter451 = true,
+    resumeCooldownMs = 300000,
+    resumeMaxPasses = 1,
   } = options;
 
   const cacheWrites = [];
   const toRun = [];
-  let rateLimitHits = 0;
-  let circuitSkipped = 0;
-  let consecutiveRiskControl = 0;
-  let circuitOpen = false;
 
   for (const task of tasks) {
     const { origin, dest, date } = task;
@@ -136,81 +220,60 @@ async function runSearchQueue(tasks, map, options = {}) {
     toRun.push(task);
   }
 
-  await mapPool(toRun, concurrency, async (task) => {
-    const { origin, dest, date } = task;
+  const state = {
+    rateLimitHits: 0,
+    circuitSkipped: 0,
+    circuitOpen: false,
+    consecutiveRiskControl: 0,
+    failed451Tasks: [],
+    cacheWrites,
+  };
 
-    if (circuitOpen) {
-      circuitSkipped++;
-      const skipped = skippedResult(origin, dest, date, "451:circuit_open_skipped");
-      mergeRouteEntry(map, skipped);
-      return skipped;
-    }
+  await mapPool(toRun, concurrency, async (task) => runOneTask(task, map, options, state));
 
-    process.stderr.write(`${label}: ${origin} → ${dest} | ${date} | ${task.mode || "full"}\n`);
+  let resumePasses = 0;
+  while (
+    resumeAfter451 &&
+    resumeMaxPasses > 0 &&
+    resumePasses < resumeMaxPasses &&
+    state.failed451Tasks.length > 0
+  ) {
+    const retryTasks = [...state.failed451Tasks];
+    state.failed451Tasks = [];
+    state.circuitOpen = false;
+    state.consecutiveRiskControl = 0;
+    resumePasses++;
+    process.stderr.write(
+      `${label}: resume pass ${resumePasses}/${resumeMaxPasses} — ${retryTasks.length} routes after ${Math.round(resumeCooldownMs / 1000)}s cooldown\n`
+    );
+    await sleep(resumeCooldownMs);
+    await mapPool(retryTasks, concurrency, async (task) => runOneTask(task, map, options, state));
+  }
 
-    let result = await searchTask(task);
+  appendCacheEntries(state.cacheWrites);
+  persistFailedTasks(state.failed451Tasks);
 
-    if (isRiskControlError(result)) {
-      rateLimitHits++;
-      consecutiveRiskControl++;
-      process.stderr.write(
-        `${label}: risk control ${result.apiError} (${consecutiveRiskControl}/${circuitBreakerThreshold})\n`
-      );
-      if (
-        circuitBreakerEnabled &&
-        consecutiveRiskControl >= circuitBreakerThreshold &&
-        !circuitOpen
-      ) {
-        circuitOpen = true;
-        process.stderr.write(
-          `${label}: ⚡ circuit breaker OPEN — skipping remaining tasks. ` +
-            `Wait ${Math.round(circuitBreakerCooldownMs / 60000)} min before next phase/run.\n`
-        );
-      }
-    } else if (isRetryableError(result)) {
-      let retries = 0;
-      while (isRetryableError(result) && retries < rateLimitRetries) {
-        rateLimitHits++;
-        process.stderr.write(
-          `${label}: quota limit (${result.apiError}) — pausing ${rateLimitPauseMs / 1000}s before retry\n`
-        );
-        await sleep(rateLimitPauseMs);
-        result = await searchTask(task);
-        retries++;
-      }
-      if (!result.apiError) consecutiveRiskControl = 0;
-    } else if (!result.apiError) {
-      consecutiveRiskControl = 0;
-    }
-
-    if (result.apiError && !result.apiError.includes("circuit_open_skipped")) {
-      process.stderr.write(`${label}: ${origin} → ${dest} | ${date} failed: ${result.apiError}\n`);
-    }
-
-    mergeRouteEntry(map, result);
-
-    if (useCache && cache && isResultCacheable(result)) {
-      cacheWrites.push({
-        origin,
-        dest,
-        date,
-        result,
-        cachedOn: todayIso(),
-      });
-    }
-
-    if (requestDelayMs > 0) await sleep(requestDelayMs);
-    return result;
-  });
-
-  appendCacheEntries(cacheWrites);
   return {
     ran: toRun.length,
     cached: tasks.length - toRun.length,
-    rateLimitHits,
-    circuitSkipped,
-    circuitOpen,
+    rateLimitHits: state.rateLimitHits,
+    circuitSkipped: state.circuitSkipped,
+    circuitOpen: state.circuitOpen,
+    resumePasses,
+    failedRemaining: state.failed451Tasks.length,
   };
+}
+
+function persistFailedTasks(failedTasks) {
+  if (!failedTasks.length) return;
+  const fs = require("fs");
+  const outPath = path.join(__dirname, "..", "reports/failed-tasks.json");
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(
+    outPath,
+    JSON.stringify({ at: new Date().toISOString(), tasks: failedTasks }, null, 2) + "\n"
+  );
+  process.stderr.write(`Failed tasks saved: ${outPath} (${failedTasks.length})\n`);
 }
 
 module.exports = {

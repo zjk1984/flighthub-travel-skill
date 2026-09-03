@@ -1,0 +1,119 @@
+#!/usr/bin/env node
+/**
+ * Query hotels from trip-profile segments via flyai search-hotel.
+ *
+ * Usage: node monitor-hotels.js [--profile config/trip-profile.json] [--out reports/xinjiang-hotels-latest.json]
+ */
+const fs = require("fs");
+const path = require("path");
+const { execFileSync } = require("child_process");
+const { loadConfig } = require("./load-monitor-config");
+const { loadTripProfile, DEFAULT_PROFILE_PATH } = require("./load-trip-profile");
+const { sleep } = require("./search-queue");
+
+const ROOT = path.join(__dirname, "..");
+
+function parseArgs(argv) {
+  let profilePath = null;
+  let outPath = path.join(ROOT, "reports/xinjiang-hotels-latest.json");
+  for (let i = 2; i < argv.length; i++) {
+    if (argv[i] === "--profile" && argv[i + 1]) {
+      profilePath = argv[++i];
+      continue;
+    }
+    if (argv[i] === "--out" && argv[i + 1]) {
+      outPath = argv[++i];
+      continue;
+    }
+  }
+  return { profilePath, outPath };
+}
+
+function runHotelSearch(segment) {
+  const flyai = process.env.FLYAI || "npx flyai";
+  const args = [
+    "search-hotel",
+    "--dest-name",
+    segment.destName,
+    "--check-in-date",
+    segment.checkIn,
+    "--check-out-date",
+    segment.checkOut,
+    "--sort",
+    "price_asc",
+  ];
+  if (segment.maxPrice) args.push("--max-price", String(segment.maxPrice));
+  const cmd = flyai.split(/\s+/);
+  try {
+    const out = execFileSync(cmd[0], [...cmd.slice(1), ...args], {
+      encoding: "utf8",
+      maxBuffer: 8 * 1024 * 1024,
+      cwd: ROOT,
+    });
+    return JSON.parse(out.trim());
+  } catch (e) {
+    const stdout = e.stdout ? String(e.stdout) : "";
+    if (stdout.trim()) {
+      try {
+        return JSON.parse(stdout.trim());
+      } catch (_) {
+        /* fall through */
+      }
+    }
+    process.stderr.write(
+      `Hotel search failed ${segment.destName} ${segment.checkIn}: ${e.message}\n`
+    );
+    return null;
+  }
+}
+
+function mapHotels(segment, payload, topN) {
+  const list = payload?.data?.itemList || payload?.itemList || [];
+  return list.slice(0, topN).map((h, i) => ({
+    segment: segment.segment,
+    checkin: segment.checkIn,
+    checkout: segment.checkOut,
+    rank: i + 1,
+    name: h.hotelName || h.name || "—",
+    price: h.price ? `¥${h.price}` : h.lowestPrice ? `¥${h.lowestPrice}` : "—",
+    star: h.star || h.hotelStar || h.brandName || "—",
+    poi: h.interestsPoi || h.address || "—",
+    url: h.detailUrl || h.jumpUrl || "",
+  }));
+}
+
+async function main() {
+  const { profilePath, outPath } = parseArgs(process.argv);
+  const cfg = loadConfig();
+  const trip = profilePath
+    ? loadTripProfile({ tripProfilePath: profilePath, focusMode: false })
+    : cfg.trip;
+  const segments = trip.hotels || [];
+  if (!segments.length) {
+    process.stderr.write("No hotel segments in trip profile — skipping\n");
+    return;
+  }
+
+  if (!process.env.FLYAI_API_KEY) {
+    process.stderr.write("Warning: FLYAI_API_KEY not set — hotel prices may be trial/masked\n");
+  }
+
+  const all = [];
+  for (const seg of segments) {
+    process.stderr.write(`Hotels: ${seg.segment} → ${seg.destName} ${seg.checkIn}..${seg.checkOut}\n`);
+    const payload = runHotelSearch(seg);
+    if (payload) {
+      all.push(...mapHotels(seg, payload, seg.topN || 5));
+    }
+    await sleep(2000);
+  }
+
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, JSON.stringify(all, null, 2) + "\n");
+  process.stderr.write(`Hotels saved: ${outPath} (${all.length} rows)\n`);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

@@ -61,11 +61,13 @@ All commands output **single-line JSON** to `stdout`; errors and hints go to `st
 4. **Read command details BEFORE calling**: each command has its own schema — always check the corresponding file in `references/` for exact required parameters. Do NOT guess or reuse formats from other commands.
 
 ## Configuration
-The tool can make trial without any API keys. For enhanced results, configure optional APIs:
+**Monitoring and price decisions require a formal API key.** Trial mode without `FLYAI_API_KEY` may return masked prices (`¥xxx`) and unreliable quotes — use trial only for smoke tests.
 
 ```
 flyai config set FLYAI_API_KEY "your-key"
 ```
+
+Also configure in project `.env` for monitor scripts: `FLYAI_API_KEY=...`
 
 ## Core Capabilities
 
@@ -125,13 +127,13 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 ```
 
 **注意事项：**
-- 每次查询之间**间隔 1 秒**（sleep 1），不要并发（并发偶发空响应错误），必须串行逐个查询
+- 每次查询之间**间隔 3 秒**（监控脚本 `requestDelayMs: 3000`）；单次 Agent 查询可用 `sleep 1`
 - 每次查询结果**追加写入同一个文件**，不要覆盖（用 `>>`）
 - 最终用去重脚本处理合并后的文件，**不要手动计数**
 - 热门航线（如深圳→上海）直飞约 20-30 趟，预估 3-5 次查询可拿全
 - 冷门航线可能 1-2 次就全部拿到
 - 每次查询必须记录 API 消耗次数，在最终输出中体现
-- 去重脚本路径：`~/.openclaw/workspace/scripts/flyai-dedup.js`
+- 去重脚本路径：仓库内 `scripts/flyai-dedup.js`（勿用旧路径 `~/.openclaw/workspace/...`）
 
 ### 航班查询输出模板（必须严格遵守）
 
@@ -199,7 +201,7 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
     - 最小粒度 1h 时接受结果
 
 步骤 3：去重合并
-  cat $TMPFILE | node ~/.openclaw/workspace/scripts/flyai-dedup.js > /tmp/flyai-result-$$.json
+  cat $TMPFILE | node scripts/flyai-dedup.js > /tmp/flyai-result-$$.json
   # stderr 输出: 去重: XX → YY 条
   # 读取去重后的 YY 作为最终航班数
 
@@ -250,6 +252,22 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 
 内置脚本批量查询广东（深圳/广州）↔ 新疆（乌鲁木齐/伊宁/阿勒泰/石河子）低价航班，生成 Markdown 报告，并可选推送飞书交互卡片（方案借鉴 [daily_stock_analysis](https://github.com/zjk1984/daily_stock_analysis)）。
 
+### 聚焦盯票（推荐）
+
+编辑 `config/trip-profile.json`（人数、老人画像、已订去程、聚焦航线、酒店段），并启用聚焦 preset：
+
+```bash
+npm run monitor:preset -- xinjiang-focus-yining   # 伊宁↔广州盯票
+npm run monitor:config
+```
+
+| 文件 | 说明 |
+|------|------|
+| `config/trip-profile.json` | 行程画像（5人、family_elder、focusRoutes、酒店段） |
+| `config/presets/*.json` | 监控 preset（`xinjiang-full` / `xinjiang-focus-yining`） |
+| `reports/xinjiang-flights-brief.md` | **决策简报**（10/7 vs 10/8、场景推荐、酒店） |
+| `reports/price-history.jsonl` | 每日最低价快照与变动 |
+
 ### 运行
 
 ```bash
@@ -259,7 +277,14 @@ npm run monitor:ranked    # 查询 + 全量报告 + TOP3 评分报告
 
 输出文件：
 - `reports/xinjiang-flights-latest.md` — 全量价格
-- `reports/xinjiang-flights-ranked.md` — 每日 TOP3 + 扣分项
+- `reports/xinjiang-flights-ranked.md` — 每日 TOP3 + 扣分项（v2 画像评分）
+- `reports/xinjiang-flights-brief.md` — 一页决策简报（默认飞书推送）
+
+```bash
+npm run monitor:hotels      # 按 trip-profile 刷新酒店
+npm run monitor:resume      # 重试 reports/failed-tasks.json 中的 451 失败航线
+npm run monitor:brief       # 仅从 JSONL 重新生成简报
+```
 
 ### 配置与重置
 
@@ -294,7 +319,7 @@ npm run notify:feishu      # 测试推送 TOP3 报告
 npm run monitor:ranked     # 查询 + 报告 + 自动推送
 ```
 
-`FEISHU_REPORT`：`ranked`（默认 TOP3）| `latest` | `both`
+`FEISHU_REPORT`：`brief`（默认决策简报）| `ranked` | `latest` | `both` | `all`
 
 **卡片格式**（与 daily_stock_analysis 一致）：
 - `msg_type: interactive`，正文用 `lark_md` 渲染 Markdown

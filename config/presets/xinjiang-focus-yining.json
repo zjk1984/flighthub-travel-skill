@@ -1,0 +1,10 @@
+{
+  "routeLabel": "伊宁 ↔ 广州（聚焦盯票）",
+  "origins": ["广州"],
+  "destinations": ["伊宁"],
+  "outboundDates": ["2026-10-01"],
+  "returnDates": ["2026-10-07", "2026-10-08"],
+  "directOnlyAirports": [],
+  "tripProfilePath": "config/trip-profile.json",
+  "focusMode": true
+}

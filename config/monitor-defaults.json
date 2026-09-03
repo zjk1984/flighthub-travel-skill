@@ -11,6 +11,8 @@
     "2026-10-08"
   ],
   "directOnlyAirports": ["乌鲁木齐"],
+  "tripProfilePath": null,
+  "focusMode": false,
   "search": {
     "concurrency": 1,
     "useRouteCache": true,
@@ -20,6 +22,9 @@
     "rateLimitPauseMs": 60000,
     "rateLimitRetries": 1,
     "maxApiCallsPerRoute": 8,
+    "resumeAfter451": true,
+    "resumeCooldownMs": 300000,
+    "resumeMaxPasses": 1,
     "circuitBreaker": {
       "enabled": true,
       "threshold": 3,
@@ -50,6 +55,7 @@
     "excludeFromMainTop3": false
   },
   "scoring": {
+    "profile": "default",
     "originScores": { "深圳": 100, "广州": 80 },
     "destinationScores": {
       "乌鲁木齐": 100,

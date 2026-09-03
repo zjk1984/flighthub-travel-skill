@@ -8,7 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
-const { loadConfig, formatCoverage, isConfiguredMonitorEntry } = require("./load-monitor-config");
+const { loadConfig, formatCoverage, isConfiguredMonitorEntry, buildOutboundTasks, buildReturnTasks } = require("./load-monitor-config");
 const { compactMap, saveToFile, loadFromFile } = require("./flight-store");
 const { loadCache, pruneCache } = require("./flight-cache");
 const { runSearchQueue, sleep } = require("./search-queue");
@@ -38,40 +38,14 @@ function parseArgs(argv) {
   };
 }
 
-function buildOutboundTasks() {
-  const tasks = [];
-  const directOnly = new Set(CFG.directOnlyAirports);
-  for (const date of CFG.outboundDates) {
-    for (const origin of CFG.origins) {
-      for (const dest of CFG.destinations) {
-        tasks.push({
-          origin,
-          dest,
-          date,
-          mode: directOnly.has(dest) ? "direct" : "full",
-        });
-      }
-    }
-  }
-  return tasks;
+const { recordSnapshots } = require("./price-history");
+
+function buildOutboundTasksLocal() {
+  return buildOutboundTasks(CFG);
 }
 
-function buildReturnTasks() {
-  const tasks = [];
-  const directOnly = new Set(CFG.directOnlyAirports);
-  for (const date of CFG.returnDates) {
-    for (const dest of CFG.destinations) {
-      for (const origin of CFG.origins) {
-        tasks.push({
-          origin: dest,
-          dest: origin,
-          date,
-          mode: directOnly.has(dest) ? "direct" : "full",
-        });
-      }
-    }
-  }
-  return tasks;
+function buildReturnTasksLocal() {
+  return buildReturnTasks(CFG);
 }
 
 function queueOptions(label) {
@@ -82,6 +56,9 @@ function queueOptions(label) {
     requestDelayMs: CFG.search.requestDelayMs,
     rateLimitPauseMs: CFG.search.rateLimitPauseMs,
     rateLimitRetries: CFG.search.rateLimitRetries,
+    resumeAfter451: CFG.search.resumeAfter451 !== false,
+    resumeCooldownMs: CFG.search.resumeCooldownMs ?? 300000,
+    resumeMaxPasses: CFG.search.resumeMaxPasses ?? 1,
     circuitBreakerEnabled: cb.enabled !== false,
     circuitBreakerThreshold: cb.threshold ?? 3,
     circuitBreakerCooldownMs: cb.cooldownMs ?? 1800000,
@@ -116,8 +93,13 @@ async function main() {
   const { phase, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
 
   process.stderr.write(
-    `Monitor (${phase}): ${CFG.routeLabel} | ${CFG.origins.join("/")} → ${formatCoverage(CFG.destinations)}\n`
+    `Monitor (${phase}): ${CFG.routeLabel} | ${CFG.origins.join("/")} → ${formatCoverage(CFG.destinations)}` +
+      (CFG.focusMode ? " [聚焦模式]" : "") +
+      `\n`
   );
+  if (CFG.trip?.label) {
+    process.stderr.write(`  行程：${CFG.trip.label} | ${CFG.trip.partySize} 人\n`);
+  }
   process.stderr.write(`  去程 ${CFG.outboundDates.join(" ")} | 返程 ${CFG.returnDates.join(" ")}\n`);
   process.stderr.write(
     `  并发 ${CFG.search.concurrency} | 请求间隔 ${CFG.search.requestDelayMs}ms | 批次间隔 ${CFG.search.batchDelayMs / 1000}s | 熔断 ${CFG.search.circuitBreaker?.threshold ?? 3}×451\n`
@@ -133,7 +115,7 @@ async function main() {
       : new Map();
 
   if (phase === "all" || phase === "outbound") {
-    const outStats = await runSearchQueue(buildOutboundTasks(), map, {
+    const outStats = await runSearchQueue(buildOutboundTasksLocal(), map, {
       ...queueOptions("Outbound"),
       cache,
     });
@@ -167,6 +149,13 @@ async function main() {
       const scopeArgs = ["--scope", "outbound"];
       fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
       fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
+      const briefOut = rankedOut.replace(/-ranked\.md$/, "-brief.md");
+      try {
+        fs.writeFileSync(briefOut, runScript("format-travel-brief.js", resultsPath));
+        process.stderr.write(`Brief saved: ${briefOut}\n`);
+      } catch (e) {
+        process.stderr.write(`Brief generation skipped: ${e.message}\n`);
+      }
       process.stderr.write(`Outbound report saved: ${latestOut}\n`);
       process.stderr.write(`Outbound ranked saved: ${rankedOut}\n`);
       if (outStats.circuitOpen) {
@@ -210,7 +199,7 @@ async function main() {
 
   let returnCircuitOpen = false;
   if (phase === "all" || phase === "return") {
-    const inStats = await runSearchQueue(buildReturnTasks(), map, {
+    const inStats = await runSearchQueue(buildReturnTasksLocal(), map, {
       ...queueOptions("Return"),
       cache,
     });
@@ -239,6 +228,7 @@ async function main() {
   }
 
   saveResults(map, resultsPath);
+  recordSnapshots(compactMap(map).filter((r) => isConfiguredMonitorEntry(r, CFG)));
   const apiErrors = countApiErrors(map);
   if (apiErrors > 0) {
     process.stderr.write(`Warning: ${apiErrors} routes have apiError (see JSONL / report)\n`);
@@ -249,6 +239,13 @@ async function main() {
   const scopeArgs = [];
   fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
   fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
+  const briefOut = rankedOut.replace(/-ranked\.md$/, "-brief.md").replace(/outbound-ranked\.md$/, "outbound-brief.md");
+  try {
+    fs.writeFileSync(briefOut, runScript("format-travel-brief.js", resultsPath));
+    process.stderr.write(`Brief saved: ${briefOut}\n`);
+  } catch (e) {
+    process.stderr.write(`Brief generation skipped: ${e.message}\n`);
+  }
   process.stderr.write(`Report saved: ${latestOut}\n`);
   process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
 }

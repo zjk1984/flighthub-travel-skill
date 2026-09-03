@@ -1,0 +1,55 @@
+{
+  "label": "新疆伊宁慢循环 · 5人家庭",
+  "partySize": 5,
+  "scoringProfile": "family_elder",
+  "focusMode": true,
+  "bookedOutbound": {
+    "route": "广州→伊宁",
+    "date": "2026-10-01",
+    "flightNo": "CZ6888",
+    "note": "经乌鲁木齐联程，约 23:10 落地伊宁"
+  },
+  "focusRoutes": {
+    "outbound": [
+      { "origin": "广州", "dest": "伊宁", "dates": ["2026-10-01"] }
+    ],
+    "inbound": [
+      { "origin": "伊宁", "dest": "广州", "dates": ["2026-10-07", "2026-10-08"] }
+    ]
+  },
+  "returnDateCompare": ["2026-10-07", "2026-10-08"],
+  "hotels": [
+    {
+      "segment": "10/1 晚到",
+      "destName": "伊宁",
+      "checkIn": "2026-10-01",
+      "checkOut": "2026-10-02",
+      "maxPrice": 500,
+      "topN": 5
+    },
+    {
+      "segment": "10/2-3 赛湖",
+      "destName": "博乐",
+      "checkIn": "2026-10-02",
+      "checkOut": "2026-10-04",
+      "maxPrice": 800,
+      "topN": 5
+    },
+    {
+      "segment": "10/4-5 那拉提",
+      "destName": "新源",
+      "checkIn": "2026-10-04",
+      "checkOut": "2026-10-06",
+      "maxPrice": 600,
+      "topN": 5
+    },
+    {
+      "segment": "10/6-7 回伊宁",
+      "destName": "伊宁",
+      "checkIn": "2026-10-06",
+      "checkOut": "2026-10-08",
+      "maxPrice": 500,
+      "topN": 5
+    }
+  ]
+}

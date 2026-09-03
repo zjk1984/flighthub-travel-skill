@@ -7,6 +7,9 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const CONFIG_PATH = path.join(ROOT, "config/monitor-config.json");
 const DEFAULTS_PATH = path.join(ROOT, "config/monitor-defaults.json");
+const PRESETS_DIR = path.join(ROOT, "config/presets");
+
+const { loadTripProfile, buildFocusTasks } = require("./load-trip-profile");
 
 const CITY_LABEL = {
   伊宁: "伊犁（伊宁）",
@@ -56,6 +59,9 @@ function normalizeSearch(raw) {
     rateLimitPauseMs: Math.max(1000, parseInt(d.rateLimitPauseMs, 10) || 60000),
     rateLimitRetries: Math.max(0, Math.min(3, parseInt(d.rateLimitRetries, 10) || 1)),
     maxApiCallsPerRoute: Math.max(1, parseInt(d.maxApiCallsPerRoute, 10) || 8),
+    resumeAfter451: d.resumeAfter451 !== false,
+    resumeCooldownMs: Math.max(60000, parseInt(d.resumeCooldownMs, 10) || 300000),
+    resumeMaxPasses: Math.max(0, Math.min(2, parseInt(d.resumeMaxPasses, 10) || 1)),
     circuitBreaker: {
       enabled: circuit.enabled !== false,
       threshold: Math.max(1, parseInt(circuit.threshold, 10) || 3),
@@ -108,7 +114,8 @@ function normalizeScoring(raw) {
   const destinationScores = { ...(d.destinationScores || {}) };
   const apiPriceFloor = { ...(d.apiPriceFloor || { 伊宁: 750, 阿勒泰: 750 }) };
   const apiPriceFloorReturn = { ...(d.apiPriceFloorReturn || { 伊宁: 650, 阿勒泰: 650 }) };
-  return { originScores, destinationScores, apiPriceFloor, apiPriceFloorReturn };
+  const profile = String(d.profile || "default").trim() || "default";
+  return { originScores, destinationScores, apiPriceFloor, apiPriceFloorReturn, profile };
 }
 
 function normalizeConfig(raw) {
@@ -119,6 +126,8 @@ function normalizeConfig(raw) {
     outboundDates: uniqDates(raw.outboundDates),
     returnDates: uniqDates(raw.returnDates),
     directOnlyAirports: uniqStrings(raw.directOnlyAirports || ["乌鲁木齐"]),
+    tripProfilePath: raw.tripProfilePath ? String(raw.tripProfilePath).trim() : null,
+    focusMode: raw.focusMode === true,
     search: normalizeSearch(raw.search),
     customTransfer: normalizeCustomTransfer(raw.customTransfer),
     scoring: normalizeScoring(raw.scoring),
@@ -129,7 +138,76 @@ function normalizeConfig(raw) {
   if (!cfg.outboundDates.length) throw new Error("outboundDates 不能为空");
   if (!cfg.returnDates.length) throw new Error("returnDates 不能为空");
 
+  cfg.trip = loadTripProfile(cfg);
+  if (cfg.trip.focusMode) cfg.focusMode = true;
+
   return cfg;
+}
+
+function loadPreset(name) {
+  const presetPath = path.join(PRESETS_DIR, `${name}.json`);
+  if (!fs.existsSync(presetPath)) {
+    throw new Error(`未知 preset: ${name}（config/presets/${name}.json 不存在）`);
+  }
+  const preset = readJson(presetPath);
+  const current = fs.existsSync(CONFIG_PATH) ? readJson(CONFIG_PATH) : {};
+  return normalizeConfig({
+    ...current,
+    ...preset,
+    search: { ...(current.search || {}), ...(preset.search || {}) },
+    customTransfer: { ...(current.customTransfer || {}), ...(preset.customTransfer || {}) },
+    scoring: { ...(current.scoring || {}), ...(preset.scoring || {}) },
+  });
+}
+
+function applyPreset(name) {
+  const cfg = loadPreset(name);
+  saveConfig(cfg);
+  return cfg;
+}
+
+function buildOutboundTasks(cfg) {
+  const c = cfg || loadConfig();
+  if (c.focusMode && c.trip?.focusRoutes?.outbound?.length) {
+    return buildFocusTasks(c.trip.focusRoutes, "outbound", "full");
+  }
+  const tasks = [];
+  const directOnly = new Set(c.directOnlyAirports);
+  for (const date of c.outboundDates) {
+    for (const origin of c.origins) {
+      for (const dest of c.destinations) {
+        tasks.push({
+          origin,
+          dest,
+          date,
+          mode: directOnly.has(dest) ? "direct" : "full",
+        });
+      }
+    }
+  }
+  return tasks;
+}
+
+function buildReturnTasks(cfg) {
+  const c = cfg || loadConfig();
+  if (c.focusMode && c.trip?.focusRoutes?.inbound?.length) {
+    return buildFocusTasks(c.trip.focusRoutes, "inbound", "full");
+  }
+  const tasks = [];
+  const directOnly = new Set(c.directOnlyAirports);
+  for (const date of c.returnDates) {
+    for (const dest of c.destinations) {
+      for (const origin of c.origins) {
+        tasks.push({
+          origin: dest,
+          dest: origin,
+          date,
+          mode: directOnly.has(dest) ? "direct" : "full",
+        });
+      }
+    }
+  }
+  return tasks;
 }
 
 function uniqStrings(list) {
@@ -235,10 +313,15 @@ function exportBash(cfg) {
 module.exports = {
   CONFIG_PATH,
   DEFAULTS_PATH,
+  PRESETS_DIR,
   loadDefaults,
   loadConfig,
   saveConfig,
   normalizeConfig,
+  loadPreset,
+  applyPreset,
+  buildOutboundTasks,
+  buildReturnTasks,
   parseList,
   labelCity,
   formatDateShort,
