@@ -30,7 +30,12 @@ const HOTEL_OVERRIDES = {
   "2026-10-06": {
     name: "博乐赛湖云上酒店 / 赛湖之畔",
     price: "¥463–890/间",
-    note: "近赛里木湖东门，看日落星空；勿住博乐市区过远",
+    note: "D6 独库出来后住赛湖东门；勿住博乐市区",
+  },
+  "2026-10-05": {
+    name: "新源/那拉提镇",
+    price: "¥250–350/间",
+    note: "D5 独库前置；搜「新源」或「那拉提镇」",
   },
 };
 
@@ -54,7 +59,7 @@ function stayLine(dateStr, hotelsBySegment, dayStay) {
   const segKey = segmentForDate(dateStr, TRIP.hotels);
   if (segKey && hotelsBySegment.has(segKey)) {
     const { pick, backup } = hotelsBySegment.get(segKey);
-    if (pick) {
+    if (pick && !HOTEL_OVERRIDES[dateStr]) {
       const book = pick.url ? `[预订](${pick.url})` : "";
       let s = `**${pick.name}**（${pick.star || "—"} · ¥${pick.priceNum}/间`;
       if (pick.stayTotal) s += ` · 3间≈¥${pick.stayTotal.toFixed(0)}`;
@@ -64,15 +69,28 @@ function stayLine(dateStr, hotelsBySegment, dayStay) {
     }
   }
   if (override) {
-    return `**${override.name}**（${override.note}）`;
+    let s = `**${override.name}**`;
+    if (override.price) s += `（${override.price}`;
+    if (override.note) s += override.price ? ` · ${override.note}）` : `（${override.note}）`;
+    else if (override.price) s += `）`;
+    // Still show API pick as backup if different segment had data
+    const segKey = segmentForDate(dateStr, TRIP.hotels);
+    if (segKey && hotelsBySegment.has(segKey)) {
+      const { pick } = hotelsBySegment.get(segKey);
+      if (pick && !pick.name.includes("天麓")) {
+        const book = pick.url ? `[备选预订](${pick.url})` : "";
+        s += `\n> API 备选：**${pick.name}** ¥${pick.priceNum}/间 ${book}`;
+      }
+    }
+    return s;
   }
   return dayStay || "—";
 }
 
 function renderCard(day, hotelsBySegment) {
   const wd = weekday(day.date);
-  let md = `### 📍 ${day.cardId || day.label} · ${day.date.slice(5)} ${wd}\n\n`;
-  md += `> **${day.title || day.label}**\n\n`;
+  const head = `${day.cardId || day.label} ${day.date.slice(5)} ${day.title || ""}`.trim();
+  let md = `### 📍 ${head}（${wd}）\n\n`;
   md += `| | |\n|---|---|\n`;
   md += `| **行程** | ${day.activity} |\n`;
   md += `| **车程** | ${day.drive || "—"} |\n`;
@@ -110,6 +128,9 @@ function main() {
   }
   if (TRIP.itinerary?.overview) {
     md += `**环线概要：** ${TRIP.itinerary.overview}\n\n`;
+  }
+  if (TRIP.itinerary?.alternateRoute) {
+    md += `> **Plan B（独库封闭）：** ${TRIP.itinerary.alternateRoute}\n\n`;
   }
   md += `---\n\n`;
 
