@@ -178,29 +178,61 @@ function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1) {
         nights,
         roomEstimate: Math.ceil(partySize / 2),
         stayTotal: h.priceNum * nights * Math.ceil(partySize / 2),
+        partySize,
+        destName: segmentMeta?.destName || h.destName || "",
       };
     })
     .sort((a, b) => b.score - a.score || a.priceNum - b.priceNum);
 }
 
-function buildDeductions(h) {
+function buildDeductions(h, profile) {
   const items = [];
+  const w = profile?.weights || {};
+
   if (h.priceNum >= 500) {
-    items.push(`价格 ¥${h.priceNum}/晚：较高档（价格分 ${h.pricePts}）`);
+    items.push(`价格 ¥${h.priceNum}/晚：较高档，绝对分偏低（价格分 ${h.pricePts}，权重 ${Math.round((w.price || 0) * 100)}%）`);
   } else if (h.priceNum < 200) {
     items.push(`价格 ¥${h.priceNum}/晚：低价档（价格分 ${h.pricePts}）`);
   } else {
-    items.push(`价格 ¥${h.priceNum}/晚：价格分 ${h.pricePts}`);
+    items.push(`价格 ¥${h.priceNum}/晚：综合价分 ${h.pricePts}（绝对+同段相对各 50%）`);
   }
-  items.push(`位置 ${h.poi || "—"}：位置分 ${h.locationPts}`);
-  items.push(`档次 ${h.star || "—"}：舒适度分 ${h.comfortPts}`);
-  if (h.reviewScore) items.push(`评分 ${h.reviewScore}：口碑分 ${h.reviewPts}`);
-  items.push(`品牌/类型：品牌分 ${h.brandPts}`);
+
+  if (h.locationPts >= 100) {
+    items.push(`位置 ${h.poi || "—"}：命中分段 POI 偏好（位置分 100）`);
+  } else if (h.locationPts >= 88) {
+    items.push(`位置 ${h.poi || "—"}：部分匹配 POI（位置分 ${h.locationPts}，较满分扣 ${100 - h.locationPts}）`);
+  } else {
+    items.push(`位置 ${h.poi || "—"}：未命中分段 POI 关键词（位置分 ${h.locationPts}，较满分扣 ${100 - h.locationPts}）`);
+  }
+
+  if (h.comfortPts >= 90) {
+    items.push(`档次 ${h.star || "—"}：舒适度分 ${h.comfortPts}（较优）`);
+  } else {
+    items.push(`档次 ${h.star || "—"}：舒适度分 ${h.comfortPts}（老人出行建议舒适型及以上）`);
+  }
+
+  if (h.reviewScore) {
+    items.push(`平台评分 ${h.reviewScore}：口碑分 ${h.reviewPts}`);
+  } else {
+    items.push(`口碑：无评分数据，默认 ${h.reviewPts} 分`);
+  }
+
+  if (h.brandPts >= 100) {
+    items.push(`品牌：连锁/优选品牌（品牌分 100）`);
+  } else if (h.brandPts <= 50) {
+    items.push(`品牌：含青旅/胶囊等关键词，老人画像扣分（品牌分 ${h.brandPts}）`);
+  } else {
+    items.push(`品牌/类型：品牌分 ${h.brandPts}`);
+  }
+
   if (h.nights > 1) {
     items.push(
-      `连住 ${h.nights} 晚 × ${h.roomEstimate} 间 ≈ ¥${h.stayTotal.toFixed(0)}（${h.roomEstimate} 间估算）`
+      `连住 ${h.nights} 晚 × ${h.roomEstimate} 间 ≈ ¥${h.stayTotal.toFixed(0)}（${h.roomEstimate} 间估算，${h.partySize || "?"} 人）`
     );
+  } else if (h.roomEstimate > 1) {
+    items.push(`单晚 × ${h.roomEstimate} 间 ≈ ¥${h.stayTotal.toFixed(0)}（${h.roomEstimate} 间估算）`);
   }
+
   return items;
 }
 
