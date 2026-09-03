@@ -13,7 +13,7 @@
     "address": "218国道旁、州森林武警部队南侧1层局部，2-6层全部",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F15DpvN"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4E6dp7"
   },
   {
     "segment": "10/1 机场",
@@ -29,7 +29,7 @@
     "address": "经济合作区上海路2699号万容广场商业D楼",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0jVNiQ"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3eaHyw"
   },
   {
     "segment": "10/1 机场",
@@ -45,7 +45,7 @@
     "address": "西环路107号伊宁市合作区山东路219号营建 梧桐丽景C区一层部分，三层四层五层六层全部",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3o0vMK"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Uo30j"
   },
   {
     "segment": "10/1 机场",
@@ -61,7 +61,7 @@
     "address": "伊宁市城盘子路138号合泰阳光家苑4号商业楼, 中国",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Q8eWX"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3NQgk3"
   },
   {
     "segment": "10/1 机场",
@@ -77,7 +77,7 @@
     "address": "西环路235号梧桐丽景C区12号楼401号商铺",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1NGJ7O"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nECxL"
   },
   {
     "segment": "10/2-3 昭苏",
@@ -93,7 +93,7 @@
     "address": "洪纳海街007号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1a57I4"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2rxdDm"
   },
   {
     "segment": "10/2-3 昭苏",
@@ -109,7 +109,7 @@
     "address": "新疆昭苏昭苏镇乌孙路366号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0LMKae"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3qQ8n4"
   },
   {
     "segment": "10/2-3 昭苏",
@@ -125,11 +125,27 @@
     "address": "解放街253号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3kZLYL"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F05OHPh"
   },
   {
-    "segment": "10/4-6 伊宁",
+    "segment": "10/4 八卦城",
     "checkin": "2026-10-04",
+    "checkout": "2026-10-05",
+    "apiRank": 1,
+    "name": "特克斯八卦城迎宾南路亚朵酒店（V3.6）",
+    "price": "¥390",
+    "priceNum": 390,
+    "star": "高档型",
+    "brandName": "",
+    "poi": "近七十八团客运站",
+    "address": "新疆伊犁哈萨克自治州特克斯县沿河路20号",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nDM4b"
+  },
+  {
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 1,
     "name": "雅景酒店(伊宁站店)",
@@ -141,11 +157,11 @@
     "address": "伊宁市经济合作区建材路1号中国西部国际建材城C2-C6号楼1234号商铺",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Gsteo"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3FNsL8"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 2,
     "name": "伊宁骏锦酒店",
@@ -157,29 +173,45 @@
     "address": "南岸新区伊河大道9号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0qT3Wn"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3MiJ9q"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 3,
+    "name": "喆啡酒店(伊宁机场六星街店)",
+    "price": "¥262",
+    "priceNum": 262,
+    "star": "高档型",
+    "brandName": "锦江",
+    "poi": "近北京路",
+    "address": "伊宁市解放西路273号（近上海城天马转盘）",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3lNvvp"
+  },
+  {
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
+    "checkout": "2026-10-07",
+    "apiRank": 4,
     "name": "新疆海旭酒店(伊宁市火车站店)",
-    "price": "¥293",
-    "priceNum": 293,
+    "price": "¥270",
+    "priceNum": 270,
     "star": "高档型",
     "brandName": "",
     "poi": "近伊宁站",
     "address": "新疆伊犁哈萨克自治州伊宁市218国道以北天津路以西佛山路以南中国西部国际建材城二期C4号楼四层460号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eBY1L"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2YWnBN"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
-    "apiRank": 4,
+    "apiRank": 5,
     "name": "伊宁丽水之都大酒店",
     "price": "¥298",
     "priceNum": 298,
@@ -189,27 +221,11 @@
     "address": "解放路79号西桥名都商业综合楼1407-1408号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ValUW"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2atGHB"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
-    "checkout": "2026-10-07",
-    "apiRank": 5,
-    "name": "喆啡酒店(伊宁机场六星街店)",
-    "price": "¥306",
-    "priceNum": 306,
-    "star": "高档型",
-    "brandName": "锦江",
-    "poi": "近北京路",
-    "address": "伊宁市解放西路273号（近上海城天马转盘）",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0S8jdm"
-  },
-  {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 6,
     "name": "伊宁江苏大酒店（六星街店）",
@@ -221,11 +237,11 @@
     "address": "伊犁伊宁市解放西路七巷190号。",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0R7w7e"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3uBJ9s"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 7,
     "name": "泽涛酒店(伊宁万容广场汉宾公园店)",
@@ -237,11 +253,11 @@
     "address": "山东路心悦龙庭小区446号B号楼112号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4a6TRV"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4G5Tmk"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 8,
     "name": "伊宁吉宜酒店(新茂业国际购物中心店)",
@@ -253,27 +269,27 @@
     "address": "伊宁市开发区北京路1979南岗高层(妇幼保健站后)",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4a00Wn"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F45MZBb"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 1,
     "name": "伊宁喀赞其民俗旅游区红旗路亚朵酒店（V3.6）",
-    "price": "¥458",
-    "priceNum": 458,
+    "price": "¥443",
+    "priceNum": 443,
     "star": "高档型",
     "brandName": "",
     "poi": "近喀赞其民俗旅游区",
     "address": "新疆维吾尔自治区伊犁哈萨克自治州伊宁市红旗路23号新峰大夏1层大厅、2层东南侧部分、13-17层",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3piF4G"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3MnBIo"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 2,
     "name": "浦东假日酒店（伊宁六星街伊犁师范店）",
@@ -285,11 +301,11 @@
     "address": "伊宁市军垦路37号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0fP7AJ"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4ZNoSr"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 5,
     "name": "伊宁伊犁宾馆",
@@ -301,26 +317,26 @@
     "address": "伊宁市迎宾路8号。",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1g5Ip3"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38XAgH"
   },
   {
-    "segment": "10/4-6 伊宁",
-    "checkin": "2026-10-04",
+    "segment": "10/5-6 伊宁",
+    "checkin": "2026-10-05",
     "checkout": "2026-10-07",
     "apiRank": 6,
     "name": "伊宁万豪万枫酒店",
-    "price": "¥538",
-    "priceNum": 538,
+    "price": "¥474",
+    "priceNum": 474,
     "star": "高档型",
     "brandName": "万豪",
     "poi": "近伊宁市开发区",
     "address": "新疆维吾尔自治区伊犁哈萨克自治州伊宁市深圳路449号金屋·紫都城A座",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F112xy9"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F03604c"
   },
   {
-    "segment": "10/7 缓冲",
+    "segment": "10/7 机场",
     "checkin": "2026-10-07",
     "checkout": "2026-10-08",
     "apiRank": 1,
@@ -333,10 +349,10 @@
     "address": "经济合作区上海路2699号万容广场商业D楼",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F32WkaK"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3o1PIU"
   },
   {
-    "segment": "10/7 缓冲",
+    "segment": "10/7 机场",
     "checkin": "2026-10-07",
     "checkout": "2026-10-08",
     "apiRank": 2,
@@ -349,10 +365,10 @@
     "address": "218国道旁、州森林武警部队南侧1层局部，2-6层全部",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1J76M8"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0UAWv8"
   },
   {
-    "segment": "10/7 缓冲",
+    "segment": "10/7 机场",
     "checkin": "2026-10-07",
     "checkout": "2026-10-08",
     "apiRank": 3,
@@ -365,10 +381,10 @@
     "address": "伊宁市城盘子路138号合泰阳光家苑4号商业楼, 中国",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4AhUH2"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Qnudt"
   },
   {
-    "segment": "10/7 缓冲",
+    "segment": "10/7 机场",
     "checkin": "2026-10-07",
     "checkout": "2026-10-08",
     "apiRank": 4,
@@ -381,10 +397,10 @@
     "address": "西环路107号伊宁市合作区山东路219号营建 梧桐丽景C区一层部分，三层四层五层六层全部",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2l6McI"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3MpMuK"
   },
   {
-    "segment": "10/7 缓冲",
+    "segment": "10/7 机场",
     "checkin": "2026-10-07",
     "checkout": "2026-10-08",
     "apiRank": 5,
@@ -397,6 +413,6 @@
     "address": "解放路4巷74号利达商务楼1层部分2-6层全部",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3DRTIK"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F15nGsf"
   }
 ]
