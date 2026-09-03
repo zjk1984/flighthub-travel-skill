@@ -30,12 +30,12 @@ const HOTEL_OVERRIDES = {
   "2026-10-06": {
     name: "博乐赛湖云上酒店 / 赛湖之畔",
     price: "¥463–890/间",
-    note: "D6 独库出来后住赛湖东门；勿住博乐市区",
+    note: "D6 午后从伊宁赴赛湖东门；勿住博乐市区",
   },
   "2026-10-05": {
-    name: "新源/那拉提镇",
-    price: "¥250–350/间",
-    note: "D5 独库前置；搜「新源」或「那拉提镇」",
+    name: "伊宁丽水之都 / 骏锦",
+    price: "¥300–450/间",
+    note: "D5 Plan B 回伊宁；喀赞其/六星街附近",
   },
 };
 
@@ -130,7 +130,7 @@ function main() {
     md += `**环线概要：** ${TRIP.itinerary.overview}\n\n`;
   }
   if (TRIP.itinerary?.alternateRoute) {
-    md += `> **Plan B（独库封闭）：** ${TRIP.itinerary.alternateRoute}\n\n`;
+    md += `> **可选路线：** ${TRIP.itinerary.alternateRoute}\n\n`;
   }
   md += `---\n\n`;
 
