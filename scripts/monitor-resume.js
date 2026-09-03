@@ -4,7 +4,7 @@
  */
 const fs = require("fs");
 const path = require("path");
-const { loadConfig, buildOutboundTasks, buildReturnTasks, isConfiguredMonitorEntry } = require("./load-monitor-config");
+const { loadConfig, isConfiguredMonitorEntry } = require("./load-monitor-config");
 const { loadFromFile, saveToFile, compactMap } = require("./flight-store");
 const { loadCache, pruneCache } = require("./flight-cache");
 const { runSearchQueue } = require("./search-queue");

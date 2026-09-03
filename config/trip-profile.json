@@ -25,7 +25,8 @@
       "checkIn": "2026-10-01",
       "checkOut": "2026-10-02",
       "maxPrice": 500,
-      "topN": 5
+      "topN": 8,
+      "poiPrefer": ["机场", "伊宁站", "火车站", "喀赞其"]
     },
     {
       "segment": "10/2-3 赛湖",
@@ -33,7 +34,8 @@
       "checkIn": "2026-10-02",
       "checkOut": "2026-10-04",
       "maxPrice": 800,
-      "topN": 5
+      "topN": 8,
+      "poiPrefer": ["赛里木", "博乐", "湖"]
     },
     {
       "segment": "10/4-5 那拉提",
@@ -41,7 +43,8 @@
       "checkIn": "2026-10-04",
       "checkOut": "2026-10-06",
       "maxPrice": 600,
-      "topN": 5
+      "topN": 8,
+      "poiPrefer": ["那拉提", "新源", "草原"]
     },
     {
       "segment": "10/6-7 回伊宁",
@@ -49,7 +52,8 @@
       "checkIn": "2026-10-06",
       "checkOut": "2026-10-08",
       "maxPrice": 500,
-      "topN": 5
+      "topN": 8,
+      "poiPrefer": ["机场", "伊宁站", "市区", "喀赞其"]
     }
   ]
 }

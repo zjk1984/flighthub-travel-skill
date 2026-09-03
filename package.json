@@ -17,6 +17,7 @@
     "monitor:preset": "node scripts/monitor-config.js preset",
     "monitor:presets": "node scripts/monitor-config.js list-presets",
     "monitor:hotels": "bash -c 'source scripts/load-env.sh && node scripts/monitor-hotels.js'",
+    "monitor:hotels:ranked": "node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json",
     "monitor:resume": "bash -c 'source scripts/load-env.sh && node scripts/monitor-resume.js'",
     "monitor:brief": "node scripts/format-travel-brief.js reports/xinjiang-results.jsonl",
     "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-brief.md'",

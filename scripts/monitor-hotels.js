@@ -10,6 +10,8 @@ const { execFileSync } = require("child_process");
 const { loadConfig } = require("./load-monitor-config");
 const { loadTripProfile, DEFAULT_PROFILE_PATH } = require("./load-trip-profile");
 const { sleep } = require("./search-queue");
+const { parsePriceNum } = require("./hotel-scoring");
+const { spawnSync } = require("child_process");
 
 const ROOT = path.join(__dirname, "..");
 
@@ -69,17 +71,26 @@ function runHotelSearch(segment) {
 
 function mapHotels(segment, payload, topN) {
   const list = payload?.data?.itemList || payload?.itemList || [];
-  return list.slice(0, topN).map((h, i) => ({
-    segment: segment.segment,
-    checkin: segment.checkIn,
-    checkout: segment.checkOut,
-    rank: i + 1,
-    name: h.hotelName || h.name || "—",
-    price: h.price ? `¥${h.price}` : h.lowestPrice ? `¥${h.lowestPrice}` : "—",
-    star: h.star || h.hotelStar || h.brandName || "—",
-    poi: h.interestsPoi || h.address || "—",
-    url: h.detailUrl || h.jumpUrl || "",
-  }));
+  return list.slice(0, topN).map((h, i) => {
+    const priceRaw = h.price || h.lowestPrice || "";
+    const priceNum = parsePriceNum(priceRaw);
+    return {
+      segment: segment.segment,
+      checkin: segment.checkIn,
+      checkout: segment.checkOut,
+      apiRank: i + 1,
+      name: h.hotelName || h.name || "—",
+      price: priceNum > 0 ? `¥${priceNum}` : String(priceRaw || "—"),
+      priceNum,
+      star: h.star || h.hotelStar || "—",
+      brandName: h.brandName || "",
+      poi: h.interestsPoi || h.address || "—",
+      address: h.address || "",
+      reviewScore: h.score != null ? String(h.score) : null,
+      reviewDesc: h.scoreDesc || h.review || "",
+      url: h.detailUrl || h.jumpUrl || "",
+    };
+  });
 }
 
 async function main() {
@@ -111,6 +122,15 @@ async function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(all, null, 2) + "\n");
   process.stderr.write(`Hotels saved: ${outPath} (${all.length} rows)\n`);
+
+  const rankedOut = outPath.replace(/\.json$/, "-ranked.md");
+  const r = spawnSync("node", [path.join(__dirname, "format-hotels-ranked.js"), outPath, "--out", rankedOut], {
+    encoding: "utf8",
+    cwd: ROOT,
+  });
+  if (r.status !== 0) {
+    process.stderr.write(r.stderr || "format-hotels-ranked failed\n");
+  }
 }
 
 main().catch((err) => {

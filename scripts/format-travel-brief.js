@@ -22,6 +22,11 @@ const {
   isSameDayArrival,
 } = require("./scoring-profiles");
 const { getDeltaForRoute, lowestPriceFromFlights } = require("./price-history");
+const {
+  getHotelProfile,
+  parsePriceNum,
+  scoreHotelsInSegment,
+} = require("./hotel-scoring");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
@@ -124,22 +129,32 @@ function renderHotels(hotelsPath) {
   const hotels = JSON.parse(fs.readFileSync(hotelsPath, "utf8"));
   if (!Array.isArray(hotels) || !hotels.length) return "";
 
-  let md = `## 酒店速览（${PARTY} 人 ≈ ${Math.ceil(PARTY / 2)} 间）\n\n`;
+  const hotelProfile = getHotelProfile(TRIP.hotelScoringProfile || TRIP.scoringProfile || "family_elder");
+  const segmentMetaMap = new Map((TRIP.hotels || []).map((s) => [s.segment, s]));
+  const rooms = Math.ceil(PARTY / 2);
+
+  let md = `## 酒店 TOP3（${hotelProfile.label} · ${PARTY} 人 ≈ ${rooms} 间）\n\n`;
   const bySegment = new Map();
   for (const h of hotels) {
+    const row = {
+      ...h,
+      priceNum: h.priceNum != null ? h.priceNum : parsePriceNum(h.price),
+    };
     if (!bySegment.has(h.segment)) bySegment.set(h.segment, []);
-    bySegment.get(h.segment).push(h);
+    bySegment.get(h.segment).push(row);
   }
   for (const [segment, list] of bySegment) {
+    const scored = scoreHotelsInSegment(list, hotelProfile, segmentMetaMap.get(segment), PARTY);
     md += `### ${segment}\n\n`;
-    md += `| 酒店 | 档次 | 实价/晚 | 位置 | 预订 |\n`;
-    md += `|------|------|---------|------|------|\n`;
-    for (const h of list.slice(0, 3)) {
+    md += `| 排名 | 评分 | 酒店 | 档次 | 单间/晚 | ${rooms}间合计 | 位置 | 预订 |\n`;
+    md += "|------|------|------|------|---------|----------|------|------|\n";
+    scored.slice(0, 3).forEach((h, i) => {
       const book = h.url ? `[预订](${h.url})` : "—";
-      md += `| ${h.name} | ${h.star || "—"} | ${h.price} | ${h.poi || "—"} | ${book} |\n`;
-    }
+      md += `| ${i + 1} | ${h.score} | ${h.name} | ${h.star || "—"} | ¥${h.priceNum.toFixed(0)} | ¥${h.stayTotal.toFixed(0)} | ${h.poi || "—"} | ${book} |\n`;
+    });
     md += "\n";
   }
+  md += `> 完整评分说明见 \`reports/xinjiang-hotels-ranked.md\`\n\n`;
   return md;
 }
 
