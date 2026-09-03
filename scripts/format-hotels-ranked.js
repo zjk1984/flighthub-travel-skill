@@ -11,6 +11,7 @@ const { loadConfig, formatDateShort } = require("./load-monitor-config");
 const {
   getHotelProfile,
   parsePriceNum,
+  roomCountForParty,
   scoreHotelsInSegment,
   buildDeductions,
 } = require("./hotel-scoring");
@@ -56,14 +57,13 @@ function renderBookingLinks(h) {
   return `   - [点击预订](${h.url})\n\n`;
 }
 
-function renderScoringGuide(profile, partySize) {
+function renderScoringGuide(profile, partySize, rooms) {
   const w = profile.weights;
-  const rooms = Math.ceil(partySize / 2);
   return `## 📐 酒店评分标准（v1 · ${profile.label}）
 
 综合分 **越高越好**，满分 100。**按入住日/行程段**分组评分（同段酒店互相比较价格）。
 
-${partySize > 1 ? `> 团队 **${partySize} 人** ≈ **${rooms} 间**；「${rooms}间合计」= 单间夜价 × 晚数 × ${rooms}\n` : ""}
+${partySize > 1 ? `> 团队 **${partySize} 人** · **${rooms} 间**；「${rooms}间合计」= 单间夜价 × 晚数 × ${rooms}\n` : ""}
 
 | 维度 | 权重 | 计分规则 |
 |------|------|----------|
@@ -80,9 +80,8 @@ ${partySize > 1 ? `> 团队 **${partySize} 人** ≈ **${rooms} 间**；「${roo
 `;
 }
 
-function renderDailySection(dayEntry, profile, partySize) {
+function renderDailySection(dayEntry, profile, rooms) {
   const { checkin, segmentLabel, destName, scored, candidateCount } = dayEntry;
-  const rooms = Math.ceil(partySize / 2);
   const short = checkin ? formatDateShort(checkin) : segmentLabel;
   const titleSuffix = segmentLabel && checkin ? ` · ${segmentLabel}` : segmentLabel || "";
 
@@ -116,7 +115,7 @@ function renderDailySection(dayEntry, profile, partySize) {
   return md;
 }
 
-function buildDayEntries(raw, trip, profile, partySize) {
+function buildDayEntries(raw, trip, profile, partySize, roomCount) {
   const bySegment = new Map();
   for (const h of raw) {
     if (!bySegment.has(h.segment)) bySegment.set(h.segment, []);
@@ -131,7 +130,7 @@ function buildDayEntries(raw, trip, profile, partySize) {
   const entries = [];
   for (const [segmentLabel, list] of bySegment) {
     const meta = segmentMetaMap.get(segmentLabel) || { segment: segmentLabel };
-    const scored = scoreHotelsInSegment(list, profile, meta, partySize);
+    const scored = scoreHotelsInSegment(list, profile, meta, partySize, roomCount);
     entries.push({
       checkin: meta.checkIn || list[0]?.checkin || "",
       checkout: meta.checkOut || list[0]?.checkout || "",
@@ -153,21 +152,22 @@ function renderReport(raw, cfg) {
   const profileName = trip.hotelScoringProfile || trip.scoringProfile || "family_elder";
   const profile = getHotelProfile(profileName);
   const partySize = trip.partySize || 1;
-  const dayEntries = buildDayEntries(raw, trip, profile, partySize);
+  const rooms = roomCountForParty(partySize, trip.roomCount);
+  const dayEntries = buildDayEntries(raw, trip, profile, partySize, trip.roomCount);
   const totalCandidates = raw.length;
 
   let md = `# 🏨 每日 TOP3 酒店评分推荐\n\n`;
   md += `> 生成时间：${formatShanghaiTime()} (Asia/Shanghai)\n\n`;
   if (trip.label) md += `> 行程：${trip.label}\n\n`;
   md += `- 入住段：${dayEntries.length} 段 | 候选酒店：${totalCandidates} 条`;
-  if (partySize > 1) md += ` | ${partySize} 人 ≈ ${Math.ceil(partySize / 2)} 间`;
+  if (partySize > 1) md += ` | ${partySize} 人 · ${rooms} 间`;
   md += `\n\n`;
 
-  md += renderScoringGuide(profile, partySize);
+  md += renderScoringGuide(profile, partySize, rooms);
   md += `## 🏨 每日 TOP3（按入住日）\n\n`;
 
   for (const day of dayEntries) {
-    md += renderDailySection(day, profile, partySize);
+    md += renderDailySection(day, profile, rooms);
   }
 
   md += `---\n基于飞猪 fly.ai 实时数据\n`;

@@ -23,6 +23,7 @@ function loadTripProfile(cfg) {
     return {
       label: null,
       partySize: 1,
+      roomCount: null,
       scoringProfile: "default",
       focusMode: cfg?.focusMode === true,
       skipOutboundMonitor: false,
@@ -39,6 +40,7 @@ function loadTripProfile(cfg) {
   return {
     label: raw.label || null,
     partySize: Math.max(1, parseInt(raw.partySize, 10) || 1),
+    roomCount: raw.roomCount > 0 ? raw.roomCount : null,
     scoringProfile: raw.scoringProfile || "default",
     focusMode: raw.focusMode === true || cfg?.focusMode === true,
     skipOutboundMonitor: raw.skipOutboundMonitor === true,

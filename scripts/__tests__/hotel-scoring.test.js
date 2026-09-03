@@ -59,4 +59,12 @@ describe("hotel-scoring", () => {
     const scored = scoreHotelsInSegment(hotels, profile, meta, 5);
     assert.equal(scored[0].name, "全季伊宁北京路酒店");
   });
+
+  it("explicit roomCount overrides default ceil(party/2)", () => {
+    const profile = getHotelProfile("family_elder");
+    const hotels = [{ name: "测试酒店", priceNum: 300, checkin: "2026-10-01", checkout: "2026-10-02", star: "舒适型" }];
+    const scored = scoreHotelsInSegment(hotels, profile, { segment: "test" }, 5, 2);
+    assert.equal(scored[0].roomEstimate, 2);
+    assert.equal(scored[0].stayTotal, 600);
+  });
 });

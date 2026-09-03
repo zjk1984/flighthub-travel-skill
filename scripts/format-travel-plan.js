@@ -22,6 +22,7 @@ const {
 const {
   getHotelProfile,
   parsePriceNum,
+  roomCountForParty,
   scoreHotelsInSegment,
 } = require("./hotel-scoring");
 
@@ -29,6 +30,7 @@ const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
 const TRIP = CFG.trip || {};
 const PARTY = TRIP.partySize || 1;
+const ROOMS = roomCountForParty(PARTY, TRIP.roomCount);
 const PROFILE = getProfile(TRIP.scoringProfile || CFG.scoring?.profile || "default");
 const ITIN = TRIP.itinerary || {};
 
@@ -165,7 +167,7 @@ function loadHotelsBySegment(hotelsPath) {
   for (const seg of TRIP.hotels || []) {
     const list = raw.filter((h) => h.segment === seg.segment);
     if (!list.length) continue;
-    const scored = scoreHotelsInSegment(list, hotelProfile, seg, PARTY);
+    const scored = scoreHotelsInSegment(list, hotelProfile, seg, PARTY, TRIP.roomCount);
     const pick = pickHotelForPlan(scored, hotelProfile);
     if (pick) bySegment.set(seg.segment, { pick, seg });
   }
@@ -227,7 +229,7 @@ function renderCarRental() {
 
 function renderHotelTable(hotelsBySegment) {
   if (!hotelsBySegment.size) return "";
-  let md = `## 四、酒店（${PARTY} 人 ≈ ${Math.ceil(PARTY / 2)} 间，**正式实价**）\n\n`;
+  let md = `## 四、酒店（${PARTY} 人 · **${ROOMS} 间**，**正式实价**）\n\n`;
   md += `| 日期段 | 推荐 | 实价/晚 | 段合计 | 预订 |\n|--------|------|---------|--------|------|\n`;
   for (const [, { pick, seg }] of hotelsBySegment) {
     const range = `${seg.checkIn.slice(5)}→${seg.checkOut.slice(5)}`;
@@ -263,7 +265,7 @@ function renderBudget(inboundByDate, hotelsBySegment) {
   }
   let hotelTotal = 0;
   for (const [, { pick }] of hotelsBySegment) {
-    hotelTotal += pick.stayTotal || pick.priceNum * (pick.nights || 1) * Math.ceil(PARTY / 2);
+    hotelTotal += pick.stayTotal || pick.priceNum * (pick.nights || 1) * ROOMS;
   }
   const car = ITIN.carRental?.costPerDay;
   const carLow = car ? car[0] * 7 : 3500;

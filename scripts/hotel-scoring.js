@@ -146,8 +146,14 @@ function nightsBetween(checkin, checkout) {
   return Math.max(1, Math.round((b - a) / 86400000));
 }
 
-function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1) {
+function roomCountForParty(partySize = 1, roomCount = null) {
+  if (roomCount != null && roomCount > 0) return roomCount;
+  return Math.max(1, Math.ceil(partySize / 2));
+}
+
+function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1, roomCount = null) {
   if (!hotels.length) return [];
+  const rooms = roomCountForParty(partySize, roomCount);
   const prices = hotels.map((h) => h.priceNum);
   return hotels
     .map((h) => {
@@ -176,8 +182,8 @@ function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1) {
         brandPts,
         score,
         nights,
-        roomEstimate: Math.ceil(partySize / 2),
-        stayTotal: h.priceNum * nights * Math.ceil(partySize / 2),
+        roomEstimate: rooms,
+        stayTotal: h.priceNum * nights * rooms,
         partySize,
         destName: segmentMeta?.destName || h.destName || "",
       };
@@ -241,6 +247,7 @@ module.exports = {
   DEFAULT_SEGMENT_POI,
   getHotelProfile,
   parsePriceNum,
+  roomCountForParty,
   scoreHotelsInSegment,
   buildDeductions,
   pricePointsAbsolute,

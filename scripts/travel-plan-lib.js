@@ -6,6 +6,7 @@ const { formatDateShort } = require("./load-monitor-config");
 const {
   getHotelProfile,
   parsePriceNum,
+  roomCountForParty,
   scoreHotelsInSegment,
 } = require("./hotel-scoring");
 const { getProfile, pickScenario, isSameDayArrival } = require("./scoring-profiles");
@@ -46,7 +47,7 @@ function loadHotelsBySegment(hotelsPath, trip, partySize) {
   for (const seg of trip.hotels || []) {
     const list = raw.filter((h) => h.segment === seg.segment);
     if (!list.length) continue;
-    const scored = scoreHotelsInSegment(list, hotelProfile, seg, partySize);
+    const scored = scoreHotelsInSegment(list, hotelProfile, seg, partySize, trip.roomCount);
     const pick = pickHotelForPlan(scored, hotelProfile);
     const backup = pickHotelBackup(scored, pick);
     bySegment.set(seg.segment, { pick, backup, scored, seg });
@@ -57,12 +58,13 @@ function loadHotelsBySegment(hotelsPath, trip, partySize) {
 function renderItineraryTable(trip, hotelsBySegment) {
   const days = trip.itinerary?.days || [];
   if (!days.length) return "";
+  const rooms = roomCountForParty(trip.partySize, trip.roomCount);
 
   let md = `## 📅 每日行程 + 酒店安排\n\n`;
   if (trip.itinerary?.overview) {
     md += `> ${trip.itinerary.overview}\n\n`;
   }
-  md += `| 日期 | 行程安排 | 车程 | 推荐酒店 | 档次 | 3间合计 | 预订 |\n`;
+  md += `| 日期 | 行程安排 | 车程 | 推荐酒店 | 档次 | ${rooms}间合计 | 预订 |\n`;
   md += `|------|----------|------|----------|------|---------|------|\n`;
 
   for (const day of days) {
@@ -76,7 +78,7 @@ function renderItineraryTable(trip, hotelsBySegment) {
       if (pick) {
         hotel = `**${pick.name}**`;
         star = pick.star || "—";
-        total = pick.stayTotal ? `¥${pick.stayTotal.toFixed(0)}` : `¥${(pick.priceNum * Math.ceil((trip.partySize || 1) / 2)).toFixed(0)}`;
+        total = pick.stayTotal ? `¥${pick.stayTotal.toFixed(0)}` : `¥${(pick.priceNum * rooms).toFixed(0)}`;
         book = pick.url ? `[订](${pick.url})` : "—";
       }
     } else if (day.stay && day.stay !== "—") {
@@ -92,7 +94,8 @@ function renderHotelBookingSheet(trip, hotelsBySegment) {
     return `## 🏨 酒店预订清单\n\n> 暂无酒店数据，请运行 \`npm run monitor:hotels\`\n\n`;
   }
 
-  let md = `## 🏨 酒店预订清单（${trip.partySize || 1} 人 ≈ ${Math.ceil((trip.partySize || 1) / 2)} 间）\n\n`;
+  const rooms = roomCountForParty(trip.partySize, trip.roomCount);
+  let md = `## 🏨 酒店预订清单（${trip.partySize || 1} 人 · **${rooms} 间**）\n\n`;
   md += `| 入住段 | 日期 | 首选（老人友好） | 备选 | 单间/晚 | 段合计 | 预订 |\n`;
   md += `|--------|------|------------------|------|---------|--------|------|\n`;
 

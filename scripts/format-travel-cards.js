@@ -11,6 +11,7 @@ const path = require("path");
 const { formatShanghaiTime } = require("./format-time");
 const { loadConfig } = require("./load-monitor-config");
 const { loadHotelsBySegment, segmentForDate } = require("./travel-plan-lib");
+const { roomCountForParty } = require("./hotel-scoring");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
@@ -62,6 +63,7 @@ function buildContext(variant) {
       itinerary: trip.itinerary || {},
       hotels: trip.hotels || [],
       hotelOverrides: DEFAULT_HOTEL_OVERRIDES,
+      rooms: roomCountForParty(trip.partySize, trip.roomCount),
       variantNote: trip.itinerary?.alternateRoute
         ? `> **可选路线：** ${trip.itinerary.alternateRoute}\n\n`
         : "",
@@ -77,6 +79,7 @@ function buildContext(variant) {
     itinerary: v.itinerary || {},
     hotels: v.hotels || trip.hotels || [],
     hotelOverrides: { ...DEFAULT_HOTEL_OVERRIDES, ...(v.hotelOverrides || {}) },
+    rooms: roomCountForParty(trip.partySize, trip.roomCount),
     variantNote: v.fallbackNote ? `> **备选说明：** ${v.fallbackNote}\n\n` : "",
     titleSuffix: " · 独库方案",
   };
@@ -95,7 +98,7 @@ function stayLine(dateStr, hotelsBySegment, dayStay, ctx) {
     if (pick && !override) {
       const book = pick.url ? `[预订](${pick.url})` : "";
       let s = `**${pick.name}**（${pick.star || "—"} · ¥${pick.priceNum}/间`;
-      if (pick.stayTotal) s += ` · 3间≈¥${pick.stayTotal.toFixed(0)}`;
+      if (pick.stayTotal) s += ` · ${ctx.rooms}间≈¥${pick.stayTotal.toFixed(0)}`;
       s += `）${book ? " " + book : ""}`;
       if (backup) s += `\n> 备选：${backup.name} ¥${backup.priceNum}/间`;
       return s;
@@ -151,7 +154,7 @@ function renderCards(ctx, hotelsPath, out) {
   const hotelsBySegment = loadHotelsBySegment(hotelsPath, tripForHotels, ctx.partySize);
 
   let md = `# 伊犁 8 天自驾旅行计划${ctx.titleSuffix}\n\n`;
-  md += `> ${ctx.label} · **${ctx.partySize} 人** · **10/1–10/8**\n`;
+  md += `> ${ctx.label} · **${ctx.partySize} 人 · ${ctx.rooms} 间** · **10/1–10/8**\n`;
   md += `> 生成时间：${formatShanghaiTime()}\n\n`;
   if (ctx.trip.bookedOutbound) {
     const b = ctx.trip.bookedOutbound;
