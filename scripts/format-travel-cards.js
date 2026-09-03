@@ -2,7 +2,9 @@
 /**
  * 8-day card-style travel plan (one card per day).
  *
- * Usage: node format-travel-cards.js [--out reports/xinjiang-travel-cards.md]
+ * Usage:
+ *   node format-travel-cards.js [--out reports/xinjiang-travel-cards.md]
+ *   node format-travel-cards.js --variant duku --out reports/xinjiang-travel-cards-duku.md
  */
 const fs = require("fs");
 const path = require("path");
@@ -12,11 +14,9 @@ const { loadHotelsBySegment, segmentForDate } = require("./travel-plan-lib");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
-const TRIP = CFG.trip || {};
-const PARTY = TRIP.partySize || 1;
 
-/** User-specified hotel overrides when API has no match */
-const HOTEL_OVERRIDES = {
+/** Shared overrides when API has no match (Plan B default) */
+const DEFAULT_HOTEL_OVERRIDES = {
   "2026-10-02": {
     name: "美豪丽致酒店(昭苏天马湖店)",
     price: "¥245/间",
@@ -42,11 +42,44 @@ const HOTEL_OVERRIDES = {
 function parseArgs(argv) {
   let out = path.join(ROOT, "reports/xinjiang-travel-cards.md");
   let hotelsPath = path.join(ROOT, "reports/xinjiang-hotels-latest.json");
+  let variant = null;
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === "--out" && argv[i + 1]) out = argv[++i];
     else if (argv[i] === "--hotels" && argv[i + 1]) hotelsPath = argv[++i];
+    else if (argv[i] === "--variant" && argv[i + 1]) variant = argv[++i];
   }
-  return { out, hotelsPath };
+  return { out, hotelsPath, variant };
+}
+
+function buildContext(variant) {
+  const trip = CFG.trip || {};
+  const partySize = trip.partySize || 1;
+  if (!variant) {
+    return {
+      trip,
+      partySize,
+      label: trip.label || "伊犁自驾",
+      itinerary: trip.itinerary || {},
+      hotels: trip.hotels || [],
+      hotelOverrides: DEFAULT_HOTEL_OVERRIDES,
+      variantNote: trip.itinerary?.alternateRoute
+        ? `> **可选路线：** ${trip.itinerary.alternateRoute}\n\n`
+        : "",
+      titleSuffix: "",
+    };
+  }
+  const v = trip.itineraryVariants?.[variant];
+  if (!v) throw new Error(`Unknown itinerary variant: ${variant}`);
+  return {
+    trip,
+    partySize,
+    label: v.label || trip.label,
+    itinerary: v.itinerary || {},
+    hotels: v.hotels || trip.hotels || [],
+    hotelOverrides: { ...DEFAULT_HOTEL_OVERRIDES, ...(v.hotelOverrides || {}) },
+    variantNote: v.fallbackNote ? `> **备选说明：** ${v.fallbackNote}\n\n` : "",
+    titleSuffix: " · 独库方案",
+  };
 }
 
 function weekday(dateStr) {
@@ -54,12 +87,12 @@ function weekday(dateStr) {
   return ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][d.getDay()];
 }
 
-function stayLine(dateStr, hotelsBySegment, dayStay) {
-  const override = HOTEL_OVERRIDES[dateStr];
-  const segKey = segmentForDate(dateStr, TRIP.hotels);
+function stayLine(dateStr, hotelsBySegment, dayStay, ctx) {
+  const override = ctx.hotelOverrides[dateStr];
+  const segKey = segmentForDate(dateStr, ctx.hotels);
   if (segKey && hotelsBySegment.has(segKey)) {
     const { pick, backup } = hotelsBySegment.get(segKey);
-    if (pick && !HOTEL_OVERRIDES[dateStr]) {
+    if (pick && !override) {
       const book = pick.url ? `[预订](${pick.url})` : "";
       let s = `**${pick.name}**（${pick.star || "—"} · ¥${pick.priceNum}/间`;
       if (pick.stayTotal) s += ` · 3间≈¥${pick.stayTotal.toFixed(0)}`;
@@ -73,8 +106,6 @@ function stayLine(dateStr, hotelsBySegment, dayStay) {
     if (override.price) s += `（${override.price}`;
     if (override.note) s += override.price ? ` · ${override.note}）` : `（${override.note}）`;
     else if (override.price) s += `）`;
-    // Still show API pick as backup if different segment had data
-    const segKey = segmentForDate(dateStr, TRIP.hotels);
     if (segKey && hotelsBySegment.has(segKey)) {
       const { pick } = hotelsBySegment.get(segKey);
       if (pick && !pick.name.includes("天麓")) {
@@ -87,14 +118,14 @@ function stayLine(dateStr, hotelsBySegment, dayStay) {
   return dayStay || "—";
 }
 
-function renderCard(day, hotelsBySegment) {
+function renderCard(day, hotelsBySegment, ctx) {
   const wd = weekday(day.date);
   const head = `${day.cardId || day.label} ${day.date.slice(5)} ${day.title || ""}`.trim();
   let md = `### 📍 ${head}（${wd}）\n\n`;
   md += `| | |\n|---|---|\n`;
   md += `| **行程** | ${day.activity} |\n`;
   md += `| **车程** | ${day.drive || "—"} |\n`;
-  md += `| **住宿** | ${stayLine(day.date, hotelsBySegment, day.stay)} |\n`;
+  md += `| **住宿** | ${stayLine(day.date, hotelsBySegment, day.stay, ctx)} |\n`;
   if (day.note) md += `| **提示** | ${day.note} |\n`;
   md += `\n---\n\n`;
   return md;
@@ -114,34 +145,32 @@ function renderTips(itinerary) {
   return md + "\n";
 }
 
-function main() {
-  const { out, hotelsPath } = parseArgs(process.argv);
-  const days = TRIP.itinerary?.days || [];
-  const hotelsBySegment = loadHotelsBySegment(hotelsPath, TRIP, PARTY);
+function renderCards(ctx, hotelsPath, out) {
+  const days = ctx.itinerary?.days || [];
+  const tripForHotels = { ...ctx.trip, hotels: ctx.hotels };
+  const hotelsBySegment = loadHotelsBySegment(hotelsPath, tripForHotels, ctx.partySize);
 
-  let md = `# 伊犁 8 天自驾旅行计划\n\n`;
-  md += `> ${TRIP.label || "伊犁自驾"} · **${PARTY} 人** · **10/1–10/8**\n`;
+  let md = `# 伊犁 8 天自驾旅行计划${ctx.titleSuffix}\n\n`;
+  md += `> ${ctx.label} · **${ctx.partySize} 人** · **10/1–10/8**\n`;
   md += `> 生成时间：${formatShanghaiTime()}\n\n`;
-  if (TRIP.bookedOutbound) {
-    const b = TRIP.bookedOutbound;
+  if (ctx.trip.bookedOutbound) {
+    const b = ctx.trip.bookedOutbound;
     md += `✈️ **去程已订：** ${b.route} ${b.date} ${b.flightNo}（${b.note || ""}）\n\n`;
   }
-  if (TRIP.itinerary?.overview) {
-    md += `**环线概要：** ${TRIP.itinerary.overview}\n\n`;
+  if (ctx.itinerary?.overview) {
+    md += `**环线概要：** ${ctx.itinerary.overview}\n\n`;
   }
-  if (TRIP.itinerary?.alternateRoute) {
-    md += `> **可选路线：** ${TRIP.itinerary.alternateRoute}\n\n`;
-  }
+  if (ctx.variantNote) md += ctx.variantNote;
   md += `---\n\n`;
 
   for (const day of days) {
-    md += renderCard(day, hotelsBySegment);
+    md += renderCard(day, hotelsBySegment, ctx);
   }
 
-  md += renderTips(TRIP.itinerary);
+  md += renderTips(ctx.itinerary);
 
-  if (TRIP.itinerary?.carRental) {
-    const c = TRIP.itinerary.carRental;
+  if (ctx.itinerary?.carRental) {
+    const c = ctx.itinerary.carRental;
     md += `## 🚗 租车\n\n`;
     md += `- **车型：** ${c.type}\n`;
     md += `- **取还：** ${c.pickup} → ${c.return}\n`;
@@ -154,6 +183,12 @@ function main() {
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, md);
   process.stderr.write(`Travel cards saved: ${out}\n`);
+}
+
+function main() {
+  const { out, hotelsPath, variant } = parseArgs(process.argv);
+  const ctx = buildContext(variant);
+  renderCards(ctx, hotelsPath, out);
 }
 
 main();

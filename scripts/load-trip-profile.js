@@ -31,6 +31,7 @@ function loadTripProfile(cfg) {
       returnDateCompare: [],
       hotels: [],
       itinerary: null,
+      itineraryVariants: {},
       profilePath: null,
     };
   }
@@ -46,6 +47,7 @@ function loadTripProfile(cfg) {
     returnDateCompare: Array.isArray(raw.returnDateCompare) ? raw.returnDateCompare : [],
     hotels: Array.isArray(raw.hotels) ? raw.hotels : [],
     itinerary: raw.itinerary || null,
+    itineraryVariants: raw.itineraryVariants || {},
     profilePath,
   };
 }

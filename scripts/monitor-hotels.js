@@ -153,7 +153,16 @@ async function main() {
   const trip = profilePath
     ? loadTripProfile({ tripProfilePath: profilePath, focusMode: false })
     : cfg.trip;
-  const segments = trip.hotels || [];
+  const segments = [...(trip.hotels || [])];
+  const seen = new Set(segments.map((s) => s.segment));
+  for (const variant of Object.values(trip.itineraryVariants || {})) {
+    for (const seg of variant.hotels || []) {
+      if (!seen.has(seg.segment)) {
+        segments.push(seg);
+        seen.add(seg.segment);
+      }
+    }
+  }
   if (!segments.length) {
     process.stderr.write("No hotel segments in trip profile — skipping\n");
     return;

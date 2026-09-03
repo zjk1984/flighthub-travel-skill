@@ -1,10 +1,10 @@
 # 🏨 每日 TOP3 酒店评分推荐
 
-> 生成时间：2026-09-03 14:53:27 (Asia/Shanghai)
+> 生成时间：2026-09-03 15:05:31 (Asia/Shanghai)
 
 > 行程：伊犁8天自驾 · 伊昭+赛湖（Plan B）
 
-- 入住段：5 段 | 候选酒店：29 条 | 5 人 ≈ 3 间
+- 入住段：5 段 | 候选酒店：35 条 | 5 人 ≈ 3 间
 
 ## 📐 酒店评分标准（v1 · 家庭·老人友好）
 
@@ -33,9 +33,9 @@
 
 | 排名 | 评分 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 3间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 94 | 伊宁 | 星程伊宁宁远路国际机场酒店 | 舒适型 | ¥369 | 96 | 100 | 90 | 75 | 100 | ¥1107 | 10-01→10-02 | 近伊犁职业技术学院 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2c2KKA) |
-| 2 | 79.3 | 伊宁 | 星程伊宁万容广场酒店 | 舒适型 | ¥396 | 72 | 65 | 90 | 75 | 100 | ¥1188 | 10-01→10-02 | 近汉宾公园 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1SY6Xc) |
-| 3 | 77.3 | 伊宁 | 星程伊宁西环路新茂业酒店 | 舒适型 | ¥405 | 64 | 65 | 90 | 75 | 100 | ¥1215 | 10-01→10-02 | 近农四师客运站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38m9Hi) |
+| 1 | 94 | 伊宁 | 星程伊宁宁远路国际机场酒店 | 舒适型 | ¥369 | 96 | 100 | 90 | 75 | 100 | ¥1107 | 10-01→10-02 | 近伊犁职业技术学院 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2GyJoM) |
+| 2 | 79.3 | 伊宁 | 星程伊宁万容广场酒店 | 舒适型 | ¥396 | 72 | 65 | 90 | 75 | 100 | ¥1188 | 10-01→10-02 | 近汉宾公园 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4PQpc2) |
+| 3 | 77.3 | 伊宁 | 星程伊宁西环路新茂业酒店 | 舒适型 | ¥405 | 64 | 65 | 90 | 75 | 100 | ¥1215 | 10-01→10-02 | 近农四师客运站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dk5qG) |
 
 **扣分项明细：**
 
@@ -46,7 +46,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
    - 单晚 × 3 间 ≈ ¥1107（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2c2KKA)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2GyJoM)
 
 2. **伊宁 · 星程伊宁万容广场酒店**（综合 79.3）
    - 价格 ¥396/晚：综合价分 72（绝对+同段相对各 50%）
@@ -55,7 +55,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
    - 单晚 × 3 间 ≈ ¥1188（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1SY6Xc)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4PQpc2)
 
 3. **伊宁 · 星程伊宁西环路新茂业酒店**（综合 77.3）
    - 价格 ¥405/晚：综合价分 64（绝对+同段相对各 50%）
@@ -64,7 +64,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
    - 单晚 × 3 间 ≈ ¥1215（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F38m9Hi)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1dk5qG)
 
 ### 10/4（2026-10-04） · D4 特克斯
 
@@ -72,7 +72,7 @@
 
 | 排名 | 评分 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 3间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 94.3 | 特克斯 | 特克斯八卦城迎宾南路亚朵酒店（V3.6） | 高档型 | ¥390 | 92 | 100 | 95 | 75 | 100 | ¥1170 | 10-04→10-05 | 近七十八团客运站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18aZ7n) |
+| 1 | 94.3 | 特克斯 | 特克斯八卦城迎宾南路亚朵酒店（V3.6） | 高档型 | ¥390 | 92 | 100 | 95 | 75 | 100 | ¥1170 | 10-04→10-05 | 近七十八团客运站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HozIy) |
 
 **扣分项明细：**
 
@@ -83,36 +83,46 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
    - 单晚 × 3 间 ≈ ¥1170（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18aZ7n)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1HozIy)
 
 ### 10/5（2026-10-05） · D5 伊宁
 
-> 目的地：**伊宁** | 候选 2 家
+> 目的地：**伊宁** | 候选 8 家
 
 | 排名 | 评分 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 3间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 85.2 | 伊宁 | 全季丽水火车站酒店 | 舒适型 | ¥360 | 96 | 65 | 90 | 75 | 100 | ¥1080 | 10-05→10-06 | 近丽水站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QWR4x) |
-| 2 | 72.8 | 伊宁 | 全季丽水遂昌酒店 | 舒适型 | ¥414 | 46 | 65 | 90 | 75 | 100 | ¥1242 | 10-05→10-06 | 近遂昌十八里翠水利旅游区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0l1inY) |
+| 1 | 86.3 | 伊宁 | 伊宁天缘商务酒店 | 舒适型 | ¥238 | 80 | 100 | 90 | 75 | 75 | ¥714 | 10-05→10-06 | 近喀赞其民俗旅游区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1L435r) |
+| 2 | 84.5 | 伊宁 | 伊宁美达快捷酒店 | 舒适型 | ¥178 | 85 | 88 | 90 | 75 | 75 | ¥534 | 10-05→10-06 | 近仁和步行街 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JmVsA) |
+| 3 | 83.3 | 伊宁 | 伊宁市夜幕宾馆 | 舒适型 | ¥322 | 62 | 100 | 90 | 75 | 85 | ¥966 | 10-05→10-06 | 近六星美食街 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F23rBW4) |
 
 **扣分项明细：**
 
-1. **伊宁 · 全季丽水火车站酒店**（综合 85.2）
-   - 价格 ¥360/晚：综合价分 96（绝对+同段相对各 50%）
-   - 位置 近丽水站：未命中分段 POI 关键词（位置分 65，较满分扣 35）
+1. **伊宁 · 伊宁天缘商务酒店**（综合 86.3）
+   - 价格 ¥238/晚：综合价分 80（绝对+同段相对各 50%）
+   - 位置 近喀赞其民俗旅游区：命中分段 POI 偏好（位置分 100）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
-   - 品牌：连锁/优选品牌（品牌分 100）
-   - 单晚 × 3 间 ≈ ¥1080（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QWR4x)
+   - 品牌/类型：品牌分 75
+   - 单晚 × 3 间 ≈ ¥714（3 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1L435r)
 
-2. **伊宁 · 全季丽水遂昌酒店**（综合 72.8）
-   - 价格 ¥414/晚：综合价分 46（绝对+同段相对各 50%）
-   - 位置 近遂昌十八里翠水利旅游区：未命中分段 POI 关键词（位置分 65，较满分扣 35）
+2. **伊宁 · 伊宁美达快捷酒店**（综合 84.5）
+   - 价格 ¥178/晚：低价档（价格分 85）
+   - 位置 近仁和步行街：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
-   - 品牌：连锁/优选品牌（品牌分 100）
-   - 单晚 × 3 间 ≈ ¥1242（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0l1inY)
+   - 品牌/类型：品牌分 75
+   - 单晚 × 3 间 ≈ ¥534（3 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4JmVsA)
+
+3. **伊宁 · 伊宁市夜幕宾馆**（综合 83.3）
+   - 价格 ¥322/晚：综合价分 62（绝对+同段相对各 50%）
+   - 位置 近六星美食街：命中分段 POI 偏好（位置分 100）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 85
+   - 单晚 × 3 间 ≈ ¥966（3 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F23rBW4)
 
 ### 10/6（2026-10-06） · D6 赛湖东门
 
@@ -120,9 +130,9 @@
 
 | 排名 | 评分 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 3间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 82.5 | 博乐 | 博乐友好购物中心团结北路亚朵酒店 | 高档型 | ¥424 | 80 | 65 | 95 | 75 | 100 | ¥1272 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0PmHSX) |
-| 2 | 82 | 博乐 | 博乐万达悦华酒店 | 高档型 | ¥210 | 93 | 65 | 95 | 75 | 75 | ¥630 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4a8ybU) |
-| 3 | 82 | 博乐 | 西海明珠大酒店 | 高档型 | ¥290 | 87 | 65 | 95 | 75 | 85 | ¥870 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3iNh5K) |
+| 1 | 82.5 | 博乐 | 博乐友好购物中心团结北路亚朵酒店 | 高档型 | ¥424 | 80 | 65 | 95 | 75 | 100 | ¥1272 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eC28C) |
+| 2 | 82 | 博乐 | 博乐万达悦华酒店 | 高档型 | ¥210 | 93 | 65 | 95 | 75 | 75 | ¥630 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qzR5t) |
+| 3 | 82 | 博乐 | 西海明珠大酒店 | 高档型 | ¥290 | 87 | 65 | 95 | 75 | 85 | ¥870 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Xwepk) |
 
 **扣分项明细：**
 
@@ -133,7 +143,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
    - 单晚 × 3 间 ≈ ¥1272（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0PmHSX)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4eC28C)
 
 2. **博乐 · 博乐万达悦华酒店**（综合 82）
    - 价格 ¥210/晚：综合价分 93（绝对+同段相对各 50%）
@@ -142,7 +152,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
    - 单晚 × 3 间 ≈ ¥630（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4a8ybU)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qzR5t)
 
 3. **博乐 · 西海明珠大酒店**（综合 82）
    - 价格 ¥290/晚：综合价分 87（绝对+同段相对各 50%）
@@ -151,7 +161,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
    - 单晚 × 3 间 ≈ ¥870（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3iNh5K)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Xwepk)
 
 ### 10/7（2026-10-07） · D7 伊宁
 
@@ -159,9 +169,9 @@
 
 | 排名 | 评分 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 3间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 88.5 | 伊宁 | 星程伊宁宁远路国际机场酒店 | 舒适型 | ¥252 | 74 | 100 | 90 | 75 | 100 | ¥756 | 10-07→10-08 | 近伊犁职业技术学院 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MXSR3) |
-| 2 | 82.8 | 伊宁 | 伊宁天缘商务酒店 | 舒适型 | ¥238 | 78 | 88 | 90 | 75 | 75 | ¥714 | 10-07→10-08 | 近喀赞其民俗旅游区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Oyy89) |
-| 3 | 81 | 伊宁 | 麗枫酒店.伊宁机场六星街店 | 舒适型 | ¥263 | 71 | 88 | 90 | 75 | 75 | ¥789 | 10-07→10-08 | 近中国农业银行(伊宁机场路支行) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0YoTmT) |
+| 1 | 88.5 | 伊宁 | 星程伊宁宁远路国际机场酒店 | 舒适型 | ¥252 | 74 | 100 | 90 | 75 | 100 | ¥756 | 10-07→10-08 | 近伊犁职业技术学院 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F03IrwT) |
+| 2 | 82.8 | 伊宁 | 伊宁天缘商务酒店 | 舒适型 | ¥238 | 78 | 88 | 90 | 75 | 75 | ¥714 | 10-07→10-08 | 近喀赞其民俗旅游区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3c2lKY) |
+| 3 | 81 | 伊宁 | 麗枫酒店.伊宁机场六星街店 | 舒适型 | ¥263 | 71 | 88 | 90 | 75 | 75 | ¥789 | 10-07→10-08 | 近中国农业银行(伊宁机场路支行) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2RMLbw) |
 
 **扣分项明细：**
 
@@ -172,7 +182,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
    - 单晚 × 3 间 ≈ ¥756（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2MXSR3)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F03IrwT)
 
 2. **伊宁 · 伊宁天缘商务酒店**（综合 82.8）
    - 价格 ¥238/晚：综合价分 78（绝对+同段相对各 50%）
@@ -181,7 +191,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
    - 单晚 × 3 间 ≈ ¥714（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Oyy89)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3c2lKY)
 
 3. **伊宁 · 麗枫酒店.伊宁机场六星街店**（综合 81）
    - 价格 ¥263/晚：综合价分 71（绝对+同段相对各 50%）
@@ -190,7 +200,7 @@
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
    - 单晚 × 3 间 ≈ ¥789（3 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0YoTmT)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2RMLbw)
 
 ---
 基于飞猪 fly.ai 实时数据
