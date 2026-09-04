@@ -29,6 +29,19 @@ node "$SCRIPT_DIR/monitor-run.js" --phase return --flights-only "${EXTRA_ARGS[@]
 
 if feishu_notify_enabled && [[ "${FEISHU_SKIP:-}" != "1" ]]; then
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
-  echo "Sending Feishu (ranked only)..." >&2
-  node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
+  FLIGHTS_BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
+  FEISHU_REPORT="${FEISHU_REPORT:-all}"
+  echo "Sending Feishu (return flights: $FEISHU_REPORT)..." >&2
+  case "$FEISHU_REPORT" in
+    ranked)
+      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
+      ;;
+    brief)
+      [[ -f "$FLIGHTS_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程机票简报" "$FLIGHTS_BRIEF" || true
+      ;;
+    all|*)
+      node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
+      [[ -f "$FLIGHTS_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程机票简报" "$FLIGHTS_BRIEF" || true
+      ;;
+  esac
 fi
