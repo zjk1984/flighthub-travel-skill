@@ -143,7 +143,6 @@ function main() {
     inboundByDate.get(f.date).push(f);
   }
 
-  const prefs = getReturnPreferences(TRIP);
   let md = `# 返程机票简报\n\n`;
   md += `> 生成时间：${formatShanghaiTime()} | 评分画像：**${PROFILE.label}** | **${PARTY} 人**\n\n`;
   if (TRIP.bookedOutbound) {
