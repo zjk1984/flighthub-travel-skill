@@ -1,9 +1,9 @@
 {
-  "routeLabel": "伊犁8天 · 独库+赛湖 · 10/8 返广州",
+  "routeLabel": "伊犁8天 · 独库+赛湖 · 10/7-10/8 返广州",
   "origins": ["广州"],
   "destinations": ["伊宁"],
   "outboundDates": ["2026-10-01"],
-  "returnDates": ["2026-10-08"],
+  "returnDates": ["2026-10-07", "2026-10-08"],
   "directOnlyAirports": [],
   "tripProfilePath": "config/trip-profile.json",
   "focusMode": true,

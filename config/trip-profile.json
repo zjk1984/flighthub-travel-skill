@@ -24,10 +24,10 @@
   "focusRoutes": {
     "outbound": [],
     "inbound": [
-      { "origin": "伊宁", "dest": "广州", "dates": ["2026-10-08"] }
+      { "origin": "伊宁", "dest": "广州", "dates": ["2026-10-07", "2026-10-08"] }
     ]
   },
-  "returnDateCompare": ["2026-10-08"],
+  "returnDateCompare": ["2026-10-07", "2026-10-08"],
   "itinerary": {
     "principles": ["独库+伊昭出发前必查路况", "独库封路立即改 Plan B", "老人不赶夜路"],
     "overview": "伊宁 → 伊昭 → 昭苏(2d) → 特克斯 → **独库北段** → 赛里木湖 → 果子沟 → 伊宁 → 10/8 返广州",
