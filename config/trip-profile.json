@@ -15,15 +15,26 @@
     },
     "notes": [
       "严格顺序：1 去程 → 2 返程 → 3 Plan A/B → 4 酒店",
-      "确认返程后在 workflow.confirmed.return 设 true，并填写 bookedReturn",
-      "确认路线后在 workflow.confirmed.plan 设 duku 或 planb"
+      "阶段2 返程：TOP3 纯机票评分，不看 D8 将军府时间窗",
+      "阶段3 计划：itineraryConstraints 仅作衔接提示，不改动 TOP3",
+      "确认返程后 workflow.confirmed.return=true；确认路线后 workflow.confirmed.plan=duku|planb"
     ]
   },
   "returnPreferences": {
-    "minDepartureTime": "12:00",
     "targetPricePerPerson": 1500,
     "adjacentDayFallback": true,
-    "note": "D8 将军府 11:00 取行李后出发；12:00 前起飞与行程冲突"
+    "filterTop3ByItinerary": false,
+    "note": "阶段2：纯机票评分与比价；不绑定 D8 行程"
+  },
+  "itineraryConstraints": {
+    "note": "阶段3 旅行计划衔接提示（不影响返程 TOP3 排名）",
+    "byDate": {
+      "2026-10-08": {
+        "minDepartureTime": "12:00",
+        "activity": "D8 09:00 伊犁将军府 → 11:00 取行李 → 机场",
+        "note": "12:00 前起飞与当日行程冲突，订票前请核对"
+      }
+    }
   },
   "skipOutboundMonitor": true,
   "bookedOutbound": {

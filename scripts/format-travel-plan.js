@@ -25,6 +25,7 @@ const {
   roomCountForParty,
   scoreHotelsInSegment,
 } = require("./hotel-scoring");
+const { renderItineraryConflictAdvisory } = require("./return-flight-prefs");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
@@ -338,6 +339,8 @@ function main() {
   md += `---\n\n`;
   md += renderBookedOutbound();
   md += renderReturnSection(inboundByDate);
+  const flatInbound = [...inboundByDate.values()].flat();
+  md += renderItineraryConflictAdvisory(flatInbound, TRIP, PARTY, "plan");
   md += `---\n\n`;
   md += renderCarRental();
   md += renderItinerary(hotelsBySegment);

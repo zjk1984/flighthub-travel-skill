@@ -167,7 +167,6 @@ async function fetchAdjacentFallback(map, cache, options) {
 
 function printReturnSummary(map) {
   const trip = CFG.trip || {};
-  const prefs = getReturnPreferences(trip);
   const dates = primaryReturnDates(trip, CFG);
   const routes = inboundRoutes(trip);
   if (!dates.length) return;
@@ -179,7 +178,7 @@ function printReturnSummary(map) {
       const main = countMainApiFlights(entry);
       const total = (entry?.flights || []).length;
       const line =
-        `Summary ${r.origin}→${r.dest} ${d}: main=${main}, total=${total}, window≥${prefs.minDepartureTime}`;
+        `Summary ${r.origin}→${r.dest} ${d}: main=${main}, total=${total} (phase2: score-only)`;
       process.stderr.write(`${line}\n`);
     }
   }

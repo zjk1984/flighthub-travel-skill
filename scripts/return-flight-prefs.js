@@ -1,7 +1,11 @@
 /**
- * Return flight preferences: time window, target price, feasibility.
+ * Return flight preferences (phase 2) vs itinerary constraints (phase 3).
+ *
+ * Phase 2 — return ranking: price/score only; do NOT filter TOP3 by D8 将军府 etc.
+ * Phase 3 — travel plan: optional itineraryConflict advisory from itineraryConstraints.
  */
 const { parseRoute } = require("./load-monitor-config");
+const { resolveWorkflowState } = require("./trip-workflow");
 
 function parseTimeToMinutes(hhmm) {
   if (!hhmm || typeof hhmm !== "string") return null;
@@ -18,34 +22,83 @@ function depMinutes(f) {
 function getReturnPreferences(trip) {
   const p = trip?.returnPreferences || {};
   return {
-    minDepartureTime: p.minDepartureTime || "12:00",
     targetPricePerPerson: p.targetPricePerPerson > 0 ? p.targetPricePerPerson : null,
     adjacentDayFallback: p.adjacentDayFallback !== false,
+    /** Explicit opt-in only; default false — return phase ranks all credible flights */
+    filterTop3ByItinerary: p.filterTop3ByItinerary === true,
     note: p.note || "",
   };
 }
 
-function isFeasibleReturnFlight(f, prefs) {
-  if (!f || isOutboundLike(f)) return true;
-  const min = parseTimeToMinutes(prefs.minDepartureTime);
-  const dep = depMinutes(f);
-  if (min == null || dep == null) return true;
-  return dep >= min;
+function getItineraryConstraints(trip) {
+  const ic = trip?.itineraryConstraints || {};
+  return {
+    byDate: ic.byDate || {},
+    note: ic.note || "",
+  };
 }
 
-function isOutboundLike(f) {
-  return false;
+function minDepartureForDate(trip, date) {
+  const row = getItineraryConstraints(trip).byDate?.[date];
+  return row?.minDepartureTime || null;
+}
+
+function shouldFilterTop3ByItinerary(trip) {
+  return getReturnPreferences(trip).filterTop3ByItinerary;
+}
+
+function isFeasibleForItinerary(f, trip) {
+  const min = minDepartureForDate(trip, f?.date);
+  if (!min) return true;
+  const dep = depMinutes(f);
+  const minM = parseTimeToMinutes(min);
+  if (minM == null || dep == null) return true;
+  return dep >= minM;
+}
+
+/** @deprecated use isFeasibleForItinerary — kept for tests */
+function isFeasibleReturnFlight(f, prefs) {
+  void prefs;
+  return true;
+}
+
+function splitByItinerary(flights, trip) {
+  const feasible = [];
+  const conflict = [];
+  for (const f of flights) {
+    if (isFeasibleForItinerary(f, trip)) feasible.push(f);
+    else conflict.push(f);
+  }
+  return { feasible, conflict };
 }
 
 function splitFeasible(flights, trip) {
-  const prefs = getReturnPreferences(trip);
-  const feasible = [];
-  const other = [];
-  for (const f of flights) {
-    if (isFeasibleReturnFlight(f, prefs)) feasible.push(f);
-    else other.push(f);
+  if (!shouldFilterTop3ByItinerary(trip)) {
+    return { feasible: flights, other: [], prefs: getReturnPreferences(trip) };
   }
-  return { feasible, other, prefs };
+  const { feasible, conflict } = splitByItinerary(flights, trip);
+  return { feasible, other: conflict, prefs: getReturnPreferences(trip) };
+}
+
+function inboundRankingPool(flights, trip) {
+  const verified = flights.filter((f) => f.priceVerified !== false);
+  const { feasible } = splitFeasible(verified.length ? verified : flights, trip);
+  return feasible.length ? feasible : verified.length ? verified : flights;
+}
+
+function shouldShowItineraryAdvisory(trip, context = "ranked") {
+  const ic = getItineraryConstraints(trip);
+  if (!Object.keys(ic.byDate).length) return false;
+  return context === "plan";
+}
+
+function renderPhase2Notice(trip) {
+  const { currentPhase } = resolveWorkflowState(trip);
+  if (currentPhase !== "return") return "";
+  return (
+    `> **阶段 2（返程机票）：** TOP3 按价格/评分/画像排序，**不**按 D8 行程过滤。` +
+    `行程衔接约束见阶段 3 \`skill:plan\`。\n\n`
+  );
 }
 
 function countMainApiFlights(entry) {
@@ -97,7 +150,7 @@ function renderInventoryAlert(results, trip, cfg) {
   if (!lines.length) return "";
   return (
     `## ⚠️ 库存告警\n\n` +
-    `> 以下日期主查询无联程结果，TOP3 可能仅含自定义中转或与行程冲突的航班；请以 App 实价为准或查看下方「相邻日参考」。\n\n` +
+    `> 以下日期主查询无联程结果；请以 App 实价为准或查看「相邻日参考」。\n\n` +
     lines.join("\n") +
     `\n\n`
   );
@@ -107,10 +160,8 @@ function renderTargetPriceAlert(flights, trip, partySize = 1) {
   const prefs = getReturnPreferences(trip);
   if (!prefs.targetPricePerPerson) return "";
   const verified = flights.filter((f) => f.priceVerified !== false);
-  const feasible = verified.filter((f) => isFeasibleReturnFlight(f, prefs));
-  const pool = feasible.length ? feasible : verified;
-  if (!pool.length) return "";
-  const best = pool.reduce((a, b) => (a.priceNum < b.priceNum ? a : b));
+  if (!verified.length) return "";
+  const best = verified.reduce((a, b) => (a.priceNum < b.priceNum ? a : b));
   if (best.priceNum > prefs.targetPricePerPerson) return "";
   const total = best.priceNum * partySize;
   return (
@@ -120,21 +171,44 @@ function renderTargetPriceAlert(flights, trip, partySize = 1) {
   );
 }
 
-function renderInfeasibleSection(flights, trip, partySize = 1) {
-  const { other, prefs } = splitFeasible(flights, trip);
-  if (!other.length) return "";
-  let md = `## ⛔ 不推荐（与行程冲突 · 起飞 < ${prefs.minDepartureTime}）\n\n`;
-  md += `> D8 将军府后 **${prefs.minDepartureTime}** 前起飞无法衔接，仅供参考。\n\n`;
-  md += `| 航班 | 航线 | 价格 | 出发 | 到达 |\n`;
-  md += `|------|------|------|------|------|\n`;
-  for (const f of other.sort((a, b) => b.depDateTime.localeCompare(a.depDateTime)).slice(0, 8)) {
-    const price =
-      partySize > 1
-        ? `¥${f.priceNum.toFixed(0)}/人 (¥${(f.priceNum * partySize).toFixed(0)})`
-        : `¥${f.priceNum.toFixed(0)}`;
-    md += `| ${f.flightNo} | ${f.route || ""} | ${price} | ${f.depDateTime?.slice(11, 16)} | ${f.arrDateTime?.slice(11, 16)} |\n`;
+function renderItineraryConflictAdvisory(flights, trip, partySize = 1, context = "plan") {
+  if (!shouldShowItineraryAdvisory(trip, context)) return "";
+  const ic = getItineraryConstraints(trip);
+  const { conflict } = splitByItinerary(
+    flights.filter((f) => f.priceVerified !== false),
+    trip
+  );
+  if (!conflict.length) return "";
+
+  let md = `## 📋 行程衔接提示（阶段 3 · 不影响返程 TOP3 排名）\n\n`;
+  if (ic.note) md += `> ${ic.note}\n\n`;
+
+  const byDate = new Map();
+  for (const f of conflict) {
+    if (!byDate.has(f.date)) byDate.set(f.date, []);
+    byDate.get(f.date).push(f);
   }
-  return md + "\n";
+  for (const [date, list] of [...byDate.entries()].sort()) {
+    const min = minDepartureForDate(trip, date);
+    const row = ic.byDate?.[date];
+    md += `### ${date.slice(5)}（${date}）起飞早于 **${min}** 的航班\n\n`;
+    if (row?.activity) md += `> 当日安排：${row.activity}\n\n`;
+    md += `| 航班 | 价格 | 出发 | 到达 |\n|------|------|------|------|\n`;
+    for (const f of list.sort((a, b) => a.priceNum - b.priceNum).slice(0, 6)) {
+      const price =
+        partySize > 1
+          ? `¥${f.priceNum.toFixed(0)}/人`
+          : `¥${f.priceNum.toFixed(0)}`;
+      md += `| ${f.flightNo} | ${price} | ${f.depDateTime?.slice(11, 16)} | ${f.arrDateTime?.slice(11, 16)} |\n`;
+    }
+    md += "\n";
+  }
+  return md;
+}
+
+/** @deprecated use renderItineraryConflictAdvisory in plan phase only */
+function renderInfeasibleSection(flights, trip, partySize = 1) {
+  return renderItineraryConflictAdvisory(flights, trip, partySize, "plan");
 }
 
 function renderAdjacentReference(scoredFlights, results) {
@@ -158,8 +232,16 @@ function renderAdjacentReference(scoredFlights, results) {
 module.exports = {
   parseTimeToMinutes,
   getReturnPreferences,
+  getItineraryConstraints,
+  minDepartureForDate,
+  shouldFilterTop3ByItinerary,
+  isFeasibleForItinerary,
   isFeasibleReturnFlight,
   splitFeasible,
+  splitByItinerary,
+  inboundRankingPool,
+  shouldShowItineraryAdvisory,
+  renderPhase2Notice,
   countMainApiFlights,
   countCustomFlights,
   addDays,
@@ -167,6 +249,7 @@ module.exports = {
   inboundRoutes,
   renderInventoryAlert,
   renderTargetPriceAlert,
+  renderItineraryConflictAdvisory,
   renderInfeasibleSection,
   renderAdjacentReference,
 };

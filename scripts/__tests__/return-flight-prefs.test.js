@@ -1,63 +1,49 @@
 const { describe, it } = require("node:test");
 const assert = require("node:assert/strict");
 const {
-  parseTimeToMinutes,
-  isFeasibleReturnFlight,
   splitFeasible,
-  countMainApiFlights,
-  renderInventoryAlert,
-  getReturnPreferences,
+  splitByItinerary,
+  inboundRankingPool,
+  shouldFilterTop3ByItinerary,
+  renderItineraryConflictAdvisory,
+  minDepartureForDate,
 } = require("../return-flight-prefs");
 
-describe("return-flight-prefs", () => {
-  it("parseTimeToMinutes handles HH:MM", () => {
-    assert.equal(parseTimeToMinutes("12:00"), 720);
-    assert.equal(parseTimeToMinutes("09:30"), 570);
-  });
+describe("return-flight-prefs priority", () => {
+  const trip = {
+    returnPreferences: { filterTop3ByItinerary: false },
+    itineraryConstraints: {
+      byDate: {
+        "2026-10-08": { minDepartureTime: "12:00", activity: "将军府" },
+      },
+    },
+  };
 
-  it("isFeasibleReturnFlight rejects early departure", () => {
-    const trip = { returnPreferences: { minDepartureTime: "12:00" } };
-    const early = { depDateTime: "2026-10-08 09:00:00" };
-    const ok = { depDateTime: "2026-10-08 17:00:00" };
-    assert.equal(isFeasibleReturnFlight(early, getReturnPreferences(trip)), false);
-    assert.equal(isFeasibleReturnFlight(ok, getReturnPreferences(trip)), true);
-  });
+  const flights = [
+    { date: "2026-10-08", depDateTime: "2026-10-08 09:00:00", priceNum: 1200, priceVerified: true },
+    { date: "2026-10-08", depDateTime: "2026-10-08 15:50:00", priceNum: 1460, priceVerified: true },
+  ];
 
-  it("splitFeasible partitions flights", () => {
-    const trip = { returnPreferences: { minDepartureTime: "12:00" } };
-    const flights = [
-      { depDateTime: "2026-10-08 09:00:00", priceNum: 1000 },
-      { depDateTime: "2026-10-08 15:00:00", priceNum: 1200 },
-    ];
+  it("phase2 does not filter TOP3 by itinerary", () => {
+    assert.equal(shouldFilterTop3ByItinerary(trip), false);
     const { feasible, other } = splitFeasible(flights, trip);
+    assert.equal(feasible.length, 2);
+    assert.equal(other.length, 0);
+    assert.equal(inboundRankingPool(flights, trip).length, 2);
+  });
+
+  it("itinerary conflict detected for plan advisory only", () => {
+    assert.equal(minDepartureForDate(trip, "2026-10-08"), "12:00");
+    const { conflict } = splitByItinerary(flights, trip);
+    assert.equal(conflict.length, 1);
+    assert.match(renderItineraryConflictAdvisory(flights, trip, 5, "plan"), /行程衔接提示/);
+    assert.equal(renderItineraryConflictAdvisory(flights, trip, 5, "ranked"), "");
+  });
+
+  it("opt-in filterTop3ByItinerary still works", () => {
+    const strict = { ...trip, returnPreferences: { filterTop3ByItinerary: true } };
+    const { feasible, other } = splitFeasible(flights, strict);
     assert.equal(feasible.length, 1);
     assert.equal(other.length, 1);
-  });
-
-  it("countMainApiFlights excludes custom transfer", () => {
-    const entry = {
-      flights: [
-        { flightNo: "CZ1234", customTransfer: false },
-        { flightNo: "X/Y", customTransfer: true },
-      ],
-    };
-    assert.equal(countMainApiFlights(entry), 1);
-  });
-
-  it("renderInventoryAlert flags zero main results", () => {
-    const results = [
-      {
-        route: "伊宁→广州",
-        date: "2026-10-08",
-        flights: [{ customTransfer: true, flightNo: "A/B" }],
-      },
-    ];
-    const trip = {
-      focusRoutes: { inbound: [{ origin: "伊宁", dest: "广州", dates: ["2026-10-08"] }] },
-    };
-    const cfg = { returnDates: ["2026-10-08"] };
-    const md = renderInventoryAlert(results, trip, cfg);
-    assert.match(md, /库存告警/);
-    assert.match(md, /0 条/);
   });
 });

@@ -77,6 +77,12 @@ function assertPhaseGate(trip, requiredPhase) {
 function renderWorkflowStatus(trip) {
   const { state, currentPhase } = resolveWorkflowState(trip);
   const lines = ["## 决策优先级（Skill 执行顺序）", ""];
+  const scopes = {
+    outbound: "查去程 TOP3 → 写入 bookedOutbound",
+    return: "查返程 TOP3 · **纯机票评分**（不看 D8 行程）",
+    plan: "Plan A/B 卡片 + itineraryConstraints 衔接提示",
+    hotels: "按 activeVariant 查酒店",
+  };
   for (const key of WORKFLOW_ORDER) {
     const done =
       key === "outbound"
@@ -95,6 +101,7 @@ function renderWorkflowStatus(trip) {
     lines.push("", "> 全部阶段已确认，可按需刷新酒店/航班。");
   } else {
     lines.push("", `> **当前阶段：** ${PHASE_LABELS[currentPhase] || currentPhase}`);
+    if (scopes[currentPhase]) lines.push(`> **本阶段范围：** ${scopes[currentPhase]}`);
   }
   return lines.join("\n") + "\n";
 }

@@ -259,8 +259,8 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 | 顺序 | 阶段 | 命令 | 说明 |
 |------|------|------|------|
 | **1** | 确认去程 | `npm run skill:outbound` | 去程 TOP3；订票后写入 `bookedOutbound` |
-| **2** | 确认返程 | `npm run skill:return:flights` | 返程 TOP3 + 机票简报；确认后 `workflow.confirmed.return: true` |
-| **3** | 确认计划 | `npm run skill:plan` | Plan A（独库）+ Plan B 卡片；确认后 `workflow.confirmed.plan: "duku"` 或 `"planb"` |
+| **2** | 确认返程 | `npm run skill:return:flights` | **纯机票 TOP3**（价格/评分/画像；不含 D8 行程过滤） |
+| **3** | 确认计划 | `npm run skill:plan` | Plan A/B + `itineraryConstraints` 衔接提示（如 D8 12:00 前） |
 | **4** | 确认酒店 | `npm run skill:hotels` | 按 `activeVariant` 查酒店；最后才跑 |
 
 ```bash

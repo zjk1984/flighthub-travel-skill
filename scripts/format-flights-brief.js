@@ -24,8 +24,7 @@ const { getDeltaForRoute, lowestPriceFromFlights } = require("./price-history");
 const {
   renderInventoryAlert,
   renderTargetPriceAlert,
-  splitFeasible,
-  getReturnPreferences,
+  renderPhase2Notice,
 } = require("./return-flight-prefs");
 
 const ROOT = path.join(__dirname, "..");
@@ -91,17 +90,15 @@ function renderReturnCompare(inboundByDate) {
     md += `| ${PARTY}人最低价 | ${prices.map((p) => (p != null ? `¥${p.toFixed(0)}` : "—")).join(" | ")} |\n\n`;
   }
 
-  md += `### 各日场景推荐（可行窗口内）\n\n`;
+  md += `### 各日场景推荐\n\n`;
   md += `| 场景 | 航班 | 时间 | 价格 | 当日到 | 预订 |\n`;
   md += `|------|------|------|------|--------|------|\n`;
   for (const d of dates) {
     const list = inboundByDate.get(d) || [];
-    const verified = list.map((f) => ({ ...f, priceVerified: f.priceVerified !== false }));
-    const { feasible } = splitFeasible(verified, TRIP);
-    const pool = feasible.length ? feasible : verified;
-    const cheapest = pickScenario(pool, "cheapest", PROFILE);
-    const elder = pickScenario(pool, "elder", PROFILE);
-    const sameDay = pickScenario(pool, "same_day", PROFILE);
+    const verified = list.filter((f) => f.priceVerified !== false);
+    const cheapest = pickScenario(verified, "cheapest", PROFILE);
+    const elder = pickScenario(verified, "elder", PROFILE);
+    const sameDay = pickScenario(verified, "same_day", PROFILE);
     md += renderFlightRow(`${formatDateShort(d)} 最低价`, cheapest);
     md += renderFlightRow(`${formatDateShort(d)} 老人推荐`, elder);
     if (sameDay) md += renderFlightRow(`${formatDateShort(d)} 当日到`, sameDay);
@@ -153,7 +150,8 @@ function main() {
     const b = TRIP.bookedOutbound;
     md += `**已订去程：** ${b.route} ${b.date} ${b.flightNo || ""} — ${b.note || ""}\n\n`;
   }
-  md += `> 可行窗口：伊宁起飞 ≥ **${prefs.minDepartureTime}** · 完整 TOP3 见 \`reports/xinjiang-flights-ranked.md\`\n\n`;
+  md += renderPhase2Notice(TRIP);
+  md += `> 完整 TOP3 见 \`reports/xinjiang-flights-ranked.md\` · D8 行程衔接见 \`skill:plan\`\n\n`;
 
   md += renderInventoryAlert(results, TRIP, CFG);
   md += renderTargetPriceAlert(
