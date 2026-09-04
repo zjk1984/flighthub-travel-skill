@@ -24,5 +24,7 @@ describe("load-trip-profile", () => {
     assert.equal(trip.partySize, 5);
     assert.equal(trip.scoringProfile, "family_elder");
     assert.ok(trip.focusRoutes.inbound.length > 0);
+    assert.equal(trip.returnPreferences.filterTop3ByItinerary, false);
+    assert.equal(trip.itineraryConstraints.byDate["2026-10-08"].minDepartureTime, "12:00");
   });
 });
