@@ -52,6 +52,9 @@
     "originScores": { "深圳": 100, "广州": 80 },
     "destinationScores": { "伊宁": 100 },
     "apiPriceFloor": { "伊宁": 750 },
-    "apiPriceFloorReturn": { "伊宁": 650 }
+    "apiPriceFloorReturn": { "伊宁": 650 },
+    "returnOriginScoresByAnchor": {
+      "伊宁": { "伊宁": 100, "博乐": 86, "乌鲁木齐": 82, "石河子": 74, "阿勒泰": 58 }
+    }
   }
 }

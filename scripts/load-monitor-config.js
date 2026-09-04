@@ -114,8 +114,16 @@ function normalizeScoring(raw) {
   const destinationScores = { ...(d.destinationScores || {}) };
   const apiPriceFloor = { ...(d.apiPriceFloor || { 伊宁: 750, 阿勒泰: 750 }) };
   const apiPriceFloorReturn = { ...(d.apiPriceFloorReturn || { 伊宁: 650, 阿勒泰: 650 }) };
+  const returnOriginScoresByAnchor = { ...(d.returnOriginScoresByAnchor || {}) };
   const profile = String(d.profile || "default").trim() || "default";
-  return { originScores, destinationScores, apiPriceFloor, apiPriceFloorReturn, profile };
+  return {
+    originScores,
+    destinationScores,
+    apiPriceFloor,
+    apiPriceFloorReturn,
+    returnOriginScoresByAnchor,
+    profile,
+  };
 }
 
 function normalizeConfig(raw) {

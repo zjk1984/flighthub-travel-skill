@@ -30,6 +30,12 @@ const {
   renderAdjacentReference,
   getReturnPreferences,
 } = require("./return-flight-prefs");
+const {
+  shouldUseReturnOriginScoring,
+  getOutboundAnchor,
+  depCityPref,
+  formatDepCityDeduction,
+} = require("./return-origin-scoring");
 
 const CFG = loadConfig();
 const ORIGINS = CFG.origins;
@@ -71,9 +77,7 @@ function isOutbound(route) {
 }
 
 function guangdongPref(f, direction) {
-  const { origin, dest } = parseRoute(f.route);
-  const city = direction === "outbound" ? origin : dest;
-  return SCORING.originScores[city] ?? 80;
+  return depCityPref(f, direction, TRIP, SCORING).pts;
 }
 
 function transferCount(f) {
@@ -212,18 +216,22 @@ function scoreFlights(flights, direction) {
   const normD = normalize(durations);
 
   return flights.map((f, i) => {
-    const depPref = guangdongPref(f, direction);
+    const depCityMeta = depCityPref(f, direction, TRIP, SCORING);
+    const depPref = depCityMeta.pts;
     const pricePts = pricePointsCombined(f.priceNum, dayPrices);
     const transferBreakdown = transferScoreBreakdown(f);
     const transferPts = transferBreakdown.transferPts;
     const depTimePts = timeSlotPoints(f.depDateTime);
     const arrTimePts = arrTimeSlotPoints(f, SCORING_PROFILE);
     const durationPts = durationPointsFromNorm(normD[i], f.durationMin);
+    const xjPref =
+      depCityMeta.mode === "return_origin" ? depPref : xjAirportPref(f.xjAirport);
     const row = {
       ...f,
       direction,
       depPref,
-      xjPref: xjAirportPref(f.xjAirport),
+      depCityMeta,
+      xjPref,
       pricePts,
       transferPts,
       transferBasePts: transferBreakdown.basePts,
@@ -484,7 +492,9 @@ function buildDeductions(f) {
     items.push(`转机分 ${f.transferPts}：直达且当日到达（满分）`);
   }
 
-  if (f.depPref < 100) {
+  if (f.depCityMeta) {
+    items.push(formatDepCityDeduction(f.depCityMeta, labelCity));
+  } else if (f.depPref < 100) {
     items.push(`出发/到达地 ${gdCity}：偏好分 80（较深圳 100 扣 20）`);
   } else {
     items.push(`出发/到达地 ${gdCity}：偏好分 100`);
@@ -506,6 +516,18 @@ function buildDeductions(f) {
 
 function renderScoringGuide() {
   const w = WEIGHTS;
+  const anchor = getOutboundAnchor(TRIP);
+  const useReturnOrigin = shouldUseReturnOriginScoring(TRIP, "inbound");
+  const depCityRule = useReturnOrigin
+    ? `去程已订 → **返程新疆出发地**相对去程目的地 **${labelCity(anchor)}** 远近（同机场 100，其他按 \`returnOriginScoresByAnchor\` 扣减）`
+    : "可配置（默认深圳 100、广州 80）";
+  const anchorTable =
+    useReturnOrigin && SCORING.returnOriginScoresByAnchor?.[anchor]
+      ? Object.entries(SCORING.returnOriginScoresByAnchor[anchor])
+          .sort((a, b) => b[1] - a[1])
+          .map(([ap, pts]) => `${labelCity(ap)} ${pts}`)
+          .join(" · ")
+      : "";
   return `## 📐 评分标准说明（v2 · ${SCORING_PROFILE.label}）
 
 综合分 **越高越好**，满分 100。**按日期分组**评分（同日航班互相比较时长/价格）。
@@ -518,9 +540,10 @@ ${PARTY_SIZE > 1 ? `\n> 团队人数：**${PARTY_SIZE} 人**（表格单价 × $
 | 转机（基础） | ${Math.round(w.transfer * 100)}% | 直达 100；1 次 75；≥2 次 50 |
 | 跨日扣分 | （转机维度内） | 整体到达跨日 **-25**（API 联程含航段跨日；自定义中转仅看整体到达日） |
 | 自定义中转扣分 | （转机维度内） | 分段购票方案 **-25**，与跨日扣分**独立叠加** |
-| 出发/到达地 | ${Math.round(w.depCity * 100)}% | 可配置（默认深圳 100、广州 80） |
+| 出发/到达地 | ${Math.round(w.depCity * 100)}% | ${depCityRule} |
 | 起飞时间 | ${Math.round(w.depTime * 100)}% | 画像 ${SCORING_PROFILE.label} 时段偏好 |
 | 落地时间 | ${Math.round(w.arrTime * 100)}% | 同起飞；老人画像次日上午到达加分 |
+${anchorTable ? `\n> 返程出发地分（锚点 ${labelCity(anchor)}）：${anchorTable}\n` : ""}
 
 **公式：** 综合分 = Σ(子分 ÷ 100 × 权重) × 100
 
