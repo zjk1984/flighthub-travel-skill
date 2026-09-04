@@ -79,7 +79,7 @@ function renderWorkflowStatus(trip) {
   const lines = ["## 决策优先级（Skill 执行顺序）", ""];
   const scopes = {
     outbound: "查去程 TOP3 → 写入 bookedOutbound",
-    return: "查返程 TOP3 · **纯机票评分**（不看 D8 行程）",
+    return: "查返程 TOP3 · **纯机票评分**（多机场比价，不看 D8 行程）",
     plan: "Plan A/B 卡片 + itineraryConstraints 衔接提示",
     hotels: "按 activeVariant 查酒店",
   };

@@ -15,7 +15,7 @@
     },
     "notes": [
       "严格顺序：1 去程 → 2 返程 → 3 Plan A/B → 4 酒店",
-      "阶段2 返程：TOP3 纯机票评分，不看 D8 将军府时间窗",
+      "阶段2 返程：TOP3 纯机票评分 + 备选机场（乌鲁木齐/博乐/石河子），不看 D8 时间窗",
       "阶段3 计划：itineraryConstraints 仅作衔接提示，不改动 TOP3",
       "确认返程后 workflow.confirmed.return=true；确认路线后 workflow.confirmed.plan=duku|planb",
       "写入 bookedReturn 前须用户明确确认（勿用 TOP3 推荐自动标记完成）"
@@ -25,8 +25,9 @@
     "targetPricePerPerson": 1500,
     "adjacentDayFallback": true,
     "filterTop3ByItinerary": false,
-    "note": "阶段2：纯机票评分与比价；不绑定 D8 行程"
+    "note": "阶段2：纯机票评分；含备选出发机场，不绑定 D8 伊宁还车"
   },
+  "returnAlternateOrigins": ["乌鲁木齐", "博乐", "石河子"],
   "itineraryConstraints": {
     "note": "阶段3 旅行计划衔接提示（不影响返程 TOP3 排名）",
     "byDate": {

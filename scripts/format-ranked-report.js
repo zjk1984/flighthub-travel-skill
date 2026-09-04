@@ -37,7 +37,6 @@ const {
 } = require("./return-origin-scoring");
 const {
   transferScoreBreakdown,
-  transferPoints,
   renderTransferScoringGuideRows,
   appendTransferDeductionItems,
 } = require("./transfer-scoring");
@@ -708,8 +707,8 @@ if (showOut) {
   md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
 }
 if (showIn) {
-  md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
-  md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
+  md += renderDailySections(inByDay, "🛬 返程每日 TOP3（多出发机场 · 纯机票评分）", "inbound");
+  md += renderPerDestTop1(inPerDest, "🗺️ 返程各出发机场 TOP1");
   md += renderScenarioPicks(inboundRanked);
   md += renderAdjacentReference(inbound, results);
 }

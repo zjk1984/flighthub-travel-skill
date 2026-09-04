@@ -1,12 +1,21 @@
 # 返程机票简报
 
-> 生成时间：2026-09-04 11:58:04 | 评分画像：**家庭·老人友好** | **5 人**
+> 生成时间：2026-09-04 12:14:49 | 评分画像：**家庭·老人友好** | **5 人**
 
 **已订去程：** 广州→伊宁 2026-10-01 CZ6888 / CZ6827 — 南航联程经乌鲁木齐
 
 > **阶段 2（返程机票）：** TOP3 按价格/评分/画像排序，**不**按 D8 行程过滤。行程衔接约束见阶段 3 `skill:plan`。
+> **备选出发机场：** 乌鲁木齐、博乐、石河子（与伊宁一并比价；远机场仅扣分不剔除）。
 
 > 完整 TOP3 见 `reports/xinjiang-flights-ranked.md` · D8 行程衔接见 `skill:plan`
+
+## ⚠️ 库存告警
+
+> 以下日期主查询无联程结果；请以 App 实价为准或查看「相邻日参考」。
+
+- **博乐→广州 2026-10-08** — 主查询 **0 条**（fly.ai「智慧交通结果为空」或暂无联程库存）
+- **石河子→广州 2026-10-07** — 主查询 **0 条**（fly.ai「智慧交通结果为空」或暂无联程库存）；仅有自定义中转 **2 条**
+- **石河子→广州 2026-10-08** — 主查询 **0 条**（fly.ai「智慧交通结果为空」或暂无联程库存）
 
 ## 🔔 目标价提醒
 
@@ -16,22 +25,27 @@
 
 | 对比项 | 10/7 | 10/8 |
 |--------|------|------|
-| 5人最低价 | ¥8240 | ¥7300 |
+| 5人最低价 | ¥8100 | ¥7300 |
 
 ### 各日场景推荐
 
 | 场景 | 航班 | 时间 | 价格 | 当日到 | 预订 |
 |------|------|------|------|--------|------|
-| 10/7 最低价 | **EU2990 / AQ1474 + 8L9886 / AQ1120** | 10-07 22:35→10-10 01:40 | ¥1648（5人 ¥8240） | 否 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ywJpJ) |
-| 10/7 老人推荐 | **CZ2370** | 10-07 16:20→10-07 23:50 | ¥3789（5人 ¥18945） | 是 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3AoeF4) |
-| 10/7 当日到 | **CZ2370** | 10-07 16:20→10-07 23:50 | ¥3789（5人 ¥18945） | 是 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3AoeF4) |
-| 10/8 最低价 | **3U6915 / ZH9442** | 10-08 15:50→10-09 09:20 | ¥1460（5人 ¥7300） | 否 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0vvmUh) |
-| 10/8 老人推荐 | **3U6915 / ZH9442** | 10-08 15:50→10-09 09:20 | ¥1460（5人 ¥7300） | 否 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0vvmUh) |
+| 10/7 最低价 | **G54384 / 9C7356 + 3U6338 / ZH9442** | 10-07 21:35→10-09 09:20 | ¥1620（5人 ¥8100） | 否 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2hWce6) |
+| 10/7 老人推荐 | **UQ2591** | 10-07 10:15→10-07 15:25 | ¥3620（5人 ¥18100） | 是 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2l0eKn) |
+| 10/7 当日到 | **AQ1166** | 10-07 15:15→10-07 21:55 | ¥2839（5人 ¥14195） | 是 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Z1vJO) |
+| 10/8 最低价 | **3U6915 / ZH9442** | 10-08 15:50→10-09 09:20 | ¥1460（5人 ¥7300） | 否 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4LfIgn) |
+| 10/8 老人推荐 | **CZ6024** | 10-08 08:45→10-08 14:10 | ¥2700（5人 ¥13500） | 是 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4IYNY0) |
+| 10/8 当日到 | **CA9674** | 10-08 18:00→10-08 23:20 | ¥1629（5人 ¥8145） | 是 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1zkuZ2) |
 
 ## 返程价格变动
 
 - **伊宁→广州** 2026-10-07 当前最低 ¥1648
 - **伊宁→广州** 2026-10-08 当前最低 ¥1460
+- **乌鲁木齐→广州** 2026-10-07 当前最低 ¥1769
+- **乌鲁木齐→广州** 2026-10-08 当前最低 ¥1629
+- **博乐→广州** 2026-10-07 当前最低 ¥1689
+- **石河子→广州** 2026-10-07 当前最低 ¥1620
 
 ---
 基于飞猪 fly.ai 实时数据 · 机票简报由 `format-flights-brief.js` 自动生成

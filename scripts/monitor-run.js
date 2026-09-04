@@ -130,7 +130,7 @@ async function fetchAdjacentFallback(map, cache, options) {
   if (!prefs.adjacentDayFallback) return { ran: 0 };
 
   const primaryDates = primaryReturnDates(trip, CFG);
-  const routes = inboundRoutes(trip);
+  const routes = inboundRoutes(trip, CFG);
   if (!routes.length || !primaryDates.length) return { ran: 0 };
 
   const tasks = [];
@@ -168,7 +168,7 @@ async function fetchAdjacentFallback(map, cache, options) {
 function printReturnSummary(map) {
   const trip = CFG.trip || {};
   const dates = primaryReturnDates(trip, CFG);
-  const routes = inboundRoutes(trip);
+  const routes = inboundRoutes(trip, CFG);
   if (!dates.length) return;
 
   for (const r of routes.length ? routes : [{ origin: "伊宁", dest: "广州" }]) {

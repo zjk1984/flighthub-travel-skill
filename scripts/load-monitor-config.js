@@ -10,6 +10,7 @@ const DEFAULTS_PATH = path.join(ROOT, "config/monitor-defaults.json");
 const PRESETS_DIR = path.join(ROOT, "config/presets");
 
 const { loadTripProfile, buildFocusTasks } = require("./load-trip-profile");
+const { resolveInboundFocusRoutes } = require("./return-focus-routes");
 
 const CITY_LABEL = {
   伊宁: "伊犁（伊宁）",
@@ -199,8 +200,9 @@ function buildOutboundTasks(cfg) {
 
 function buildReturnTasks(cfg) {
   const c = cfg || loadConfig();
-  if (c.focusMode && c.trip?.focusRoutes?.inbound?.length) {
-    return buildFocusTasks(c.trip.focusRoutes, "inbound", "full");
+  const inbound = resolveInboundFocusRoutes(c.trip, c);
+  if (c.focusMode && inbound.length) {
+    return buildFocusTasks({ inbound }, "inbound", "full");
   }
   const tasks = [];
   const directOnly = new Set(c.directOnlyAirports);

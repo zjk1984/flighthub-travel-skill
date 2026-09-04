@@ -30,7 +30,7 @@ function collectTargets(trip, cfg, includeAdjacent) {
       dates.add(addDays(d, 1));
     }
   }
-  const routes = inboundRoutes(trip);
+  const routes = inboundRoutes(trip, cfg);
   const targets = [];
   for (const r of routes) {
     for (const d of dates) {

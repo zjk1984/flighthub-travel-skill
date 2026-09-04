@@ -46,6 +46,7 @@ function loadTripProfile(cfg) {
       returnDateCompare: [],
       returnPreferences: {},
       itineraryConstraints: {},
+      returnAlternateOrigins: [],
       activeVariant: null,
       workflow: null,
       bookedReturn: null,
@@ -67,6 +68,9 @@ function loadTripProfile(cfg) {
     focusRoutes: raw.focusRoutes || null,
     returnDateCompare: Array.isArray(raw.returnDateCompare) ? raw.returnDateCompare : [],
     returnPreferences: raw.returnPreferences || {},
+    returnAlternateOrigins: Array.isArray(raw.returnAlternateOrigins)
+      ? raw.returnAlternateOrigins
+      : [],
     itineraryConstraints: raw.itineraryConstraints || {},
     activeVariant: raw.activeVariant || null,
     workflow: raw.workflow || null,

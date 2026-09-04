@@ -6,6 +6,7 @@
  */
 const { parseRoute } = require("./load-monitor-config");
 const { resolveWorkflowState } = require("./trip-workflow");
+const { resolveInboundFocusRoutes } = require("./return-focus-routes");
 
 function parseTimeToMinutes(hhmm) {
   if (!hhmm || typeof hhmm !== "string") return null;
@@ -95,10 +96,14 @@ function shouldShowItineraryAdvisory(trip, context = "ranked") {
 function renderPhase2Notice(trip) {
   const { currentPhase } = resolveWorkflowState(trip);
   if (currentPhase !== "return") return "";
-  return (
+  const alts = trip?.returnAlternateOrigins || [];
+  let md =
     `> **阶段 2（返程机票）：** TOP3 按价格/评分/画像排序，**不**按 D8 行程过滤。` +
-    `行程衔接约束见阶段 3 \`skill:plan\`。\n\n`
-  );
+    `行程衔接约束见阶段 3 \`skill:plan\`。\n`;
+  if (alts.length) {
+    md += `> **备选出发机场：** ${alts.join("、")}（与伊宁一并比价；远机场仅扣分不剔除）。\n`;
+  }
+  return md + "\n";
 }
 
 function countMainApiFlights(entry) {
@@ -117,14 +122,18 @@ function addDays(dateStr, delta) {
 
 function primaryReturnDates(trip, cfg) {
   const dates = new Set(cfg?.returnDates || []);
-  for (const r of trip?.focusRoutes?.inbound || []) {
+  for (const r of resolveInboundFocusRoutes(trip, cfg)) {
     for (const d of r.dates || []) dates.add(d);
   }
   return [...dates].sort();
 }
 
-function inboundRoutes(trip) {
-  return trip?.focusRoutes?.inbound || [];
+/**
+ * Phase 2 return search routes: focusRoutes.inbound + returnAlternateOrigins (same dates/dest).
+ * Alternates are scored by returnOriginScoresByAnchor; not tied to D8 伊宁动线.
+ */
+function inboundRoutes(trip, cfg) {
+  return resolveInboundFocusRoutes(trip, cfg);
 }
 
 function renderInventoryAlert(results, trip, cfg) {
@@ -133,7 +142,7 @@ function renderInventoryAlert(results, trip, cfg) {
   for (const r of results) {
     if (dates.length && !dates.includes(r.date)) continue;
     const { origin, dest } = parseRoute(r.route);
-    const isInbound = trip?.focusRoutes?.inbound?.some(
+    const isInbound = resolveInboundFocusRoutes(trip, cfg).some(
       (fr) => fr.origin === origin && fr.dest === dest
     );
     if (!isInbound && dates.length) continue;
