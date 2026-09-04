@@ -93,7 +93,22 @@ function renderBookedOutbound() {
   return md;
 }
 
+function renderBookedReturn() {
+  const b = TRIP.bookedReturn;
+  if (!b) return "";
+  let md = `### 返程（已订，不再监控）\n\n`;
+  md += `| 项目 | 内容 |\n|------|------|\n`;
+  md += `| 日期 | ${b.date} |\n`;
+  md += `| 航班 | **${b.flightNo || "—"}** |\n`;
+  const arrNote = b.arrDate && b.arrDate !== b.date ? `（${b.arrDate} ${b.arrTime} 落地）` : b.arrTime ? ` → **${b.arrTime} 落地**` : "";
+  md += `| 路线 | ${b.route}${b.depTime ? ` ${b.depTime}` : ""}${arrNote} |\n`;
+  if (b.price) md += `| 参考价 | ¥${b.price}（${PARTY}人 ¥${(b.price * PARTY).toFixed(0)}） |\n`;
+  md += `| 说明 | ${b.note || "—"} |\n\n`;
+  return md;
+}
+
 function renderReturnSection(inboundByDate) {
+  if (TRIP.bookedReturn) return renderBookedReturn();
   const dates = TRIP.returnDateCompare?.length
     ? TRIP.returnDateCompare
     : CFG.returnDates;
