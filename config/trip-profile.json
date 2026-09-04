@@ -9,7 +9,7 @@
     "priorityOrder": ["outbound", "return", "plan", "hotels"],
     "confirmed": {
       "outbound": true,
-      "return": true,
+      "return": false,
       "plan": null,
       "hotels": false
     },
@@ -17,7 +17,8 @@
       "严格顺序：1 去程 → 2 返程 → 3 Plan A/B → 4 酒店",
       "阶段2 返程：TOP3 纯机票评分，不看 D8 将军府时间窗",
       "阶段3 计划：itineraryConstraints 仅作衔接提示，不改动 TOP3",
-      "确认返程后 workflow.confirmed.return=true；确认路线后 workflow.confirmed.plan=duku|planb"
+      "确认返程后 workflow.confirmed.return=true；确认路线后 workflow.confirmed.plan=duku|planb",
+      "写入 bookedReturn 前须用户明确确认（勿用 TOP3 推荐自动标记完成）"
     ]
   },
   "returnPreferences": {
@@ -46,17 +47,6 @@
     "arrTime": "23:10",
     "note": "南航联程经乌鲁木齐"
   },
-  "bookedReturn": {
-    "route": "伊宁→广州",
-    "date": "2026-10-08",
-    "flightNo": "3U6915 / ZH9442",
-    "price": 1460,
-    "depTime": "15:50",
-    "arrTime": "09:20",
-    "arrDate": "2026-10-09",
-    "jumpUrl": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F103kzH",
-    "note": "川航+深航中转成都；次日上午到广州（TOP3 老人推荐 · 达目标价 ¥1500/人）"
-  },
   "focusRoutes": {
     "outbound": [],
     "inbound": [
@@ -75,7 +65,7 @@
       "**伊昭公路**（D2）10 月易封；封路改 G577 绕路",
       "**果子沟大桥** 禁止桥面停车 → 导航 **果子沟金顶观景台**",
       "**D8 上午** **伊犁将军府**（09:00–11:00）；**D7 住市区** 将军府/六星街附近",
-      "10/8 **15:50 航班**（3U6915/ZH9442），**11:30 前** 离开将军府 → **14:00 前** 到机场还车"
+      "10/8 **17:00 航班**，**11:30 前** 离开将军府 → **14:00 前** 到机场还车"
     ],
     "carRental": {
       "type": "7 座 SUV 或 MPV（独库建议 SUV）",
@@ -158,7 +148,7 @@
         "date": "2026-10-08",
         "label": "10/8",
         "title": "伊犁将军府 → 广州",
-        "activity": "09:00 **伊犁将军府**（慢游约 1–1.5h）→ **11:00** 回酒店取行李 → 机场还车，**15:50 航班**（3U6915/ZH9442）",
+        "activity": "09:00 **伊犁将军府**（慢游约 1–1.5h）→ **11:00** 回酒店取行李 → 机场还车，**17:00 航班**",
         "drive": "市区 → 机场约 30–40min",
         "stay": "—",
         "note": "10/8 周四开馆；14:00 前到机场"
@@ -181,7 +171,7 @@
           "**Plan B**：D5 特克斯→伊宁，D6 伊宁城区→赛湖东门，D7 赛湖→果子沟→伊宁",
           "**D6** 上午伊宁慢游，**15:00 前** 出发赴赛湖东门",
           "**D8 上午** 伊犁将军府；D7 住市区将军府附近",
-          "10/8 **15:50 航班**，**14:00 前** 到机场"
+          "10/8 **17:00 航班**，**14:00 前** 到机场"
         ],
         "carRental": {
           "type": "7 座 SUV 或 MPV",
@@ -260,7 +250,7 @@
             "date": "2026-10-08",
             "label": "10/8",
             "title": "伊犁将军府 → 广州",
-            "activity": "09:00 **伊犁将军府** → **11:00** 取行李 → 机场还车，**15:50 航班**（3U6915/ZH9442）",
+            "activity": "09:00 **伊犁将军府** → **11:00** 取行李 → 机场还车，**17:00 航班**",
             "drive": "市区 → 机场约 30–40min",
             "stay": "—",
             "note": "14:00 前到机场"
