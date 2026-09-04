@@ -254,7 +254,22 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 
 ### 聚焦盯票（推荐）
 
-编辑 `config/trip-profile.json`（人数、老人画像、已订去程、聚焦航线、酒店段），并启用聚焦 preset：
+**决策优先级（Agent / 脚本必须遵守）：**
+
+| 顺序 | 阶段 | 命令 | 说明 |
+|------|------|------|------|
+| **1** | 确认去程 | `npm run skill:outbound` | 去程 TOP3；订票后写入 `bookedOutbound` |
+| **2** | 确认返程 | `npm run skill:return:flights` | 返程 TOP3 + 机票简报；确认后 `workflow.confirmed.return: true` |
+| **3** | 确认计划 | `npm run skill:plan` | Plan A（独库）+ Plan B 卡片；确认后 `workflow.confirmed.plan: "duku"` 或 `"planb"` |
+| **4** | 确认酒店 | `npm run skill:hotels` | 按 `activeVariant` 查酒店；最后才跑 |
+
+```bash
+npm run skill:workflow:status   # 查看当前阶段
+npm run skill:workflow          # 从当前阶段顺序执行到酒店
+npm run skill:return            # 一次性 2→3→4（去程已订时）
+```
+
+编辑 `config/trip-profile.json`（人数、老人画像、已订去程、聚焦航线、`workflow.confirmed`、酒店段），并启用聚焦 preset：
 
 ```bash
 npm run monitor:preset -- xinjiang-focus-yining   # 伊宁↔广州盯票
@@ -265,7 +280,8 @@ npm run monitor:config
 |------|------|
 | `config/trip-profile.json` | 行程画像（5人、family_elder、focusRoutes、酒店段） |
 | `config/presets/*.json` | 监控 preset（`xinjiang-full` / `xinjiang-focus-yining`） |
-| `reports/xinjiang-flights-brief.md` | **决策简报**（10/7 vs 10/8、场景推荐、酒店） |
+| `reports/xinjiang-flights-brief.md` | **返程机票简报**（10/7 vs 10/8、库存告警） |
+| `reports/xinjiang-travel-brief.md` | **行程·酒店简报**（阶段 4；不含机票 TOP3） |
 | `reports/price-history.jsonl` | 每日最低价快照与变动 |
 
 ### 运行

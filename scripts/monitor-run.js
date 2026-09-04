@@ -29,6 +29,7 @@ function parseArgs(argv) {
   const positional = [];
   let phase = "all";
   let flightsOnly = false;
+  let planOnly = false;
   let refresh = false;
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === "--phase" && argv[i + 1]) {
@@ -37,6 +38,10 @@ function parseArgs(argv) {
     }
     if (argv[i] === "--flights-only") {
       flightsOnly = true;
+      continue;
+    }
+    if (argv[i] === "--plan-only") {
+      planOnly = true;
       continue;
     }
     if (argv[i] === "--refresh") {
@@ -51,6 +56,7 @@ function parseArgs(argv) {
   return {
     phase,
     flightsOnly,
+    planOnly,
     refresh,
     resultsPath: positional[0] || path.join(ROOT, "reports/xinjiang-results.jsonl"),
     latestOut: positional[1] || path.join(ROOT, "reports/xinjiang-flights-latest.md"),
@@ -179,8 +185,43 @@ function printReturnSummary(map) {
   }
 }
 
+function generateTravelArtifacts(resultsPath) {
+  const briefOut = path.join(ROOT, "reports/xinjiang-travel-brief.md");
+  const planOut = path.join(ROOT, "reports/xinjiang-travel-plan.md");
+  try {
+    fs.writeFileSync(briefOut, runScript("format-travel-brief.js", resultsPath));
+    process.stderr.write(`Travel brief saved: ${briefOut}\n`);
+  } catch (e) {
+    process.stderr.write(`Travel brief skipped: ${e.message}\n`);
+  }
+  try {
+    runScript("format-travel-plan.js", resultsPath, ["--out", planOut]);
+    process.stderr.write(`Travel plan saved: ${planOut}\n`);
+    const cardsOut = path.join(ROOT, "reports/xinjiang-travel-cards.md");
+    runScript("format-travel-cards.js", resultsPath, ["--out", cardsOut]);
+    process.stderr.write(`Travel cards saved: ${cardsOut}\n`);
+    const cardsPlanb = path.join(ROOT, "reports/xinjiang-travel-cards-planb.md");
+    try {
+      runScript("format-travel-cards.js", resultsPath, ["--variant", "planb", "--out", cardsPlanb]);
+      process.stderr.write(`Travel cards saved: ${cardsPlanb}\n`);
+    } catch (e) {
+      process.stderr.write(`Plan B cards skipped: ${e.message}\n`);
+    }
+  } catch (e) {
+    process.stderr.write(`Travel plan skipped: ${e.message}\n`);
+  }
+}
+
 async function main() {
-  const { phase, flightsOnly, refresh, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
+  const { phase, flightsOnly, planOnly, refresh, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
+
+  if (planOnly) {
+    if (!fs.existsSync(resultsPath)) {
+      throw new Error(`Missing results file for plan-only: ${resultsPath}`);
+    }
+    generateTravelArtifacts(resultsPath);
+    return;
+  }
 
   if (refresh && (phase === "return" || phase === "all")) {
     const purged = purgeReturnRoutes({ includeAdjacent: true });
@@ -360,30 +401,7 @@ async function main() {
     process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
     return;
   }
-  const briefOut = path.join(ROOT, "reports/xinjiang-travel-brief.md");
-  const planOut = path.join(ROOT, "reports/xinjiang-travel-plan.md");
-  try {
-    fs.writeFileSync(briefOut, runScript("format-travel-brief.js", resultsPath));
-    process.stderr.write(`Brief saved: ${briefOut}\n`);
-  } catch (e) {
-    process.stderr.write(`Brief generation skipped: ${e.message}\n`);
-  }
-  try {
-    runScript("format-travel-plan.js", resultsPath, ["--out", planOut]);
-    process.stderr.write(`Travel plan saved: ${planOut}\n`);
-    const cardsOut = path.join(ROOT, "reports/xinjiang-travel-cards.md");
-    runScript("format-travel-cards.js", resultsPath, ["--out", cardsOut]);
-    process.stderr.write(`Travel cards saved: ${cardsOut}\n`);
-    const cardsPlanb = path.join(ROOT, "reports/xinjiang-travel-cards-planb.md");
-    try {
-      runScript("format-travel-cards.js", resultsPath, ["--variant", "planb", "--out", cardsPlanb]);
-      process.stderr.write(`Travel cards saved: ${cardsPlanb}\n`);
-    } catch (e) {
-      process.stderr.write(`Plan B cards skipped: ${e.message}\n`);
-    }
-  } catch (e) {
-    process.stderr.write(`Travel plan skipped: ${e.message}\n`);
-  }
+  generateTravelArtifacts(resultsPath);
   process.stderr.write(`Report saved: ${latestOut}\n`);
   process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
 }

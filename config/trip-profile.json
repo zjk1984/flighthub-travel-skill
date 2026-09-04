@@ -5,6 +5,20 @@
   "scoringProfile": "family_elder",
   "focusMode": true,
   "activeVariant": "duku",
+  "workflow": {
+    "priorityOrder": ["outbound", "return", "plan", "hotels"],
+    "confirmed": {
+      "outbound": true,
+      "return": false,
+      "plan": null,
+      "hotels": false
+    },
+    "notes": [
+      "严格顺序：1 去程 → 2 返程 → 3 Plan A/B → 4 酒店",
+      "确认返程后在 workflow.confirmed.return 设 true，并填写 bookedReturn",
+      "确认路线后在 workflow.confirmed.plan 设 duku 或 planb"
+    ]
+  },
   "returnPreferences": {
     "minDepartureTime": "12:00",
     "targetPricePerPerson": 1500,

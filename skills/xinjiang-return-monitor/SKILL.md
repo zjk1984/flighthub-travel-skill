@@ -32,21 +32,22 @@ metadata:
 
 ## 何时使用
 
-- 用户要求查/监控**返程**、新疆飞广东、10/6–10/8 等返程日期
+- 用户要求查/监控**返程**、新疆飞广东、10/7–10/8 等返程日期
+- **去程已确认**（`bookedOutbound`）后的阶段 **2**
 - 用户说「执行返程 skill」「运行返程监控」
-- 去程 Skill 已运行且 **API 已冷却**（建议间隔 ≥30 分钟）
 
 ## 前置条件
 
-- 建议先运行 `xinjiang-outbound-monitor`（非必须；无 JSONL 时仅查返程）
-- `FLYAI_API_KEY` 已配置
+- **阶段 1 已完成**：`bookedOutbound` 或 `workflow.confirmed.outbound: true`
+- 本 Skill 仅负责 **阶段 2（返程机票）**；计划与酒店请用 `skill:plan` / `skill:hotels`
 
 ## 执行命令
 
 ```bash
-npm run skill:return
+npm run skill:return:flights    # 阶段 2 推荐（仅机票 + refresh）
+npm run skill:return            # 阶段 2→3→4 全流程
 # 等价
-bash scripts/monitor-return.sh
+bash scripts/monitor-return-flights.sh --refresh
 ```
 
 ## 输出
@@ -60,9 +61,13 @@ bash scripts/monitor-return.sh
 ## 推荐流程
 
 ```
-T+0      npm run skill:outbound     # 去程 Skill
-T+30min  测试单条 API 无 451
-T+30min  npm run skill:return       # 本 Skill
+阶段 1  npm run skill:outbound           # 去程
+        确认后写入 bookedOutbound
+阶段 2  npm run skill:return:flights     # 返程（--refresh 强制重查）
+        确认后 workflow.confirmed.return = true
+阶段 3  npm run skill:plan               # Plan A + Plan B 卡片
+        确认后 workflow.confirmed.plan = "duku" | "planb"
+阶段 4  npm run skill:hotels             # 酒店
 ```
 
 ## 配置

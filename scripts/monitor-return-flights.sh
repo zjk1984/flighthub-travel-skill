@@ -27,7 +27,7 @@ fi
 echo "▶ 返程航班（仅机票，不含酒店/行程）" >&2
 node "$SCRIPT_DIR/monitor-run.js" --phase return --flights-only "${EXTRA_ARGS[@]}" "$RESULTS" "$OUTPUT" "$RANKED"
 
-if feishu_notify_enabled; then
+if feishu_notify_enabled && [[ "${FEISHU_SKIP:-}" != "1" ]]; then
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   echo "Sending Feishu (ranked only)..." >&2
   node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true

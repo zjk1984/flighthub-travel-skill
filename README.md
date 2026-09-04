@@ -75,12 +75,20 @@ node scripts/monitor-config.js reset --destinations     # 仅重置目的地
 
 ### 运行监控
 
-**推荐：聚焦盯票（伊宁↔广州，读 `config/trip-profile.json`）**
+**决策优先级（必须按序）：**
+
+| # | 阶段 | 命令 |
+|---|------|------|
+| 1 | 去程 | `npm run skill:outbound` |
+| 2 | 返程 | `npm run skill:return:flights` |
+| 3 | 计划 Plan A/B | `npm run skill:plan` |
+| 4 | 酒店 | `npm run skill:hotels` |
 
 ```bash
 npm install
 npm run monitor:preset -- xinjiang-focus-yining
-npm run skill:return      # 返程 + 酒店 + 决策简报 + 飞书
+npm run skill:workflow:status   # 当前阶段
+npm run skill:return            # 去程已订时：2→3→4 顺序执行
 ```
 
 **全量扫描（5 城 × 多日期，API 用量大）**
@@ -93,7 +101,8 @@ npm run skill:return
 ```
 
 报告输出：
-- `reports/xinjiang-flights-brief.md` — **决策简报**（10/7 vs 10/8、5人合计、场景推荐）
+- `reports/xinjiang-flights-brief.md` — **返程机票简报**（日期对比、库存告警）
+- `reports/xinjiang-travel-brief.md` — **行程·酒店简报**（阶段 4）
 - `reports/xinjiang-flights-ranked.md` — TOP3 评分（family_elder 等画像）
 - `reports/xinjiang-flights-latest.md` — 全量价格
 - `reports/price-history.jsonl` — 每日最低价变动
