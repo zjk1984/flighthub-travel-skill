@@ -9,10 +9,18 @@ const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
 const { loadConfig, formatCoverage, isConfiguredMonitorEntry, buildOutboundTasks, buildReturnTasks } = require("./load-monitor-config");
-const { compactMap, saveToFile, loadFromFile } = require("./flight-store");
+const { compactMap, saveToFile, loadFromFile, routeKey } = require("./flight-store");
 const { loadCache, pruneCache } = require("./flight-cache");
 const { runSearchQueue, sleep } = require("./search-queue");
 const { appendCustomResults } = require("./custom-transfer-lib");
+const { purgeReturnRoutes } = require("./refresh-return-routes");
+const {
+  getReturnPreferences,
+  countMainApiFlights,
+  addDays,
+  primaryReturnDates,
+  inboundRoutes,
+} = require("./return-flight-prefs");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
@@ -21,6 +29,7 @@ function parseArgs(argv) {
   const positional = [];
   let phase = "all";
   let flightsOnly = false;
+  let refresh = false;
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === "--phase" && argv[i + 1]) {
       phase = argv[++i];
@@ -28,6 +37,10 @@ function parseArgs(argv) {
     }
     if (argv[i] === "--flights-only") {
       flightsOnly = true;
+      continue;
+    }
+    if (argv[i] === "--refresh") {
+      refresh = true;
       continue;
     }
     positional.push(argv[i]);
@@ -38,6 +51,7 @@ function parseArgs(argv) {
   return {
     phase,
     flightsOnly,
+    refresh,
     resultsPath: positional[0] || path.join(ROOT, "reports/xinjiang-results.jsonl"),
     latestOut: positional[1] || path.join(ROOT, "reports/xinjiang-flights-latest.md"),
     rankedOut: positional[2] || path.join(ROOT, "reports/xinjiang-flights-ranked.md"),
@@ -74,7 +88,7 @@ function queueOptions(label) {
 
 function saveResults(map, resultsPath) {
   saveToFile(map, resultsPath, {
-    filter: (r) => isConfiguredMonitorEntry(r, CFG),
+    filter: (r) => isConfiguredMonitorEntry(r, CFG) || r.adjacentFallback,
   });
 }
 
@@ -95,8 +109,85 @@ function countApiErrors(map) {
   return compactMap(map).filter((r) => r.apiError).length;
 }
 
+function tagAdjacentFallback(map, task) {
+  const key = routeKey(`${task.origin}→${task.dest}`, task.date);
+  const entry = map.get(key);
+  if (entry) {
+    entry.adjacentFallback = true;
+    entry.referenceDate = task.referenceDate;
+  }
+}
+
+async function fetchAdjacentFallback(map, cache, options) {
+  const trip = CFG.trip || {};
+  const prefs = getReturnPreferences(trip);
+  if (!prefs.adjacentDayFallback) return { ran: 0 };
+
+  const primaryDates = primaryReturnDates(trip, CFG);
+  const routes = inboundRoutes(trip);
+  if (!routes.length || !primaryDates.length) return { ran: 0 };
+
+  const tasks = [];
+  for (const r of routes) {
+    for (const d of primaryDates) {
+      const key = routeKey(`${r.origin}→${r.dest}`, d);
+      const entry = map.get(key);
+      if (countMainApiFlights(entry) > 0) continue;
+
+      for (const delta of [-1, 1]) {
+        const adjDate = addDays(d, delta);
+        if (primaryDates.includes(adjDate)) continue;
+        const adjKey = routeKey(`${r.origin}→${r.dest}`, adjDate);
+        const existing = map.get(adjKey);
+        if (existing && (existing.flights || []).length > 0) continue;
+        tasks.push({
+          origin: r.origin,
+          dest: r.dest,
+          date: adjDate,
+          mode: r.mode || "full",
+          referenceDate: d,
+        });
+      }
+    }
+  }
+
+  if (!tasks.length) return { ran: 0 };
+
+  process.stderr.write(`Adjacent-day fallback: ${tasks.length} route×date\n`);
+  const stats = await runSearchQueue(tasks, map, { ...options, cache, label: "Adjacent" });
+  for (const t of tasks) tagAdjacentFallback(map, t);
+  return stats;
+}
+
+function printReturnSummary(map) {
+  const trip = CFG.trip || {};
+  const prefs = getReturnPreferences(trip);
+  const dates = primaryReturnDates(trip, CFG);
+  const routes = inboundRoutes(trip);
+  if (!dates.length) return;
+
+  for (const r of routes.length ? routes : [{ origin: "伊宁", dest: "广州" }]) {
+    for (const d of dates) {
+      const key = routeKey(`${r.origin}→${r.dest}`, d);
+      const entry = map.get(key);
+      const main = countMainApiFlights(entry);
+      const total = (entry?.flights || []).length;
+      const line =
+        `Summary ${r.origin}→${r.dest} ${d}: main=${main}, total=${total}, window≥${prefs.minDepartureTime}`;
+      process.stderr.write(`${line}\n`);
+    }
+  }
+}
+
 async function main() {
-  const { phase, flightsOnly, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
+  const { phase, flightsOnly, refresh, resultsPath, latestOut, rankedOut } = parseArgs(process.argv);
+
+  if (refresh && (phase === "return" || phase === "all")) {
+    const purged = purgeReturnRoutes({ includeAdjacent: true });
+    process.stderr.write(
+      `Refresh: purged cache ${purged.cachePurged}, results ${purged.resultsPurged} (${purged.targets} keys)\n`
+    );
+  }
 
   process.stderr.write(
     `Monitor (${phase}${flightsOnly ? ", flights-only" : ""}): ${CFG.routeLabel} | ${CFG.origins.join("/")} → ${formatCoverage(CFG.destinations)}` +
@@ -215,6 +306,15 @@ async function main() {
         (inStats.circuitOpen ? `, circuit OPEN (${inStats.circuitSkipped} skipped)` : "") +
         `\n`
     );
+
+    if (!inStats.circuitOpen) {
+      const adjStats = await fetchAdjacentFallback(map, cache, queueOptions("Adjacent"));
+      if (adjStats.ran > 0) {
+        process.stderr.write(
+          `Adjacent: ${adjStats.ran} fetched, ${adjStats.cached} cached\n`
+        );
+      }
+    }
   }
 
   if (
@@ -245,12 +345,22 @@ async function main() {
   const scopeArgs = returnOnly && phase === "return" ? ["--scope", "return"] : [];
   fs.writeFileSync(latestOut, runScript("format-xinjiang-report.js", resultsPath, scopeArgs));
   fs.writeFileSync(rankedOut, runScript("format-ranked-report.js", resultsPath, scopeArgs));
+  const flightsBriefOut = rankedOut.replace(/-ranked\.md$/, "-brief.md");
+  try {
+    fs.writeFileSync(flightsBriefOut, runScript("format-flights-brief.js", resultsPath));
+    process.stderr.write(`Flights brief saved: ${flightsBriefOut}\n`);
+  } catch (e) {
+    process.stderr.write(`Flights brief skipped: ${e.message}\n`);
+  }
+  if (phase === "return" || phase === "all") {
+    printReturnSummary(map);
+  }
   if (flightsOnly) {
     process.stderr.write(`Report saved: ${latestOut}\n`);
     process.stderr.write(`Ranked report saved: ${rankedOut}\n`);
     return;
   }
-  const briefOut = rankedOut.replace(/-ranked\.md$/, "-brief.md").replace(/outbound-ranked\.md$/, "outbound-brief.md");
+  const briefOut = path.join(ROOT, "reports/xinjiang-travel-brief.md");
   const planOut = path.join(ROOT, "reports/xinjiang-travel-plan.md");
   try {
     fs.writeFileSync(briefOut, runScript("format-travel-brief.js", resultsPath));

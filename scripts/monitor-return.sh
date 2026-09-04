@@ -19,7 +19,8 @@ source "$SCRIPT_DIR/feishu-env.sh"
 RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 OUTPUT="$ROOT_DIR/reports/xinjiang-flights-latest.md"
 RANKED="$ROOT_DIR/reports/xinjiang-flights-ranked.md"
-BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
+FLIGHTS_BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
+TRAVEL_BRIEF="$ROOT_DIR/reports/xinjiang-travel-brief.md"
 PLAN="$ROOT_DIR/reports/xinjiang-travel-plan.md"
 
 echo "▶ 返程 Skill：伊宁→广州 + 酒店 + 旅行计划（去程已订）" >&2
@@ -27,18 +28,14 @@ node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel monitor skipped (non-fatal)"
 node "$SCRIPT_DIR/monitor-run.js" --phase return "$RESULTS" "$OUTPUT" "$RANKED"
 
 if feishu_notify_enabled; then
-  # 去程已订时强制推送完整简报（含行程+酒店），不再只推 ranked 航班
+  eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
+  # 去程已订：默认飞书推 ranked TOP3；完整行程/酒店用 FEISHU_REPORT=brief|all
   if [[ -f "$ROOT_DIR/config/trip-profile.json" ]] && grep -q '"skipOutboundMonitor": true' "$ROOT_DIR/config/trip-profile.json" 2>/dev/null; then
-    FEISHU_REPORT="${FEISHU_REPORT:-brief}"
-    if [[ "$FEISHU_REPORT" == "ranked" ]]; then
-      FEISHU_REPORT="brief"
-      echo "去程已订 → 飞书改为推送决策简报（含行程+酒店）" >&2
-    fi
+    FEISHU_REPORT="${FEISHU_REPORT:-ranked}"
   else
     FEISHU_REPORT="${FEISHU_REPORT:-brief}"
   fi
   echo "Sending Feishu ($FEISHU_REPORT)..." >&2
-  eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   case "$FEISHU_REPORT" in
     ranked)
       node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
@@ -47,14 +44,13 @@ if feishu_notify_enabled; then
       [[ -f "$PLAN" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
       ;;
     all)
-      [[ -f "$BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 决策简报" "$BRIEF" || true
+      [[ -f "$FLIGHTS_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程机票简报" "$FLIGHTS_BRIEF" || true
+      [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
       [[ -f "$PLAN" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
       node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
       ;;
     brief|*)
-      if [[ -f "$BRIEF" ]]; then
-        node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 决策简报" "$BRIEF" || true
-      fi
+      [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
       if [[ -f "$PLAN" ]]; then
         node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 旅行计划" "$PLAN" || true
       fi

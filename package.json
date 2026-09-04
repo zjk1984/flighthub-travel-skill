@@ -22,6 +22,7 @@
     "monitor:hotels:ranked": "node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json",
     "monitor:resume": "bash -c 'source scripts/load-env.sh && node scripts/monitor-resume.js'",
     "monitor:brief": "node scripts/format-travel-brief.js reports/xinjiang-results.jsonl",
+    "monitor:flights-brief": "node scripts/format-flights-brief.js reports/xinjiang-results.jsonl",
     "monitor:plan": "node scripts/format-travel-plan.js reports/xinjiang-results.jsonl --out reports/xinjiang-travel-plan.md",
     "monitor:cards": "node scripts/format-travel-cards.js --out reports/xinjiang-travel-cards.md",
     "monitor:cards:planb": "node scripts/format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md",

@@ -17,6 +17,20 @@ function resolveProfilePath(cfg) {
   return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
 }
 
+function applyActiveVariant(raw) {
+  const key = raw.activeVariant;
+  if (!key || key === "duku" || key === "main") return raw;
+  const variant = raw.itineraryVariants?.[key];
+  if (!variant) return raw;
+  return {
+    ...raw,
+    label: variant.label || raw.label,
+    itinerary: variant.itinerary || raw.itinerary,
+    hotels: variant.hotels || raw.hotels,
+    hotelOverrides: variant.hotelOverrides || raw.hotelOverrides,
+  };
+}
+
 function loadTripProfile(cfg) {
   const profilePath = resolveProfilePath(cfg);
   if (!profilePath || !fs.existsSync(profilePath)) {
@@ -30,13 +44,15 @@ function loadTripProfile(cfg) {
       bookedOutbound: null,
       focusRoutes: null,
       returnDateCompare: [],
+      returnPreferences: {},
+      activeVariant: null,
       hotels: [],
       itinerary: null,
       itineraryVariants: {},
       profilePath: null,
     };
   }
-  const raw = readJson(profilePath);
+  const raw = applyActiveVariant(readJson(profilePath));
   return {
     label: raw.label || null,
     partySize: Math.max(1, parseInt(raw.partySize, 10) || 1),
@@ -47,6 +63,8 @@ function loadTripProfile(cfg) {
     bookedOutbound: raw.bookedOutbound || null,
     focusRoutes: raw.focusRoutes || null,
     returnDateCompare: Array.isArray(raw.returnDateCompare) ? raw.returnDateCompare : [],
+    returnPreferences: raw.returnPreferences || {},
+    activeVariant: raw.activeVariant || null,
     hotels: Array.isArray(raw.hotels) ? raw.hotels : [],
     itinerary: raw.itinerary || null,
     itineraryVariants: raw.itineraryVariants || {},
@@ -76,4 +94,5 @@ module.exports = {
   loadTripProfile,
   buildFocusTasks,
   resolveProfilePath,
+  applyActiveVariant,
 };

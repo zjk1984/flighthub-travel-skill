@@ -19,25 +19,13 @@ for arg in "$@"; do
   if [[ "$arg" == "--refresh" ]]; then REFRESH=true; fi
 done
 
+EXTRA_ARGS=()
 if [[ "$REFRESH" == "true" ]]; then
-  node -e "
-const fs=require('fs');
-const cachePath='reports/flight-route-cache.jsonl';
-const resultsPath='reports/xinjiang-results.jsonl';
-function purge(file, pred) {
-  if(!fs.existsSync(file)) return 0;
-  const lines=fs.readFileSync(file,'utf8').split('\n').filter(Boolean);
-  const kept=lines.filter(l=>{ try { return !pred(JSON.parse(l)); } catch { return true; } });
-  fs.writeFileSync(file, kept.join('\n')+(kept.length?'\n':''));
-  return lines.length-kept.length;
-}
-const isReturn=(r)=> (r.route==='伊宁→广州'&&r.date==='2026-10-08') || (r.origin==='伊宁'&&r.dest==='广州'&&r.date==='2026-10-08');
-console.error('Refresh: purged cache', purge(cachePath, isReturn), 'results', purge(resultsPath, isReturn));
-"
+  EXTRA_ARGS+=(--refresh)
 fi
 
 echo "▶ 返程航班（仅机票，不含酒店/行程）" >&2
-node "$SCRIPT_DIR/monitor-run.js" --phase return --flights-only "$RESULTS" "$OUTPUT" "$RANKED"
+node "$SCRIPT_DIR/monitor-run.js" --phase return --flights-only "${EXTRA_ARGS[@]}" "$RESULTS" "$OUTPUT" "$RANKED"
 
 if feishu_notify_enabled; then
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"

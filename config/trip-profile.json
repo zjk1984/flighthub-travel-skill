@@ -4,6 +4,13 @@
   "roomCount": 2,
   "scoringProfile": "family_elder",
   "focusMode": true,
+  "activeVariant": "duku",
+  "returnPreferences": {
+    "minDepartureTime": "12:00",
+    "targetPricePerPerson": 1500,
+    "adjacentDayFallback": true,
+    "note": "D8 将军府 11:00 取行李后出发；12:00 前起飞与行程冲突"
+  },
   "skipOutboundMonitor": true,
   "bookedOutbound": {
     "route": "广州→伊宁",

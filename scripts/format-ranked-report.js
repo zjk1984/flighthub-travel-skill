@@ -22,6 +22,14 @@ const {
   arrTimeSlotPoints,
   pickScenario,
 } = require("./scoring-profiles");
+const {
+  splitFeasible,
+  renderInventoryAlert,
+  renderTargetPriceAlert,
+  renderInfeasibleSection,
+  renderAdjacentReference,
+  getReturnPreferences,
+} = require("./return-flight-prefs");
 
 const CFG = loadConfig();
 const ORIGINS = CFG.origins;
@@ -660,8 +668,8 @@ function parseReportArgs(argv) {
 
 const { scope, inputPath } = parseReportArgs(process.argv);
 const raw = fs.readFileSync(inputPath, "utf8");
-const results = compactMap(buildRouteMap(parseJsonl(raw))).filter((r) =>
-  isConfiguredMonitorEntry(r, CFG)
+const results = compactMap(buildRouteMap(parseJsonl(raw))).filter(
+  (r) => isConfiguredMonitorEntry(r, CFG) || r.adjacentFallback
 );
 const all = flattenFlights(results);
 const outboundScored = scoreFlightsByDay(all.filter(f => isOutbound(f.route)), "outbound");
@@ -672,10 +680,12 @@ const customOutCount = outbound.filter(f => f.customTransfer).length;
 const customInCount = inbound.filter(f => f.customTransfer).length;
 
 const outByDay = topByDay(outbound);
-const inByDay = topByDay(inbound, TOP_N, { ensureCustom: true });
+const { feasible: inboundFeasible } = splitFeasible(inbound, TRIP);
+const inByDay = topByDay(inboundFeasible, TOP_N, { ensureCustom: true });
 const outPerDest = topByDayPerDest(outbound);
-const inPerDest = topByDayPerDest(inbound);
-const roundTrips = recommendRoundTrips(outbound, inbound);
+const inPerDest = topByDayPerDest(inboundFeasible);
+const roundTrips = recommendRoundTrips(outbound, inboundFeasible);
+const returnPrefs = getReturnPreferences(TRIP);
 
 const scopeLabel =
   scope === "outbound" ? "去程" : scope === "return" ? "返程" : "往返";
@@ -701,11 +711,19 @@ if (showIn && scope === "all") {
   if (customInCount > 0) md += `（含自定义中转 ${customInCount} 条）`;
   md += `\n`;
 } else if (showIn && scope === "return") {
-  md += `- 候选航班：返程 ${inbound.length} 条`;
+  md += `- 候选航班：返程 ${inbound.length} 条（可行窗口 ≥${returnPrefs.minDepartureTime}：**${inboundFeasible.length}** 条）`;
   if (customInCount > 0) md += `（含自定义中转 ${customInCount} 条）`;
   md += `\n`;
 }
 md += `\n`;
+
+if (showIn) {
+  md += renderInventoryAlert(results, TRIP, CFG);
+  md += renderTargetPriceAlert(inbound.filter((f) => f.priceVerified !== false), TRIP, PARTY_SIZE);
+  if (scope === "return" || scope === "all") {
+    md += `> 返程可行窗口：伊宁起飞 ≥ **${returnPrefs.minDepartureTime}**（D8 将军府后）\n\n`;
+  }
+}
 
 md += renderScoringGuide();
 if (showOut) {
@@ -713,9 +731,11 @@ if (showOut) {
   md += renderPerDestTop1(outPerDest, "🗺️ 去程各目的地 TOP1");
 }
 if (showIn) {
-  md += renderDailySections(inByDay, "🛬 返程每日 TOP3（目的地多样化）", "inbound");
-  md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1");
-  md += renderScenarioPicks(inbound);
+  md += renderDailySections(inByDay, "🛬 返程每日 TOP3（可行窗口内 · 目的地多样化）", "inbound");
+  md += renderPerDestTop1(inPerDest, "🗺️ 返程各目的地 TOP1（可行窗口内）");
+  md += renderScenarioPicks(inboundFeasible);
+  md += renderInfeasibleSection(inbound.filter((f) => f.priceVerified !== false), TRIP, PARTY_SIZE);
+  md += renderAdjacentReference(inbound, results);
 }
 if (scope === "all") {
   md += renderRoundTrips(roundTrips);

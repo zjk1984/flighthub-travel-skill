@@ -196,7 +196,7 @@ function main() {
     inboundByDate.get(f.date).push(f);
   }
 
-  let md = `# 旅行决策简报（返程 · 行程 · 酒店）\n\n`;
+  let md = `# 旅行决策简报（行程 · 酒店）\n\n`;
   md += `> 生成时间：${formatShanghaiTime()} | 评分画像：**${PROFILE.label}** | **${PARTY} 人**\n\n`;
   if (TRIP.label) md += `> 行程：${TRIP.label}\n\n`;
   if (TRIP.bookedOutbound) {
@@ -217,8 +217,7 @@ function main() {
   md += renderTipsBrief(TRIP.itinerary);
 
   md += `---\n\n`;
-  md += renderReturnCompare(inboundByDate);
-  md += renderPriceDeltas(results);
+  md += `> 返程机票 TOP3 / 库存告警见 \`reports/xinjiang-flights-ranked.md\` 与 \`reports/xinjiang-flights-brief.md\`\n\n`;
   md += `## 酒店评分明细（各段 TOP3）\n\n`;
   md += renderHotels(hotelsPath);
   md += `---\n基于飞猪 fly.ai 实时数据 · 决策简报由 \`format-travel-brief.js\` 自动生成\n`;
