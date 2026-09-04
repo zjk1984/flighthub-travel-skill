@@ -1,6 +1,6 @@
 # ✈️ 伊犁8天 · 独库+赛湖 · 10/7-10/8 返广州 返程 TOP3 评分推荐
 
-> 生成时间：2026-09-04 11:49:13 (Asia/Shanghai)
+> 生成时间：2026-09-04 11:58:04 (Asia/Shanghai)
 
 > 覆盖目的地：伊犁（伊宁）
 
@@ -65,7 +65,7 @@
    - 返程出发 伊犁（伊宁）：偏好分 100（与去程目的地 伊犁（伊宁） 一致）
    - 起飞 16:20：非理想时段（07–10 / 10–20 最佳），95 分
    - 落地 23:50：非理想时段，80 分
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3xhYfb)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3AoeF4)
 
 2. **伊犁（伊宁）→广州 G551F8G / G551F8G + MU9670 / MU5731**（综合 57.5）
    - 自定义中转：兰州 衔接 2h15m，第一段 G551F8G / G551F8G (¥890) + 第二段 MU9670 / MU5731 (¥1520)，需分段购票
@@ -118,7 +118,7 @@
    - 转机分合计 50
    - 返程出发 伊犁（伊宁）：偏好分 100（与去程目的地 伊犁（伊宁） 一致）
    - 起飞 17:55：非理想时段（07–10 / 10–20 最佳），95 分
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F14l954)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2iuj8D)
 
 3. **伊犁（伊宁）→广州 3U6915 / 3U6703**（综合 75.2）
    - 价格 ¥1480：满 1000 元档，绝对分 75（综合价分 83）
@@ -129,7 +129,7 @@
    - 返程出发 伊犁（伊宁）：偏好分 100（与去程目的地 伊犁（伊宁） 一致）
    - 起飞 15:50：非理想时段（07–10 / 10–20 最佳），95 分
    - 落地 15:50：非理想时段，95 分
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2xeS8N)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3aq9y3)
 
 ## 🗺️ 返程各目的地 TOP1
 
