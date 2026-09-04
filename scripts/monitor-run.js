@@ -3,7 +3,7 @@
  * Unified monitor orchestrator: main search → custom transfer → reports
  *
  * Usage:
- *   node monitor-run.js [--phase all|outbound|return] [--flights-only] [results.jsonl] [latest.md] [ranked.md]
+ *   node monitor-run.js [--phase all|outbound|return] [--flights-only] [--refresh] [results.jsonl] [latest.md] [ranked.md]
  */
 const fs = require("fs");
 const path = require("path");
