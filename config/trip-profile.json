@@ -4,20 +4,20 @@
   "roomCount": 2,
   "scoringProfile": "family_elder",
   "focusMode": true,
-  "activeVariant": "duku",
+  "activeVariant": "planb",
   "workflow": {
     "priorityOrder": ["outbound", "return", "plan", "hotels"],
     "confirmed": {
       "outbound": true,
       "return": true,
-      "plan": null,
+      "plan": "planb",
       "hotels": false
     },
     "notes": [
       "严格顺序：1 去程 → 2 返程 → 3 Plan A/B → 4 酒店",
-      "阶段2 返程：TOP3 纯机票评分 + 备选机场，不看 D8 时间窗",
-      "阶段3 计划：两套方案 Plan A（独库）/ Plan B（绕开独库），待用户择一",
-      "确认路线后 workflow.confirmed.plan=duku|planb"
+      "阶段2 返程：已订 MU6170/MU2311 博乐出发",
+      "阶段3 计划：**Plan B（绕开独库）** 已确认 · 详见 reports/planb-daily-guide.md",
+      "阶段4 酒店：按 Plan B 6 晚分段预订"
     ]
   },
   "returnPreferences": {
@@ -219,6 +219,7 @@
       "fallbackNote": "独库封闭或老人不宜盘山时的备用路线；D2 休整与 D7 博乐与 Plan A 一致",
       "itinerary": {
         "overview": "伊宁休整 → 伊昭 → 昭苏 → 特克斯 → **国道直抵赛湖** → 果子沟 → **博乐** → 10/8 返广州",
+        "dailyGuide": "reports/planb-daily-guide.md",
         "importantTips": [
           "**Plan B**：不走高海拔独库；D6 特克斯经 G30/国道直抵赛湖东门",
           "**D2** 同 Plan A：伊宁休整 + **伊犁将军府** + 六星街",
@@ -308,6 +309,12 @@
             "stay": "—",
             "note": "12:00 前还车"
           }
+        ],
+        "todo": [
+          "D3 查伊昭路况；封路改 G577",
+          "预约夏塔（10/4）",
+          "订 6 晚住宿（2 间；含 D2 伊宁、昭苏、特克斯、赛湖东门、D7 博乐）",
+          "D6 必住赛湖东门；D7 博乐；D8 12:00 前还车"
         ]
       },
       "hotels": [
