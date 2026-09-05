@@ -100,10 +100,27 @@ function renderBookedReturn() {
   md += `| 项目 | 内容 |\n|------|------|\n`;
   md += `| 日期 | ${b.date} |\n`;
   md += `| 航班 | **${b.flightNo || "—"}** |\n`;
-  const arrNote = b.arrDate && b.arrDate !== b.date ? `（${b.arrDate} ${b.arrTime} 落地）` : b.arrTime ? ` → **${b.arrTime} 落地**` : "";
+  const arrNote =
+    b.arrDate && b.arrTime
+      ? b.arrDate !== b.date
+        ? ` → **${b.arrDate} ${b.arrTime} 落地广州**`
+        : ` → **${b.arrTime} 落地广州**（当日）`
+      : "";
   md += `| 路线 | ${b.route}${b.depTime ? ` ${b.depTime}` : ""}${arrNote} |\n`;
-  if (b.price) md += `| 参考价 | ¥${b.price}（${PARTY}人 ¥${(b.price * PARTY).toFixed(0)}） |\n`;
+  if (b.connectVia) md += `| 中转 | ${b.connectVia} |\n`;
+  const price = b.price ?? b.priceRef;
+  if (price) {
+    const total = b.partyTotalRef ?? price * PARTY;
+    md += `| 参考价 | ¥${price}/人（${PARTY}人 ≈ ¥${total}）${b.price ? "" : " · API/时刻参考，以订单为准"} |\n`;
+  }
   md += `| 说明 | ${b.note || "—"} |\n\n`;
+  if (b.legs?.length) {
+    md += `**联程明细：**\n\n| 段 | 航班 | 路线 | 出发 | 到达 |\n|----|------|------|------|------|\n`;
+    for (const leg of b.legs) {
+      md += `| ${leg.flightNo === b.legs[0].flightNo ? "1" : "2"} | **${leg.flightNo}** | ${leg.route} | ${leg.date?.slice(5) || b.date?.slice(5) || "—"} ${leg.depTime || "—"} | ${leg.date?.slice(5) || "—"} ${leg.arrTime || "—"} |\n`;
+    }
+    md += `\n`;
+  }
   return md;
 }
 
