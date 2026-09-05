@@ -42,5 +42,5 @@
 
 ## 下一步
 
-1. 确认 **Plan A** 或 **Plan B**
-2. 阶段 4 按选定方案刷新 **6 晚酒店**（含 D2 伊宁、D7 博乐）
+1. ~~确认 **Plan A** 或 **Plan B**~~ → **已确认 Plan B**（详见 `reports/planb-daily-guide.md`）
+2. 阶段 4 按 Plan B 刷新 **6 晚酒店**（含 D2 伊宁、D7 博乐）
