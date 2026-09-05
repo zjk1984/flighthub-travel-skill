@@ -165,6 +165,18 @@ function renderCards(ctx, hotelsPath, out) {
     const b = ctx.trip.bookedOutbound;
     md += `✈️ **去程已订：** ${b.route} ${b.date} ${b.flightNo}（${b.note || ""}）\n\n`;
   }
+  if (ctx.trip.bookedReturn) {
+    const r = ctx.trip.bookedReturn;
+    const arr =
+      r.arrTime && r.arrDate
+        ? r.arrDate === r.date
+          ? ` · **${r.arrTime} 到广州**（当日）`
+          : ` · ${r.arrDate} ${r.arrTime} 到广州`
+        : "";
+    const price = r.price ?? r.priceRef;
+    const priceNote = price ? ` · 参考 ¥${price}/人` : "";
+    md += `✈️ **返程已订：** ${r.route} ${r.date} **${r.flightNo}**${arr}${priceNote}\n\n`;
+  }
   if (ctx.itinerary?.overview) {
     md += `**环线概要：** ${ctx.itinerary.overview}\n\n`;
   }

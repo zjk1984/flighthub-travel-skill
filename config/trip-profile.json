@@ -53,13 +53,36 @@
     "flightNo": "MU6170 / MU2311",
     "depAirport": "博乐阿拉山口",
     "depStation": "阿拉山口",
+    "arrStation": "广州白云",
     "depTime": "13:30",
+    "arrTime": "21:55",
+    "arrDate": "2026-10-08",
+    "sameDayArrival": true,
     "connectVia": "西安",
+    "priceRef": 2424,
+    "partyTotalRef": 12120,
     "legs": [
-      { "flightNo": "MU6170", "route": "博乐→西安" },
-      { "flightNo": "MU2311", "route": "西安→广州" }
+      {
+        "flightNo": "MU6170",
+        "route": "博乐→西安",
+        "date": "2026-10-08",
+        "depTime": "13:30",
+        "arrTime": "17:20",
+        "depAirport": "阿拉山口",
+        "arrAirport": "西安咸阳 T5"
+      },
+      {
+        "flightNo": "MU2311",
+        "route": "西安→广州",
+        "date": "2026-10-08",
+        "depTime": "19:30",
+        "arrTime": "21:55",
+        "depAirport": "西安咸阳 T5",
+        "arrAirport": "广州白云 T3",
+        "layover": "西安等候约 2h10m"
+      }
     ],
-    "note": "用户已订 · MU6170 博乐→西安 + MU2311 西安→广州；10/8 12:00 前阿拉山口机场还车 · 价格/到达以订单为准"
+    "note": "用户已订东航联程 · 10/8 **当日 21:55 到广州**；12:00 前阿拉山口还车 · 参考价 API 同首段 ¥2424/人（5人≈¥12120），**以订单实付为准**"
   },
   "focusRoutes": {
     "outbound": [],
