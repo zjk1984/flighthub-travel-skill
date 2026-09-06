@@ -1,10 +1,10 @@
 # 🏨 每日 TOP3 酒店评分推荐
 
-> 生成时间：2026-09-07 07:39:43 (Asia/Shanghai)
+> 生成时间：2026-09-07 07:44:50 (Asia/Shanghai)
 
 > 行程：伊犁8天自驾 · 玉湖+喀拉峻+独库百里画廊+赛湖
 
-- 入住段：7 段 | 候选酒店：100 条 | 5 人 · 2 间
+- 入住段：7 段 | 候选酒店：108 条 | 5 人 · 2 间
 
 ## 📐 酒店评分标准（v1 · 家庭·老人友好）
 
@@ -33,223 +33,223 @@
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 87.5 | 酒店 | 伊宁 | 全季伊宁宁远路国际机场酒店 | 舒适型 | ¥4 | 70 | 100 | 90 | 75 | 100 | ¥8 | 10-01→10-02 | 近伊犁职业技术学院 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Oau4w) |
-| 2 | 78.8 | 酒店 | 伊宁 | 全季伊宁福州路林则徐纪念馆酒店 | 舒适型 | ¥4 | 70 | 65 | 90 | 75 | 100 | ¥8 | 10-01→10-02 | 近伊宁市开发区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Zq9C6) |
+| 1 | 93.3 | 酒店 | 伊宁 | 全季伊宁宁远路国际机场酒店 | 舒适型 | ¥349 | 93 | 100 | 90 | 75 | 100 | ¥698 | 10-01→10-02 | 近伊犁职业技术学院 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2WhaY1) |
+| 2 | 72.8 | 酒店 | 伊宁 | 全季伊宁福州路林则徐纪念馆酒店 | 舒适型 | ¥431 | 46 | 65 | 90 | 75 | 100 | ¥862 | 10-01→10-02 | 近伊宁市开发区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4J41Gr) |
 
 **扣分项明细：**
 
-1. **伊宁 · 全季伊宁宁远路国际机场酒店**（综合 87.5）
-   - 价格 ¥4/晚：低价档（价格分 70）
+1. **伊宁 · 全季伊宁宁远路国际机场酒店**（综合 93.3）
+   - 价格 ¥349/晚：综合价分 93（绝对+同段相对各 50%）
    - 位置 近伊犁职业技术学院：命中分段 POI 偏好（位置分 100）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
-   - 单晚 × 2 间 ≈ ¥8（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Oau4w)
+   - 单晚 × 2 间 ≈ ¥698（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2WhaY1)
 
-2. **伊宁 · 全季伊宁福州路林则徐纪念馆酒店**（综合 78.8）
-   - 价格 ¥4/晚：低价档（价格分 70）
+2. **伊宁 · 全季伊宁福州路林则徐纪念馆酒店**（综合 72.8）
+   - 价格 ¥431/晚：综合价分 46（绝对+同段相对各 50%）
    - 位置 近伊宁市开发区：未命中分段 POI 关键词（位置分 65，较满分扣 35）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
-   - 单晚 × 2 间 ≈ ¥8（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Zq9C6)
+   - 单晚 × 2 间 ≈ ¥862（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4J41Gr)
 
 ### 10/2（2026-10-02） · D2 玉湖
 
-> 目的地：**昭苏** | 候选 23 家
+> 目的地：**昭苏** | 候选 22 家
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 86 | 民宿 | 昭苏 | 昭苏伊昭骏温泉大酒店 | 舒适型 | ¥1 | 85 | 88 | 90 | 75 | 85 | ¥2 | 10-02→10-03 | 近南城区天马国际旅游文化广场 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ismYl) |
-| 2 | 86 | 民宿 | 昭苏 | 伊犁国泰悦港大酒店 | 舒适型 | ¥1 | 85 | 88 | 90 | 75 | 85 | ¥2 | 10-02→10-03 | 近昭苏 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FvTN5) |
-| 3 | 84.5 | 民宿 | 昭苏 | 江浙酒店 | 舒适型 | ¥1 | 85 | 88 | 90 | 75 | 75 | ¥2 | 10-02→10-03 | 近昭苏 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0izbgP) |
+| 1 | 86 | 民宿 | 昭苏 | 昭苏伊昭骏温泉大酒店 | 舒适型 | ¥130 | 85 | 88 | 90 | 75 | 85 | ¥260 | 10-02→10-03 | 近南城区天马国际旅游文化广场 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3p6vYA) |
+| 2 | 85.5 | 民宿 | 昭苏 | 伊犁国泰悦港大酒店 | 舒适型 | ¥146 | 83 | 88 | 90 | 75 | 85 | ¥292 | 10-02→10-03 | 近昭苏 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ymXLG) |
+| 3 | 83.5 | 民宿 | 昭苏 | 昭苏江苏国际大酒店 | 高档型 | ¥305 | 70 | 88 | 95 | 75 | 85 | ¥610 | 10-02→10-03 | 近南城区天马国际旅游文化广场 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Cx0QT) |
 
 **扣分项明细：**
 
 1. **昭苏 · 昭苏伊昭骏温泉大酒店**（综合 86）
-   - 价格 ¥1/晚：低价档（价格分 85）
+   - 价格 ¥130/晚：低价档（价格分 85）
    - 位置 近南城区天马国际旅游文化广场：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ismYl)
+   - 单晚 × 2 间 ≈ ¥260（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3p6vYA)
 
-2. **昭苏 · 伊犁国泰悦港大酒店**（综合 86）
-   - 价格 ¥1/晚：低价档（价格分 85）
+2. **昭苏 · 伊犁国泰悦港大酒店**（综合 85.5）
+   - 价格 ¥146/晚：低价档（价格分 83）
    - 位置 近昭苏：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2FvTN5)
+   - 单晚 × 2 间 ≈ ¥292（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ymXLG)
 
-3. **昭苏 · 江浙酒店**（综合 84.5）
-   - 价格 ¥1/晚：低价档（价格分 85）
-   - 位置 近昭苏：部分匹配 POI（位置分 88，较满分扣 12）
-   - 档次 舒适型：舒适度分 90（较优）
+3. **昭苏 · 昭苏江苏国际大酒店**（综合 83.5）
+   - 价格 ¥305/晚：综合价分 70（绝对+同段相对各 50%）
+   - 位置 近南城区天马国际旅游文化广场：部分匹配 POI（位置分 88，较满分扣 12）
+   - 档次 高档型：舒适度分 95（较优）
    - 口碑：无评分数据，默认 75 分
-   - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0izbgP)
+   - 品牌/类型：品牌分 85
+   - 单晚 × 2 间 ≈ ¥610（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Cx0QT)
 
 ### 10/3（2026-10-03） · D3 特克斯
 
-> 目的地：**特克斯** | 候选 16 家
+> 目的地：**特克斯** | 候选 19 家
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 89 | 民宿 | 特克斯 | 特克斯青龙大酒店 | 舒适型 | ¥1 | 85 | 100 | 90 | 75 | 85 | ¥2 | 10-03→10-04 | 近特克斯八卦城景区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1m6QIv) |
-| 2 | 89 | 民宿 | 特克斯 | 特克斯县名城大酒店 | 舒适型 | ¥1 | 85 | 100 | 90 | 75 | 85 | ¥2 | 10-03→10-04 | 近特克斯八卦城景区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Gr9GT) |
-| 3 | 87.5 | 民宿 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥1 | 85 | 100 | 90 | 75 | 75 | ¥2 | 10-03→10-04 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1z0ivo) |
+| 1 | 87.8 | 民宿 | 特克斯 | 特克斯青龙大酒店 | 舒适型 | ¥156 | 80 | 100 | 90 | 75 | 85 | ¥312 | 10-03→10-04 | 近特克斯八卦城景区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0n4eIn) |
+| 2 | 87.5 | 民宿 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥118 | 85 | 100 | 90 | 75 | 75 | ¥236 | 10-03→10-04 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0GEe2r) |
+| 3 | 87.5 | 酒店 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥118 | 85 | 100 | 90 | 75 | 75 | ¥236 | 10-03→10-04 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2bucUf) |
 
 **扣分项明细：**
 
-1. **特克斯 · 特克斯青龙大酒店**（综合 89）
-   - 价格 ¥1/晚：低价档（价格分 85）
+1. **特克斯 · 特克斯青龙大酒店**（综合 87.8）
+   - 价格 ¥156/晚：低价档（价格分 80）
    - 位置 近特克斯八卦城景区：命中分段 POI 偏好（位置分 100）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1m6QIv)
+   - 单晚 × 2 间 ≈ ¥312（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0n4eIn)
 
-2. **特克斯 · 特克斯县名城大酒店**（综合 89）
-   - 价格 ¥1/晚：低价档（价格分 85）
-   - 位置 近特克斯八卦城景区：命中分段 POI 偏好（位置分 100）
-   - 档次 舒适型：舒适度分 90（较优）
-   - 口碑：无评分数据，默认 75 分
-   - 品牌/类型：品牌分 85
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3Gr9GT)
-
-3. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 87.5）
-   - 价格 ¥1/晚：低价档（价格分 85）
+2. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 87.5）
+   - 价格 ¥118/晚：低价档（价格分 85）
    - 位置 近特克斯县人民政府：命中分段 POI 偏好（位置分 100）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1z0ivo)
+   - 单晚 × 2 间 ≈ ¥236（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0GEe2r)
+
+3. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 87.5）
+   - 价格 ¥118/晚：低价档（价格分 85）
+   - 位置 近特克斯县人民政府：命中分段 POI 偏好（位置分 100）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 75
+   - 单晚 × 2 间 ≈ ¥236（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2bucUf)
 
 ### 10/4（2026-10-04） · D4 喀拉峻
 
-> 目的地：**特克斯** | 候选 16 家
+> 目的地：**特克斯** | 候选 17 家
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 86 | 民宿 | 特克斯 | 特克斯县名城大酒店 | 舒适型 | ¥1 | 85 | 88 | 90 | 75 | 85 | ¥2 | 10-04→10-05 | 近特克斯八卦城景区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1cPLu9) |
-| 2 | 84.5 | 民宿 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥1 | 85 | 88 | 90 | 75 | 75 | ¥2 | 10-04→10-05 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nfEkP) |
-| 3 | 84.5 | 酒店 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥1 | 85 | 88 | 90 | 75 | 75 | ¥2 | 10-04→10-05 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Mun1E) |
+| 1 | 84.5 | 民宿 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥118 | 85 | 88 | 90 | 75 | 75 | ¥236 | 10-04→10-05 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F439xLZ) |
+| 2 | 84.5 | 酒店 | 特克斯 | 花筑·特克斯半坡民宿（特克斯八卦城店） | 舒适型 | ¥118 | 85 | 88 | 90 | 75 | 75 | ¥236 | 10-04→10-05 | 近特克斯县人民政府 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1gN07k) |
+| 3 | 84 | 民宿 | 特克斯 | 特克斯县名城大酒店 | 舒适型 | ¥188 | 77 | 88 | 90 | 75 | 85 | ¥376 | 10-04→10-05 | 近特克斯八卦城景区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1UgJIh) |
 
 **扣分项明细：**
 
-1. **特克斯 · 特克斯县名城大酒店**（综合 86）
-   - 价格 ¥1/晚：低价档（价格分 85）
+1. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 84.5）
+   - 价格 ¥118/晚：低价档（价格分 85）
+   - 位置 近特克斯县人民政府：部分匹配 POI（位置分 88，较满分扣 12）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 75
+   - 单晚 × 2 间 ≈ ¥236（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F439xLZ)
+
+2. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 84.5）
+   - 价格 ¥118/晚：低价档（价格分 85）
+   - 位置 近特克斯县人民政府：部分匹配 POI（位置分 88，较满分扣 12）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 75
+   - 单晚 × 2 间 ≈ ¥236（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1gN07k)
+
+3. **特克斯 · 特克斯县名城大酒店**（综合 84）
+   - 价格 ¥188/晚：低价档（价格分 77）
    - 位置 近特克斯八卦城景区：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1cPLu9)
-
-2. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 84.5）
-   - 价格 ¥1/晚：低价档（价格分 85）
-   - 位置 近特克斯县人民政府：部分匹配 POI（位置分 88，较满分扣 12）
-   - 档次 舒适型：舒适度分 90（较优）
-   - 口碑：无评分数据，默认 75 分
-   - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2nfEkP)
-
-3. **特克斯 · 花筑·特克斯半坡民宿（特克斯八卦城店）**（综合 84.5）
-   - 价格 ¥1/晚：低价档（价格分 85）
-   - 位置 近特克斯县人民政府：部分匹配 POI（位置分 88，较满分扣 12）
-   - 档次 舒适型：舒适度分 90（较优）
-   - 口碑：无评分数据，默认 75 分
-   - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥2（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Mun1E)
+   - 单晚 × 2 间 ≈ ¥376（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1UgJIh)
 
 ### 10/5（2026-10-05） · D5 百里画廊
 
-> 目的地：**尼勒克** | 候选 4 家
+> 目的地：**尼勒克** | 候选 8 家
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 78.8 | 民宿 | 尼勒克 | 巴依阿吾勒山庄 | 舒适型 | ¥2 | 85 | 65 | 90 | 75 | 75 | ¥4 | 10-05→10-06 | 乌拉斯台镇阔克铁热克村 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1e68EJ) |
-| 2 | 76.3 | 民宿 | 尼勒克 | 独库唐布拉野奢度假酒店 | 高档型 | ¥3 | 35 | 100 | 95 | 75 | 75 | ¥6 | 10-05→10-06 | 尼勒克315国道尼勒克县马场石松马队向西1公里, 中国 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Fsz0Z) |
-| 3 | 78.8 | 酒店 | 尼勒克 | 巴依阿吾勒山庄 | 舒适型 | ¥2 | 85 | 65 | 90 | 75 | 75 | ¥4 | 10-05→10-06 | 乌拉斯台镇阔克铁热克村 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4LNmBH) |
+| 1 | 79 | 民宿 | 尼勒克 | 独库唐布拉野奢度假酒店 | 高档型 | ¥369 | 46 | 100 | 95 | 75 | 75 | ¥738 | 10-05→10-06 | 尼勒克315国道尼勒克县马场石松马队向西1公里, 中国 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0WMOeb) |
+| 2 | 78.8 | 民宿 | 尼勒克 | 巴依阿吾勒山庄 | 舒适型 | ¥155 | 85 | 65 | 90 | 75 | 75 | ¥310 | 10-05→10-06 | 乌拉斯台镇阔克铁热克村 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4flzOV) |
+| 3 | 78.8 | 民宿 | 尼勒克 | 唐布拉草原放蜂人家民宿 | 舒适型 | ¥285 | 62 | 88 | 90 | 75 | 75 | ¥570 | 10-05→10-06 | 七十一团北河路二巷3-3号 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4DPM5V) |
 
 **扣分项明细：**
 
-1. **尼勒克 · 巴依阿吾勒山庄**（综合 78.8）
-   - 价格 ¥2/晚：低价档（价格分 85）
-   - 位置 乌拉斯台镇阔克铁热克村：未命中分段 POI 关键词（位置分 65，较满分扣 35）
-   - 档次 舒适型：舒适度分 90（较优）
-   - 口碑：无评分数据，默认 75 分
-   - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1e68EJ)
-
-2. **尼勒克 · 独库唐布拉野奢度假酒店**（综合 76.3）
-   - 价格 ¥3/晚：低价档（价格分 35）
+1. **尼勒克 · 独库唐布拉野奢度假酒店**（综合 79）
+   - 价格 ¥369/晚：综合价分 46（绝对+同段相对各 50%）
    - 位置 尼勒克315国道尼勒克县马场石松马队向西1公里, 中国：命中分段 POI 偏好（位置分 100）
    - 档次 高档型：舒适度分 95（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥6（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Fsz0Z)
+   - 单晚 × 2 间 ≈ ¥738（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0WMOeb)
 
-3. **尼勒克 · 巴依阿吾勒山庄**（综合 78.8）
-   - 价格 ¥2/晚：低价档（价格分 85）
+2. **尼勒克 · 巴依阿吾勒山庄**（综合 78.8）
+   - 价格 ¥155/晚：低价档（价格分 85）
    - 位置 乌拉斯台镇阔克铁热克村：未命中分段 POI 关键词（位置分 65，较满分扣 35）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4LNmBH)
+   - 单晚 × 2 间 ≈ ¥310（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4flzOV)
+
+3. **尼勒克 · 唐布拉草原放蜂人家民宿**（综合 78.8）
+   - 价格 ¥285/晚：综合价分 62（绝对+同段相对各 50%）
+   - 位置 七十一团北河路二巷3-3号：部分匹配 POI（位置分 88，较满分扣 12）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 75
+   - 单晚 × 2 间 ≈ ¥570（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4DPM5V)
 
 ### 10/6（2026-10-06） · D6 赛湖东门
 
-> 目的地：**博乐** | 候选 14 家
+> 目的地：**博乐** | 候选 15 家
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 84.7 | 民宿 | 博乐 | 博乐颐中园酒店 | 高档型 | ¥4 | 69 | 100 | 95 | 75 | 75 | ¥8 | 10-06→10-07 | 近赛里木湖路 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QaVMb) |
-| 2 | 80 | 民宿 | 博乐 | 博乐万达悦华酒店 | 高档型 | ¥2 | 85 | 65 | 95 | 75 | 75 | ¥4 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0HgwH4) |
-| 3 | 80 | 民宿 | 博乐 | 博乐希尔顿惠庭酒店 | 高档型 | ¥2 | 85 | 65 | 95 | 75 | 75 | ¥4 | 10-06→10-07 | 近博尔塔拉蒙古自治州广播电视大学 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37ZJlM) |
+| 1 | 87.8 | 民宿 | 博乐 | 博乐颐中园酒店 | 高档型 | ¥391 | 81 | 100 | 95 | 75 | 75 | ¥782 | 10-06→10-07 | 近赛里木湖路 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0GYjZa) |
+| 2 | 80.8 | 民宿 | 博乐 | 博乐希尔顿惠庭酒店 | 高档型 | ¥246 | 88 | 65 | 95 | 75 | 75 | ¥492 | 10-06→10-07 | 近博尔塔拉蒙古自治州广播电视大学 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4aUCed) |
+| 3 | 80 | 民宿 | 博乐 | 博乐万达悦华酒店 | 高档型 | ¥179 | 85 | 65 | 95 | 75 | 75 | ¥358 | 10-06→10-07 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F31oupf) |
 
 **扣分项明细：**
 
-1. **博乐 · 博乐颐中园酒店**（综合 84.7）
-   - 价格 ¥4/晚：低价档（价格分 69）
+1. **博乐 · 博乐颐中园酒店**（综合 87.8）
+   - 价格 ¥391/晚：综合价分 81（绝对+同段相对各 50%）
    - 位置 近赛里木湖路：命中分段 POI 偏好（位置分 100）
    - 档次 高档型：舒适度分 95（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥8（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2QaVMb)
+   - 单晚 × 2 间 ≈ ¥782（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0GYjZa)
 
-2. **博乐 · 博乐万达悦华酒店**（综合 80）
-   - 价格 ¥2/晚：低价档（价格分 85）
-   - 位置 近博乐商业步行街(博乐市文化中心楼东南)：未命中分段 POI 关键词（位置分 65，较满分扣 35）
-   - 档次 高档型：舒适度分 95（较优）
-   - 口碑：无评分数据，默认 75 分
-   - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0HgwH4)
-
-3. **博乐 · 博乐希尔顿惠庭酒店**（综合 80）
-   - 价格 ¥2/晚：低价档（价格分 85）
+2. **博乐 · 博乐希尔顿惠庭酒店**（综合 80.8）
+   - 价格 ¥246/晚：综合价分 88（绝对+同段相对各 50%）
    - 位置 近博尔塔拉蒙古自治州广播电视大学：未命中分段 POI 关键词（位置分 65，较满分扣 35）
    - 档次 高档型：舒适度分 95（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F37ZJlM)
+   - 单晚 × 2 间 ≈ ¥492（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4aUCed)
+
+3. **博乐 · 博乐万达悦华酒店**（综合 80）
+   - 价格 ¥179/晚：低价档（价格分 85）
+   - 位置 近博乐商业步行街(博乐市文化中心楼东南)：未命中分段 POI 关键词（位置分 65，较满分扣 35）
+   - 档次 高档型：舒适度分 95（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 75
+   - 单晚 × 2 间 ≈ ¥358（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F31oupf)
 
 ### 10/7（2026-10-07） · D7 博乐
 
@@ -257,38 +257,38 @@
 
 | 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 85.2 | 民宿 | 博乐 | 全季博乐酒店 | 舒适型 | ¥2 | 73 | 88 | 90 | 75 | 100 | ¥4 | 10-07→10-08 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qebrK) |
-| 2 | 83 | 民宿 | 博乐 | 博乐供销新合大酒店 | 舒适型 | ¥2 | 73 | 88 | 90 | 75 | 85 | ¥4 | 10-07→10-08 | 近博尔塔拉蒙古自治州物资再生利用有限责任公司 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F12Rx8t) |
-| 3 | 82.7 | 民宿 | 博乐 | 博乐希尔顿惠庭酒店 | 高档型 | ¥2 | 73 | 88 | 95 | 75 | 75 | ¥4 | 10-07→10-08 | 近博尔塔拉蒙古自治州广播电视大学 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3tXGEP) |
+| 1 | 87.8 | 民宿 | 博乐 | 全季博乐酒店 | 舒适型 | ¥216 | 83 | 88 | 90 | 75 | 100 | ¥432 | 10-07→10-08 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1KNGLk) |
+| 2 | 84.5 | 民宿 | 博乐 | 博乐供销新合大酒店 | 舒适型 | ¥243 | 79 | 88 | 90 | 75 | 85 | ¥486 | 10-07→10-08 | 近博尔塔拉蒙古自治州物资再生利用有限责任公司 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0MeQRN) |
+| 3 | 84.3 | 民宿 | 博乐 | 博乐希尔顿惠庭酒店 | 高档型 | ¥246 | 79 | 88 | 95 | 75 | 75 | ¥492 | 10-07→10-08 | 近博尔塔拉蒙古自治州广播电视大学 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2CB3gr) |
 
 **扣分项明细：**
 
-1. **博乐 · 全季博乐酒店**（综合 85.2）
-   - 价格 ¥2/晚：低价档（价格分 73）
+1. **博乐 · 全季博乐酒店**（综合 87.8）
+   - 价格 ¥216/晚：综合价分 83（绝对+同段相对各 50%）
    - 位置 近博乐商业步行街(博乐市文化中心楼东南)：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌：连锁/优选品牌（品牌分 100）
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qebrK)
+   - 单晚 × 2 间 ≈ ¥432（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1KNGLk)
 
-2. **博乐 · 博乐供销新合大酒店**（综合 83）
-   - 价格 ¥2/晚：低价档（价格分 73）
+2. **博乐 · 博乐供销新合大酒店**（综合 84.5）
+   - 价格 ¥243/晚：综合价分 79（绝对+同段相对各 50%）
    - 位置 近博尔塔拉蒙古自治州物资再生利用有限责任公司：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F12Rx8t)
+   - 单晚 × 2 间 ≈ ¥486（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0MeQRN)
 
-3. **博乐 · 博乐希尔顿惠庭酒店**（综合 82.7）
-   - 价格 ¥2/晚：低价档（价格分 73）
+3. **博乐 · 博乐希尔顿惠庭酒店**（综合 84.3）
+   - 价格 ¥246/晚：综合价分 79（绝对+同段相对各 50%）
    - 位置 近博尔塔拉蒙古自治州广播电视大学：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 高档型：舒适度分 95（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 单晚 × 2 间 ≈ ¥4（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3tXGEP)
+   - 单晚 × 2 间 ≈ ¥492（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2CB3gr)
 
 ---
 基于飞猪 fly.ai 实时数据
