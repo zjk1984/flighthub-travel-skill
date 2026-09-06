@@ -343,7 +343,8 @@
           "topN": 12,
           "keyWords": "玉湖 民宿 牧家乐 昭苏",
           "hotelStars": "3,4",
-          "poiPrefer": ["玉湖", "昭苏", "玉湖景区"]
+          "poiPrefer": ["玉湖", "昭苏", "玉湖景区"],
+          "preferHomestay": true
         },
         {
           "segment": "D3 特克斯",
@@ -354,7 +355,8 @@
           "topN": 12,
           "keyWords": "离街 民宿 八卦城 太极坛 特克斯",
           "hotelStars": "3,4",
-          "poiPrefer": ["八卦城", "离街", "太极坛", "特克斯"]
+          "poiPrefer": ["八卦城", "离街", "太极坛", "特克斯"],
+          "preferHomestay": true
         },
         {
           "segment": "D4 喀拉峻",
@@ -365,7 +367,8 @@
           "topN": 12,
           "keyWords": "喀拉峻 民宿 牧家乐 草原 阔克苏",
           "hotelStars": "3,4",
-          "poiPrefer": ["喀拉峻", "阔克苏", "草原", "特克斯"]
+          "poiPrefer": ["喀拉峻", "阔克苏", "草原", "特克斯"],
+          "preferHomestay": true
         },
         {
           "segment": "D5 百里画廊",
@@ -376,7 +379,8 @@
           "topN": 12,
           "keyWords": "唐布拉 百里画廊 尼勒克 牧家乐 民宿",
           "hotelStars": "3,4",
-          "poiPrefer": ["唐布拉", "百里画廊", "尼勒克", "乔尔玛"]
+          "poiPrefer": ["唐布拉", "百里画廊", "尼勒克", "乔尔玛"],
+          "preferHomestay": true
         },
         {
           "segment": "D6 赛湖东门",
@@ -387,7 +391,8 @@
           "topN": 12,
           "keyWords": "赛里木 赛湖 东门",
           "hotelStars": "4,5",
-          "poiPrefer": ["赛里木", "赛湖", "东门", "湖"]
+          "poiPrefer": ["赛里木", "赛湖", "东门", "湖"],
+          "preferHomestay": true
         },
         {
           "segment": "D7 博乐",
@@ -398,7 +403,8 @@
           "topN": 12,
           "keyWords": "亚朵 万达悦华 友好 博乐",
           "hotelStars": "3,4,5",
-          "poiPrefer": ["博乐", "友好", "团结路", "机场"]
+          "poiPrefer": ["博乐", "友好", "团结路", "机场"],
+          "preferHomestay": true
         }
       ],
       "hotelOverrides": {

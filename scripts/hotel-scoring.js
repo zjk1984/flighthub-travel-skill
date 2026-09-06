@@ -90,12 +90,16 @@ function pricePointsCombined(price, segmentPrices) {
   return Math.round(abs * 0.5 + rel * 0.5);
 }
 
-function comfortPoints(star, profile) {
+function comfortPoints(star, profile, hotel, segmentMeta) {
   const s = String(star || "").trim();
+  const name = `${hotel?.name || ""} ${hotel?.lodgingType || ""}`;
   for (const [key, pts] of Object.entries(STAR_POINTS)) {
     if (s.includes(key)) return pts;
   }
-  if (/民宿|客栈| inn/i.test(s)) return profile?.elderFriendly ? 55 : 70;
+  if (/民宿|客栈|牧家乐| inn/i.test(s + name)) {
+    if (segmentMeta?.preferHomestay) return profile?.elderFriendly ? 88 : 92;
+    return profile?.elderFriendly ? 55 : 70;
+  }
   return 75;
 }
 
@@ -159,7 +163,7 @@ function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1, roomC
     .map((h) => {
       const pricePts = pricePointsCombined(h.priceNum, prices);
       const locationPts = locationPoints(h, segmentMeta);
-      const comfortPts = comfortPoints(h.star, profile);
+      const comfortPts = comfortPoints(h.star, profile, h, segmentMeta);
       const reviewPts = reviewPoints(h.reviewScore);
       const brandPts = brandPoints(h.name, profile);
       const w = profile.weights;
@@ -188,7 +192,14 @@ function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1, roomC
         destName: segmentMeta?.destName || h.destName || "",
       };
     })
-    .sort((a, b) => b.score - a.score || a.priceNum - b.priceNum);
+    .sort((a, b) => {
+      if (segmentMeta?.preferHomestay) {
+        const aHomestay = a.lodgingType === "民宿" || /民宿|客栈|牧家乐/.test(a.name);
+        const bHomestay = b.lodgingType === "民宿" || /民宿|客栈|牧家乐/.test(b.name);
+        if (aHomestay !== bHomestay) return aHomestay ? -1 : 1;
+      }
+      return b.score - a.score || a.priceNum - b.priceNum;
+    });
 }
 
 function buildDeductions(h, profile) {

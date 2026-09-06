@@ -31,6 +31,8 @@ if feishu_notify_enabled && [[ "${FEISHU_SKIP:-}" != "1" ]]; then
       [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
       ;;
     brief|*)
+      RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
+      [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店·民宿 TOP3" "$RANKED" || true
       [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
       ;;
   esac

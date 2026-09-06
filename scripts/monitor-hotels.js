@@ -32,7 +32,7 @@ function parseArgs(argv) {
 }
 
 function runHotelSearch(segment, overrides = {}) {
-  const flyai = process.env.FLYAI || "npx flyai";
+  const flyai = process.env.FLYAI || "npx @fly-ai/flyai-cli";
   const args = [
     "search-hotel",
     "--dest-name",
@@ -44,7 +44,7 @@ function runHotelSearch(segment, overrides = {}) {
     "--sort",
     overrides.sort || segment.sort || "price_asc",
     "--hotel-types",
-    "酒店",
+    overrides.hotelTypes || segment.hotelTypes || "酒店",
   ];
   if (segment.maxPrice && !overrides.ignoreMaxPrice) {
     args.push("--max-price", String(segment.maxPrice));
@@ -88,7 +88,7 @@ function dedupeHotels(rows) {
   const seen = new Set();
   const out = [];
   for (const h of rows) {
-    const key = `${h.name}|${h.checkin}|${h.checkout}`;
+    const key = `${h.name}|${h.checkin}|${h.checkout}|${h.lodgingType || ""}`;
     if (seen.has(key)) continue;
     seen.add(key);
     out.push(h);
@@ -99,31 +99,38 @@ function dedupeHotels(rows) {
 async function searchSegment(seg, elderFriendly) {
   const topN = seg.topN || 8;
   const rows = [];
-  const pricePayload = runHotelSearch(seg, {
-    sort: "price_asc",
-    usePoi: seg.segment?.includes("机场") || seg.poiPrefer?.includes("喀赞其"),
-  });
-  if (pricePayload) rows.push(...mapHotels(seg, pricePayload, topN));
+  const types = seg.preferHomestay ? ["民宿", "酒店"] : [seg.hotelTypes || "酒店"];
 
-  if (elderFriendly) {
-    const comfortPayload = runHotelSearch(seg, {
-      sort: "rate_desc",
-      hotelStars: seg.hotelStars || "4,5",
-      usePoi: !!seg.poiPrefer?.[0],
-      keyWords: seg.keyWords || "全季 星程 舒适",
-      ignoreMaxPrice: false,
+  for (const lodgingType of types) {
+    const pricePayload = runHotelSearch(seg, {
+      sort: "price_asc",
+      hotelTypes: lodgingType,
+      usePoi: seg.segment?.includes("机场") || seg.poiPrefer?.includes("喀赞其"),
     });
-    if (comfortPayload) rows.push(...mapHotels(seg, comfortPayload, topN));
-    // Fallback: POI-only search when keyword+stars returns empty
-    if (!rows.length && seg.poiPrefer?.[0]) {
-      const poiPayload = runHotelSearch(seg, { sort: "rate_desc", usePoi: true });
-      if (poiPayload) rows.push(...mapHotels(seg, poiPayload, topN));
+    if (pricePayload) rows.push(...mapHotels(seg, pricePayload, topN, lodgingType));
+
+    if (elderFriendly && lodgingType === "酒店") {
+      const comfortPayload = runHotelSearch(seg, {
+        sort: "rate_desc",
+        hotelTypes: lodgingType,
+        hotelStars: seg.hotelStars || "4,5",
+        usePoi: !!seg.poiPrefer?.[0],
+        keyWords: seg.keyWords || "全季 星程 舒适",
+        ignoreMaxPrice: false,
+      });
+      if (comfortPayload) rows.push(...mapHotels(seg, comfortPayload, topN, lodgingType));
     }
+    if (lodgingType === "民宿") await sleep(1200);
+  }
+
+  if (!rows.length && seg.poiPrefer?.[0]) {
+    const poiPayload = runHotelSearch(seg, { sort: "rate_desc", usePoi: true });
+    if (poiPayload) rows.push(...mapHotels(seg, poiPayload, topN, "酒店"));
   }
   return dedupeHotels(rows);
 }
 
-function mapHotels(segment, payload, topN) {
+function mapHotels(segment, payload, topN, lodgingType) {
   const list = payload?.data?.itemList || payload?.itemList || [];
   return list.slice(0, topN).map((h, i) => {
     const priceRaw = h.price || h.lowestPrice || "";
@@ -133,6 +140,7 @@ function mapHotels(segment, payload, topN) {
       checkin: segment.checkIn,
       checkout: segment.checkOut,
       apiRank: i + 1,
+      lodgingType: lodgingType || segment.hotelTypes || "酒店",
       name: h.hotelName || h.name || "—",
       price: priceNum > 0 ? `¥${priceNum}` : String(priceRaw || "—"),
       priceNum,
