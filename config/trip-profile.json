@@ -344,7 +344,9 @@
           "scenicPoi": ["玉湖景区"],
           "scenicHomestay": true,
           "extraKeywordSearches": [
-            { "keyWords": "望湖庄园 玉湖", "poiName": "玉湖景区" }
+            { "keyWords": "望湖庄园 玉湖", "poiName": "玉湖景区" },
+            { "keyWords": "玉湖 民宿", "poiName": "玉湖景区" },
+            { "keyWords": "木子陶 葛洲坝", "poiName": "葛洲坝玉湖" }
           ],
           "keyWords": "玉湖 民宿 牧家乐",
           "hotelStars": "3,4",
@@ -374,7 +376,9 @@
           "scenicHomestay": true,
           "extraKeywordSearches": [
             { "keyWords": "喀拉峻 民宿 波森" },
-            { "keyWords": "喀拉峻 别克波森" }
+            { "keyWords": "喀拉峻 别克波森" },
+            { "keyWords": "喀拉峻 无垠 野奢" },
+            { "keyWords": "喀拉峻 霍斯宝" }
           ],
           "keyWords": "喀拉峻 民宿 牧家乐 草原",
           "hotelStars": "3,4",
@@ -403,9 +407,10 @@
           "scenicPoi": "赛里木湖",
           "scenicHomestay": true,
           "extraKeywordSearches": [
-            { "keyWords": "赛湖 民宿 东门" },
-            { "keyWords": "喜见 新游客中心" },
-            { "keyWords": "拾光小住 赛里木湖" }
+            { "keyWords": "赛湖 民宿" },
+            { "keyWords": "云湖兰山 赛里木湖" },
+            { "keyWords": "拾光小住 新游客中心" },
+            { "keyWords": "入画入梦 赛里木湖" }
           ],
           "keyWords": "赛里木湖 赛湖 东门 民宿",
           "hotelStars": "3,4",

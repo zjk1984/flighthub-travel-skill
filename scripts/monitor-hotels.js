@@ -130,7 +130,7 @@ function dedupeHotels(rows) {
 function isScenicHomestayCandidate(h, seg) {
   const scenic = Array.isArray(seg.scenicPoi) ? seg.scenicPoi : seg.scenicPoi ? [seg.scenicPoi] : [];
   const text = `${h.poi || ""} ${h.address || ""} ${h.name || ""}`;
-  if (/青年旅舍|青旅|胶囊|床位/.test(text)) return false;
+  if (/青年旅舍|青旅|胶囊|床位|漫威电竞|华松旅社|华腾宾馆/.test(text)) return false;
 
   const hasYuhu = scenic.some((k) => /玉湖/.test(k));
   const hasBagua = scenic.some((k) => /八卦城/.test(k));
@@ -151,6 +151,9 @@ function isScenicHomestayCandidate(h, seg) {
     return false;
   }
   if (hasSayram && /大酒店|时代酒店/.test(h.name) && !/赛湖|赛里木|风景名胜/.test(text)) return false;
+  if (/汉庭|麗枫|维也纳国际|全季|亚朵|中亚全纳|博乐赛湖云上|博乐市海景酒店/.test(h.name) && !/民宿|毡房|鱼坊|山庄|营地|野奢|拾光|喜见|云湖/.test(h.name)) {
+    return false;
+  }
   if (hasBagua && /大酒店/.test(h.name) && !/民宿|客栈|花筑|半坡|闲庭/.test(text)) return false;
   if (/近昭苏$|天马大道|文化广场|文化路\d|工矿路|乌孙路\d号$/.test(text) && !/玉湖|望湖|景区/.test(text)) {
     return false;
@@ -161,14 +164,14 @@ function isScenicHomestayCandidate(h, seg) {
     玉湖景区: /玉湖|望湖|葛洲坝|别迭|喀夏加尔|木子陶|小别迭/,
     葛洲坝玉湖: /玉湖|望湖|葛洲坝|别迭|喀夏加尔|木子陶|小别迭/,
     八卦城: /八卦城|离街|半坡|闲庭民宿/,
-    喀拉峻: /喀拉峻|阔克苏|波森|别克|霍斯宝|云雾牧/,
+    喀拉峻: /喀拉峻|阔克苏|波森|别克|霍斯宝|云雾牧|无垠|牧业村/,
     唐布拉: /唐布拉|放蜂|野奢|巴依阿吾勒|百里画廊|315国道|乌拉斯台/,
-    赛里木湖: /赛里木湖|赛湖|拾光|云湖|鸿泽|鱼坊|游客中心|风景名胜|喜见|鲸语|毡房/,
+    赛里木湖: /赛里木湖|赛湖|拾光|云湖|鸿泽|鱼坊|游客中心|风景名胜|喜见|鲸语|毡房|入画入梦|白鸟湖/,
   };
   for (const poi of scenic) {
     if (poiPatterns[poi]?.test(text)) return true;
   }
-  if (/民宿|牧家乐|山庄|营地|度假村/.test(h.name) && /乡|村|景区|风景名胜|315国道|牧场/.test(text)) return true;
+  if (/民宿|牧家乐|山庄|营地|度假村|庄园|毡房|鱼坊/.test(h.name) && /乡|村|景区|风景名胜|315国道|牧场|牧业村|别迭|游客中心/.test(text)) return true;
   if (hasTangbula && /放蜂|野奢|巴依阿吾勒|唐布拉/.test(text)) return true;
   return false;
 }
@@ -353,7 +356,11 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+module.exports = { searchSegment, runHotelSearch, filterScenicHomestays, mapHotels };
