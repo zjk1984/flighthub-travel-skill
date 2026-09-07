@@ -90,12 +90,16 @@ function pricePointsCombined(price, segmentPrices) {
   return Math.round(abs * 0.5 + rel * 0.5);
 }
 
-function comfortPoints(star, profile) {
+function comfortPoints(star, profile, hotel, segmentMeta) {
   const s = String(star || "").trim();
+  const name = `${hotel?.name || ""} ${hotel?.lodgingType || ""}`;
   for (const [key, pts] of Object.entries(STAR_POINTS)) {
     if (s.includes(key)) return pts;
   }
-  if (/民宿|客栈| inn/i.test(s)) return profile?.elderFriendly ? 55 : 70;
+  if (/民宿|客栈|牧家乐| inn/i.test(s + name)) {
+    if (segmentMeta?.preferHomestay) return profile?.elderFriendly ? 88 : 92;
+    return profile?.elderFriendly ? 55 : 70;
+  }
   return 75;
 }
 
@@ -109,12 +113,37 @@ function reviewPoints(reviewScore) {
   return 55;
 }
 
+function curatedNameMatch(hotel, segmentMeta) {
+  const curated = segmentMeta?.curatedName;
+  if (!curated) return false;
+  const name = `${hotel.name || ""}`;
+  const key = curated.replace(/[（(].*$/, "").trim();
+  if (name.includes(key) || key.includes(name)) return true;
+  const short = key.slice(0, Math.min(6, key.length));
+  return short.length >= 3 && name.includes(short);
+}
+
 function locationPoints(hotel, segmentMeta) {
   const poi = `${hotel.poi || ""} ${hotel.address || ""} ${hotel.name || ""}`;
+  if (curatedNameMatch(hotel, segmentMeta)) return 100;
   const prefer =
     segmentMeta?.poiPrefer ||
     DEFAULT_SEGMENT_POI[hotel.segment] ||
     [];
+  const scenic = segmentMeta?.scenicPoi
+    ? (Array.isArray(segmentMeta.scenicPoi) ? segmentMeta.scenicPoi : [segmentMeta.scenicPoi])
+    : [];
+  if (scenic.length) {
+    let scenicHits = 0;
+    for (const kw of scenic) {
+      if (poi.includes(kw)) scenicHits++;
+    }
+    if (scenicHits >= 1) return 100;
+    if (/景区|风景名胜|草原|湖|画廊|牧家|山庄|营地|游客中心|别迭|喀夏加尔|乌拉斯台|315国道/.test(poi)) return 95;
+    if (/赛里木湖路|博乐巨辉|时代酒店|灵壤|天祥|建材家具/.test(poi)) return 35;
+    if (/县城|市区|镇工矿路|天马湖|文化广场|近昭苏|县人民政府/.test(poi)) return 40;
+    return 55;
+  }
   if (!prefer.length) return 80;
   let hits = 0;
   for (const kw of prefer) {
@@ -159,7 +188,7 @@ function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1, roomC
     .map((h) => {
       const pricePts = pricePointsCombined(h.priceNum, prices);
       const locationPts = locationPoints(h, segmentMeta);
-      const comfortPts = comfortPoints(h.star, profile);
+      const comfortPts = comfortPoints(h.star, profile, h, segmentMeta);
       const reviewPts = reviewPoints(h.reviewScore);
       const brandPts = brandPoints(h.name, profile);
       const w = profile.weights;
@@ -188,7 +217,23 @@ function scoreHotelsInSegment(hotels, profile, segmentMeta, partySize = 1, roomC
         destName: segmentMeta?.destName || h.destName || "",
       };
     })
-    .sort((a, b) => b.score - a.score || a.priceNum - b.priceNum);
+    .sort((a, b) => {
+      if (segmentMeta?.preferHomestay || segmentMeta?.scenicHomestay) {
+        const aHomestay = a.lodgingType === "民宿" || /民宿|客栈|牧家乐|山庄|营地|毡房/.test(a.name);
+        const bHomestay = b.lodgingType === "民宿" || /民宿|客栈|牧家乐|山庄|营地|毡房/.test(b.name);
+        if (aHomestay !== bHomestay) return aHomestay ? -1 : 1;
+      }
+      if (segmentMeta?.scenicHomestay) {
+        const aCityHotel = /大酒店|时代酒店|云上酒店/.test(a.name) && !/民宿|牧家|山庄|毡房/.test(a.name);
+        const bCityHotel = /大酒店|时代酒店|云上酒店/.test(b.name) && !/民宿|牧家|山庄|毡房/.test(b.name);
+        if (aCityHotel !== bCityHotel) return aCityHotel ? 1 : -1;
+        const aCurated = curatedNameMatch(a, segmentMeta);
+        const bCurated = curatedNameMatch(b, segmentMeta);
+        if (aCurated !== bCurated) return aCurated ? -1 : 1;
+        if (a.locationPts !== b.locationPts) return b.locationPts - a.locationPts;
+      }
+      return b.score - a.score || a.priceNum - b.priceNum;
+    });
 }
 
 function buildDeductions(h, profile) {
@@ -253,4 +298,5 @@ module.exports = {
   pricePointsAbsolute,
   locationPoints,
   comfortPoints,
+  curatedNameMatch,
 };

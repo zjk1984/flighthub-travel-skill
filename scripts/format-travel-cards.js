@@ -98,27 +98,33 @@ function weekday(dateStr) {
 function stayLine(dateStr, hotelsBySegment, dayStay, ctx) {
   const override = ctx.hotelOverrides[dateStr];
   const segKey = segmentForDate(dateStr, ctx.hotels);
+  const segMeta = (ctx.hotels || []).find((s) => s.segment === segKey);
+  const scenicTag = segMeta?.scenicHomestay ? "🏡 **景区民宿专荐** · " : "";
+
   if (segKey && hotelsBySegment.has(segKey)) {
     const { pick, backup } = hotelsBySegment.get(segKey);
     if (pick && !override) {
       const book = pick.url ? `[预订](${pick.url})` : "";
-      let s = `**${pick.name}**（${pick.star || "—"} · ¥${pick.priceNum}/间`;
+      let s = `${scenicTag}**${pick.name}**（${pick.star || "—"} · ¥${pick.priceNum}/间`;
       if (pick.stayTotal) s += ` · ${ctx.rooms}间≈¥${pick.stayTotal.toFixed(0)}`;
       s += `）${book ? " " + book : ""}`;
-      if (backup) s += `\n> 备选：${backup.name} ¥${backup.priceNum}/间`;
+      if (backup && (!segMeta?.scenicHomestay || backup.lodgingType === "民宿")) {
+        s += `\n> 备选：${backup.name} ¥${backup.priceNum}/间`;
+      }
       return s;
     }
   }
   if (override) {
-    let s = `**${override.name}**`;
+    let s = `${scenicTag}**${override.name}**`;
     if (override.price) s += `（${override.price}`;
     if (override.note) s += override.price ? ` · ${override.note}）` : `（${override.note}）`;
     else if (override.price) s += `）`;
     if (segKey && hotelsBySegment.has(segKey)) {
-      const { pick } = hotelsBySegment.get(segKey);
-      if (pick && !pick.name.includes("天麓")) {
-        const book = pick.url ? `[备选预订](${pick.url})` : "";
-        s += `\n> API 备选：**${pick.name}** ¥${pick.priceNum}/间 ${book}`;
+      const { pick, backup } = hotelsBySegment.get(segKey);
+      const alt = pick && !pick.name.includes(override.name.slice(0, 4)) ? pick : backup;
+      if (alt && alt.url && !alt.fromOverride) {
+        const book = `[备选预订](${alt.url})`;
+        s += `\n> API 备选：**${alt.name}** ¥${alt.priceNum}/间 ${book}`;
       }
     }
     return s;

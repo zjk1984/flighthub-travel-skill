@@ -76,6 +76,7 @@ function loadTripProfile(cfg) {
     workflow: raw.workflow || null,
     bookedReturn: raw.bookedReturn || null,
     hotels: Array.isArray(raw.hotels) ? raw.hotels : [],
+    hotelOverrides: raw.hotelOverrides || {},
     itinerary: raw.itinerary || null,
     itineraryVariants: raw.itineraryVariants || {},
     profilePath,

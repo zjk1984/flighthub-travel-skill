@@ -93,14 +93,17 @@ function renderDailySection(dayEntry, profile, rooms) {
     return md;
   }
 
-  md += `| 排名 | 评分 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | ${rooms}间合计 | 入住→离店 | 位置 | 预订 |\n`;
-  md += "|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|\n";
+  md += `| 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | ${rooms}间合计 | 入住→离店 | 位置 | 预订 |\n`;
+  md += "|------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|\n";
 
   scored.slice(0, TOP_N).forEach((h, i) => {
     const book = h.url ? `[预订](${h.url})` : "—";
+    const type =
+      h.lodgingType ||
+      (/民宿|客栈|牧家乐/.test(h.name) ? "民宿" : "酒店");
     const reviewCol = h.reviewScore ? h.reviewPts : h.reviewPts;
     md +=
-      `| ${i + 1} | ${h.score} | ${h.destName || destName || "—"} | ${h.name} | ${h.star || "—"} | ` +
+      `| ${i + 1} | ${h.score} | ${type} | ${h.destName || destName || "—"} | ${h.name} | ${h.star || "—"} | ` +
       `¥${h.priceNum.toFixed(0)} | ${h.pricePts} | ${h.locationPts} | ${h.comfortPts} | ${reviewCol} | ${h.brandPts} | ` +
       `¥${h.stayTotal.toFixed(0)} | ${formatStayRange(h)} | ${h.poi || "—"} | ${book} |\n`;
   });
@@ -122,9 +125,14 @@ function buildDayEntries(raw, trip, profile, partySize, roomCount) {
     bySegment.get(h.segment).push(h);
   }
 
+  const hotelOverrides = trip.hotelOverrides || {};
   const segmentMetaMap = new Map();
   for (const seg of trip.hotels || []) {
-    segmentMetaMap.set(seg.segment, seg);
+    const override = hotelOverrides[seg.checkIn];
+    segmentMetaMap.set(seg.segment, {
+      ...seg,
+      curatedName: override?.name || seg.curatedName || "",
+    });
   }
 
   const entries = [];
