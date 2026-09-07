@@ -125,9 +125,14 @@ function buildDayEntries(raw, trip, profile, partySize, roomCount) {
     bySegment.get(h.segment).push(h);
   }
 
+  const hotelOverrides = trip.hotelOverrides || {};
   const segmentMetaMap = new Map();
   for (const seg of trip.hotels || []) {
-    segmentMetaMap.set(seg.segment, seg);
+    const override = hotelOverrides[seg.checkIn];
+    segmentMetaMap.set(seg.segment, {
+      ...seg,
+      curatedName: override?.name || seg.curatedName || "",
+    });
   }
 
   const entries = [];

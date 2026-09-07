@@ -316,7 +316,7 @@
           }
         ],
         "todo": [
-          "预订 **玉湖**、**特克斯**、**喀拉峻** 民宿（2 间；须提前确认）",
+          "预订 **玉湖/喀拉峻/赛湖** 景区旁民宿（2 间）；特克斯/唐布拉优先民宿",
           "D5 晚 + D6 早查 **独库北段**；封路改 G30",
           "订 7 段住宿（2 间；D1 机场、玉湖民宿、特克斯民宿、喀拉峻民宿、唐布拉、赛湖东门、博乐）",
           "唐布拉提前订房；D8 **12:00 前** 阿拉山口还车"
@@ -339,11 +339,16 @@
           "destName": "昭苏",
           "checkIn": "2026-10-02",
           "checkOut": "2026-10-03",
-          "maxPrice": 600,
+          "maxPrice": 800,
           "topN": 12,
-          "keyWords": "玉湖 民宿 牧家乐 昭苏",
+          "scenicPoi": ["玉湖景区"],
+          "scenicHomestay": true,
+          "extraKeywordSearches": [
+            { "keyWords": "望湖庄园 玉湖", "poiName": "玉湖景区" }
+          ],
+          "keyWords": "玉湖 民宿 牧家乐",
           "hotelStars": "3,4",
-          "poiPrefer": ["玉湖", "昭苏", "玉湖景区"],
+          "poiPrefer": ["玉湖", "玉湖景区", "葛洲坝玉湖"],
           "preferHomestay": true
         },
         {
@@ -353,9 +358,9 @@
           "checkOut": "2026-10-04",
           "maxPrice": 500,
           "topN": 12,
-          "keyWords": "离街 民宿 八卦城 太极坛 特克斯",
+          "keyWords": "离街 民宿 八卦城 半坡",
           "hotelStars": "3,4",
-          "poiPrefer": ["八卦城", "离街", "太极坛", "特克斯"],
+          "poiPrefer": ["八卦城", "离街", "太极坛", "特克斯八卦城"],
           "preferHomestay": true
         },
         {
@@ -363,11 +368,17 @@
           "destName": "特克斯",
           "checkIn": "2026-10-04",
           "checkOut": "2026-10-05",
-          "maxPrice": 600,
+          "maxPrice": 800,
           "topN": 12,
-          "keyWords": "喀拉峻 民宿 牧家乐 草原 阔克苏",
+          "scenicPoi": "喀拉峻",
+          "scenicHomestay": true,
+          "extraKeywordSearches": [
+            { "keyWords": "喀拉峻 民宿 波森" },
+            { "keyWords": "喀拉峻 别克波森" }
+          ],
+          "keyWords": "喀拉峻 民宿 牧家乐 草原",
           "hotelStars": "3,4",
-          "poiPrefer": ["喀拉峻", "阔克苏", "草原", "特克斯"],
+          "poiPrefer": ["喀拉峻", "阔克苏", "草原"],
           "preferHomestay": true
         },
         {
@@ -375,11 +386,11 @@
           "destName": "尼勒克",
           "checkIn": "2026-10-05",
           "checkOut": "2026-10-06",
-          "maxPrice": 600,
+          "maxPrice": 900,
           "topN": 12,
-          "keyWords": "唐布拉 百里画廊 尼勒克 牧家乐 民宿",
+          "keyWords": "唐布拉 百里画廊 民宿 牧家乐 巴依阿吾勒",
           "hotelStars": "3,4",
-          "poiPrefer": ["唐布拉", "百里画廊", "尼勒克", "乔尔玛"],
+          "poiPrefer": ["唐布拉", "百里画廊", "避暑山庄"],
           "preferHomestay": true
         },
         {
@@ -389,9 +400,16 @@
           "checkOut": "2026-10-07",
           "maxPrice": 900,
           "topN": 12,
-          "keyWords": "赛里木 赛湖 东门",
-          "hotelStars": "4,5",
-          "poiPrefer": ["赛里木", "赛湖", "东门", "湖"],
+          "scenicPoi": "赛里木湖",
+          "scenicHomestay": true,
+          "extraKeywordSearches": [
+            { "keyWords": "赛湖 民宿 东门" },
+            { "keyWords": "喜见 新游客中心" },
+            { "keyWords": "拾光小住 赛里木湖" }
+          ],
+          "keyWords": "赛里木湖 赛湖 东门 民宿",
+          "hotelStars": "3,4",
+          "poiPrefer": ["赛里木湖", "赛湖", "东门", "风景名胜"],
           "preferHomestay": true
         },
         {
@@ -403,8 +421,7 @@
           "topN": 12,
           "keyWords": "亚朵 万达悦华 友好 博乐",
           "hotelStars": "3,4,5",
-          "poiPrefer": ["博乐", "友好", "团结路", "机场"],
-          "preferHomestay": true
+          "poiPrefer": ["博乐", "友好", "团结路", "机场"]
         }
       ],
       "hotelOverrides": {
@@ -414,29 +431,29 @@
           "note": "D1 晚到住机场附近；D2 早退房取车赴昭苏"
         },
         "2026-10-02": {
-          "name": "玉湖景区 / 昭苏玉湖民宿",
-          "price": "¥200–400/间",
-          "note": "D2 玉湖游玩后住景区旁民宿；须提前预订"
+          "name": "昭苏望湖庄园",
+          "price": "¥439/间",
+          "note": "D2 玉湖景区旁；2间≈¥878"
         },
         "2026-10-03": {
-          "name": "特克斯离街 / 八卦城民宿",
-          "price": "¥200–350/间",
-          "note": "D3 特克斯休整；离街周边须提前订"
+          "name": "花筑·特克斯半坡民宿（八卦城）",
+          "price": "¥118/间",
+          "note": "D3 八卦城景区旁；2间≈¥236"
         },
         "2026-10-04": {
-          "name": "喀拉峻草原 / 阔克苏民宿",
-          "price": "¥250–450/间",
-          "note": "D4 喀拉峻游玩后住牧区民宿；须提前预订"
+          "name": "特克斯喀拉峻别克波森山庄",
+          "price": "¥681/间起",
+          "note": "D4 喀拉峻景区内；须提前预订"
         },
         "2026-10-05": {
-          "name": "唐布拉百里画廊 / 尼勒克民宿",
-          "price": "¥200–400/间",
-          "note": "D5 百里画廊；须提前预订"
+          "name": "巴依阿吾勒山庄",
+          "price": "¥155/间",
+          "note": "D5 唐布拉百里画廊；2间≈¥310"
         },
         "2026-10-06": {
-          "name": "博乐赛湖云上酒店 / 赛湖之畔",
-          "price": "¥463–890/间",
-          "note": "D6 独库→赛湖南门进·东门住"
+          "name": "喜见民宿(赛里木湖新游客中心店)",
+          "price": "¥309/间",
+          "note": "D6 赛里木湖景区东门/新游客中心；备选拾光小住·云湖兰山"
         },
         "2026-10-07": {
           "name": "博乐友好亚朵 / 万达悦华",

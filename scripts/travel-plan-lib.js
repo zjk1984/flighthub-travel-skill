@@ -43,11 +43,33 @@ function loadHotelsBySegment(hotelsPath, trip, partySize) {
     reviewScore: h.reviewScore ?? h.score ?? null,
   }));
   const hotelProfile = getHotelProfile(trip.scoringProfile || "family_elder");
+  const hotelOverrides = trip.hotelOverrides || {};
   const bySegment = new Map();
   for (const seg of trip.hotels || []) {
-    const list = raw.filter((h) => h.segment === seg.segment);
+    let list = raw.filter((h) => h.segment === seg.segment);
+    const override = hotelOverrides[seg.checkIn];
+    const meta = { ...seg, curatedName: override?.name || "" };
+    if (seg.scenicHomestay && override?.name && !list.some((h) => h.name.includes(override.name.slice(0, 4)))) {
+      const priceNum = parsePriceNum(override.price);
+      list = [
+        ...list,
+        {
+          segment: seg.segment,
+          checkin: seg.checkIn,
+          checkout: seg.checkOut,
+          lodgingType: "民宿",
+          name: override.name,
+          price: String(override.price || "").includes("¥") ? override.price : `¥${priceNum}`,
+          priceNum: priceNum || 0,
+          star: "舒适型",
+          poi: override.note || "景区旁",
+          url: "",
+          fromOverride: true,
+        },
+      ];
+    }
     if (!list.length) continue;
-    const scored = scoreHotelsInSegment(list, hotelProfile, seg, partySize, trip.roomCount);
+    const scored = scoreHotelsInSegment(list, hotelProfile, meta, partySize, trip.roomCount);
     const pick = pickHotelForPlan(scored, hotelProfile);
     const backup = pickHotelBackup(scored, pick);
     bySegment.set(seg.segment, { pick, backup, scored, seg });
