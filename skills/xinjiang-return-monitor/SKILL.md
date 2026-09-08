@@ -81,3 +81,8 @@ npm run monitor:set -- --return-dates 2026-10-06,2026-10-07,2026-10-08
 
 - 若返程阶段触发熔断，会跳过剩余航线及 custom transfer
 - 飞书推送默认发送完整 TOP3 报告（需配置 `FEISHU_WEBHOOK_URL`）
+- 返程完成后若紧接着查酒店，建议间隔 **≥30 分钟**；酒店全量 6 段易触发 451，可改用 `npm run monitor:hotels:scenic` 只刷景区段
+
+## 后续阶段
+
+计划与酒店见 `skills/xinjiang-trip-workflow/SKILL.md`：`skill:plan` → `skill:hotels`

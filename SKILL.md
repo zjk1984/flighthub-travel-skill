@@ -299,9 +299,34 @@ npm run monitor:ranked    # 查询 + 全量报告 + TOP3 评分报告
 ```bash
 npm run monitor:hotels      # 按 trip-profile 刷新酒店
 npm run monitor:hotels:ranked  # 酒店 TOP3 评分报告（v1，对标机票 v2）
+npm run monitor:hotels:scenic  # 仅重查 scenicHomestay 段（玉湖/喀拉峻/赛湖）
 npm run monitor:resume      # 重试 reports/failed-tasks.json 中的 451 失败航线
 npm run monitor:brief       # 仅从 JSONL 重新生成简报
 ```
+
+### 酒店查询 — 执行经验（Plan B）
+
+**数据源**：`config/trip-profile.json` → `activeVariant` 下 `itineraryVariants.planb.hotels`（6 段 7 晚）。
+
+**景区民宿优先**：段上设 `scenicHomestay: true` + `scenicPoi` + `extraKeywordSearches`。D2 玉湖、D3–D4 喀拉峻、D6 赛湖为 scenic 段。
+
+**修改 profile 后再生报告**：
+
+```bash
+source scripts/load-env.sh
+node scripts/monitor-hotels.js
+node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json
+node scripts/format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md
+node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xinjiang-travel-brief.md
+```
+
+**仅刷 scenic 段**（降 API 消耗）：`npm run monitor:hotels:scenic`
+
+**`hotelOverrides`**：按 checkIn 日期写入选定名/价；当 API 把连锁排到 TOP 或搜不到目标民宿（如赛湖喜见/鲸语、喀拉峻无垠之境）时使用。
+
+**451 风控**：酒店段间隔 2.5–3s；451 后等 45s 重试。连续失败时等 30–60min 或只跑 scenic refresh，勿短时间全量重查。
+
+详细工作流见 `skills/xinjiang-trip-workflow/SKILL.md`。
 
 ### 配置与重置
 
