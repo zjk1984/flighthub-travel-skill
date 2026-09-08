@@ -335,6 +335,35 @@ async function main() {
   const hotelOverrides = trip.hotelOverrides || {};
   const all = [];
   for (const seg of segments) {
+    if (seg.skipMonitor) {
+      const ov = hotelOverrides[seg.checkIn];
+      if (ov?.name) {
+        const priceNum = parsePriceNum(ov.price);
+        all.push({
+          segment: seg.segment,
+          checkin: seg.checkIn,
+          checkout: seg.checkOut,
+          apiRank: 0,
+          lodgingType: "酒店",
+          searchPoi: seg.poiPrefer?.[0] || "",
+          name: ov.name,
+          price: priceNum > 0 ? `¥${priceNum}` : ov.price || "—",
+          priceNum,
+          star: "舒适型",
+          brandName: "全季",
+          poi: ov.note || "已订",
+          address: "",
+          reviewScore: null,
+          reviewDesc: "",
+          url: ov.url || "",
+          booked: true,
+        });
+        process.stderr.write(`Hotels: ${seg.segment} → skipped (booked: ${ov.name})\n`);
+      } else {
+        process.stderr.write(`Hotels: ${seg.segment} → skipped (skipMonitor, no override)\n`);
+      }
+      continue;
+    }
     process.stderr.write(`Hotels: ${seg.segment} → ${seg.destName} ${seg.checkIn}..${seg.checkOut}\n`);
     const rows = await searchSegment(seg, elderFriendly, hotelOverrides);
     all.push(...rows);

@@ -6,7 +6,12 @@
   "focusMode": true,
   "activeVariant": "planb",
   "workflow": {
-    "priorityOrder": ["outbound", "return", "plan", "hotels"],
+    "priorityOrder": [
+      "outbound",
+      "return",
+      "plan",
+      "hotels"
+    ],
     "confirmed": {
       "outbound": true,
       "return": true,
@@ -26,7 +31,11 @@
     "filterTop3ByItinerary": false,
     "note": "返程已订 MU6170/MU2311 博乐出发"
   },
-  "returnAlternateOrigins": ["乌鲁木齐", "博乐", "石河子"],
+  "returnAlternateOrigins": [
+    "乌鲁木齐",
+    "博乐",
+    "石河子"
+  ],
   "itineraryConstraints": {
     "note": "阶段3 旅行计划衔接提示",
     "byDate": {
@@ -87,12 +96,28 @@
   "focusRoutes": {
     "outbound": [],
     "inbound": [
-      { "origin": "伊宁", "dest": "广州", "dates": ["2026-10-07", "2026-10-08"] }
+      {
+        "origin": "伊宁",
+        "dest": "广州",
+        "dates": [
+          "2026-10-07",
+          "2026-10-08"
+        ]
+      }
     ]
   },
-  "returnDateCompare": ["2026-10-07", "2026-10-08"],
+  "returnDateCompare": [
+    "2026-10-07",
+    "2026-10-08"
+  ],
   "itinerary": {
-    "principles": ["D2 伊宁休整不赶远路", "独库+伊昭出发前必查路况", "独库封路立即改 Plan B", "老人不赶夜路", "D7 住博乐方便 D8 还车"],
+    "principles": [
+      "D2 伊宁休整不赶远路",
+      "独库+伊昭出发前必查路况",
+      "独库封路立即改 Plan B",
+      "老人不赶夜路",
+      "D7 住博乐方便 D8 还车"
+    ],
     "overview": "伊宁休整 → 伊昭 → 昭苏 → 特克斯 → **独库北段** → 赛里木湖 → 果子沟 → **博乐** → 10/8 返广州",
     "alternateRoute": "若独库封闭：**Plan B** — 特克斯经国道直抵赛湖，不走高海拔盘山（见 Plan B 卡片）",
     "importantTips": [
@@ -109,21 +134,48 @@
       "date": "2026-10-02",
       "title": "D2 · 昭苏 · 玉湖",
       "mustSee": [
-        { "name": "伊犁将军府", "time": "09:30–11:30", "note": "取车后可选短停；时间紧可省略" },
-        { "name": "玉湖", "time": "15:00–18:30", "note": "伊宁→昭苏后下午入园；海拔高备外套" }
+        {
+          "name": "伊犁将军府",
+          "time": "09:30–11:30",
+          "note": "取车后可选短停；时间紧可省略"
+        },
+        {
+          "name": "玉湖",
+          "time": "15:00–18:30",
+          "note": "伊宁→昭苏后下午入园；海拔高备外套"
+        }
       ],
       "optional": [
-        { "name": "六星街", "note": "D2 取车前可选短停（非住宿）" },
-        { "name": "天马湖", "note": "D3 出发前昭苏县城可短停" }
+        {
+          "name": "六星街",
+          "note": "D2 取车前可选短停（非住宿）"
+        },
+        {
+          "name": "天马湖",
+          "note": "D3 出发前昭苏县城可短停"
+        }
       ],
-      "tips": ["上午取车验车", "伊宁→昭苏走 G577 约 3.5h", "玉湖盘山路弯多"]
+      "tips": [
+        "上午取车验车",
+        "伊宁→昭苏走 G577 约 3.5h",
+        "玉湖盘山路弯多"
+      ]
     },
     "carRental": {
       "type": "7 座 SUV 或 MPV（独库建议 SUV）",
       "pickup": "10/2 上午伊宁机场/市区取车",
       "return": "10/8 12:00 前博乐阿拉山口机场还车",
-      "costPerDay": [500, 700],
-      "tips": ["验车拍视频", "买全险", "满油取还", "独库/伊昭封路改国道", "备晕车药、薄羽绒"]
+      "costPerDay": [
+        500,
+        700
+      ],
+      "tips": [
+        "验车拍视频",
+        "买全险",
+        "满油取还",
+        "独库/伊昭封路改国道",
+        "备晕车药、薄羽绒"
+      ]
     },
     "days": [
       {
@@ -231,8 +283,17 @@
           "type": "7 座 SUV 或 MPV（独库建议 SUV）",
           "pickup": "已提前备好（10/1 落地后取或网点预留，D2 直接用车）",
           "return": "10/8 12:00 前博乐阿拉山口机场还车",
-          "costPerDay": [500, 700],
-          "tips": ["验车拍视频", "买全险", "满油取还", "独库封路改 G30", "备晕车药、薄羽绒"]
+          "costPerDay": [
+            500,
+            700
+          ],
+          "tips": [
+            "验车拍视频",
+            "买全险",
+            "满油取还",
+            "独库封路改 G30",
+            "备晕车药、薄羽绒"
+          ]
         },
         "days": [
           {
@@ -328,11 +389,17 @@
           "destName": "伊宁",
           "checkIn": "2026-10-01",
           "checkOut": "2026-10-02",
+          "skipMonitor": true,
           "maxPrice": 500,
           "topN": 12,
           "keyWords": "机场 星程 宁远路 全季 麗枫 万容",
           "hotelStars": "3,4,5",
-          "poiPrefer": ["机场", "伊宁国际机场", "宁远路", "飞机场路"]
+          "poiPrefer": [
+            "机场",
+            "伊宁国际机场",
+            "宁远路",
+            "飞机场路"
+          ]
         },
         {
           "segment": "D2 玉湖",
@@ -341,16 +408,31 @@
           "checkOut": "2026-10-03",
           "maxPrice": 800,
           "topN": 12,
-          "scenicPoi": ["玉湖景区"],
+          "scenicPoi": [
+            "玉湖景区"
+          ],
           "scenicHomestay": true,
           "extraKeywordSearches": [
-            { "keyWords": "望湖庄园 玉湖", "poiName": "玉湖景区" },
-            { "keyWords": "玉湖 民宿", "poiName": "玉湖景区" },
-            { "keyWords": "木子陶 葛洲坝", "poiName": "葛洲坝玉湖" }
+            {
+              "keyWords": "望湖庄园 玉湖",
+              "poiName": "玉湖景区"
+            },
+            {
+              "keyWords": "玉湖 民宿",
+              "poiName": "玉湖景区"
+            },
+            {
+              "keyWords": "木子陶 葛洲坝",
+              "poiName": "葛洲坝玉湖"
+            }
           ],
           "keyWords": "玉湖 民宿 牧家乐",
           "hotelStars": "3,4",
-          "poiPrefer": ["玉湖", "玉湖景区", "葛洲坝玉湖"],
+          "poiPrefer": [
+            "玉湖",
+            "玉湖景区",
+            "葛洲坝玉湖"
+          ],
           "preferHomestay": true
         },
         {
@@ -363,14 +445,26 @@
           "scenicPoi": "喀拉峻",
           "scenicHomestay": true,
           "extraKeywordSearches": [
-            { "keyWords": "喀拉峻 民宿 波森" },
-            { "keyWords": "喀拉峻 别克波森" },
-            { "keyWords": "喀拉峻 无垠 野奢" },
-            { "keyWords": "喀拉峻 霍斯宝" }
+            {
+              "keyWords": "喀拉峻 民宿 波森"
+            },
+            {
+              "keyWords": "喀拉峻 别克波森"
+            },
+            {
+              "keyWords": "喀拉峻 无垠 野奢"
+            },
+            {
+              "keyWords": "喀拉峻 霍斯宝"
+            }
           ],
           "keyWords": "喀拉峻 民宿 牧家乐 草原",
           "hotelStars": "3,4",
-          "poiPrefer": ["喀拉峻", "阔克苏", "草原"],
+          "poiPrefer": [
+            "喀拉峻",
+            "阔克苏",
+            "草原"
+          ],
           "preferHomestay": true
         },
         {
@@ -382,7 +476,11 @@
           "topN": 12,
           "keyWords": "唐布拉 百里画廊 民宿 牧家乐 巴依阿吾勒",
           "hotelStars": "3,4",
-          "poiPrefer": ["唐布拉", "百里画廊", "避暑山庄"],
+          "poiPrefer": [
+            "唐布拉",
+            "百里画廊",
+            "避暑山庄"
+          ],
           "preferHomestay": true
         },
         {
@@ -395,14 +493,27 @@
           "scenicPoi": "赛里木湖",
           "scenicHomestay": true,
           "extraKeywordSearches": [
-            { "keyWords": "赛湖 民宿" },
-            { "keyWords": "云湖兰山 赛里木湖" },
-            { "keyWords": "拾光小住 新游客中心" },
-            { "keyWords": "入画入梦 赛里木湖" }
+            {
+              "keyWords": "赛湖 民宿"
+            },
+            {
+              "keyWords": "云湖兰山 赛里木湖"
+            },
+            {
+              "keyWords": "拾光小住 新游客中心"
+            },
+            {
+              "keyWords": "入画入梦 赛里木湖"
+            }
           ],
           "keyWords": "赛里木湖 赛湖 东门 民宿",
           "hotelStars": "3,4",
-          "poiPrefer": ["赛里木湖", "赛湖", "东门", "风景名胜"],
+          "poiPrefer": [
+            "赛里木湖",
+            "赛湖",
+            "东门",
+            "风景名胜"
+          ],
           "preferHomestay": true
         },
         {
@@ -414,44 +525,21 @@
           "topN": 12,
           "keyWords": "亚朵 万达悦华 友好 博乐",
           "hotelStars": "3,4,5",
-          "poiPrefer": ["博乐", "友好", "团结路", "机场"]
+          "poiPrefer": [
+            "博乐",
+            "友好",
+            "团结路",
+            "机场"
+          ]
         }
       ],
       "hotelOverrides": {
         "2026-10-01": {
-          "name": "星程伊宁宁远路国际机场酒店",
-          "price": "¥369/间",
-          "note": "D1 晚到住机场附近；D2 早退房直接赴昭苏（车辆已备好）"
-        },
-        "2026-10-02": {
-          "name": "昭苏望湖庄园",
-          "price": "¥439/间",
-          "note": "D2 玉湖景区旁；2间≈¥878"
-        },
-        "2026-10-03": {
-          "name": "特克斯喀拉峻别克波森山庄",
-          "price": "¥675/间",
-          "note": "D3-D4 喀拉峻连住 2 晚；2间×2晚≈¥2700"
-        },
-        "2026-10-04": {
-          "name": "特克斯喀拉峻别克波森山庄",
-          "price": "¥675/间",
-          "note": "同 D3 连住第 2 晚"
-        },
-        "2026-10-05": {
-          "name": "巴依阿吾勒山庄",
-          "price": "¥155/间",
-          "note": "D5 唐布拉百里画廊；2间≈¥310"
-        },
-        "2026-10-06": {
-          "name": "赛湖高白鲑鱼坊",
-          "price": "¥711/间",
-          "note": "D6 赛湖景区内特色民宿；备选如家 neo 游客中心 ¥392"
-        },
-        "2026-10-07": {
-          "name": "汉庭博乐天山路店",
-          "price": "¥190/间",
-          "note": "D7 赛湖→博乐；D8 还车；2间≈¥380"
+          "name": "全季伊宁宁远路国际机场酒店",
+          "price": "¥349/间",
+          "booked": true,
+          "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ls6aQ",
+          "note": "D1 已订 · 晚到住机场附近；D2 10:00 后退房赴昭苏"
         }
       }
     }
@@ -466,7 +554,13 @@
       "topN": 12,
       "keyWords": "六星街 将军府 喀赞其 全季 丽水 观澜",
       "hotelStars": "3,4,5",
-      "poiPrefer": ["六星街", "六星美食街", "将军府", "喀赞其", "解放路"]
+      "poiPrefer": [
+        "六星街",
+        "六星美食街",
+        "将军府",
+        "喀赞其",
+        "解放路"
+      ]
     },
     {
       "segment": "D3-D4 昭苏",
@@ -477,7 +571,11 @@
       "topN": 12,
       "keyWords": "美豪 全季",
       "hotelStars": "4,5",
-      "poiPrefer": ["昭苏", "天马", "县城"]
+      "poiPrefer": [
+        "昭苏",
+        "天马",
+        "县城"
+      ]
     },
     {
       "segment": "D5 那拉提",
@@ -488,7 +586,11 @@
       "topN": 12,
       "keyWords": "那拉提 全季 舒适",
       "hotelStars": "4,5",
-      "poiPrefer": ["那拉提", "新源", "草原"]
+      "poiPrefer": [
+        "那拉提",
+        "新源",
+        "草原"
+      ]
     },
     {
       "segment": "D6 赛湖东门",
@@ -499,7 +601,12 @@
       "topN": 12,
       "keyWords": "赛里木 赛湖 东门",
       "hotelStars": "4,5",
-      "poiPrefer": ["赛里木", "赛湖", "东门", "湖"]
+      "poiPrefer": [
+        "赛里木",
+        "赛湖",
+        "东门",
+        "湖"
+      ]
     },
     {
       "segment": "D7 博乐",
@@ -510,7 +617,12 @@
       "topN": 12,
       "keyWords": "亚朵 万达悦华 友好 博乐",
       "hotelStars": "3,4,5",
-      "poiPrefer": ["博乐", "友好", "团结路", "机场"]
+      "poiPrefer": [
+        "博乐",
+        "友好",
+        "团结路",
+        "机场"
+      ]
     }
   ]
 }
