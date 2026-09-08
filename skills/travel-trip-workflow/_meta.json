@@ -1,0 +1,6 @@
+{
+  "slug": "travel-trip-workflow",
+  "version": "1.0.0",
+  "referenceImplementation": "xinjiang-trip-workflow",
+  "templateConfig": "config/trip-profile.template.json"
+}

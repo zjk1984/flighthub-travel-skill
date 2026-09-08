@@ -1,0 +1,132 @@
+{
+  "label": "{{TRIP_LABEL}}",
+  "partySize": 2,
+  "roomCount": 1,
+  "scoringProfile": "default",
+  "focusMode": true,
+  "activeVariant": "primary",
+  "workflow": {
+    "priorityOrder": ["outbound", "return", "plan", "hotels"],
+    "confirmed": {
+      "outbound": false,
+      "return": false,
+      "plan": null,
+      "hotels": false
+    },
+    "notes": [
+      "严格顺序：1 去程 → 2 返程 → 3 计划 → 4 酒店",
+      "每阶段确认后再写入 workflow.confirmed 或 booked* 字段"
+    ]
+  },
+  "returnPreferences": {
+    "targetPricePerPerson": null,
+    "adjacentDayFallback": true,
+    "filterTop3ByItinerary": false,
+    "note": "返程 TOP3 纯机票评分；行程衔接见 itineraryConstraints"
+  },
+  "returnAlternateOrigins": [],
+  "itineraryConstraints": {
+    "note": "按返程日约束末段活动（如还车/退房时间）",
+    "byDate": {
+      "{{RETURN_DATE}}": {
+        "minDepartureTime": "12:00",
+        "activity": "末日上午短活动 → 机场/车站",
+        "note": "以订单起飞/发车时间为准"
+      }
+    }
+  },
+  "skipOutboundMonitor": false,
+  "bookedOutbound": null,
+  "bookedReturn": null,
+  "focusRoutes": {
+    "outbound": [
+      {
+        "origin": "{{HOME_CITY}}",
+        "dest": "{{DEST_CITY}}",
+        "dates": ["{{OUTBOUND_DATE}}"]
+      }
+    ],
+    "inbound": [
+      {
+        "origin": "{{DEST_CITY}}",
+        "dest": "{{HOME_CITY}}",
+        "dates": ["{{RETURN_DATE}}"]
+      }
+    ]
+  },
+  "returnDateCompare": ["{{RETURN_DATE}}"],
+  "itinerary": {
+    "principles": ["老人不赶夜路", "每日出发时间可统一约束"],
+    "overview": "{{PRIMARY_ROUTE_OVERVIEW}}",
+    "alternateRoute": "若主路线不可行，改 fallback 方案（见 itineraryVariants.fallback）",
+    "importantTips": [],
+    "days": [
+      {
+        "cardId": "D1",
+        "date": "{{OUTBOUND_DATE}}",
+        "label": "D1",
+        "title": "抵达 {{DEST_CITY}}",
+        "activity": "落地/到站 → 入住",
+        "drive": "",
+        "stay": "机场/车站附近"
+      }
+    ],
+    "todo": ["确认去程", "确认返程", "确认计划 variant", "预订各段住宿"]
+  },
+  "itineraryVariants": {
+    "primary": {
+      "label": "{{TRIP_LABEL}} · 主方案",
+      "fallbackNote": "主方案不可行时切换 activeVariant 为 fallback",
+      "itinerary": {
+        "overview": "{{PRIMARY_ROUTE_OVERVIEW}}",
+        "importantTips": [],
+        "days": [],
+        "todo": []
+      },
+      "hotels": [
+        {
+          "segment": "D1 抵达",
+          "destName": "{{DEST_CITY}}",
+          "checkIn": "{{OUTBOUND_DATE}}",
+          "checkOut": "{{DAY2_DATE}}",
+          "maxPrice": 600,
+          "topN": 12,
+          "keyWords": "机场 全季 亚朵",
+          "hotelStars": "3,4,5",
+          "poiPrefer": ["机场", "火车站"]
+        },
+        {
+          "segment": "D2 景区",
+          "destName": "{{SCENIC_CITY}}",
+          "checkIn": "{{DAY2_DATE}}",
+          "checkOut": "{{DAY3_DATE}}",
+          "maxPrice": 800,
+          "topN": 12,
+          "scenicPoi": "{{SCENIC_POI}}",
+          "scenicHomestay": true,
+          "extraKeywordSearches": [
+            { "keyWords": "{{SCENIC_POI}} 民宿", "poiName": "{{SCENIC_POI}}" }
+          ],
+          "keyWords": "景区 民宿",
+          "hotelStars": "3,4",
+          "poiPrefer": ["{{SCENIC_POI}}"],
+          "preferHomestay": true
+        }
+      ],
+      "hotelOverrides": {}
+    },
+    "fallback": {
+      "label": "{{TRIP_LABEL}} · 备选方案",
+      "fallbackNote": "封路/天气/闭园时启用",
+      "itinerary": {
+        "overview": "{{FALLBACK_ROUTE_OVERVIEW}}",
+        "importantTips": [],
+        "days": [],
+        "todo": []
+      },
+      "hotels": [],
+      "hotelOverrides": {}
+    }
+  },
+  "hotels": []
+}
