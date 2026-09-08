@@ -18,7 +18,7 @@
 
 ## 🗺️ 环线概要
 
-伊宁 → **玉湖民宿** → **特克斯** → **喀拉峻民宿** → **唐布拉** → **独库·赛湖** → **博乐** → 返广州
+伊宁 → **玉湖民宿** → **喀拉峻民宿×2** → **库尔德宁·唐布拉** → **独库·赛湖** → **博乐** → 返广州
 
 ---
 
@@ -41,22 +41,14 @@
 
 ---
 
-### D3 · 10/3 特克斯 · 民宿
+### D3–D4 · 10/3–10/4 喀拉峻 · 🏡 景区民宿（连住 2 晚）
 
-| 推荐 | 单间/晚 | 2间合计 | 预订 |
-|------|---------|---------|------|
-| ⭐ **花筑·特克斯半坡民宿（八卦城店）** | ¥118 | ¥236 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F41PIaU) |
-| 特克斯青龙大酒店（备选） | ¥176 | ¥352 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3OWycR) |
-| 特克斯县名城大酒店（备选） | ¥188 | ¥376 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F06rsZ5) |
+| 推荐 | 单间/晚 | 2间×2晚合计 | 预订 |
+|------|---------|-------------|------|
+| ⭐ **特克斯喀拉峻别克波森山庄** | ¥675 | ¥2700 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qFPcA) |
+| 喀拉峻无垠之境野奢营地酒店 | ¥1575 | ¥6300 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1vHuXX) |
 
----
-
-### D4 · 10/4 喀拉峻 · 🏡 景区民宿
-
-| 推荐 | 单间/晚 | 2间合计 | 预订 |
-|------|---------|---------|------|
-| ⭐ **特克斯喀拉峻别克波森山庄** | ¥675 | ¥1350 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qFPcA) |
-| 喀拉峻无垠之境野奢营地酒店 | ¥1575 | ¥3150 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1vHuXX) |
+> D3 玉湖直赴喀拉峻，不经特克斯过夜
 
 ---
 
@@ -96,9 +88,8 @@
 |------|------|------|
 | 10/2 玉湖 | 昭苏望湖庄园 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1S2b06 |
 | 10/2 玉湖 | 木子陶野奢 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2qULW2 |
-| 10/3 特克斯 | 花筑半坡民宿 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F41PIaU |
-| 10/4 喀拉峻 | 别克波森山庄 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qFPcA |
-| 10/4 喀拉峻 | 无垠之境野奢 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1vHuXX |
+| 10/3–10/4 喀拉峻 | 别克波森山庄 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qFPcA |
+| 10/3–10/4 喀拉峻 | 无垠之境野奢 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1vHuXX |
 | 10/5 唐布拉 | 巴依阿吾勒山庄 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4S5ywa |
 | 10/5 唐布拉 | 放蜂人家民宿 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F28PTJl |
 | 10/6 赛湖 | 喜见民宿 | https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F49nI8V |
@@ -111,6 +102,7 @@
 
 ## ⚠️ 提示
 
+- **D3 玉湖直赴喀拉峻**，喀拉峻**连住 2 晚**；D5 途经**库尔德宁**轻游 2–3h
 - **D2–D7 每日尽量 10:00 后出发**（老人友好；D6 独库日 10:00 出发仍可赶赛湖日落）
 - 玉湖/喀拉峻/赛湖只住**景区旁民宿**
 - D5 晚 + D6 早查独库路况
