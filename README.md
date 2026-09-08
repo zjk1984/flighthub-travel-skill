@@ -31,6 +31,22 @@ OpenClaw Skill，基于飞猪 MCP 接口，提供机票、酒店、门票、景�
 
 CLI 安装：`npm i -g @fly-ai/flyai-cli`
 
+## 通用旅行决策工作流（可复用）
+
+任意目的地均可复用四阶段框架：**去程 → 返程 → 计划 → 酒店**。
+
+| 资源 | 说明 |
+|------|------|
+| [`skills/travel-trip-workflow/SKILL.md`](skills/travel-trip-workflow/SKILL.md) | 通用 Skill：Bootstrap 步骤、字段速查、再生链、风控 |
+| [`config/trip-profile.template.json`](config/trip-profile.template.json) | 新目的地配置模板（复制后改占位符） |
+| [`skills/xinjiang-trip-workflow/SKILL.md`](skills/xinjiang-trip-workflow/SKILL.md) | 伊犁参考实现（Plan A/B、景区民宿实测） |
+
+```bash
+cp config/trip-profile.template.json config/trip-profile-yunnan.json
+# 编辑 monitor-config.json → tripProfilePath
+npm run skill:workflow:status
+```
+
 ## 低价机票监控
 
 本项目内置广东 ↔ 新疆低价航班监控脚本，基于 FlyAI skill 的自适应时间切片策略查询飞猪实时数据。

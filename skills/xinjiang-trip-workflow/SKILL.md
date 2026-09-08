@@ -15,6 +15,8 @@ metadata:
 
 # 伊犁行程决策工作流
 
+> **通用框架**：可复用于其他目的地的四阶段工作流见 [`skills/travel-trip-workflow/SKILL.md`](skills/travel-trip-workflow/SKILL.md)；配置模板见 [`config/trip-profile.template.json`](config/trip-profile.template.json)。本文档为**伊犁参考实现**。
+
 ## 优先级（铁律）
 
 1. **确认去程航班** — `npm run skill:outbound` → `bookedOutbound`

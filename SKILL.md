@@ -326,7 +326,7 @@ node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xin
 
 **451 风控**：酒店段间隔 2.5–3s；451 后等 45s 重试。连续失败时等 30–60min 或只跑 scenic refresh，勿短时间全量重查。
 
-详细工作流见 `skills/xinjiang-trip-workflow/SKILL.md`。
+详细工作流见 `skills/travel-trip-workflow/SKILL.md`（通用框架）与 `skills/xinjiang-trip-workflow/SKILL.md`（伊犁参考实现）。
 
 ### 配置与重置
 
