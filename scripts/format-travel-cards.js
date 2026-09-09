@@ -116,6 +116,7 @@ function stayLine(dateStr, hotelsBySegment, dayStay, ctx) {
   }
   if (override) {
     let s = `${scenicTag}**${override.name}**`;
+    if (override.booked) s = `✅ **已订** · ${s}`;
     if (override.price) s += `（${override.price}`;
     if (override.note) s += override.price ? ` · ${override.note}）` : `（${override.note}）`;
     else if (override.price) s += `）`;
