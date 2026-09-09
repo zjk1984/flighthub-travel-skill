@@ -38,24 +38,6 @@
     "booked": true
   },
   {
-    "segment": "D3-D4 喀拉峻",
-    "checkin": "2026-10-03",
-    "checkout": "2026-10-05",
-    "apiRank": 1,
-    "lodgingType": "民宿",
-    "searchPoi": "喀拉峻 别克波森",
-    "name": "特克斯喀拉峻别克波森山庄",
-    "price": "¥668",
-    "priceNum": 668,
-    "star": "经济型",
-    "brandName": "",
-    "poi": "喀拉达拉乡喀拉峻牧业村73号",
-    "address": "喀拉达拉乡喀拉峻牧业村73号",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1qxasr"
-  },
-  {
     "segment": "D5 百里画廊",
     "checkin": "2026-10-05",
     "checkout": "2026-10-06",
@@ -71,7 +53,7 @@
     "address": "乌拉斯台镇阔克铁热克村",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2rULKq"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2KDOkr"
   },
   {
     "segment": "D5 百里画廊",
@@ -89,7 +71,7 @@
     "address": "尼勒克--健康路县人民医院东北方向约200处-，近315省道。",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2mU6ZS"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2gJ4Ak"
   },
   {
     "segment": "D5 百里画廊",
@@ -107,7 +89,7 @@
     "address": "尼勒克县幸福路102",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0RHwiV"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1epDI2"
   },
   {
     "segment": "D5 百里画廊",
@@ -125,7 +107,7 @@
     "address": "七十一团北河路二巷3-3号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0np126"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2v5g3Q"
   },
   {
     "segment": "D5 百里画廊",
@@ -143,7 +125,7 @@
     "address": "种蜂场狗熊沟路口",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2X7rE3"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3przQd"
   },
   {
     "segment": "D5 百里画廊",
@@ -161,7 +143,7 @@
     "address": "新疆维吾尔自治区尼勒克县幸福路。",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4SDz7E"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2uCFKA"
   },
   {
     "segment": "D5 百里画廊",
@@ -179,133 +161,7 @@
     "address": "尼勒克蒙不特桥喀孜纳特赛马场往北80米处",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4SRHmv"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 1,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "巴依阿吾勒山庄",
-    "price": "¥155",
-    "priceNum": 155,
-    "star": "舒适型",
-    "brandName": "",
-    "poi": "乌拉斯台镇阔克铁热克村",
-    "address": "乌拉斯台镇阔克铁热克村",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2UsZf3"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 2,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "尼勒克新安大酒店",
-    "price": "¥154",
-    "priceNum": 154,
-    "star": "舒适型",
-    "brandName": "",
-    "poi": "近尼勒克县客运站",
-    "address": "尼勒克--健康路县人民医院东北方向约200处-，近315省道。",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1nRw2k"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 3,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "尼勒克县宜尚酒店",
-    "price": "¥161",
-    "priceNum": 161,
-    "star": "高档型",
-    "brandName": "",
-    "poi": "近尼勒克县客运站",
-    "address": "尼勒克县幸福路102",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F160WgE"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 4,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "唐布拉草原放蜂人家民宿",
-    "price": "¥285",
-    "priceNum": 285,
-    "star": "舒适型",
-    "brandName": "",
-    "poi": "七十一团北河路二巷3-3号",
-    "address": "七十一团北河路二巷3-3号",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4CTUl1"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 5,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "尼勒克天山黑蜂庄园生态酒店",
-    "price": "¥296",
-    "priceNum": 296,
-    "star": "舒适型",
-    "brandName": "花筑",
-    "poi": "种蜂场狗熊沟路口",
-    "address": "种蜂场狗熊沟路口",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3wtjDR"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 6,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "尼勒克县唐布拉大酒店",
-    "price": "¥372",
-    "priceNum": 372,
-    "star": "三星级",
-    "brandName": "",
-    "poi": "近尼勒克县客运站",
-    "address": "新疆维吾尔自治区尼勒克县幸福路。",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F47B9jW"
-  },
-  {
-    "segment": "D5 百里画廊",
-    "checkin": "2026-10-05",
-    "checkout": "2026-10-06",
-    "apiRank": 7,
-    "lodgingType": "酒店",
-    "searchPoi": "",
-    "name": "舒泊瑞斯酒店（唐布拉孟克特景区店）",
-    "price": "¥772",
-    "priceNum": 772,
-    "star": "高档型",
-    "brandName": "",
-    "poi": "近阿克塔斯",
-    "address": "尼勒克蒙不特桥喀孜纳特赛马场往北80米处",
-    "reviewScore": null,
-    "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2h9c9q"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1Ivcxc"
   },
   {
     "segment": "D5 百里画廊",
@@ -323,7 +179,7 @@
     "address": "中国/新疆/尼勒克/五唐段",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2E6hDg"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0Mghi7"
   },
   {
     "segment": "D5 百里画廊",
@@ -341,7 +197,7 @@
     "address": "尼勒克315国道尼勒克县马场石松马队向西1公里, 中国",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0nMne9"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1FuGkP"
   },
   {
     "segment": "D6 赛湖东门",
@@ -359,7 +215,25 @@
     "address": "赛里木湖风景名胜区博乐路3号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0SvCa8"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2wZ1YP"
+  },
+  {
+    "segment": "D6 赛湖东门",
+    "checkin": "2026-10-06",
+    "checkout": "2026-10-07",
+    "apiRank": 1,
+    "lodgingType": "民宿",
+    "searchPoi": "拾光小住 新游客中心",
+    "name": "拾光小住(赛里木湖新游客中心店)",
+    "price": "¥768",
+    "priceNum": 768,
+    "star": "经济型",
+    "brandName": "",
+    "poi": "近赛里木湖国家级风景名胜区",
+    "address": "赛里木湖历史文化商业广场B区13栋",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4NHEPp"
   },
   {
     "segment": "D6 赛湖东门",
@@ -377,7 +251,7 @@
     "address": "新疆博乐赛里木湖景区丝路风情街11幢2单元",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2HwnsI"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2d9qAC"
   },
   {
     "segment": "D6 赛湖东门",
@@ -395,7 +269,7 @@
     "address": "新疆博州博乐市赛里木湖景区丝路风情街9号楼",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F069dzs"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1M7bBF"
   },
   {
     "segment": "D7 博乐",
@@ -413,7 +287,7 @@
     "address": "博乐 土尔扈特路博州农副产品物流园",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Gje45"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F107Pl1"
   },
   {
     "segment": "D7 博乐",
@@ -423,15 +297,15 @@
     "lodgingType": "酒店",
     "searchPoi": "",
     "name": "博乐市江浙宾馆",
-    "price": "¥137",
-    "priceNum": 137,
+    "price": "¥136",
+    "priceNum": 136,
     "star": "舒适型",
     "brandName": "",
     "poi": "近博乐商业步行街(博乐市文化中心楼东南)",
     "address": "响根布呼路兴乐商贸城北门北京桥东约200米处",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0BKovP"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4FZsFs"
   },
   {
     "segment": "D7 博乐",
@@ -449,7 +323,7 @@
     "address": "新疆博尔塔拉博乐市北京路154号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3mTRQE"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0xJbOJ"
   },
   {
     "segment": "D7 博乐",
@@ -467,7 +341,7 @@
     "address": "南城区街道夏尔西里路翰林华府1栋4-05号商铺",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ZlHbr"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Fjuny"
   },
   {
     "segment": "D7 博乐",
@@ -485,7 +359,7 @@
     "address": "新疆博州博乐市建国路世纪华庭北门25号楼5-10层房",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1yKEnO"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F272nEF"
   },
   {
     "segment": "D7 博乐",
@@ -503,7 +377,25 @@
     "address": "北京北路11号(时代广场八一路二段9-12层)",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F34WMqD"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3JxsEk"
+  },
+  {
+    "segment": "D7 博乐",
+    "checkin": "2026-10-07",
+    "checkout": "2026-10-08",
+    "apiRank": 7,
+    "lodgingType": "酒店",
+    "searchPoi": "",
+    "name": "博尔塔拉博乐大酒店",
+    "price": "¥406",
+    "priceNum": 406,
+    "star": "舒适型",
+    "brandName": "",
+    "poi": "近博乐商业步行街(博乐市文化中心楼东南)",
+    "address": "新疆维吾尔自治区博乐市团结路58号。",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F379Ye8"
   },
   {
     "segment": "D7 博乐",
@@ -521,7 +413,7 @@
     "address": "博乐市南城区夏尔希里路1号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F30gZRJ"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F23HRrX"
   },
   {
     "segment": "D7 博乐",
@@ -539,7 +431,7 @@
     "address": "博乐市团结南路与温泉路交汇处",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4RHpTm"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4VCIX3"
   },
   {
     "segment": "D7 博乐",
@@ -557,7 +449,7 @@
     "address": "新疆博乐市沿河路9号博尔塔拉宾馆。",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3M2zyh"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0E1sLu"
   },
   {
     "segment": "D7 博乐",
@@ -575,7 +467,7 @@
     "address": "顾里木图街道青得里大街125号6幢",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18AzIW"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0bYA2V"
   },
   {
     "segment": "D7 博乐",
@@ -593,7 +485,7 @@
     "address": "新疆维吾尔自治区博尔塔拉蒙古自治州博乐城区光明路8号壹号商业街7段",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4TyQH5"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4RTRXx"
   },
   {
     "segment": "D7 博乐",
@@ -611,7 +503,7 @@
     "address": "新疆博州博乐市克尔根卓街道新华路中央广场7号楼一层3-01铺",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0JzDeF"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4byeIh"
   },
   {
     "segment": "D7 博乐",
@@ -629,7 +521,7 @@
     "address": "天山路11号",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F43FVcI"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F39pY4G"
   },
   {
     "segment": "D7 博乐",
@@ -647,6 +539,78 @@
     "address": "新疆维吾尔自治区博尔塔拉蒙古自治州博乐市顾里木图街道北京路82号海西国际5幢7-12层，1层",
     "reviewScore": null,
     "reviewDesc": "",
-    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0LzXzN"
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F443aJh"
+  },
+  {
+    "segment": "D3-D4 喀拉峻",
+    "checkin": "2026-10-03",
+    "checkout": "2026-10-05",
+    "apiRank": 1,
+    "lodgingType": "民宿",
+    "searchPoi": "喀拉峻",
+    "name": "特克斯觅隐山野民宿",
+    "price": "¥308",
+    "priceNum": 308,
+    "star": "舒适型",
+    "brandName": "",
+    "poi": "特克斯喀拉达拉镇喀拉尕什特村团结路22巷4号",
+    "address": "特克斯喀拉达拉镇喀拉尕什特村团结路22巷4号",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1wS482"
+  },
+  {
+    "segment": "D3-D4 喀拉峻",
+    "checkin": "2026-10-03",
+    "checkout": "2026-10-05",
+    "apiRank": 2,
+    "lodgingType": "民宿",
+    "searchPoi": "喀拉峻",
+    "name": "西出故里民宿",
+    "price": "¥628",
+    "priceNum": 628,
+    "star": "舒适型",
+    "brandName": "",
+    "poi": "特克斯喀拉达拉镇哈依河四巷六号院八号",
+    "address": "特克斯喀拉达拉镇哈依河四巷六号院八号",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F47qm62"
+  },
+  {
+    "segment": "D3-D4 喀拉峻",
+    "checkin": "2026-10-03",
+    "checkout": "2026-10-05",
+    "apiRank": 2,
+    "lodgingType": "民宿",
+    "searchPoi": "喀拉峻",
+    "name": "幸福里·静逸山舍",
+    "price": "¥637",
+    "priceNum": 637,
+    "star": "舒适型",
+    "brandName": "",
+    "poi": "特克斯喀英德库什台牧业村云之味餐厅东南100米",
+    "address": "特克斯喀英德库什台牧业村云之味餐厅东南100米",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1sJhQo"
+  },
+  {
+    "segment": "D3-D4 喀拉峻",
+    "checkin": "2026-10-03",
+    "checkout": "2026-10-05",
+    "apiRank": 1,
+    "lodgingType": "民宿",
+    "searchPoi": "喀拉峻 别克波森",
+    "name": "特克斯喀拉峻别克波森山庄",
+    "price": "¥668",
+    "priceNum": 668,
+    "star": "经济型",
+    "brandName": "",
+    "poi": "喀拉达拉乡喀拉峻牧业村73号",
+    "address": "喀拉达拉乡喀拉峻牧业村73号",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3DtaBZ"
   }
 ]

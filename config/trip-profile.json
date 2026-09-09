@@ -445,27 +445,19 @@
           "topN": 12,
           "scenicPoi": "喀拉峻",
           "scenicHomestay": true,
+          "scenicAllowHotel": true,
           "extraKeywordSearches": [
-            {
-              "keyWords": "喀拉峻 民宿 波森"
-            },
-            {
-              "keyWords": "喀拉峻 别克波森"
-            },
-            {
-              "keyWords": "喀拉峻 无垠 野奢"
-            },
-            {
-              "keyWords": "喀拉峻 霍斯宝"
-            }
+            { "keyWords": "喀拉峻 民宿", "poiName": "喀拉峻" },
+            { "keyWords": "喀拉峻 酒店", "poiName": "喀拉峻" },
+            { "keyWords": "喀拉峻 别克波森" },
+            { "keyWords": "霍斯宝 喀拉峻" },
+            { "keyWords": "云雾牧 喀拉峻" },
+            { "keyWords": "无垠 喀拉峻" },
+            { "keyWords": "阔克苏 喀拉峻" }
           ],
-          "keyWords": "喀拉峻 民宿 牧家乐 草原",
+          "keyWords": "喀拉峻 民宿 酒店 牧家乐 草原",
           "hotelStars": "3,4",
-          "poiPrefer": [
-            "喀拉峻",
-            "阔克苏",
-            "草原"
-          ],
+          "poiPrefer": ["喀拉峻", "阔克苏", "草原", "牧业村"],
           "preferHomestay": true
         },
         {
