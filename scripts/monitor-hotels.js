@@ -116,15 +116,15 @@ function runHotelSearch(segment, overrides = {}) {
 }
 
 function dedupeHotels(rows) {
-  const seen = new Set();
-  const out = [];
+  const byKey = new Map();
   for (const h of rows) {
-    const key = `${h.name}|${h.checkin}|${h.checkout}|${h.lodgingType || ""}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(h);
+    const key = `${h.name}|${h.checkin}|${h.checkout}`;
+    const prev = byKey.get(key);
+    if (!prev || (h.lodgingType === "民宿" && prev.lodgingType !== "民宿")) {
+      byKey.set(key, h);
+    }
   }
-  return out;
+  return [...byKey.values()];
 }
 
 function isScenicHomestayCandidate(h, seg) {
@@ -151,7 +151,10 @@ function isScenicHomestayCandidate(h, seg) {
     return false;
   }
   if (hasSayram && /大酒店|时代酒店/.test(h.name) && !/赛湖|赛里木|风景名胜/.test(text)) return false;
-  if (/汉庭|麗枫|维也纳国际|全季|亚朵|中亚全纳|博乐赛湖云上|博乐市海景酒店/.test(h.name) && !/民宿|毡房|鱼坊|山庄|营地|野奢|拾光|喜见|云湖/.test(h.name)) {
+  if (hasKalajun && /酒店|宾馆|客栈|度假村/.test(h.name) && /喀拉峻|阔克苏|牧业村|喀拉达拉|达拉乡|霍斯宝|云雾牧/.test(text)) {
+    return true;
+  }
+  if (/汉庭|麗枫|维也纳国际|全季|亚朵|中亚全纳|博乐赛湖云上|博乐市海景酒店/.test(h.name) && !/民宿|毡房|鱼坊|山庄|营地|野奢|拾光|喜见|云湖|度假村|喀拉峻|霍斯宝/.test(h.name)) {
     return false;
   }
   if (hasBagua && /大酒店/.test(h.name) && !/民宿|客栈|花筑|半坡|闲庭/.test(text)) return false;
@@ -164,7 +167,7 @@ function isScenicHomestayCandidate(h, seg) {
     玉湖景区: /玉湖|望湖|葛洲坝|别迭|喀夏加尔|木子陶|小别迭/,
     葛洲坝玉湖: /玉湖|望湖|葛洲坝|别迭|喀夏加尔|木子陶|小别迭/,
     八卦城: /八卦城|离街|半坡|闲庭民宿/,
-    喀拉峻: /喀拉峻|阔克苏|波森|别克|霍斯宝|云雾牧|无垠|牧业村/,
+    喀拉峻: /喀拉峻|阔克苏|波森|别克|霍斯宝|云雾牧|无垠|牧业村|喀拉达拉|乌度假村|游侠人家|九月雅舍/,
     唐布拉: /唐布拉|放蜂|野奢|巴依阿吾勒|百里画廊|315国道|乌拉斯台/,
     赛里木湖: /赛里木湖|赛湖|拾光|云湖|鸿泽|鱼坊|游客中心|风景名胜|喜见|鲸语|毡房|入画入梦|白鸟湖/,
   };
@@ -191,18 +194,28 @@ function curatedKeywordFromName(name) {
   return cleaned.slice(-8);
 }
 
+function scenicLodgingTypes(seg) {
+  if (seg.scenicAllowHotel) return ["民宿", "酒店"];
+  return ["民宿"];
+}
+
 async function runScenicSearchBatch(seg, rows, topN, searches) {
   for (const s of searches) {
-    const payload = runHotelSearch(seg, {
-      sort: "price_asc",
-      hotelTypes: "民宿",
-      poiName: s.poiName,
-      keyWords: s.keyWords,
-      usePoi: !!s.poiName,
-      ignoreMaxPrice: seg.scenicHomestay,
-    });
-    if (payload) rows.push(...mapHotels(seg, payload, topN, "民宿", s.poiName || s.keyWords));
-    await sleep(2500);
+    const types = s.hotelTypes
+      ? String(s.hotelTypes).split(/[,，]/)
+      : scenicLodgingTypes(seg);
+    for (const lodgingType of types) {
+      const payload = runHotelSearch(seg, {
+        sort: "price_asc",
+        hotelTypes: lodgingType.trim(),
+        poiName: s.poiName,
+        keyWords: s.keyWords,
+        usePoi: !!s.poiName,
+        ignoreMaxPrice: seg.scenicHomestay,
+      });
+      if (payload) rows.push(...mapHotels(seg, payload, topN, lodgingType.trim(), s.poiName || s.keyWords));
+      await sleep(2500);
+    }
   }
 }
 
@@ -222,27 +235,32 @@ async function searchSegment(seg, elderFriendly, hotelOverrides = {}) {
     }
 
     for (const poiName of pois) {
-      const payload = runHotelSearch(seg, {
-        sort: "price_asc",
-        hotelTypes: "民宿",
-        poiName,
-        usePoi: true,
-        ignoreMaxPrice: seg.scenicHomestay,
-      });
-      if (payload) rows.push(...mapHotels(seg, payload, topN, "民宿", poiName));
-      await sleep(2500);
+      for (const lodgingType of scenicLodgingTypes(seg)) {
+        const payload = runHotelSearch(seg, {
+          sort: "price_asc",
+          hotelTypes: lodgingType,
+          poiName,
+          keyWords: seg.keyWords,
+          usePoi: true,
+          ignoreMaxPrice: seg.scenicHomestay,
+        });
+        if (payload) rows.push(...mapHotels(seg, payload, topN, lodgingType, poiName));
+        await sleep(2500);
+      }
     }
     await runScenicSearchBatch(seg, rows, topN, extraSearches);
 
     if (!rows.length) {
-      const fallback = runHotelSearch(seg, {
-        sort: "price_asc",
-        hotelTypes: "民宿",
-        poiName: pois[0],
-        keyWords: seg.keyWords || "民宿",
-        usePoi: true,
-      });
-      if (fallback) rows.push(...mapHotels(seg, fallback, topN, "民宿", pois[0]));
+      for (const lodgingType of scenicLodgingTypes(seg)) {
+        const fallback = runHotelSearch(seg, {
+          sort: "price_asc",
+          hotelTypes: lodgingType,
+          poiName: pois[0],
+          keyWords: seg.keyWords || "民宿",
+          usePoi: true,
+        });
+        if (fallback) rows.push(...mapHotels(seg, fallback, topN, lodgingType, pois[0]));
+      }
     }
     return dedupeHotels(filterScenicHomestays(rows, seg));
   }
@@ -335,6 +353,35 @@ async function main() {
   const hotelOverrides = trip.hotelOverrides || {};
   const all = [];
   for (const seg of segments) {
+    if (seg.skipMonitor) {
+      const ov = hotelOverrides[seg.checkIn];
+      if (ov?.name) {
+        const priceNum = parsePriceNum(ov.price);
+        all.push({
+          segment: seg.segment,
+          checkin: seg.checkIn,
+          checkout: seg.checkOut,
+          apiRank: 0,
+          lodgingType: seg.scenicHomestay ? "民宿" : "酒店",
+          searchPoi: seg.poiPrefer?.[0] || "",
+          name: ov.name,
+          price: priceNum > 0 ? `¥${priceNum}` : ov.price || "—",
+          priceNum,
+          star: ov.star || "舒适型",
+          brandName: ov.brandName || "",
+          poi: ov.note || "已订",
+          address: "",
+          reviewScore: null,
+          reviewDesc: "",
+          url: ov.url || "",
+          booked: true,
+        });
+        process.stderr.write(`Hotels: ${seg.segment} → skipped (booked: ${ov.name})\n`);
+      } else {
+        process.stderr.write(`Hotels: ${seg.segment} → skipped (skipMonitor, no override)\n`);
+      }
+      continue;
+    }
     process.stderr.write(`Hotels: ${seg.segment} → ${seg.destName} ${seg.checkIn}..${seg.checkOut}\n`);
     const rows = await searchSegment(seg, elderFriendly, hotelOverrides);
     all.push(...rows);
