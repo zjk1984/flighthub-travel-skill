@@ -86,8 +86,8 @@ function renderItineraryTable(trip, hotelsBySegment) {
   if (trip.itinerary?.overview) {
     md += `> ${trip.itinerary.overview}\n\n`;
   }
-  md += `| 日期 | 行程安排 | 车程 | 推荐酒店 | 档次 | ${rooms}间合计 | 预订 |\n`;
-  md += `|------|----------|------|----------|------|---------|------|\n`;
+  md += `| 日期 | 行程安排 | 午餐 | 车程 | 推荐酒店 | 档次 | ${rooms}间合计 | 预订 |\n`;
+  md += `|------|----------|------|------|----------|------|---------|------|\n`;
 
   for (const day of days) {
     const segKey = segmentForDate(day.date, trip.hotels);
@@ -106,7 +106,7 @@ function renderItineraryTable(trip, hotelsBySegment) {
     } else if (day.stay && day.stay !== "—") {
       hotel = day.stay;
     }
-    md += `| **${day.label}** | ${day.activity} | ${day.drive || "—"} | ${hotel} | ${star} | ${total} | ${book} |\n`;
+    md += `| **${day.label}** | ${day.activity} | ${day.lunch || "—"} | ${day.drive || "—"} | ${hotel} | ${star} | ${total} | ${book} |\n`;
   }
   return md + "\n";
 }

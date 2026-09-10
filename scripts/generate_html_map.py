@@ -515,6 +515,13 @@ html_template = """<!DOCTYPE html>
       color: #94a3b8;
     }
 
+    .card-lunch {
+      font-size: 10px;
+      color: #fcd34d;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
     .card-stay {
       color: #fbbf24;
       font-weight: 700;
@@ -794,7 +801,8 @@ window.onload = function() {
     { name: "阔克苏大峡谷", tag: "D3 下午鳄鱼湾", coord: [82.160, 43.030], color: "#2ED573", icon: "🐊", layout: "left" },
     { name: "喀拉峻大草原", tag: "D3-D4 宿山涧云海(已订)", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 山涧云海民宿(已订)", layout: "right" },
     { name: "唐布拉百里画廊", tag: "D5 宿放蜂人家", coord: [83.275, 43.682], color: "#FFA502", icon: "🏕️", hotel: "宿 放蜂人家", layout: "left" },
-    { name: "乔尔玛烈士陵园", tag: "独库北段起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
+    { name: "G217独库北段", tag: "D6 唐布拉→赛湖", coord: [83.780, 43.670], color: "#9B59B6", icon: "🛣️", layout: "right" },
+    { name: "乔尔玛烈士陵园", tag: "G217独库起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
     { name: "哈希勒根达坂", tag: "3400m 防雪长廊", coord: [83.950, 44.050], color: "#9B59B6", icon: "❄️", layout: "right" },
     { name: "果子沟金顶大桥", tag: "天山奇观大桥", coord: [81.162, 44.482], color: "#2563eb", icon: "🌉", layout: "left" },
     { name: "赛里木湖", tag: "D6夕阳 / D7环湖", coord: [81.250, 44.600], color: "#00CEC9", icon: "💎", hotel: "D6宿 东门", layout: "right" },
@@ -827,6 +835,29 @@ window.onload = function() {
     L.marker([m.coord[1], m.coord[0]], { icon: customIcon }).addTo(map);
   });
 
+  // Lunch markers from daily segments
+  ROUTE_DATA.segments.forEach(seg => {
+    if (!seg.lunch) return;
+    const lunchWp = (seg.waypoints || []).find(w => w.type === 'lunch');
+    const coord = lunchWp ? lunchWp.coord : null;
+    if (!coord) return;
+    const lunchHtml = `
+      <div class="custom-marker left-layout" style="--marker-color: #fbbf24;">
+        <div class="marker-pin">🍽️</div>
+        <div class="marker-label-pill">
+          <span class="marker-name">${seg.day} 午餐</span>
+          <span class="marker-tag">${seg.lunch}</span>
+        </div>
+      </div>`;
+    const lunchIcon = L.divIcon({
+      className: 'leaflet-div-icon-custom',
+      html: lunchHtml,
+      iconSize: [180, 32],
+      iconAnchor: [166, 16]
+    });
+    L.marker([coord[1], coord[0]], { icon: lunchIcon }).addTo(map);
+  });
+
   // Populate Bottom Timeline Cards
   const cardsContainer = document.getElementById('cards-container');
   ROUTE_DATA.segments.forEach(seg => {
@@ -854,6 +885,7 @@ window.onload = function() {
         </div>
         <div class="card-title">${seg.title}</div>
         <div class="card-highlight">${seg.highlight}</div>
+        ${seg.lunch ? `<div class="card-lunch">🍽️ ${seg.lunch}</div>` : ''}
       </div>
       <div class="card-bottom">
         <span class="card-stay">🏡 ${stayText} ${bookedBadge}</span>

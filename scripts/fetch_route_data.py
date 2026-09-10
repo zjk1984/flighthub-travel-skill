@@ -30,6 +30,7 @@ segments_def = [
         "color": "#747D8C",
         "glow": "rgba(116, 125, 140, 0.4)",
         "highlight": "CZ6888 23:10落地，宿机场全季，免深夜赶路",
+        "lunch": "机上简餐（23:10落地无正餐）",
         "road": "机场快速路",
         "waypoints": [
             {"id": "w1_1", "name": "伊宁国际机场", "coord": [81.330, 43.956], "type": "airport", "tag": "落地 23:10", "stay": False},
@@ -45,11 +46,12 @@ segments_def = [
         "color": "#FF4757",
         "glow": "rgba(255, 71, 87, 0.4)",
         "highlight": "10:00+出发，走S237伊昭公路翻越天山（白石峰可短停），宿玉湖旁望湖庄园",
+        "lunch": "昭苏县城",
         "road": "S237 伊昭公路 · 昭玉公路",
         "waypoints": [
             {"id": "w2_1", "name": "伊宁市区", "coord": [81.325, 43.935], "type": "city", "tag": "10:00+出发", "stay": False},
             {"id": "w2_2", "name": "白石峰观景台", "coord": [81.080, 43.380], "type": "scenic", "tag": "伊昭公路打卡", "stay": False},
-            {"id": "w2_3", "name": "昭苏县", "coord": [81.130, 43.155], "type": "pass", "tag": "天马故乡", "stay": False},
+            {"id": "w2_3", "name": "昭苏县城", "coord": [81.130, 43.155], "type": "lunch", "tag": "午餐 · 天马故乡", "stay": False},
             {"id": "w2_4", "name": "昭苏玉湖", "coord": [80.887, 42.943], "type": "scenic", "tag": "冰川峡谷蓝湖", "stay": False},
             {"id": "w2_5", "name": "望湖庄园", "coord": [80.890, 42.945], "type": "hotel", "tag": "D2宿 (已订)", "stay": True, "hotel": "望湖庄园"}
         ],
@@ -63,10 +65,11 @@ segments_def = [
         "color": "#2ED573",
         "glow": "rgba(46, 213, 115, 0.4)",
         "highlight": "10:00+退房直赴喀拉峻，下午阔克苏峡谷鳄鱼湾，宿山涧云海民宿 (已订 · 连住2晚)",
+        "lunch": "特克斯县城",
         "road": "S237 特昭公路 · 阔克苏观光道",
         "waypoints": [
             {"id": "w3_1", "name": "昭苏玉湖", "coord": [80.887, 42.943], "type": "scenic", "tag": "10:00+出发", "stay": False},
-            {"id": "w3_2", "name": "特克斯外围", "coord": [81.838, 43.212], "type": "pass", "tag": "不进城过夜", "stay": False},
+            {"id": "w3_2", "name": "特克斯县城", "coord": [81.838, 43.212], "type": "lunch", "tag": "午餐 · 八卦城", "stay": False},
             {"id": "w3_3", "name": "阔克苏大峡谷", "coord": [82.160, 43.030], "type": "scenic", "tag": "下午鳄鱼湾/人体草原", "stay": False},
             {"id": "w3_4", "name": "山涧云海民宿", "coord": [82.023, 43.003], "type": "hotel", "tag": "D3宿 (已订 · 连住第1晚)", "stay": True, "hotel": "山涧云海民宿"}
         ],
@@ -80,8 +83,10 @@ segments_def = [
         "color": "#1E90FF",
         "glow": "rgba(30, 144, 255, 0.4)",
         "highlight": "10:00+慢起，东喀拉峻鲜花台/猎鹰台+西喀拉峻人体草原，宿山涧云海民宿 (已订续住第2晚)",
+        "lunch": "喀拉峻游客中心/自带",
         "road": "喀拉峻全景公路",
         "waypoints": [
+            {"id": "w4_0", "name": "喀拉峻游客中心", "coord": [82.050, 43.010], "type": "lunch", "tag": "午餐 · 景区内", "stay": False},
             {"id": "w4_1", "name": "西喀拉峻人体草原", "coord": [82.080, 42.980], "type": "scenic", "tag": "九曲十八弯", "stay": False},
             {"id": "w4_2", "name": "东喀拉峻猎鹰台", "coord": [82.240, 43.040], "type": "scenic", "tag": "鲜花台/立体草原", "stay": False},
             {"id": "w4_3", "name": "山涧云海民宿", "coord": [82.023, 43.003], "type": "hotel", "tag": "D4续住 (已订 · 连住第2晚)", "stay": True, "hotel": "山涧云海民宿"}
@@ -95,31 +100,35 @@ segments_def = [
         "theme": "百里画廊 · 直抵唐布拉",
         "color": "#FFA502",
         "glow": "rgba(255, 165, 2, 0.4)",
-        "highlight": "不去库尔德宁，巩留午餐后沿S315百里画廊赴唐布拉，宿放蜂人家",
+        "highlight": "巩留午餐后沿S315百里画廊经尼勒克赴唐布拉，宿放蜂人家",
+        "lunch": "巩留县城",
         "road": "S242 · S315 唐布拉百里画廊",
         "waypoints": [
             {"id": "w5_1", "name": "喀拉峻", "coord": [82.023, 43.003], "type": "scenic", "tag": "10:00+出发", "stay": False},
-            {"id": "w5_2", "name": "巩留县城", "coord": [82.235, 43.484], "type": "city", "tag": "午餐整备", "stay": False},
-            {"id": "w5_3", "name": "唐布拉百里画廊", "coord": [83.275, 43.682], "type": "hotel", "tag": "D5宿 (放蜂人家)", "stay": True, "hotel": "放蜂人家民宿"}
+            {"id": "w5_2", "name": "巩留县城", "coord": [82.235, 43.484], "type": "lunch", "tag": "午餐", "stay": False},
+            {"id": "w5_3", "name": "尼勒克县", "coord": [82.503, 43.818], "type": "pass", "tag": "S315转场", "stay": False},
+            {"id": "w5_4", "name": "唐布拉百里画廊", "coord": [83.275, 43.682], "type": "hotel", "tag": "D5宿 (放蜂人家)", "stay": True, "hotel": "放蜂人家民宿"}
         ],
-        "route_pts": [(82.023, 43.003), (82.235, 43.484), (83.275, 43.682)]
+        "route_pts": [(82.023, 43.003), (82.235, 43.484), (82.503, 43.818), (83.275, 43.682)]
     },
     {
         "day": "D6",
         "date": "10/6 周二",
-        "title": "唐布拉 ➔ 独库北段 ➔ 果子沟 ➔ 赛湖",
-        "theme": "独库天险 · 果子沟金顶",
+        "title": "唐布拉 ➔ G217独库北段 ➔ 赛湖",
+        "theme": "G217独库 · 果子沟金顶",
         "color": "#9B59B6",
         "glow": "rgba(155, 89, 182, 0.4)",
-        "highlight": "独库北段翻越哈希勒根防雪长廊(3400m)，果子沟金顶，赛湖看日落",
+        "highlight": "唐布拉→乔尔玛走G217独库北段(3400m哈希勒根)，转G30果子沟金顶，赛湖看日落",
+        "lunch": "乔尔玛",
         "road": "S315 · G217 独库北段 · G30 连霍",
         "waypoints": [
             {"id": "w6_1", "name": "唐布拉百里画廊", "coord": [83.275, 43.682], "type": "scenic", "tag": "10:00+出发", "stay": False},
-            {"id": "w6_2", "name": "乔尔玛", "coord": [83.697, 43.667], "type": "pass", "tag": "独库纪念碑", "stay": False},
-            {"id": "w6_3", "name": "哈希勒根达坂", "coord": [83.950, 44.050], "type": "pass", "tag": "3400m 防雪长廊", "stay": False},
-            {"id": "w6_4", "name": "果子沟金顶大桥", "coord": [81.162, 44.482], "type": "scenic", "tag": "天山奇观大桥", "stay": False},
-            {"id": "w6_5", "name": "赛里木湖南门", "coord": [81.183, 44.542], "type": "scenic", "tag": "南门入园", "stay": False},
-            {"id": "w6_6", "name": "赛湖东门", "coord": [81.348, 44.622], "type": "hotel", "tag": "D6宿 (看日落)", "stay": True, "hotel": "赛湖东门客栈"}
+            {"id": "w6_2", "name": "G217独库北段", "coord": [83.780, 43.670], "type": "road", "tag": "唐布拉→赛湖", "stay": False},
+            {"id": "w6_3", "name": "乔尔玛", "coord": [83.697, 43.667], "type": "lunch", "tag": "午餐 · 独库起点", "stay": False},
+            {"id": "w6_4", "name": "哈希勒根达坂", "coord": [83.950, 44.050], "type": "pass", "tag": "3400m 防雪长廊", "stay": False},
+            {"id": "w6_5", "name": "果子沟金顶大桥", "coord": [81.162, 44.482], "type": "scenic", "tag": "天山奇观大桥", "stay": False},
+            {"id": "w6_6", "name": "赛里木湖南门", "coord": [81.183, 44.542], "type": "scenic", "tag": "南门入园", "stay": False},
+            {"id": "w6_7", "name": "赛湖东门", "coord": [81.348, 44.622], "type": "hotel", "tag": "D6宿 (看日落)", "stay": True, "hotel": "赛湖东门客栈"}
         ],
         "route_pts": [(83.275, 43.682), (83.697, 43.667), (84.882, 44.327), (81.162, 44.482), (81.348, 44.622)]
     },
@@ -131,8 +140,10 @@ segments_def = [
         "color": "#00CEC9",
         "glow": "rgba(0, 206, 201, 0.4)",
         "highlight": "10:00+入园，点将台、松树头、克勒涌珠全环湖，下午赴博乐宿全季",
+        "lunch": "赛湖东门高白鲑鱼坊",
         "road": "赛湖环湖路 · G30 · S205",
         "waypoints": [
+            {"id": "w7_0", "name": "赛湖高白鲑鱼坊", "coord": [81.340, 44.615], "type": "lunch", "tag": "午餐 · 高白鲑", "stay": False},
             {"id": "w7_1", "name": "赛湖东门", "coord": [81.348, 44.622], "type": "hotel", "tag": "10:00+环湖", "stay": False},
             {"id": "w7_2", "name": "点将台/西海", "coord": [81.140, 44.610], "type": "scenic", "tag": "蓝冰天鹅", "stay": False},
             {"id": "w7_3", "name": "克勒涌珠", "coord": [81.250, 44.670], "type": "scenic", "tag": "雪山清泉", "stay": False},
@@ -152,9 +163,10 @@ segments_def = [
         "color": "#FD79A8",
         "glow": "rgba(253, 121, 168, 0.4)",
         "highlight": "10:00逛商圈，11:30前到机场还车，MU6170 13:30起飞",
+        "lunch": "博乐友好商圈",
         "road": "博乐快速路 · G219",
         "waypoints": [
-            {"id": "w8_1", "name": "博乐市区", "coord": [82.072, 44.903], "type": "city", "tag": "10:00短逛", "stay": False},
+            {"id": "w8_1", "name": "博乐友好商圈", "coord": [82.072, 44.903], "type": "lunch", "tag": "早午餐", "stay": False},
             {"id": "w8_2", "name": "博乐阿拉山口机场", "coord": [82.298, 44.895], "type": "airport", "tag": "还车飞返 (13:30)", "stay": False}
         ],
         "route_pts": [(82.072, 44.903), (82.298, 44.895)]
@@ -204,7 +216,8 @@ highway_badges = [
     {"road": "S237", "name": "伊昭公路", "coord": [81.08, 43.40], "color": "#FF4757"},
     {"road": "S237", "name": "特昭公路", "coord": [81.45, 43.18], "color": "#2ED573"},
     {"road": "S315", "name": "唐布拉百里画廊", "coord": [83.05, 43.62], "color": "#FFA502"},
-    {"road": "G217", "name": "独库公路北段(哈希勒根)", "coord": [84.15, 43.90], "color": "#9B59B6"},
+    {"road": "G217", "name": "唐布拉→赛湖·独库北段", "coord": [83.78, 43.67], "color": "#9B59B6"},
+    {"road": "G217", "name": "哈希勒根达坂3400m", "coord": [84.15, 43.90], "color": "#9B59B6"},
     {"road": "G30", "name": "连霍高速", "coord": [82.50, 44.58], "color": "#3498DB"},
     {"road": "果子沟大桥", "name": "特大悬索桥观景台", "coord": [81.16, 44.48], "color": "#E67E22"},
     {"road": "赛湖环湖路", "name": "环湖87km观光线", "coord": [81.24, 44.60], "color": "#00CEC9"}
