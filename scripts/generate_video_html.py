@@ -633,8 +633,8 @@ const stepsContainer = document.getElementById('timeline-steps');
 const dayShortNames = [
   { day: 'D1', name: '伊宁' },
   { day: 'D2', name: '玉湖' },
-  { day: 'D3', name: '喀拉峻' },
-  { day: 'D4', name: '阔克苏' },
+  { day: 'D3', name: '阔克苏' },
+  { day: 'D4', name: '东西喀拉峻' },
   { day: 'D5', name: '唐布拉' },
   { day: 'D6', name: '独库赛湖' },
   { day: 'D7', name: '环湖博乐' },

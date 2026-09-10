@@ -574,8 +574,7 @@ html_template = """<!DOCTYPE html>
     <div class="header-subtitle">
       <span>伊宁</span> <span class="arrow">➔</span>
       <span>昭苏玉湖</span> <span class="arrow">➔</span>
-      <span>喀拉峻大草原</span> <span class="arrow">➔</span>
-      <span>库尔德宁</span> <span class="arrow">➔</span>
+      <span>喀拉峻(阔克苏+东西线)</span> <span class="arrow">➔</span>
       <span>唐布拉百里画廊</span> <span class="arrow">➔</span>
       <span>独库公路北段</span> <span class="arrow">➔</span>
       <span>赛里木湖</span> <span class="arrow">➔</span>
@@ -641,11 +640,11 @@ html_template = """<!DOCTYPE html>
       </div>
       <div class="feature-row">
         <span class="feature-icon">🏔️</span>
-        <span><strong>喀拉峻</strong> 人体草原 & 阔克苏大峡谷</span>
+        <span><strong>喀拉峻</strong> D3阔克苏 · D4东西两线</span>
       </div>
       <div class="feature-row">
-        <span class="feature-icon">🌲</span>
-        <span><strong>库尔德宁</strong> 世界自然遗产云杉林</span>
+        <span class="feature-icon">🏕️</span>
+        <span><strong>唐布拉</strong> S315百里画廊 · 十里花海</span>
       </div>
       <div class="feature-row">
         <span class="feature-icon">🌉</span>
@@ -661,9 +660,9 @@ html_template = """<!DOCTYPE html>
     <div class="day-color-bar">
       <div class="day-dot-item"><span class="day-color-line" style="background: #747D8C;"></span>D1 抵伊宁</div>
       <div class="day-dot-item"><span class="day-color-line" style="background: #FF4757;"></span>D2 玉湖</div>
-      <div class="day-dot-item"><span class="day-color-line" style="background: #2ED573;"></span>D3 喀拉峻</div>
-      <div class="day-dot-item"><span class="day-color-line" style="background: #1E90FF;"></span>D4 慢玩</div>
-      <div class="day-dot-item"><span class="day-color-line" style="background: #FFA502;"></span>D5 库尔德宁</div>
+      <div class="day-dot-item"><span class="day-color-line" style="background: #2ED573;"></span>D3 阔克苏</div>
+      <div class="day-dot-item"><span class="day-color-line" style="background: #1E90FF;"></span>D4 东西喀拉峻</div>
+      <div class="day-dot-item"><span class="day-color-line" style="background: #FFA502;"></span>D5 唐布拉</div>
       <div class="day-dot-item"><span class="day-color-line" style="background: #9B59B6;"></span>D6 独库赛湖</div>
       <div class="day-dot-item"><span class="day-color-line" style="background: #00CEC9;"></span>D7 环湖博乐</div>
       <div class="day-dot-item"><span class="day-color-line" style="background: #FD79A8;"></span>D8 返广州</div>
@@ -792,8 +791,8 @@ window.onload = function() {
   const keyMarkers = [
     { name: "伊宁机场", tag: "D1 落地 23:10", coord: [81.330, 43.956], color: "#747D8C", icon: "✈️", type: "airport", layout: "left" },
     { name: "昭苏玉湖", tag: "D2 冰川蓝湖", coord: [80.887, 42.943], color: "#FF4757", icon: "🌊", hotel: "宿 望湖庄园(已订)", layout: "left" },
-    { name: "喀拉峻大草原", tag: "D3-D4 阔克苏/鲜花台", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 山涧云海民宿(已订)", layout: "right" },
-    { name: "库尔德宁东沟", tag: "D5 云杉林 2.5h", coord: [82.855, 43.190], color: "#FFA502", icon: "🌲", layout: "left" },
+    { name: "阔克苏大峡谷", tag: "D3 下午鳄鱼湾", coord: [82.160, 43.030], color: "#2ED573", icon: "🐊", layout: "left" },
+    { name: "喀拉峻大草原", tag: "D3-D4 宿山涧云海(已订)", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 山涧云海民宿(已订)", layout: "right" },
     { name: "唐布拉百里画廊", tag: "D5 宿放蜂人家", coord: [83.275, 43.682], color: "#FFA502", icon: "🏕️", hotel: "宿 放蜂人家", layout: "left" },
     { name: "乔尔玛烈士陵园", tag: "独库北段起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
     { name: "哈希勒根达坂", tag: "3400m 防雪长廊", coord: [83.950, 44.050], color: "#9B59B6", icon: "❄️", layout: "right" },
