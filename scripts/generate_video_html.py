@@ -11,6 +11,7 @@ for idx, seg in enumerate(route_data['segments']):
     sub = subtitles_data[idx]
     seg['subtitle'] = sub['subtitle']
     seg['subtitle_short'] = sub['subtitle_short']
+    seg['lunch'] = sub.get('lunch', '')
     seg['roads_list'] = sub['roads']
     seg['scenics_list'] = sub['scenics']
     seg['active_scenics'] = sub['active_scenics']
@@ -240,6 +241,14 @@ html_content = """<!DOCTYPE html>
       font-size: 11px;
       color: #34d399;
       font-weight: 700;
+    }
+
+    .status-lunch {
+      font-size: 12px;
+      color: #fcd34d;
+      font-weight: 700;
+      margin-top: 4px;
+      margin-bottom: 2px;
     }
 
     .status-meta-row {
@@ -591,6 +600,7 @@ html_content = """<!DOCTYPE html>
     <div class="status-scenics-tagbar" id="hud-scenics-tags">
       <!-- Scenic tags -->
     </div>
+    <div class="status-lunch" id="hud-lunch">🍽️ 午餐: —</div>
     <div class="status-meta-row">
       <div class="status-stay" id="hud-stay">🏡 宿: 全季伊宁机场店 (已订)</div>
       <div class="status-dist" id="hud-dist">🚗 本日: 3.1 km</div>
@@ -614,7 +624,7 @@ html_content = """<!DOCTYPE html>
     </div>
     <div class="timeline-total-stats">
       <div class="total-dist-val" id="hud-total-dist">0.0 km</div>
-      <div class="total-dist-lbl">自驾累计里程 / 1,684 km</div>
+      <div class="total-dist-lbl">自驾累计里程 / """ + str(route_data.get('total_distance_km', 1752.5)) + """ km</div>
     </div>
   </div>
 </div>
@@ -748,6 +758,9 @@ window.setVideoState = function(state) {
   } else if (currentSeg.day === 'D8') {
     stayText = '✈️ 广州温馨的家 (MU6170)';
   }
+  document.getElementById('hud-lunch').innerText = currentSeg.lunch
+    ? `🍽️ 午餐: ${currentSeg.lunch}`
+    : '🍽️ 午餐: —';
   document.getElementById('hud-stay').innerText = stayText;
   document.getElementById('hud-dist').innerText = `🚗 本日: ${currentSeg.distance_km} km`;
   document.getElementById('hud-total-dist').innerText = cumulativeDistKm.toFixed(1) + ' km';

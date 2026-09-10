@@ -140,6 +140,7 @@ function renderCard(day, hotelsBySegment, ctx) {
   md += `| | |\n|---|---|\n`;
   md += `| **行程** | ${day.activity} |\n`;
   md += `| **车程** | ${day.drive || "—"} |\n`;
+  if (day.lunch) md += `| **午餐** | ${day.lunch} |\n`;
   md += `| **住宿** | ${stayLine(day.date, hotelsBySegment, day.stay, ctx)} |\n`;
   if (day.note) md += `| **提示** | ${day.note} |\n`;
   md += `\n---\n\n`;
