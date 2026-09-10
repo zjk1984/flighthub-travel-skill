@@ -13,7 +13,7 @@ const OUTPUT_MP4 = '/workspace/reports/maps/xinjiang-itinerary-16-9.mp4';
 
 // Timeline design: 45 seconds total duration
 // D1: 3.5s (84 frames)   - Arrival & airport pickup
-// D2: 5.0s (120 frames)  - G577 Tianshan Tunnel & Zhaosu Yuhu
+// D2: 5.0s (120 frames)  - S237 Yizhao Highway & Zhaosu Yuhu
 // D3: 5.0s (120 frames)  - S237 Te-Zhao road to Kalajun
 // D4: 5.0s (120 frames)  - Kalajun Grassland & Kuokesu Grand Canyon
 // D5: 5.5s (132 frames)  - Kuerdening & Tangbula Gallery

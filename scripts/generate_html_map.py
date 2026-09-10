@@ -612,8 +612,8 @@ html_template = """<!DOCTYPE html>
         <span>独库公路北段 (翻天山·达坂3400m)</span>
       </div>
       <div class="legend-item">
-        <span class="road-shield-mini shield-g">G577</span>
-        <span>伊昭公路 / 天山新线特长隧道</span>
+        <span class="road-shield-mini shield-s">S237</span>
+        <span>伊昭公路 (伊宁→昭苏盘山景观道)</span>
       </div>
       <div class="legend-item">
         <span class="road-shield-mini shield-s">S315</span>
