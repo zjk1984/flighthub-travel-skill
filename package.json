@@ -52,6 +52,7 @@
   },
   "homepage": "https://github.com/zjk1984/flighthub-travel-skill#readme",
   "dependencies": {
-    "@fly-ai/flyai-cli": "^1.0.16"
+    "@fly-ai/flyai-cli": "^1.0.16",
+    "puppeteer-core": "^25.10.0"
   }
 }
