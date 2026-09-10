@@ -1,10 +1,10 @@
 ---
 name: travel-trip-workflow
-display_name: "通用旅行决策工作流（去程→返程→计划→酒店）"
-description: 可复用于任意目的地的四阶段旅行 Skill 框架：1 去程 2 返程 3 计划（主/备方案）4 酒店。基于 trip-profile.json 驱动，含配置模板、报告再生链、景区民宿与 API 风控。Agent 不得跳步。
+display_name: "通用旅行决策工作流（去程→返程→计划→酒店→视觉动线）"
+description: 可复用于任意目的地的旅行 Skill 框架：1 去程 2 返程 3 计划（主/备方案）4 酒店 5 路线视觉与动线短视频。基于 trip-profile.json 驱动，含配置模板、报告再生链、景区民宿与 API 风控。Agent 不得跳步。
 homepage: https://github.com/zjk1984/flighthub-travel-skill
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   agent:
     type: tool
     runtime: node
@@ -15,6 +15,7 @@ metadata:
       - "(旅行|行程|出游|度假).*(规划|计划|决策|工作流|skill)"
       - "(去程|返程|酒店|民宿).*(确认|查询|刷新|监控)"
       - "(trip|travel|itinerary).*(workflow|plan|skill|monitor)"
+      - "(自驾|路线|动线).*(地图|海报|视频|短视频|渲染)"
       - "新建.*目的地.*(skill|行程|监控)"
       - "复制.*(伊犁|新疆).*(skill|工作流)"
 ---
@@ -28,7 +29,7 @@ metadata:
 
 ---
 
-## 四阶段优先级（铁律）
+## 五阶段优先级（铁律）
 
 | 阶段 | 目标 | 确认字段 | 典型命令 |
 |------|------|----------|----------|
@@ -36,13 +37,14 @@ metadata:
 | **2 返程** | 选定返程（可多机场/多日期） | `bookedReturn` 或 `workflow.confirmed.return: true` | `npm run skill:return:flights` |
 | **3 计划** | 确认主方案或备选 | `workflow.confirmed.plan: "primary"` \| `"fallback"` | `npm run skill:plan` |
 | **4 酒店** | 按 activeVariant 查各段住宿 | `workflow.confirmed.hotels: true` | `npm run skill:hotels` |
+| **5 动线视觉** | 生成自驾海报与 16:9 动态视频 | 可选多媒体产物 | `npm run map:poster` / `npm run map:video` |
 
 ```bash
 npm run skill:workflow:status    # 查看当前阶段
 npm run skill:workflow           # 从当前阶段顺序执行到酒店
 ```
 
-**禁止跳步**：阶段 1–3 未确认时，不要跑全量酒店查询或推送通知。
+**禁止跳步**：阶段 1–3 未确认时，不要跑全量酒店查询或推送通知。阶段 4 确认后方可输出最终完整多媒体资产。
 
 门禁逻辑：`scripts/trip-workflow.js` → `assertPhaseGate()`
 
@@ -158,9 +160,11 @@ npm run skill:outbound          # 阶段 1
 npm run skill:return:flights      # 阶段 2
 npm run skill:plan                # 阶段 3 卡片
 npm run skill:hotels              # 阶段 4
+npm run map:poster                # 阶段 5 路线海报 (9:16)
+npm run map:video                 # 阶段 5 动态自驾短视频 (16:9, 45s, 剪辑可用)
 ```
 
-### 9. 报告输出约定
+### 9. 报告与视觉输出约定
 
 建议统一前缀 `reports/{{slug}}-*`，或在现有脚本中用 `--profile` / `--out` 参数：
 
@@ -171,6 +175,8 @@ npm run skill:hotels              # 阶段 4
 | 酒店 TOP3 | `node scripts/format-hotels-ranked.js reports/...json` |
 | 行程卡片 | `node scripts/format-travel-cards.js --variant primary --out reports/...md` |
 | 决策简报 | `node scripts/format-travel-brief.js reports/...jsonl > reports/...md` |
+| 9:16 路线海报 | `npm run map:poster`（手机壁纸/打印高清图） |
+| 16:9 动线视频 | `npm run map:video`（45s 动态自驾视频：硬派 SUV、亚像素平滑、沿途标牌与字幕） |
 
 ### 10. 确认 workflow 状态
 
@@ -238,9 +244,9 @@ npm run monitor:hotels:ranked         # 生成 TOP3 评分 MD
 
 ---
 
-## 修改行程后的报告再生链
+## 修改行程后的报告与多媒体再生链
 
-编辑 profile 后**必须**按序再生，避免卡片/简报/酒店价不一致：
+编辑 profile 后**必须**按序再生，避免卡片/简报/酒店价/路线图不一致：
 
 ```bash
 source scripts/load-env.sh
@@ -252,11 +258,31 @@ node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json
 # 2. 卡片 + 简报（--variant 与 activeVariant 一致）
 node scripts/format-travel-cards.js --variant primary --out reports/travel-cards-primary.md
 node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/travel-brief.md
+
+# 3. 路线图与自驾动线短视频（若路线/途经地变动）
+npm run map:poster
+npm run map:video
 ```
 
 **合并冲突经验**：保留 profile 逻辑 + 重跑再生链；勿手工拼 reports。
 
 手维文档（逐时指南、含链接完整版）无自动生成器，Agent 按 profile 同步改写。
+
+---
+
+## 阶段 5：路线视觉与自驾短视频规范（通用参考）
+
+当多日自驾行程确定后，生成视觉动线有助于家庭沟通与旅行 Vlog 剪辑：
+
+1. **9:16 竖屏海报**：
+   - 顶部航线/目的地标签、中部地形底图+道路高亮+公路盾徽、底部每日卡片式日程与住宿。
+2. **16:9 动态自驾动线短视频**：
+   - **标题明晰**：遵循「目的地 + N天N晚自驾大环线」格式（如「新疆伊犁 8天7晚自驾大环线」）；
+   - **时长充裕（推荐 30s~45s）**：建议 24fps 下设计充足帧数，单日路段保留 3~6s 展示时间，留给观众充分阅读解说字幕；
+   - **车标设计**：使用侧视自驾车标（如硬派越野 SUV 徽章），建议**固定水平向前**，避免在急转弯或掉头时发生剧烈旋转翻折；
+   - **亚像素级平滑插值**：采用浮点连续线性插值算法计算车标坐标与轨迹延伸点，杜绝离散点采样造成的画面卡顿或跳跃；
+   - **沿途元素同步**：道路标牌、核心景区地标随车流动态浮现点亮；
+   - **解说字幕条**：底部半透明毛玻璃字幕条滚动呈现每日亮点与注意事项，省去后期剪辑加字幕成本。
 
 ---
 
@@ -315,6 +341,7 @@ FEISHU_SKIP=1 npm run skill:hotels
 - [ ] 改 profile 后跑完整再生链
 - [ ] 合并冲突后重跑，不保留半成品 reports
 - [ ] 451 连续失败时降频或 scenic 单段刷新
+- [ ] 路线或途经点变动时，同步更新 9:16 路线海报与 16:9 动态短视频
 - [ ] 用户要求时再推送通知
 
 ---
