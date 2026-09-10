@@ -12,20 +12,20 @@ const HEIGHT = 1080;
 const OUTPUT_MP4 = '/workspace/reports/maps/xinjiang-itinerary-16-9.mp4';
 
 // Timeline design:
-// D1: 2.0s (48 frames)
-// D2: 2.5s (60 frames)
-// D3: 2.5s (60 frames)
-// D4: 2.5s (60 frames)
-// D5: 3.0s (72 frames)
-// D6: 3.5s (84 frames)
-// D7: 2.5s (60 frames)
-// D8: 2.0s (48 frames)
-// Final full-loop showcase: 3.5s (84 frames)
-// Total frames: 576 frames = 24 seconds
+// D1: 2.5s (60 frames)
+// D2: 3.5s (84 frames)
+// D3: 3.5s (84 frames)
+// D4: 3.5s (84 frames)
+// D5: 4.0s (96 frames)
+// D6: 4.5s (108 frames)
+// D7: 3.5s (84 frames)
+// D8: 2.5s (60 frames)
+// Final overview showcase: 4.5s (108 frames)
+// Total frames: 768 frames = 32 seconds (comfortable reading time for subtitles)
 
-const dayDurationsSec = [2.0, 2.5, 2.5, 2.5, 3.0, 3.5, 2.5, 2.0];
+const dayDurationsSec = [2.5, 3.5, 3.5, 3.5, 4.0, 4.5, 3.5, 2.5];
 const dayFrames = dayDurationsSec.map(sec => Math.round(sec * FPS));
-const finalFrames = Math.round(3.5 * FPS);
+const finalFrames = Math.round(4.5 * FPS);
 
 const totalFrames = dayFrames.reduce((a, b) => a + b, 0) + finalFrames;
 
@@ -52,10 +52,10 @@ console.log(`Planned Video: ${totalFrames} frames @ ${FPS} fps (~${(totalFrames 
   await page.goto(htmlUrl, { waitUntil: 'networkidle0', timeout: 30000 });
 
   await page.waitForFunction('window.mapReady === true', { timeout: 15000 });
-  console.log('Map ready! Waiting 3s for all background tiles to load...');
+  console.log('Map ready! Waiting 3.5s for all background tiles to settle...');
   await new Promise(r => setTimeout(r, 3500));
 
-  // Spawn ffmpeg to receive raw JPEG/PNG image stream from stdin
+  // Spawn ffmpeg to receive raw JPEG image stream from stdin
   console.log(`Starting ffmpeg process for output: ${OUTPUT_MP4}...`);
   const ffmpeg = spawn('ffmpeg', [
     '-y',
@@ -66,13 +66,12 @@ console.log(`Planned Video: ${totalFrames} frames @ ${FPS} fps (~${(totalFrames 
     '-c:v', 'libx264',
     '-pix_fmt', 'yuv420p',
     '-preset', 'fast',
-    '-crf', '19',
+    '-crf', '18',
     '-movflags', '+faststart',
     OUTPUT_MP4
   ]);
 
   ffmpeg.stderr.on('data', data => {
-    // Optionally log progress or errors
     const str = data.toString();
     if (str.includes('error') || str.includes('Error')) {
       console.error('FFmpeg stderr:', str);
@@ -112,7 +111,7 @@ console.log(`Planned Video: ${totalFrames} frames @ ${FPS} fps (~${(totalFrames 
         isFinal: false
       });
 
-      const frameBuf = await page.screenshot({ type: 'jpeg', quality: 88 });
+      const frameBuf = await page.screenshot({ type: 'jpeg', quality: 90 });
       ffmpeg.stdin.write(frameBuf);
 
       frameCount++;
@@ -138,7 +137,7 @@ console.log(`Planned Video: ${totalFrames} frames @ ${FPS} fps (~${(totalFrames 
   }, currentDist);
 
   for (let f = 0; f < finalFrames; f++) {
-    const frameBuf = await page.screenshot({ type: 'jpeg', quality: 88 });
+    const frameBuf = await page.screenshot({ type: 'jpeg', quality: 90 });
     ffmpeg.stdin.write(frameBuf);
     frameCount++;
   }
