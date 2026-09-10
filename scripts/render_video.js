@@ -11,21 +11,21 @@ const WIDTH = 1920;
 const HEIGHT = 1080;
 const OUTPUT_MP4 = '/workspace/reports/maps/xinjiang-itinerary-16-9.mp4';
 
-// Timeline design:
-// D1: 2.5s (60 frames)
-// D2: 3.5s (84 frames)
-// D3: 3.5s (84 frames)
-// D4: 3.5s (84 frames)
-// D5: 4.0s (96 frames)
-// D6: 4.5s (108 frames)
-// D7: 3.5s (84 frames)
-// D8: 2.5s (60 frames)
-// Final overview showcase: 4.5s (108 frames)
-// Total frames: 768 frames = 32 seconds (comfortable reading time for subtitles)
+// Timeline design: 45 seconds total duration
+// D1: 3.5s (84 frames)   - Arrival & airport pickup
+// D2: 5.0s (120 frames)  - G577 Tianshan Tunnel & Zhaosu Yuhu
+// D3: 5.0s (120 frames)  - S237 Te-Zhao road to Kalajun
+// D4: 5.0s (120 frames)  - Kalajun Grassland & Kuokesu Grand Canyon
+// D5: 5.5s (132 frames)  - Kuerdening & Tangbula Gallery
+// D6: 6.5s (156 frames)  - Duku Highway North & Guozigou & Sayram Lake
+// D7: 5.0s (120 frames)  - Sayram Lake 87km Loop & Bole
+// D8: 3.5s (84 frames)   - Bole & Flight return CAN
+// Final overview showcase: 6.0s (144 frames)
+// Total frames: 1080 frames = 45.0 seconds exactly @ 24fps
 
-const dayDurationsSec = [2.5, 3.5, 3.5, 3.5, 4.0, 4.5, 3.5, 2.5];
+const dayDurationsSec = [3.5, 5.0, 5.0, 5.0, 5.5, 6.5, 5.0, 3.5];
 const dayFrames = dayDurationsSec.map(sec => Math.round(sec * FPS));
-const finalFrames = Math.round(4.5 * FPS);
+const finalFrames = Math.round(6.0 * FPS);
 
 const totalFrames = dayFrames.reduce((a, b) => a + b, 0) + finalFrames;
 

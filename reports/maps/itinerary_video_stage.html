@@ -460,10 +460,10 @@
       color: #fbbf24 !important;
     }
 
-    /* Fixed Direction Running Car Image / Badge */
+    /* Fixed Direction Running SUV Badge */
     .running-car-marker {
-      width: 72px;
-      height: 48px;
+      width: 78px;
+      height: 52px;
       position: relative;
       display: flex;
       align-items: center;
@@ -473,54 +473,68 @@
 
     .car-speed-lines {
       position: absolute;
-      left: 0;
+      left: -2px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       gap: 3px;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .speed-line {
-      height: 2px;
+      height: 2.5px;
       background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--car-color, #38bdf8) 100%);
-      border-radius: 1px;
+      border-radius: 2px;
     }
-    .speed-line:nth-child(1) { width: 14px; }
-    .speed-line:nth-child(2) { width: 20px; }
-    .speed-line:nth-child(3) { width: 12px; }
+    .speed-line:nth-child(1) { width: 16px; }
+    .speed-line:nth-child(2) { width: 22px; }
+    .speed-line:nth-child(3) { width: 14px; }
 
     .car-body-badge {
       position: relative;
-      width: 52px;
-      height: 34px;
-      border-radius: 8px;
+      width: 60px;
+      height: 40px;
+      border-radius: 9px;
       background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
       border: 2px solid #ffffff;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 12px var(--car-color, #38bdf8);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.85), 0 0 14px var(--car-color, #38bdf8);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2;
     }
 
+    .suv-label-tag {
+      position: absolute;
+      top: 2px;
+      right: 3px;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 8px;
+      font-weight: 900;
+      padding: 0 4px;
+      border-radius: 3px;
+      line-height: 11px;
+      letter-spacing: 0.5px;
+    }
+
     .car-img-svg {
-      width: 38px;
-      height: 22px;
+      width: 48px;
+      height: 28px;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
     }
 
     .car-location-anchor {
       position: absolute;
-      bottom: -6px;
+      bottom: -7px;
       left: 50%;
       transform: translateX(-50%);
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: #ffffff;
-      box-shadow: 0 0 8px var(--car-color, #38bdf8), 0 0 0 2px var(--car-color, #38bdf8);
+      box-shadow: 0 0 10px var(--car-color, #38bdf8), 0 0 0 3px var(--car-color, #38bdf8);
       z-index: 3;
     }
   </style>
@@ -537,7 +551,7 @@
       <span class="brand-tag">🚗 2026国庆自驾 · PLAN B</span>
       <span class="flight-tag">✈️ 广州 <strong>CAN</strong> ⇄ <strong>YIN / BPL</strong> 双飞</span>
     </div>
-    <div class="main-title">新疆伊犁 8天7晚自驾大环线动线</div>
+    <div class="main-title">新疆伊犁 8天7晚自驾大环线</div>
     <div class="sub-chips">
       <span class="mini-chip amber">⏰ 每日出发 ≥ 10:00 (慢节奏)</span>
       <span class="mini-chip cyan">👥 5人家庭自驾 (老人友好)</span>
@@ -734,7 +748,7 @@ window.setVideoState = function(state) {
     else if (idx === dayIdx) el.classList.add('active');
   });
 
-  // 4. Update Polyline paths up to current dayIdx and progress
+  // 4. Update Polyline paths up to current dayIdx and progress with smooth continuous interpolation
   let currentHeadLatLng = null;
 
   allPolylines.forEach((pl, idx) => {
@@ -744,21 +758,39 @@ window.setVideoState = function(state) {
       pl.line.setLatLngs(pts);
     } else if (idx === dayIdx) {
       const totalPts = pl.coords.length;
-      const count = Math.max(1, Math.min(totalPts, Math.floor(progress * totalPts)));
-      const subCoords = pl.coords.slice(0, count);
-      const pts = subCoords.map(c => [c[1], c[0]]);
+      if (totalPts === 0) return;
+
+      // Continuous floating-point progress across points
+      const exactIndex = progress * (totalPts - 1);
+      const baseIndex = Math.min(Math.floor(exactIndex), totalPts - 1);
+      const fraction = exactIndex - baseIndex;
+
+      // Draw line through baseIndex
+      const drawnCount = Math.min(totalPts, baseIndex + 1);
+      const pts = pl.coords.slice(0, drawnCount).map(c => [c[1], c[0]]);
+
+      // Interpolate the exact head position between baseIndex and next point
+      if (fraction > 0.0001 && baseIndex < totalPts - 1) {
+        const p1 = pl.coords[baseIndex];
+        const p2 = pl.coords[baseIndex + 1];
+        const interpLng = p1[0] + (p2[0] - p1[0]) * fraction;
+        const interpLat = p1[1] + (p2[1] - p1[1]) * fraction;
+        currentHeadLatLng = [interpLat, interpLng];
+        pts.push(currentHeadLatLng);
+      } else {
+        const p = pl.coords[baseIndex];
+        currentHeadLatLng = [p[1], p[0]];
+      }
+
       pl.casing.setLatLngs(pts);
       pl.line.setLatLngs(pts);
-      if (pts.length > 0) {
-        currentHeadLatLng = pts[pts.length - 1];
-      }
     } else {
       pl.casing.setLatLngs([]);
       pl.line.setLatLngs([]);
     }
   });
 
-  // 5. Update Running Car Marker (Fixed direction SUV/Car illustration, no rotation)
+  // 5. Update Running SUV Marker (Fixed direction SUV illustration with roof rack, chrome rims, no rotation)
   if (currentHeadLatLng && !isFinal) {
     const carHtml = `
       <div class="running-car-marker" style="--car-color: ${currentSeg.color};">
@@ -768,54 +800,73 @@ window.setVideoState = function(state) {
           <div class="speed-line"></div>
         </div>
         <div class="car-body-badge">
-          <!-- Realistic Self-Drive SUV Running Image / Vector -->
-          <svg class="car-img-svg" viewBox="0 0 64 36" xmlns="http://www.w3.org/2000/svg">
+          <span class="suv-label-tag">SUV</span>
+          <!-- Realistic High-Chassis Self-Drive SUV Vector -->
+          <svg class="car-img-svg" viewBox="0 0 68 36" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="carBodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient id="suvBodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="60%" stop-color="#f8fafc"/>
+                <stop offset="55%" stop-color="#f1f5f9"/>
                 <stop offset="100%" stop-color="${currentSeg.color}"/>
               </linearGradient>
-              <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="suvWindowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#38bdf8"/>
                 <stop offset="100%" stop-color="#0284c7"/>
               </linearGradient>
+              <linearGradient id="suvChassisGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#475569"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
             </defs>
-            <!-- Luggage Rack on Top -->
-            <rect x="20" y="3" width="22" height="2" rx="1" fill="#94a3b8"/>
-            <rect x="23" y="1" width="16" height="2.5" rx="1" fill="#cbd5e1"/>
-            <line x1="22" y1="5" x2="22" y2="7" stroke="#64748b" stroke-width="1.5"/>
-            <line x1="40" y1="5" x2="40" y2="7" stroke="#64748b" stroke-width="1.5"/>
-            <!-- Main Car Body Profile -->
-            <path d="M 6,24 
-                     L 10,24 
-                     Q 11,20 16,20 Q 21,20 22,24 
-                     L 42,24 
-                     Q 43,20 48,20 Q 53,20 54,24 
-                     L 60,24 
-                     Q 62,24 62,22 
-                     L 60,18 
-                     Q 58,16 53,15 
-                     L 44,14 
-                     L 34,7 
-                     Q 32,6 22,6 
-                     L 12,12 
-                     L 4,16 
-                     Q 2,18 2,21 
-                     L 2,22 
-                     Q 2,24 6,24 Z" 
-                  fill="url(#carBodyGrad)" stroke="#0f172a" stroke-width="1.2"/>
-            <!-- Windows -->
-            <path d="M 23,8 L 33,8 L 41,14 L 23,14 Z" fill="url(#windowGrad)" opacity="0.9"/>
-            <path d="M 13,13 L 21,9 L 21,14 L 7,14 Z" fill="url(#windowGrad)" opacity="0.9"/>
-            <!-- Headlights & Taillights -->
-            <polygon points="60,17 62,18 61,20 59,19" fill="#fef08a"/>
-            <polygon points="3,17 2,18 2,20 4,19" fill="#ef4444"/>
-            <!-- Wheels with Chrome Rims -->
-            <circle cx="16" cy="24" r="5.5" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
-            <circle cx="16" cy="24" r="2.5" fill="#e2e8f0"/>
-            <circle cx="48" cy="24" r="5.5" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
-            <circle cx="48" cy="24" r="2.5" fill="#e2e8f0"/>
+            <!-- Heavy-Duty Off-Road Luggage Rack on Top -->
+            <rect x="18" y="2" width="28" height="2.2" rx="1" fill="#94a3b8"/>
+            <rect x="22" y="0.2" width="20" height="2" rx="0.8" fill="#cbd5e1"/>
+            <line x1="20" y1="4" x2="20" y2="6.5" stroke="#64748b" stroke-width="1.8"/>
+            <line x1="32" y1="4" x2="32" y2="6.5" stroke="#64748b" stroke-width="1.8"/>
+            <line x1="44" y1="4" x2="44" y2="6.5" stroke="#64748b" stroke-width="1.8"/>
+
+            <!-- High-Clearance SUV Body Contour -->
+            <path d="M 5,23 
+                     L 9,23 
+                     Q 10,18 16,18 Q 22,18 23,23 
+                     L 43,23 
+                     Q 44,18 50,18 Q 56,18 57,23 
+                     L 63,23 
+                     Q 65,23 65,20 
+                     L 63,16 
+                     Q 60,14 54,13 
+                     L 46,12.5 
+                     L 36,6 
+                     Q 33,5 19,5 
+                     L 10,11 
+                     L 4,14.5 
+                     Q 2,16.5 2,19.5 
+                     L 2,21 
+                     Q 2,23 5,23 Z" 
+                  fill="url(#suvBodyGrad)" stroke="#0f172a" stroke-width="1.3"/>
+
+            <!-- Rugged Lower Body Cladding -->
+            <path d="M 5,23 L 9,23 Q 10,19 16,19 Q 22,19 23,23 L 43,23 Q 44,19 50,19 Q 56,19 57,23 L 63,23 L 64,21 L 2,21 L 5,23 Z" 
+                  fill="url(#suvChassisGrad)" opacity="0.95"/>
+
+            <!-- SUV Tinted Windows with Pillar Details -->
+            <path d="M 21,7 L 34,7 L 43,12.5 L 21,12.5 Z" fill="url(#suvWindowGrad)" opacity="0.92"/>
+            <path d="M 11,11.5 L 19,7.5 L 19,12.5 L 6,12.5 Z" fill="url(#suvWindowGrad)" opacity="0.92"/>
+            <line x1="20" y1="7" x2="20" y2="12.5" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="33" y1="7" x2="33" y2="12.5" stroke="#1e293b" stroke-width="1.4"/>
+
+            <!-- High-Beam Headlights & Rear Taillights -->
+            <polygon points="63,15 65.5,16.5 64.5,18.5 62,17" fill="#fef08a"/>
+            <polygon points="3,15.5 1.5,16.5 1.8,18.5 3.5,17.5" fill="#ef4444"/>
+
+            <!-- Large Off-Road Wheels with All-Terrain Chrome Rims -->
+            <circle cx="16" cy="23" r="6" fill="#0f172a" stroke="#64748b" stroke-width="1.6"/>
+            <circle cx="16" cy="23" r="3.2" fill="#e2e8f0" stroke="#475569" stroke-width="0.8"/>
+            <circle cx="16" cy="23" r="1.2" fill="#0f172a"/>
+
+            <circle cx="50" cy="23" r="6" fill="#0f172a" stroke="#64748b" stroke-width="1.6"/>
+            <circle cx="50" cy="23" r="3.2" fill="#e2e8f0" stroke="#475569" stroke-width="0.8"/>
+            <circle cx="50" cy="23" r="1.2" fill="#0f172a"/>
           </svg>
         </div>
         <div class="car-location-anchor"></div>
@@ -826,8 +877,8 @@ window.setVideoState = function(state) {
       const carIcon = L.divIcon({
         className: 'custom-car-div',
         html: carHtml,
-        iconSize: [72, 48],
-        iconAnchor: [36, 44]
+        iconSize: [78, 52],
+        iconAnchor: [39, 47]
       });
       carMarker = L.marker(currentHeadLatLng, { icon: carIcon, zIndexOffset: 2000 }).addTo(map);
     } else {
