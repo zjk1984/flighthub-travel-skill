@@ -40,19 +40,20 @@ segments_def = [
     {
         "day": "D2",
         "date": "10/2 周五",
-        "title": "G577翻越天山 ➔ 昭苏 ➔ 玉湖",
-        "theme": "翻越天山 · 梦幻玉湖",
+        "title": "S237伊昭公路 ➔ 昭苏 ➔ 望湖庄园",
+        "theme": "伊昭盘山 · 梦幻玉湖",
         "color": "#FF4757",
         "glow": "rgba(255, 71, 87, 0.4)",
-        "highlight": "10:00+出发，走G577特长隧道穿越天山，宿玉湖旁望湖庄园",
-        "road": "G577 · 昭玉公路",
+        "highlight": "10:00+出发，走S237伊昭公路翻越天山（白石峰可短停），宿玉湖旁望湖庄园",
+        "road": "S237 伊昭公路 · 昭玉公路",
         "waypoints": [
             {"id": "w2_1", "name": "伊宁市区", "coord": [81.325, 43.935], "type": "city", "tag": "10:00+出发", "stay": False},
-            {"id": "w2_2", "name": "昭苏县", "coord": [81.130, 43.155], "type": "pass", "tag": "天马故乡", "stay": False},
-            {"id": "w2_3", "name": "昭苏玉湖", "coord": [80.887, 42.943], "type": "scenic", "tag": "冰川峡谷蓝湖", "stay": False},
-            {"id": "w2_4", "name": "望湖庄园", "coord": [80.890, 42.945], "type": "hotel", "tag": "D2宿 (已订)", "stay": True, "hotel": "望湖庄园"}
+            {"id": "w2_2", "name": "白石峰观景台", "coord": [81.080, 43.380], "type": "scenic", "tag": "伊昭公路打卡", "stay": False},
+            {"id": "w2_3", "name": "昭苏县", "coord": [81.130, 43.155], "type": "pass", "tag": "天马故乡", "stay": False},
+            {"id": "w2_4", "name": "昭苏玉湖", "coord": [80.887, 42.943], "type": "scenic", "tag": "冰川峡谷蓝湖", "stay": False},
+            {"id": "w2_5", "name": "望湖庄园", "coord": [80.890, 42.945], "type": "hotel", "tag": "D2宿 (已订)", "stay": True, "hotel": "望湖庄园"}
         ],
-        "route_pts": [(81.325, 43.935), (81.130, 43.155), (80.887, 42.943)]
+        "route_pts": [(81.325, 43.935), (81.080, 43.380), (81.130, 43.155), (80.887, 42.943)]
     },
     {
         "day": "D3",
@@ -200,7 +201,7 @@ for seg in segments_def:
 
 # Highway badges coordinates
 highway_badges = [
-    {"road": "G577", "name": "伊昭公路/天山隧道", "coord": [81.08, 43.40], "color": "#FF4757"},
+    {"road": "S237", "name": "伊昭公路", "coord": [81.08, 43.40], "color": "#FF4757"},
     {"road": "S237", "name": "特昭公路", "coord": [81.45, 43.18], "color": "#2ED573"},
     {"road": "S315", "name": "唐布拉百里画廊", "coord": [83.05, 43.62], "color": "#FFA502"},
     {"road": "G217", "name": "独库公路北段(哈希勒根)", "coord": [84.15, 43.90], "color": "#9B59B6"},
