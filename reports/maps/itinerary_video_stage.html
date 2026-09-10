@@ -460,50 +460,68 @@
       color: #fbbf24 !important;
     }
 
-    /* Car Marker with Dynamic Rotation */
-    .car-marker-container {
-      width: 44px;
-      height: 44px;
+    /* Fixed Direction Running Car Image / Badge */
+    .running-car-marker {
+      width: 72px;
+      height: 48px;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      pointer-events: none;
     }
 
-    .car-halo-glow {
+    .car-speed-lines {
       position: absolute;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--car-color, #38bdf8) 0%, rgba(255,255,255,0) 70%);
-      animation: carPulse 1.2s infinite ease-out;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      opacity: 0.85;
     }
 
-    @keyframes carPulse {
-      0% { transform: scale(0.8); opacity: 0.8; }
-      100% { transform: scale(1.6); opacity: 0; }
+    .speed-line {
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--car-color, #38bdf8) 100%);
+      border-radius: 1px;
     }
+    .speed-line:nth-child(1) { width: 14px; }
+    .speed-line:nth-child(2) { width: 20px; }
+    .speed-line:nth-child(3) { width: 12px; }
 
-    .car-icon-wrapper {
+    .car-body-badge {
       position: relative;
-      width: 34px;
+      width: 52px;
       height: 34px;
-      border-radius: 50%;
-      background: #0f172a;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
       border: 2px solid #ffffff;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.8), 0 0 10px var(--car-color, #38bdf8);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 12px var(--car-color, #38bdf8);
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: rotate(var(--car-heading, 0deg));
-      transition: transform 0.1s ease;
+      z-index: 2;
     }
 
-    .car-svg {
-      width: 22px;
+    .car-img-svg {
+      width: 38px;
       height: 22px;
-      fill: var(--car-color, #38bdf8);
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+    }
+
+    .car-location-anchor {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px var(--car-color, #38bdf8), 0 0 0 2px var(--car-color, #38bdf8);
+      z-index: 3;
     }
   </style>
 </head>
@@ -574,9 +592,7 @@ const ROUTE_DATA = {"title": "2026国庆新疆伊犁8天7晚自驾大环线", "s
 
 let map;
 let allPolylines = [];
-let roadBadgeMarkers = [];
 let carMarker = null;
-let currentCarHeading = 0;
 let displayedScenicMarkers = {};
 let displayedRoadMarkers = {};
 
@@ -607,17 +623,6 @@ dayShortNames.forEach((item, idx) => {
   `;
   stepsContainer.appendChild(step);
 });
-
-// Calculate bearing angle between two lat/lng coordinates in degrees
-function calculateHeading(p1, p2) {
-  const lat1 = p1[0] * Math.PI / 180;
-  const lat2 = p2[0] * Math.PI / 180;
-  const dLon = (p2[1] - p1[1]) * Math.PI / 180;
-  const y = Math.sin(dLon) * Math.cos(lat2);
-  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
-  let brng = Math.atan2(y, x) * 180 / Math.PI;
-  return (brng + 360) % 360;
-}
 
 function initMap() {
   map = L.map('map', {
@@ -731,7 +736,6 @@ window.setVideoState = function(state) {
 
   // 4. Update Polyline paths up to current dayIdx and progress
   let currentHeadLatLng = null;
-  let prevHeadLatLng = null;
 
   allPolylines.forEach((pl, idx) => {
     if (idx < dayIdx) {
@@ -747,9 +751,6 @@ window.setVideoState = function(state) {
       pl.line.setLatLngs(pts);
       if (pts.length > 0) {
         currentHeadLatLng = pts[pts.length - 1];
-        if (pts.length > 1) {
-          prevHeadLatLng = pts[pts.length - 2];
-        }
       }
     } else {
       pl.casing.setLatLngs([]);
@@ -757,23 +758,67 @@ window.setVideoState = function(state) {
     }
   });
 
-  // 5. Update Car Marker (with SVG car & dynamic heading)
+  // 5. Update Running Car Marker (Fixed direction SUV/Car illustration, no rotation)
   if (currentHeadLatLng && !isFinal) {
-    if (prevHeadLatLng) {
-      currentCarHeading = calculateHeading(prevHeadLatLng, currentHeadLatLng);
-    }
-
     const carHtml = `
-      <div class="car-marker-container" style="--car-color: ${currentSeg.color};">
-        <div class="car-halo-glow"></div>
-        <div class="car-icon-wrapper" style="--car-heading: ${currentCarHeading}deg;">
-          <svg class="car-svg" viewBox="0 0 24 24">
-            <!-- Sleek Top-Down Car Silhouette -->
-            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/>
-            <circle cx="7.5" cy="14.5" r="1.5" fill="#fcd34d"/>
-            <circle cx="16.5" cy="14.5" r="1.5" fill="#fcd34d"/>
+      <div class="running-car-marker" style="--car-color: ${currentSeg.color};">
+        <div class="car-speed-lines">
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+        </div>
+        <div class="car-body-badge">
+          <!-- Realistic Self-Drive SUV Running Image / Vector -->
+          <svg class="car-img-svg" viewBox="0 0 64 36" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="carBodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="60%" stop-color="#f8fafc"/>
+                <stop offset="100%" stop-color="${currentSeg.color}"/>
+              </linearGradient>
+              <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#0284c7"/>
+              </linearGradient>
+            </defs>
+            <!-- Luggage Rack on Top -->
+            <rect x="20" y="3" width="22" height="2" rx="1" fill="#94a3b8"/>
+            <rect x="23" y="1" width="16" height="2.5" rx="1" fill="#cbd5e1"/>
+            <line x1="22" y1="5" x2="22" y2="7" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="40" y1="5" x2="40" y2="7" stroke="#64748b" stroke-width="1.5"/>
+            <!-- Main Car Body Profile -->
+            <path d="M 6,24 
+                     L 10,24 
+                     Q 11,20 16,20 Q 21,20 22,24 
+                     L 42,24 
+                     Q 43,20 48,20 Q 53,20 54,24 
+                     L 60,24 
+                     Q 62,24 62,22 
+                     L 60,18 
+                     Q 58,16 53,15 
+                     L 44,14 
+                     L 34,7 
+                     Q 32,6 22,6 
+                     L 12,12 
+                     L 4,16 
+                     Q 2,18 2,21 
+                     L 2,22 
+                     Q 2,24 6,24 Z" 
+                  fill="url(#carBodyGrad)" stroke="#0f172a" stroke-width="1.2"/>
+            <!-- Windows -->
+            <path d="M 23,8 L 33,8 L 41,14 L 23,14 Z" fill="url(#windowGrad)" opacity="0.9"/>
+            <path d="M 13,13 L 21,9 L 21,14 L 7,14 Z" fill="url(#windowGrad)" opacity="0.9"/>
+            <!-- Headlights & Taillights -->
+            <polygon points="60,17 62,18 61,20 59,19" fill="#fef08a"/>
+            <polygon points="3,17 2,18 2,20 4,19" fill="#ef4444"/>
+            <!-- Wheels with Chrome Rims -->
+            <circle cx="16" cy="24" r="5.5" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+            <circle cx="16" cy="24" r="2.5" fill="#e2e8f0"/>
+            <circle cx="48" cy="24" r="5.5" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+            <circle cx="48" cy="24" r="2.5" fill="#e2e8f0"/>
           </svg>
         </div>
+        <div class="car-location-anchor"></div>
       </div>
     `;
 
@@ -781,8 +826,8 @@ window.setVideoState = function(state) {
       const carIcon = L.divIcon({
         className: 'custom-car-div',
         html: carHtml,
-        iconSize: [44, 44],
-        iconAnchor: [22, 22]
+        iconSize: [72, 48],
+        iconAnchor: [36, 44]
       });
       carMarker = L.marker(currentHeadLatLng, { icon: carIcon, zIndexOffset: 2000 }).addTo(map);
     } else {
