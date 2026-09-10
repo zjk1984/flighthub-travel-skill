@@ -580,7 +580,7 @@ html_content = """<!DOCTYPE html>
     </div>
     <div class="main-title">新疆伊犁 8天7晚自驾大环线</div>
     <div class="sub-chips">
-      <span class="mini-chip amber">⏰ 每日出发 ≥ 10:00 (慢节奏)</span>
+      <span class="mini-chip amber">⏰ 10:00≈当地8点 · 午餐13:30 · 日落~20:05</span>
       <span class="mini-chip cyan">👥 5人家庭自驾 (老人友好)</span>
       <span class="mini-chip">📅 2026.10.01 – 10.08</span>
       <span class="mini-chip">🏔️ 喀拉峻连住2晚</span>

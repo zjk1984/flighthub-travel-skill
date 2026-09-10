@@ -588,7 +588,7 @@ html_template = """<!DOCTYPE html>
       <span>博乐市区</span>
     </div>
     <div class="header-chips">
-      <div class="chip highlight">⏰ 每日建议出发 ≥ 10:00 (老人友好慢节奏)</div>
+      <div class="chip highlight">⏰ 10:00出发≈当地8点 · 午餐13:30 · 日落~20:05</div>
       <div class="chip cyan">👥 5人舒适家庭自驾游</div>
       <div class="chip">📅 2026.10.01 – 10.08</div>
       <div class="chip">🚗 全程自驾约 1,684 km</div>
