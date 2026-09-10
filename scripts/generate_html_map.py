@@ -792,7 +792,7 @@ window.onload = function() {
   const keyMarkers = [
     { name: "伊宁机场", tag: "D1 落地 23:10", coord: [81.330, 43.956], color: "#747D8C", icon: "✈️", type: "airport", layout: "left" },
     { name: "昭苏玉湖", tag: "D2 冰川蓝湖", coord: [80.887, 42.943], color: "#FF4757", icon: "🌊", hotel: "宿 望湖庄园(已订)", layout: "left" },
-    { name: "喀拉峻大草原", tag: "D3-D4 阔克苏/鲜花台", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 景区民宿(连住2晚)", layout: "right" },
+    { name: "喀拉峻大草原", tag: "D3-D4 阔克苏/鲜花台", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 山涧云海民宿(已订)", layout: "right" },
     { name: "库尔德宁东沟", tag: "D5 云杉林 2.5h", coord: [82.855, 43.190], color: "#FFA502", icon: "🌲", layout: "left" },
     { name: "唐布拉百里画廊", tag: "D5 宿放蜂人家", coord: [83.275, 43.682], color: "#FFA502", icon: "🏕️", hotel: "宿 放蜂人家", layout: "left" },
     { name: "乔尔玛烈士陵园", tag: "独库北段起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
@@ -840,7 +840,7 @@ window.onload = function() {
     const hotelWp = seg.waypoints.find(w => w.stay);
     if (hotelWp) {
       stayText = hotelWp.hotel || hotelWp.name;
-      if (seg.day === 'D1' || seg.day === 'D2') isBooked = true;
+      if (seg.day === 'D1' || seg.day === 'D2' || seg.day === 'D3' || seg.day === 'D4') isBooked = true;
     } else if (seg.day === 'D8') {
       stayText = '飞返广州白云';
     }

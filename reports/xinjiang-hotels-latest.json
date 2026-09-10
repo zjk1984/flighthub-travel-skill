@@ -38,6 +38,25 @@
     "booked": true
   },
   {
+    "segment": "D3-D4 喀拉峻",
+    "checkin": "2026-10-03",
+    "checkout": "2026-10-05",
+    "apiRank": 0,
+    "lodgingType": "民宿",
+    "searchPoi": "山涧云海",
+    "name": "山涧云海民宿",
+    "price": "—",
+    "priceNum": 0,
+    "star": "舒适型",
+    "brandName": "",
+    "poi": "D3-D4 已订 · 喀拉峻连住2晚",
+    "address": "特克斯县喀拉峻景区周边",
+    "reviewScore": null,
+    "reviewDesc": "",
+    "url": "",
+    "booked": true
+  },
+  {
     "segment": "D5 百里画廊",
     "checkin": "2026-10-05",
     "checkout": "2026-10-06",

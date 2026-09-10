@@ -744,7 +744,7 @@ window.setVideoState = function(state) {
   const hotelWp = currentSeg.waypoints.find(w => w.stay);
   if (hotelWp) {
     stayText = `🏡 宿: ${hotelWp.hotel || hotelWp.name}`;
-    if (currentSeg.day === 'D1' || currentSeg.day === 'D2') stayText += ' (已订)';
+    if (currentSeg.day === 'D1' || currentSeg.day === 'D2' || currentSeg.day === 'D3' || currentSeg.day === 'D4') stayText += ' (已订)';
   } else if (currentSeg.day === 'D8') {
     stayText = '✈️ 广州温馨的家 (MU6170)';
   }
