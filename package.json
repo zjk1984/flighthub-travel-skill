@@ -38,6 +38,10 @@
     "lvji:dev": "pnpm --dir apps/lvji dev",
     "lvji:build": "pnpm --dir apps/lvji build",
     "lvji:test": "pnpm --dir apps/lvji test",
+    "map:fetch": "python3 scripts/fetch_route_data.py",
+    "map:poster": "node scripts/render_poster.js",
+    "map:video:data": "python3 scripts/prepare_video_data.py && python3 scripts/prepare_subtitles.py && python3 scripts/generate_html_map.py && python3 scripts/generate_video_html.py",
+    "map:video": "node scripts/render_video.js",
     "test": "node --test scripts/__tests__/*.test.js"
   },
   "repository": {

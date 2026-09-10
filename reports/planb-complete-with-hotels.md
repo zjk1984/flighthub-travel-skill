@@ -18,7 +18,7 @@
 
 ## 🗺️ 环线概要
 
-伊宁 → **玉湖民宿** → **喀拉峻民宿×2** → **库尔德宁·唐布拉** → **独库·赛湖** → **博乐** → 返广州
+伊宁 → **望湖庄园 (已订)** → **山涧云海民宿×2 (已订)** → **库尔德宁·唐布拉** → **独库·赛湖** → **博乐** → 返广州
 
 ---
 
@@ -28,7 +28,7 @@
 
 | 推荐 | 单间/晚 | 2间合计 | 预订 |
 |------|---------|---------|------|
-| ⭐ 全季伊宁宁远路国际机场酒店 | ¥349 | ¥698 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ls6aQ) |
+| ⭐ 全季伊宁宁远路国际机场酒店（✅ 已订） | ¥349 | ¥698 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ls6aQ) |
 
 ---
 
@@ -36,18 +36,19 @@
 
 | 推荐 | 单间/晚 | 2间合计 | 预订 |
 |------|---------|---------|------|
-| ⭐ **昭苏望湖庄园** | ¥439 | ¥878 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F462IQu) |
-| 昭苏乌孙驿民宿 | ¥420 | ¥840 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1549Ex) |
+| ⭐ **昭苏望湖庄园**（✅ 已订） | ¥439 | ¥878 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F462IQu) |
+| 昭苏乌孙驿民宿（备选） | ¥420 | ¥840 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1549Ex) |
 
 ---
 
-### D3–D4 · 10/3–10/4 喀拉峻 · 🏡 景区民宿（连住 2 晚）
+### D3–D4 · 10/3–10/4 喀拉峻 · 🏡 景区民宿（连住 2 晚 · ✅ 已订）
 
-| 推荐 | 单间/晚 | 2间×2晚合计 | 预订 |
-|------|---------|-------------|------|
-| ⭐ **特克斯喀拉峻别克波森山庄** | ¥675 | ¥2700 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0aubrr) |
+| 推荐 | 状态 | 备注 |
+|------|------|------|
+| ⭐ **山涧云海民宿** | ✅ **已订** | 喀拉峻景区连住 2 晚 · 免频繁搬箱 |
+| 备选：特克斯喀拉峻别克波森山庄 | 备选候选 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3DtaBZ) ¥668/间 |
 
-> D3 玉湖直赴喀拉峻；API 仅返回 1 家景区内民宿，无垠之境等请飞猪手动搜「喀拉峻 民宿」
+> D3 玉湖直赴喀拉峻；已锁定入住山涧云海民宿连住 2 晚，免除每日收拾搬运行李折腾。
 
 ---
 
