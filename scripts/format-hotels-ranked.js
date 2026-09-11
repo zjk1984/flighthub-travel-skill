@@ -93,19 +93,29 @@ function renderDailySection(dayEntry, profile, rooms) {
     return md;
   }
 
-  md += `| 排名 | 评分 | 类型 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | ${rooms}间合计 | 入住→离店 | 位置 | 预订 |\n`;
-  md += "|------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|\n";
+  md += `| 排名 | 评分 | 类型 | 来源 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | ${rooms}间合计 | 入住→离店 | 位置 | 预订 |\n`;
+  md += "|------|------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|\n";
 
   scored.slice(0, TOP_N).forEach((h, i) => {
     const book = h.url ? `[预订](${h.url})` : "—";
+    const src =
+      h.source === "google"
+        ? "Google"
+        : h.source === "both"
+          ? "飞猪+Google"
+          : h.source === "flyai"
+            ? "飞猪"
+            : "";
     const type =
       h.lodgingType ||
       (/民宿|客栈|牧家乐/.test(h.name) ? "民宿" : "酒店");
     const reviewCol = h.reviewScore ? h.reviewPts : h.reviewPts;
+    const priceCol =
+      h.priceNum > 0 ? (h.priceIsEstimate ? `≈¥${h.priceNum.toFixed(0)}` : `¥${h.priceNum.toFixed(0)}`) : "—";
     md +=
-      `| ${i + 1} | ${h.score} | ${type} | ${h.destName || destName || "—"} | ${h.name} | ${h.star || "—"} | ` +
-      `¥${h.priceNum.toFixed(0)} | ${h.pricePts} | ${h.locationPts} | ${h.comfortPts} | ${reviewCol} | ${h.brandPts} | ` +
-      `¥${h.stayTotal.toFixed(0)} | ${formatStayRange(h)} | ${h.poi || "—"} | ${book} |\n`;
+      `| ${i + 1} | ${h.score} | ${type} | ${src || "—"} | ${h.destName || destName || "—"} | ${h.name} | ${h.star || "—"} | ` +
+      `${priceCol} | ${h.pricePts} | ${h.locationPts} | ${h.comfortPts} | ${reviewCol} | ${h.brandPts} | ` +
+      `${h.priceNum > 0 ? `¥${h.stayTotal.toFixed(0)}` : "—"} | ${formatStayRange(h)} | ${h.poi || "—"} | ${book} |\n`;
   });
 
   md += "\n**扣分项明细：**\n\n";
@@ -178,7 +188,7 @@ function renderReport(raw, cfg) {
     md += renderDailySection(day, profile, rooms);
   }
 
-  md += `---\n基于飞猪 fly.ai 实时数据\n`;
+  md += `---\n基于飞猪 fly.ai 实时数据 + Google Places 民宿/酒店名录（价格以飞猪为准；Google 无实价时显示 ≈ 估算档）\n`;
   return md;
 }
 

@@ -11,6 +11,11 @@ const { loadConfig } = require("./load-monitor-config");
 const { loadTripProfile, DEFAULT_PROFILE_PATH } = require("./load-trip-profile");
 const { sleep } = require("./search-queue");
 const { parsePriceNum } = require("./hotel-scoring");
+const {
+  getApiKey: getGoogleApiKey,
+  searchSegmentGooglePlaces,
+  mergeHotelSources,
+} = require("./google-places-hotels");
 const { spawnSync } = require("child_process");
 
 const ROOT = path.join(__dirname, "..");
@@ -262,7 +267,8 @@ async function searchSegment(seg, elderFriendly, hotelOverrides = {}) {
         if (fallback) rows.push(...mapHotels(seg, fallback, topN, lodgingType, pois[0]));
       }
     }
-    return dedupeHotels(filterScenicHomestays(rows, seg));
+    const filtered = dedupeHotels(filterScenicHomestays(rows, seg));
+    return enrichWithGooglePlaces(seg, filtered, topN);
   }
 
   const types = seg.preferHomestay ? ["民宿", "酒店"] : [seg.hotelTypes || "酒店"];
@@ -293,7 +299,24 @@ async function searchSegment(seg, elderFriendly, hotelOverrides = {}) {
     const poiPayload = runHotelSearch(seg, { sort: "rate_desc", usePoi: true });
     if (poiPayload) rows.push(...mapHotels(seg, poiPayload, topN, "酒店"));
   }
-  return dedupeHotels(rows);
+  return enrichWithGooglePlaces(seg, dedupeHotels(rows), topN);
+}
+
+async function enrichWithGooglePlaces(seg, flyaiRows, topN) {
+  if (!getGoogleApiKey() || seg.googlePlaces === false) return flyaiRows;
+  try {
+    const googleRows = await searchSegmentGooglePlaces(seg, topN);
+    if (!googleRows.length) return flyaiRows;
+    let merged = mergeHotelSources(flyaiRows, googleRows);
+    if (seg.scenicHomestay) {
+      merged = filterScenicHomestays(merged, seg);
+    }
+    process.stderr.write(`  → Google Places +${googleRows.length} (merged ${merged.length})\n`);
+    return merged;
+  } catch (err) {
+    process.stderr.write(`  → Google Places skipped: ${err.message}\n`);
+    return flyaiRows;
+  }
 }
 
 function mapHotels(segment, payload, topN, lodgingType, searchPoi) {
@@ -318,6 +341,7 @@ function mapHotels(segment, payload, topN, lodgingType, searchPoi) {
       reviewScore: h.score != null ? String(h.score) : null,
       reviewDesc: h.scoreDesc || h.review || "",
       url: h.detailUrl || h.jumpUrl || "",
+      source: "flyai",
     };
   });
 }
@@ -347,6 +371,9 @@ async function main() {
 
   if (!process.env.FLYAI_API_KEY) {
     process.stderr.write("Warning: FLYAI_API_KEY not set — hotel prices may be trial/masked\n");
+  }
+  if (!getGoogleApiKey()) {
+    process.stderr.write("Warning: GOOGLE_PLACES_API_KEY not set — skipping Google lodging data\n");
   }
 
   const elderFriendly = trip.scoringProfile === "family_elder";
