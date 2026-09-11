@@ -16,7 +16,7 @@ const monitor = require("./monitor-hotels.js");
 async function main() {
   const cfg = loadConfig();
   const trip = cfg.trip;
-  const scenicSegs = (trip.hotels || []).filter((s) => s.scenicHomestay);
+  const scenicSegs = (trip.hotels || []).filter((s) => s.scenicHomestay && !s.skipMonitor);
   if (!scenicSegs.length) {
     process.stderr.write("No scenic homestay segments\n");
     return;

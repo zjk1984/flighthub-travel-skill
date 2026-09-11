@@ -240,12 +240,18 @@ function buildDeductions(h, profile) {
   const items = [];
   const w = profile?.weights || {};
 
-  if (h.priceNum >= 500) {
+  if (h.priceIsEstimate) {
+    items.push(
+      `价格 ≈¥${h.priceNum}/晚：Google 价位档估算（无飞猪实价，价格分 ${h.pricePts}）`
+    );
+  } else if (h.priceNum >= 500) {
     items.push(`价格 ¥${h.priceNum}/晚：较高档，绝对分偏低（价格分 ${h.pricePts}，权重 ${Math.round((w.price || 0) * 100)}%）`);
   } else if (h.priceNum < 200) {
     items.push(`价格 ¥${h.priceNum}/晚：低价档（价格分 ${h.pricePts}）`);
-  } else {
+  } else if (h.priceNum > 0) {
     items.push(`价格 ¥${h.priceNum}/晚：综合价分 ${h.pricePts}（绝对+同段相对各 50%）`);
+  } else {
+    items.push(`价格：无实价数据（价格分 ${h.pricePts}）`);
   }
 
   if (h.locationPts >= 100) {
@@ -263,7 +269,8 @@ function buildDeductions(h, profile) {
   }
 
   if (h.reviewScore) {
-    items.push(`平台评分 ${h.reviewScore}：口碑分 ${h.reviewPts}`);
+    const src = h.source === "google" ? "Google" : h.source === "both" ? "飞猪/Google" : "平台";
+    items.push(`${src}评分 ${h.reviewScore}：口碑分 ${h.reviewPts}`);
   } else {
     items.push(`口碑：无评分数据，默认 ${h.reviewPts} 分`);
   }
