@@ -176,9 +176,13 @@ npm run monitor:hotels:scenic       # refresh-scenic-homestays.js
 npm run setup:feishu              # 配置 FEISHU_WEBHOOK_URL
 npm run skill:hotels              # 阶段 4 自动推酒店 TOP3 + 行程简报
 FEISHU_SKIP=1 npm run skill:hotels  # 跳过推送
+npm run remind:bookings:dry       # 预览预订提醒（提前 1 天）
+npm run remind:bookings           # 发送预订提醒到飞书
 ```
 
 `skill:hotels` 推送：`xinjiang-hotels-latest-ranked.md` + `xinjiang-travel-brief.md`。
+
+**预订提醒**：`config/booking-schedule.json` 按 `eventDate` 排序；每日 cron（建议 09:00）跑 `remind:bookings`，在行程日前一天汇总酒店/门票/独库预约等待办与已订项。
 
 ---
 
