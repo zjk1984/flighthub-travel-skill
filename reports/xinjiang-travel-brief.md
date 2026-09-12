@@ -1,6 +1,6 @@
 # 旅行决策简报（行程 · 酒店）
 
-> 生成时间：2026-09-12 18:13:21 | 评分画像：**家庭·老人友好** | **5 人**
+> 生成时间：2026-09-12 18:16:26 | 评分画像：**家庭·老人友好** | **5 人**
 
 > 行程：伊犁8天自驾 · 玉湖+喀拉峻+独库百里画廊+赛湖
 
@@ -30,8 +30,8 @@
 | D1 机场 | 10-01→10-02 | ✅ **全季伊宁宁远路国际机场酒店** | [全季伊宁宁远路国际机场酒店](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ls6aQ) ¥349 | ¥349 | ¥— | [已订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1ls6aQ) |
 | D2 玉湖 | 10-02→10-03 | ✅ **昭苏望湖庄园** | [昭苏望湖庄园](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F462IQu) ¥439 | ¥439 | ¥— | [已订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F462IQu) |
 | D3-D4 喀拉峻 | 10-03→10-05 | ✅ **山涧云海民宿** | 山涧云海民宿 ¥0 | — | ¥— | ✅ 已订 |
-| D5 百里画廊 | 10-05→10-06 | ✅ **伊犁尼勒克小满民宿** | [唐布拉草原放蜂人家民宿](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cczlW) ¥285 | — | ¥— | [已订](https://hotels.ctrip.com/hotels/111453794.html) |
-| D6-D7 赛湖东门 | 10-06→10-08 | ✅ **喀兰朵·山湖悦己|The Kharando Lodge** | [赛湖高白鲑鱼坊](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2adAiZ) ¥734 | — | ¥— | [已订](http://www.100wwhy.com/5164563) |
+| D5 百里画廊 | 10-05→10-06 | ✅ **伊犁尼勒克小满民宿** | [唐布拉草原放蜂人家民宿](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oWOlF) ¥285 | — | ¥— | [已订](https://hotels.ctrip.com/hotels/111453794.html) |
+| D6-D7 赛湖东门 | 10-06→10-08 | ✅ **喀兰朵·山湖悦己|The Kharando Lodge** | — | — | ¥— | [已订](http://www.100wwhy.com/5164563) |
 
 > 各段 TOP3 评分与扣分明细见下方「酒店评分明细」
 
@@ -118,61 +118,96 @@
 
 ### 10/5（2026-10-05） · D5 百里画廊
 
-> 目的地：**尼勒克** | 候选 8 家
+> 目的地：**尼勒克** | 候选 9 家
 
 | 排名 | 评分 | 类型 | 来源 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 83.5 | 民宿 | 飞猪 | 尼勒克 | 唐布拉草原放蜂人家民宿 | 舒适型 | ¥285 | 81 | 88 | 90 | 75 | 75 | ¥570 | 10-05→10-06 | 七十一团北河路二巷3-3号 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cczlW) |
-| 2 | 83.3 | 民宿 | 飞猪 | 尼勒克 | 尼勒克天山黑蜂庄园生态酒店 | 舒适型 | ¥296 | 80 | 88 | 90 | 75 | 75 | ¥592 | 10-05→10-06 | 种蜂场狗熊沟路口 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3oiZFS) |
-| 3 | 81 | 民宿 | 飞猪 | 尼勒克 | 尼勒克县唐布拉大酒店 | 三星级 | ¥372 | 77 | 88 | 78 | 75 | 85 | ¥744 | 10-05→10-06 | 近尼勒克县客运站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3lT0Jk) |
+| 1 | 83.8 | 民宿 | 飞猪 | 尼勒克 | 唐布拉草原放蜂人家民宿 | 舒适型 | ¥285 | 82 | 88 | 90 | 75 | 75 | ¥570 | 10-05→10-06 | 七十一团北河路二巷3-3号 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oWOlF) |
+| 2 | 83.5 | 民宿 | 飞猪 | 尼勒克 | 尼勒克天山黑蜂庄园生态酒店 | 舒适型 | ¥296 | 81 | 88 | 90 | 75 | 75 | ¥592 | 10-05→10-06 | 种蜂场狗熊沟路口 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F383Z5c) |
+| 3 | 81.5 | 民宿 | 飞猪 | 尼勒克 | 尼勒克县唐布拉大酒店 | 三星级 | ¥372 | 79 | 88 | 78 | 75 | 85 | ¥744 | 10-05→10-06 | 近尼勒克县客运站 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2pGoAg) |
 
 **扣分项明细：**
 
-1. **尼勒克 · 唐布拉草原放蜂人家民宿**（综合 83.5）
-   - 价格 ¥285/晚：综合价分 81（绝对+同段相对各 50%）
+1. **尼勒克 · 唐布拉草原放蜂人家民宿**（综合 83.8）
+   - 价格 ¥285/晚：综合价分 82（绝对+同段相对各 50%）
    - 位置 七十一团北河路二巷3-3号：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
    - 单晚 × 2 间 ≈ ¥570（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2cczlW)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2oWOlF)
 
-2. **尼勒克 · 尼勒克天山黑蜂庄园生态酒店**（综合 83.3）
-   - 价格 ¥296/晚：综合价分 80（绝对+同段相对各 50%）
+2. **尼勒克 · 尼勒克天山黑蜂庄园生态酒店**（综合 83.5）
+   - 价格 ¥296/晚：综合价分 81（绝对+同段相对各 50%）
    - 位置 种蜂场狗熊沟路口：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
    - 单晚 × 2 间 ≈ ¥592（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3oiZFS)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F383Z5c)
 
-3. **尼勒克 · 尼勒克县唐布拉大酒店**（综合 81）
-   - 价格 ¥372/晚：综合价分 77（绝对+同段相对各 50%）
+3. **尼勒克 · 尼勒克县唐布拉大酒店**（综合 81.5）
+   - 价格 ¥372/晚：综合价分 79（绝对+同段相对各 50%）
    - 位置 近尼勒克县客运站：部分匹配 POI（位置分 88，较满分扣 12）
    - 档次 三星级：舒适度分 78（老人出行建议舒适型及以上）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 85
    - 单晚 × 2 间 ≈ ¥744（2 间估算）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3lT0Jk)
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2pGoAg)
 
-### 10/6（2026-10-06） · D6-D7 赛湖东门
-
-> 目的地：**博乐** | 候选 1 家
+### 10/6（2026-10-06） · D6 赛湖东门
 
 | 排名 | 评分 | 类型 | 来源 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
 |------|------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
-| 1 | 87.5 | 民宿 | 飞猪 | 博乐 | 赛湖高白鲑鱼坊 | 舒适型 | ¥734 | 85 | 100 | 90 | 75 | 75 | ¥2936 | 10-06→10-08（2晚） | 近赛里木湖国家级风景名胜区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2adAiZ) |
+| 1 | 82.5 | 民宿 | 飞猪 | — | 赛湖高白鲑鱼坊 | 舒适型 | ¥711 | 85 | 80 | 90 | 75 | 75 | ¥1422 | 10-06→10-07 | 近赛里木湖国家级风景名胜区 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3bfL8q) |
 
 **扣分项明细：**
 
-1. **博乐 · 赛湖高白鲑鱼坊**（综合 87.5）
-   - 价格 ¥734/晚：较高档，绝对分偏低（价格分 85，权重 25%）
-   - 位置 近赛里木湖国家级风景名胜区：命中分段 POI 偏好（位置分 100）
+1. ** · 赛湖高白鲑鱼坊**（综合 82.5）
+   - 价格 ¥711/晚：较高档，绝对分偏低（价格分 85，权重 25%）
+   - 位置 近赛里木湖国家级风景名胜区：未命中分段 POI 关键词（位置分 80，较满分扣 20）
    - 档次 舒适型：舒适度分 90（较优）
    - 口碑：无评分数据，默认 75 分
    - 品牌/类型：品牌分 75
-   - 连住 2 晚 × 2 间 ≈ ¥2936（2 间估算，5 人）
-   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2adAiZ)
+   - 单晚 × 2 间 ≈ ¥1422（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3bfL8q)
+
+### 10/7（2026-10-07） · D7 博乐
+
+| 排名 | 评分 | 类型 | 来源 | 城市 | 酒店 | 档次 | 单间/晚 | 价格分 | 位置分 | 舒适分 | 口碑分 | 品牌分 | 2间合计 | 入住→离店 | 位置 | 预订 |
+|------|------|------|------|------|------|------|---------|--------|--------|--------|--------|--------|----------|----------|------|------|
+| 1 | 84.5 | 酒店 | 飞猪 | — | 全季博乐酒店 | 舒适型 | ¥216 | 78 | 80 | 90 | 75 | 100 | ¥432 | 10-07→10-08 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2RpQt2) |
+| 2 | 84 | 酒店 | 飞猪 | — | 博乐市江浙宾馆 | 舒适型 | ¥91 | 85 | 80 | 90 | 75 | 85 | ¥182 | 10-07→10-08 | 近博乐商业步行街(博乐市文化中心楼东南) | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4M3bvm) |
+| 3 | 83.5 | 酒店 | 飞猪 | — | 博乐供销新合大酒店 | 舒适型 | ¥112 | 83 | 80 | 90 | 75 | 85 | ¥224 | 10-07→10-08 | 近赛里木湖路 | [预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F343buB) |
+
+**扣分项明细：**
+
+1. ** · 全季博乐酒店**（综合 84.5）
+   - 价格 ¥216/晚：综合价分 78（绝对+同段相对各 50%）
+   - 位置 近博乐商业步行街(博乐市文化中心楼东南)：未命中分段 POI 关键词（位置分 80，较满分扣 20）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌：连锁/优选品牌（品牌分 100）
+   - 单晚 × 2 间 ≈ ¥432（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2RpQt2)
+
+2. ** · 博乐市江浙宾馆**（综合 84）
+   - 价格 ¥91/晚：低价档（价格分 85）
+   - 位置 近博乐商业步行街(博乐市文化中心楼东南)：未命中分段 POI 关键词（位置分 80，较满分扣 20）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 85
+   - 单晚 × 2 间 ≈ ¥182（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4M3bvm)
+
+3. ** · 博乐供销新合大酒店**（综合 83.5）
+   - 价格 ¥112/晚：低价档（价格分 83）
+   - 位置 近赛里木湖路：未命中分段 POI 关键词（位置分 80，较满分扣 20）
+   - 档次 舒适型：舒适度分 90（较优）
+   - 口碑：无评分数据，默认 75 分
+   - 品牌/类型：品牌分 85
+   - 单晚 × 2 间 ≈ ¥224（2 间估算）
+   - [点击预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F343buB)
 
 ---
 基于飞猪 fly.ai 实时数据 + Google Places 民宿/酒店名录（价格以飞猪为准；Google 无实价时显示 ≈ 估算档）
