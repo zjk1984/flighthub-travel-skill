@@ -9,11 +9,15 @@ const {
   mergeProfileHotels,
   itemsForRemindDate,
   selectDailyDigest,
+  sortByRemainingDays,
+  remainingDays,
   buildDailyMarkdown,
   loadState,
   saveState,
-  addDays,
   formatBookWindow,
+  formatReserveTime,
+  formatRemainingLabel,
+  isBeforeBookOpen,
 } = require('../booking-reminders.js');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -44,8 +48,32 @@ test('itemsForRemindDate picks items one day before event', () => {
   assert.ok(items.some((i) => i.id === 'd7-lake'));
 });
 
+test('remainingDays uses bookFromDate before window opens', () => {
+  const schedule = loadSchedule();
+  const sayram = schedule.items.find((i) => i.id === 'd7-sayram-ticket');
+  assert.equal(remainingDays(sayram, '2026-09-12'), 17);
+  assert.equal(isBeforeBookOpen(sayram, '2026-09-12'), true);
+  assert.match(formatRemainingLabel(sayram, '2026-09-12'), /距开放.*剩 17 天/);
+});
+
+test('remainingDays uses bookByDate after window opens', () => {
+  const schedule = loadSchedule();
+  const sayram = schedule.items.find((i) => i.id === 'd7-sayram-ticket');
+  assert.equal(remainingDays(sayram, '2026-10-01'), 5);
+  assert.match(formatRemainingLabel(sayram, '2026-10-01'), /距截止.*剩 5 天/);
+});
+
+test('sortByRemainingDays orders ascending by remaining days', () => {
+  const schedule = loadSchedule();
+  const pending = schedule.items.filter((i) => !i.booked);
+  const sorted = sortByRemainingDays(pending, '2026-09-12');
+  const remainings = sorted.map((i) => remainingDays(i, '2026-09-12'));
+  assert.deepEqual(remainings, [...remainings].sort((a, b) => a - b));
+  assert.equal(sorted[0].id, 'd3-kalajun-ticket');
+});
+
 test('formatBookWindow shows days remaining', () => {
-  const text = formatBookWindow({ bookByDate: '2026-10-06' }, '2026-10-05');
+  const text = formatBookWindow({ bookByDate: '2026-10-06', bookFromDate: '2026-09-29' }, '2026-10-05');
   assert.match(text, /剩 1 天/);
 });
 
@@ -55,8 +83,7 @@ test('buildDailyMarkdown includes pending section', () => {
   const items = mergeProfileHotels(schedule.items, trip);
   const digest = selectDailyDigest(items, '2026-10-05', schedule);
   const md = buildDailyMarkdown(schedule, '2026-10-05', digest);
-  assert.match(md, /每日 digest/);
-  assert.match(md, /待办/);
+  assert.match(md, /按剩余时间/);
   assert.match(md, /独库/);
 });
 
@@ -69,6 +96,12 @@ test('loadState and saveState round-trip', () => {
   } finally {
     if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
   }
+});
+
+test('formatReserveTime shows appointment slot', () => {
+  const schedule = loadSchedule();
+  const duku = schedule.items.find((i) => i.id === 'd6-duku-reserve');
+  assert.match(formatReserveTime(duku), /10\/6 14:00–16:00/);
 });
 
 test('no d6 sayram ticket in schedule after D6 no-entry change', () => {
