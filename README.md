@@ -191,6 +191,25 @@ npm run notify:feishu        # 推送当前 TOP3 报告
 npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 ```
 
+**每日预订提醒（07:00 · 防错过）：**
+
+`config/booking-schedule.json` 维护 Plan B 全部预订项（含 `bookByDate` 截止）。每日 **7:00**（Asia/Shanghai）推送飞书 digest：未完成待办、预订窗口、今日截止、明日行程准备。
+
+```bash
+npm run remind:bookings:dry              # 预览今日 digest
+npm run remind:bookings:dry -- --date 2026-10-05
+npm run remind:bookings                  # 发送（同日重复需 --force）
+npm run remind:bookings:eve              # 仅「行程日前一天」模式（旧版）
+```
+
+本机 cron（推荐）：
+
+```bash
+0 7 * * * TZ=Asia/Shanghai cd /path/to/repo && npm run remind:bookings
+```
+
+GitHub Actions：`.github/workflows/booking-reminders.yml`（需配置 `FEISHU_WEBHOOK_URL` 或 App 密钥 secrets）。
+
 **环境变量（`.env`）：**
 
 | 变量 | 说明 | 默认 |
