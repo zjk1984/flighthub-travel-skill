@@ -1,10 +1,10 @@
 ---
 name: travel-trip-workflow
-display_name: "通用旅行决策工作流（去程→返程→计划→酒店）"
-description: 可复用于任意目的地的四阶段旅行 Skill 框架：1 去程 2 返程 3 计划（主/备方案）4 酒店。基于 trip-profile.json 驱动，含配置模板、报告再生链、景区民宿与 API 风控。Agent 不得跳步。
+display_name: "通用旅行决策工作流（机酒→待办）"
+description: 可复用于任意目的地的五阶段旅行 Skill：1 去程 2 返程 3 计划 4 酒店 5 门票/预约/路况待办。机酒全订后进入 feishuTodosOnly，FlyAI 只维护 booking-schedule 未完成项。Agent 不得跳步。
 homepage: https://github.com/zjk1984/flighthub-travel-skill
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   agent:
     type: tool
     runtime: node
@@ -21,30 +21,49 @@ metadata:
 
 # 通用旅行决策工作流
 
-本 Skill 从「伊犁 8 天自驾」实践中抽象，适用于**任意目的地**的多日行程：机票盯票 → 返程比价 → 主/备路线 → 分段酒店。
+本 Skill 从「伊犁 8 天自驾」实践中抽象，适用于**任意目的地**的多日行程：
 
-**参考实现**：`skills/xinjiang-trip-workflow/SKILL.md`（新疆伊犁 Plan A/B）  
+**决策期（FlyAI）**：机票盯票 → 返程比价 → 主/备路线 → 分段酒店  
+**运维期（待办）**：景区门票、通行预约、路况查询、租车还车等 — 由 `booking-schedule.json` + 每日飞书 digest 驱动，**不再** fly.ai 查已订机酒
+
+**参考实现**：`skills/xinjiang-trip-workflow/SKILL.md`（新疆伊犁 Plan B · 机酒已订）  
 **配置模板**：`config/trip-profile.template.json`
 
 ---
 
-## 四阶段优先级（铁律）
+## 五阶段优先级（铁律）
 
-| 阶段 | 目标 | 确认字段 | 典型命令 |
-|------|------|----------|----------|
-| **1 去程** | 选定出发航班/车次 | `bookedOutbound` 或 `workflow.confirmed.outbound: true` | `npm run skill:outbound` |
-| **2 返程** | 选定返程（可多机场/多日期） | `bookedReturn` 或 `workflow.confirmed.return: true` | `npm run skill:return:flights` |
-| **3 计划** | 确认主方案或备选 | `workflow.confirmed.plan: "primary"` \| `"fallback"` | `npm run skill:plan` |
-| **4 酒店** | 按 activeVariant 查各段住宿 | `workflow.confirmed.hotels: true` | `npm run skill:hotels` |
+| 阶段 | 目标 | FlyAI | 确认字段 | 典型命令 |
+|------|------|-------|----------|----------|
+| **1 去程** | 选定出发航班/车次 | `search-flight` | `bookedOutbound` | `npm run skill:outbound` |
+| **2 返程** | 选定返程（多机场/多日期） | `search-flight` | `bookedReturn` | `npm run skill:return:flights` |
+| **3 计划** | 确认主方案或备选 | — | `workflow.confirmed.plan` | `npm run skill:plan` |
+| **4 酒店** | 按 activeVariant 查各段住宿 | `search-hotel` | `workflow.confirmed.hotels: true` | `npm run skill:hotels` |
+| **5 待办** | 门票/预约/路况/活动 | **不查** | `booking-schedule.json` → `booked: false` | `npm run remind:bookings` |
 
 ```bash
-npm run skill:workflow:status    # 查看当前阶段
+npm run skill:workflow:status    # 阶段 1–4 进度（全完成后 currentPhase = done）
 npm run skill:workflow           # 从当前阶段顺序执行到酒店
+npm run remind:bookings:dry      # 预览阶段 5 每日 digest
+npm run remind:bookings          # 推送阶段 5 飞书提醒
 ```
 
-**禁止跳步**：阶段 1–3 未确认时，不要跑全量酒店查询或推送通知。
+**禁止跳步**：阶段 1–3 未确认时，不要跑全量酒店查询或推送机酒 TOP3。
 
-门禁逻辑：`scripts/trip-workflow.js` → `assertPhaseGate()`
+门禁逻辑（阶段 1–4）：`scripts/trip-workflow.js` → `assertPhaseGate()`
+
+### 机酒已订 → `feishuTodosOnly` 模式
+
+当 `bookedOutbound` + `bookedReturn` + 全部酒店段 `hotelOverrides.*.booked`（且通常 `skipMonitor: true`）时：
+
+| 行为 | 决策期 | 运维期 |
+|------|--------|--------|
+| fly.ai 查机票 | ✅ | ❌ `buildReturnTasks()` 空 |
+| fly.ai 查酒店 | ✅ | ❌ 只写 override，不 search-hotel |
+| 飞书 | TOP3 / 比价简报 | **仅** `booking-reminders` digest |
+| 行程简报 | 含评分明细 | 待办来自 schedule，无 TOP3 |
+
+检测：`load-trip-profile.js` → `feishuTodosOnly(trip)`；shell 用 `feishu_todos_only()`（`scripts/feishu-env.sh`）。
 
 ---
 
@@ -185,6 +204,49 @@ npm run skill:hotels              # 阶段 4
 }
 ```
 
+### 11. 配置阶段 5：`booking-schedule.json`
+
+机酒确认后，复制并改写 `config/booking-schedule.json`（或按目的地新建 `config/booking-schedule-{{slug}}.json` 并在脚本中指向）：
+
+```json
+{
+  "label": "云南7天 · 待办",
+  "timezone": "Asia/Shanghai",
+  "dailyDigestHour": 7,
+  "remindDaysBefore": 1,
+  "lookAheadDays": 7,
+  "items": [
+    {
+      "id": "d3-jade-dragon-ticket",
+      "eventDate": "2026-11-03",
+      "bookByDate": "2026-11-02",
+      "category": "ticket",
+      "title": "D3 玉龙雪山门票",
+      "detail": "官方小程序 · 分时预约",
+      "booked": false,
+      "action": "提前1天购票"
+    },
+    {
+      "id": "d1-flight-out",
+      "eventDate": "2026-11-01",
+      "category": "flight",
+      "title": "D1 去程 CA1234",
+      "booked": true
+    }
+  ]
+}
+```
+
+| `category` | 典型内容 | digest 行为 |
+|------------|----------|-------------|
+| `flight` / `hotel` | 已订机酒 | `booked: true` → **不展示** |
+| `ticket` | 景区门票、自驾票 | 按 `bookFromDate` / `bookByDate` 提醒 |
+| `reservation` | 通行预约、分时入园 | 含 `appointmentTime` |
+| `road` | 路况查询（封路改线） | 行程日前提醒 |
+| `car` / `activity` | 租车/还车、当日活动 | 按需 |
+
+酒店项可通过 `profileCheckIn` 与 `hotelOverrides` 自动同步名称与 `booked` 状态（`booking-reminders.js` → `mergeProfileHotels`）。
+
 ---
 
 ## `trip-profile.json` 字段速查
@@ -281,15 +343,26 @@ node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/tra
 
 ---
 
-## 通知推送（可选）
+## 通知推送（飞书）
+
+| 阶段 | 推送 | 命令 |
+|------|------|------|
+| 1–2 | 机票 TOP3 / 简报 | `skill:outbound` / `skill:return:flights` |
+| 4 | 酒店 TOP3 + 行程简报 | `skill:hotels` |
+| **5** | **待办 digest（机酒已订后默认）** | `remind:bookings` |
 
 ```bash
-npm run setup:feishu              # FEISHU_WEBHOOK_URL
-npm run skill:hotels              # 阶段 4 自动推酒店 TOP3 + 简报
+npm run setup:feishu
+npm run skill:hotels              # 决策期：酒店 TOP3 + 简报
+npm run remind:bookings:dry       # 运维期：预览待办 digest
+npm run remind:bookings           # 运维期：发送（07:00 cron）
 FEISHU_SKIP=1 npm run skill:hotels
 ```
 
-可替换为 Slack/邮件；保持「阶段 4 完成后推送」节奏即可。
+Cron：`0 7 * * * TZ=Asia/Shanghai npm run remind:bookings`  
+GitHub Actions：`.github/workflows/booking-reminders.yml`
+
+机酒已订时，`monitor-xinjiang.sh` / `monitor-hotels-phase.sh` / `monitor-return.sh` 检测到 `feishuTodosOnly` 后**自动改推** `booking-reminders.js`，不再推 TOP3 评分明细。
 
 ---
 
@@ -308,24 +381,38 @@ FEISHU_SKIP=1 npm run skill:hotels
 
 ## Agent 检查清单
 
+**阶段 1–4（机酒决策）**
+
 - [ ] `monitor-config.json` 的 `tripProfilePath` 指向正确 profile
 - [ ] `activeVariant` 与 `workflow.confirmed.plan` 一致
 - [ ] `days` / `hotels` / `hotelOverrides` 日期对齐
 - [ ] 四阶段顺序执行，未确认不查酒店
-- [ ] 改 profile 后跑完整再生链
-- [ ] 合并冲突后重跑，不保留半成品 reports
 - [ ] 451 连续失败时降频或 scenic 单段刷新
-- [ ] 用户要求时再推送通知
+
+**阶段 5（待办运维）**
+
+- [ ] `booking-schedule.json` 覆盖全部需预订项（机酒/门票/预约/路况）
+- [ ] 已订项 `booked: true`；digest 只展示 `booked: false`
+- [ ] 改待办后 `npm run remind:bookings:dry` 验证
+- [ ] 机酒已订后**不**再 fly.ai 全量查机酒或推 TOP3 明细
+- [ ] 每日 7:00 `remind:bookings` cron 或 GitHub Actions 已启用
+
+**通用**
+
+- [ ] 改 profile/schedule 后跑再生链
+- [ ] 合并冲突后重跑，不保留半成品 reports
+- [ ] 用户要求推送：`remind:bookings --force` 或决策期 `skill:hotels`
 
 ---
 
 ## 与现有 Skills 关系
 
 ```text
-travel-trip-workflow（本 Skill，通用框架）
-├── xinjiang-trip-workflow（伊犁参考实现）
-├── xinjiang-outbound-monitor（去程盯票，可泛化为 {{origin}}-outbound-monitor）
-└── xinjiang-return-monitor（返程盯票）
+travel-trip-workflow（本 Skill，通用五阶段框架）
+├── xinjiang-trip-workflow（伊犁 Plan B 参考 · 含 booking-schedule 实例）
+├── xinjiang-outbound-monitor（去程盯票）
+├── xinjiang-return-monitor（返程盯票）
+└── booking-reminders.js + booking-schedule.json（阶段 5 待办，通用）
 ```
 
 新目的地推荐：

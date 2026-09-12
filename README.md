@@ -191,9 +191,12 @@ npm run notify:feishu        # 推送当前 TOP3 报告
 npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 ```
 
-**每日预订提醒（07:00 · 防错过）：**
+**阶段 5 · 每日待办提醒（07:00 · 机酒已订后）：**
 
-`config/booking-schedule.json` 维护 Plan B 全部预订项（含 `bookByDate` 截止）。每日 **7:00**（Asia/Shanghai）推送飞书 digest：未完成待办、预订窗口、今日截止、明日行程准备。
+Skill 五阶段：去程 → 返程 → 计划 → 酒店 → **门票/预约/路况待办**。  
+当去程+返程+全部酒店已订（`feishuTodosOnly`）时，FlyAI **不再**查机酒比价，飞书只推 `booking-schedule.json` 中 `booked: false` 的项。
+
+`config/booking-schedule.json` 维护全部预订项（机酒/门票/预约/路况）。每日 **7:00**（Asia/Shanghai）推送 digest：待办、预订窗口、今日截止、明日准备（**不含已订机酒**）。
 
 ```bash
 npm run remind:bookings:dry              # 预览今日 digest
@@ -201,6 +204,8 @@ npm run remind:bookings:dry -- --date 2026-10-05
 npm run remind:bookings                  # 发送（同日重复需 --force）
 npm run remind:bookings:eve              # 仅「行程日前一天」模式（旧版）
 ```
+
+工作流文档：`skills/xinjiang-trip-workflow/SKILL.md` · `skills/travel-trip-workflow/SKILL.md`
 
 本机 cron（推荐）：
 
