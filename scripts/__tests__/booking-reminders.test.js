@@ -9,11 +9,13 @@ const {
   mergeProfileHotels,
   itemsForRemindDate,
   selectDailyDigest,
+  sortByReserveTime,
   buildDailyMarkdown,
   loadState,
   saveState,
   addDays,
   formatBookWindow,
+  formatReserveTime,
 } = require('../booking-reminders.js');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -69,6 +71,26 @@ test('loadState and saveState round-trip', () => {
   } finally {
     if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
   }
+});
+
+test('sortByReserveTime orders pending by bookByDate then bookTime', () => {
+  const schedule = loadSchedule();
+  const pending = schedule.items.filter((i) => !i.booked);
+  const sorted = [...pending].sort(sortByReserveTime);
+  const ids = sorted.map((i) => i.id);
+  const yuhuIdx = ids.indexOf('d2-yuhu-ticket');
+  const kalajunIdx = ids.indexOf('d3-kalajun-ticket');
+  const dukuIdx = ids.indexOf('d6-duku-reserve');
+  const sayramIdx = ids.indexOf('d7-sayram-ticket');
+  assert.ok(yuhuIdx < kalajunIdx);
+  assert.ok(kalajunIdx < dukuIdx);
+  assert.ok(dukuIdx < sayramIdx);
+});
+
+test('formatReserveTime shows appointment slot', () => {
+  const schedule = loadSchedule();
+  const duku = schedule.items.find((i) => i.id === 'd6-duku-reserve');
+  assert.match(formatReserveTime(duku), /10\/6 14:00–16:00/);
 });
 
 test('no d6 sayram ticket in schedule after D6 no-entry change', () => {

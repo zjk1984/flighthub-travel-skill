@@ -82,12 +82,28 @@ function mergeProfileHotels(items, trip) {
   });
 }
 
-function sortItems(a, b) {
-  const aBy = a.bookByDate || a.eventDate;
-  const bBy = b.bookByDate || b.eventDate;
-  if (aBy !== bBy) return aBy.localeCompare(bBy);
+function reserveDate(item) {
+  return item.bookByDate || item.eventDate;
+}
+
+function reserveTime(item) {
+  return item.bookTime || item.appointmentTime || "";
+}
+
+function sortByReserveTime(a, b) {
+  const aDate = reserveDate(a);
+  const bDate = reserveDate(b);
+  if (aDate !== bDate) return aDate.localeCompare(bDate);
+  const aTime = reserveTime(a);
+  const bTime = reserveTime(b);
+  if (aTime !== bTime) return aTime.localeCompare(bTime);
   if (a.eventDate !== b.eventDate) return a.eventDate.localeCompare(b.eventDate);
   return (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
+}
+
+/** @deprecated use sortByReserveTime */
+function sortItems(a, b) {
+  return sortByReserveTime(a, b);
 }
 
 function isActive(item, today) {
@@ -106,9 +122,9 @@ function selectDailyDigest(items, today, schedule) {
   const lead = schedule.remindDaysBefore ?? 1;
   const active = items.filter((i) => isActive(i, today));
 
-  const pending = active.filter((i) => !i.booked).sort(sortItems);
+  const pending = active.filter((i) => !i.booked).sort(sortByReserveTime);
 
-  const overdue = pending.filter((i) => i.bookByDate && i.bookByDate < today);
+  const overdue = pending.filter((i) => i.bookByDate && i.bookByDate < today).sort(sortByReserveTime);
 
   const dueToday = active
     .filter((i) => {
@@ -117,7 +133,7 @@ function selectDailyDigest(items, today, schedule) {
       if (!i.booked && i.eventDate === today) return true;
       return false;
     })
-    .sort(sortItems);
+    .sort(sortByReserveTime);
 
   const bookingWindow = pending.filter((i) => {
     if (!i.bookFromDate && !i.bookByDate) return false;
@@ -126,12 +142,12 @@ function selectDailyDigest(items, today, schedule) {
     if (today < from || today > by) return false;
     if (i.bookByDate && daysBetween(today, i.bookByDate) <= lookAhead) return true;
     return Boolean(i.bookFromDate && i.bookFromDate <= today);
-  }).sort(sortItems);
+  }).sort(sortByReserveTime);
 
   const tomorrow = addDays(today, 1);
   const tomorrowPrep = active
     .filter((i) => i.eventDate === tomorrow)
-    .sort(sortItems);
+    .sort(sortByReserveTime);
 
   const hasContent =
     pending.length > 0 ||
@@ -162,14 +178,35 @@ function formatEventDate(dateStr) {
   return `${parseInt(m, 10)}/${parseInt(d, 10)}`;
 }
 
+function formatReserveTime(item) {
+  if (item.appointmentTime && item.appointmentEnd) {
+    return `${formatEventDate(item.eventDate)} ${item.appointmentTime}–${item.appointmentEnd}`;
+  }
+  if (item.appointmentTime) {
+    return `${formatEventDate(item.eventDate)} ${item.appointmentTime}`;
+  }
+  if (item.bookTime && item.bookByDate) {
+    return `${formatEventDate(item.bookByDate)} ${item.bookTime}`;
+  }
+  if (item.bookByDate) return formatEventDate(item.bookByDate);
+  return formatEventDate(item.eventDate);
+}
+
 function formatBookWindow(item, today) {
   const parts = [];
   if (item.bookFromDate) parts.push(`开放 ${formatEventDate(item.bookFromDate)}`);
   if (item.bookByDate) {
     const d = daysBetween(today, item.bookByDate);
+    const timeSuffix = item.bookTime ? ` ${item.bookTime}` : "";
     if (d < 0) parts.push(`**已逾期 ${Math.abs(d)} 天**`);
-    else if (d === 0) parts.push("**今日截止**");
-    else parts.push(`截止 ${formatEventDate(item.bookByDate)}（剩 ${d} 天）`);
+    else if (d === 0) parts.push(`**今日截止${timeSuffix}**`);
+    else parts.push(`截止 ${formatEventDate(item.bookByDate)}${timeSuffix}（剩 ${d} 天）`);
+  }
+  if (item.appointmentTime) {
+    const slot = item.appointmentEnd
+      ? `${item.appointmentTime}–${item.appointmentEnd}`
+      : item.appointmentTime;
+    parts.push(`预约时段 ${formatEventDate(item.eventDate)} ${slot}`);
   }
   return parts.join(" · ");
 }
@@ -178,7 +215,7 @@ function renderItem(item, today, idx) {
   const emoji = CATEGORY_EMOJI[item.category] || "•";
   const status = item.booked ? "✅ 已订" : "⏳ 待办";
   const lines = [`**${idx}. ${emoji} ${status} · ${item.title}**`];
-  lines.push(`行程 **${formatEventDate(item.eventDate)}**`);
+  lines.push(`🕐 预约 **${formatReserveTime(item)}** · 行程 **${formatEventDate(item.eventDate)}**`);
   const window = formatBookWindow(item, today);
   if (window) lines.push(`📌 预订 ${window}`);
   if (item.detail) lines.push(item.detail);
@@ -357,6 +394,7 @@ module.exports = {
   itemsForRemindDate,
   mergeProfileHotels,
   selectDailyDigest,
+  sortByReserveTime,
   buildDailyMarkdown,
   buildMarkdown,
   loadSchedule,
@@ -364,4 +402,7 @@ module.exports = {
   saveState,
   todayInTimezone,
   formatBookWindow,
+  formatReserveTime,
+  reserveDate,
+  reserveTime,
 };
