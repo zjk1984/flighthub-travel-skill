@@ -82,28 +82,43 @@ function mergeProfileHotels(items, trip) {
   });
 }
 
-function reserveDate(item) {
-  return item.bookByDate || item.eventDate;
-}
-
 function reserveTime(item) {
   return item.bookTime || item.appointmentTime || "";
 }
 
-function sortByReserveTime(a, b) {
-  const aDate = reserveDate(a);
-  const bDate = reserveDate(b);
-  if (aDate !== bDate) return aDate.localeCompare(bDate);
-  const aTime = reserveTime(a);
-  const bTime = reserveTime(b);
-  if (aTime !== bTime) return aTime.localeCompare(bTime);
-  if (a.eventDate !== b.eventDate) return a.eventDate.localeCompare(b.eventDate);
-  return (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
+/** Days until next booking milestone (open → deadline → event). */
+function remainingDays(item, today) {
+  if (item.bookFromDate && today < item.bookFromDate) {
+    return daysBetween(today, item.bookFromDate);
+  }
+  if (item.bookByDate) {
+    return daysBetween(today, item.bookByDate);
+  }
+  return daysBetween(today, item.eventDate);
 }
 
-/** @deprecated use sortByReserveTime */
+function isBeforeBookOpen(item, today) {
+  return Boolean(item.bookFromDate && today < item.bookFromDate);
+}
+
+function makeRemainingSorter(today) {
+  return (a, b) => {
+    const diff = remainingDays(a, today) - remainingDays(b, today);
+    if (diff !== 0) return diff;
+    const aTime = reserveTime(a);
+    const bTime = reserveTime(b);
+    if (aTime !== bTime) return aTime.localeCompare(bTime);
+    if (a.eventDate !== b.eventDate) return a.eventDate.localeCompare(b.eventDate);
+    return (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
+  };
+}
+
+function sortByRemainingDays(items, today) {
+  return [...items].sort(makeRemainingSorter(today));
+}
+
 function sortItems(a, b) {
-  return sortByReserveTime(a, b);
+  return makeRemainingSorter("9999-12-31")(a, b);
 }
 
 function isActive(item, today) {
@@ -122,32 +137,38 @@ function selectDailyDigest(items, today, schedule) {
   const lead = schedule.remindDaysBefore ?? 1;
   const active = items.filter((i) => isActive(i, today));
 
-  const pending = active.filter((i) => !i.booked).sort(sortByReserveTime);
+  const sortRemaining = makeRemainingSorter(today);
+  const pending = sortByRemainingDays(active.filter((i) => !i.booked), today);
 
-  const overdue = pending.filter((i) => i.bookByDate && i.bookByDate < today).sort(sortByReserveTime);
+  const overdue = sortByRemainingDays(
+    pending.filter((i) => i.bookByDate && i.bookByDate < today),
+    today
+  );
 
-  const dueToday = active
-    .filter((i) => {
+  const dueToday = sortByRemainingDays(
+    active.filter((i) => {
       if (i.bookByDate === today && !i.booked) return true;
       if (addDays(i.eventDate, -lead) === today) return true;
       if (!i.booked && i.eventDate === today) return true;
       return false;
-    })
-    .sort(sortByReserveTime);
+    }),
+    today
+  );
 
-  const bookingWindow = pending.filter((i) => {
-    if (!i.bookFromDate && !i.bookByDate) return false;
-    const from = i.bookFromDate || today;
-    const by = i.bookByDate || i.eventDate;
-    if (today < from || today > by) return false;
-    if (i.bookByDate && daysBetween(today, i.bookByDate) <= lookAhead) return true;
-    return Boolean(i.bookFromDate && i.bookFromDate <= today);
-  }).sort(sortByReserveTime);
+  const bookingWindow = sortByRemainingDays(
+    pending.filter((i) => {
+      if (!i.bookFromDate && !i.bookByDate) return false;
+      const from = i.bookFromDate || today;
+      const by = i.bookByDate || i.eventDate;
+      if (today < from || today > by) return false;
+      if (i.bookByDate && daysBetween(today, i.bookByDate) <= lookAhead) return true;
+      return Boolean(i.bookFromDate && i.bookFromDate <= today);
+    }),
+    today
+  );
 
   const tomorrow = addDays(today, 1);
-  const tomorrowPrep = active
-    .filter((i) => i.eventDate === tomorrow)
-    .sort(sortByReserveTime);
+  const tomorrowPrep = [...active.filter((i) => i.eventDate === tomorrow)].sort(sortRemaining);
 
   const hasContent =
     pending.length > 0 ||
@@ -192,15 +213,28 @@ function formatReserveTime(item) {
   return formatEventDate(item.eventDate);
 }
 
-function formatBookWindow(item, today) {
-  const parts = [];
-  if (item.bookFromDate) parts.push(`开放 ${formatEventDate(item.bookFromDate)}`);
+function formatRemainingLabel(item, today) {
+  const left = remainingDays(item, today);
+  const timeSuffix = item.bookTime ? ` ${item.bookTime}` : "";
+  if (left < 0) return `**已逾期 ${Math.abs(left)} 天**`;
+  if (isBeforeBookOpen(item, today)) {
+    if (left === 0) return "**今日开放预约**";
+    return `距开放 ${formatEventDate(item.bookFromDate)} **剩 ${left} 天**`;
+  }
   if (item.bookByDate) {
-    const d = daysBetween(today, item.bookByDate);
+    if (left === 0) return `**今日截止${timeSuffix}**`;
+    return `距截止 ${formatEventDate(item.bookByDate)}${timeSuffix} **剩 ${left} 天**`;
+  }
+  if (left === 0) return "**今日行程**";
+  return `距行程 ${formatEventDate(item.eventDate)} **剩 ${left} 天**`;
+}
+
+function formatBookWindow(item, today) {
+  const parts = [formatRemainingLabel(item, today)];
+  if (item.bookFromDate) parts.push(`开放 ${formatEventDate(item.bookFromDate)}`);
+  if (item.bookByDate && !isBeforeBookOpen(item, today)) {
     const timeSuffix = item.bookTime ? ` ${item.bookTime}` : "";
-    if (d < 0) parts.push(`**已逾期 ${Math.abs(d)} 天**`);
-    else if (d === 0) parts.push(`**今日截止${timeSuffix}**`);
-    else parts.push(`截止 ${formatEventDate(item.bookByDate)}${timeSuffix}（剩 ${d} 天）`);
+    parts.push(`截止 ${formatEventDate(item.bookByDate)}${timeSuffix}`);
   }
   if (item.appointmentTime) {
     const slot = item.appointmentEnd
@@ -262,7 +296,7 @@ function buildDailyMarkdown(schedule, today, digest) {
   }
 
   if (digest.pending.length) {
-    lines.push("### 📋 全部待办（未完成）", "");
+    lines.push("### 📋 全部待办（按剩余时间 ↑）", "");
     digest.pending.forEach((item, i) => {
       lines.push(renderItem(item, today, i + 1), "");
     });
@@ -394,7 +428,9 @@ module.exports = {
   itemsForRemindDate,
   mergeProfileHotels,
   selectDailyDigest,
-  sortByReserveTime,
+  sortByRemainingDays,
+  remainingDays,
+  makeRemainingSorter,
   buildDailyMarkdown,
   buildMarkdown,
   loadSchedule,
@@ -402,7 +438,8 @@ module.exports = {
   saveState,
   todayInTimezone,
   formatBookWindow,
+  formatRemainingLabel,
   formatReserveTime,
-  reserveDate,
   reserveTime,
+  isBeforeBookOpen,
 };
