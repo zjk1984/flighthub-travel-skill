@@ -671,8 +671,8 @@ html_template = """<!DOCTYPE html>
       <div class="day-dot-item"><span class="day-color-line" style="background: #1E90FF;"></span>D4 东西喀拉峻</div>
       <div class="day-dot-item"><span class="day-color-line" style="background: #FFA502;"></span>D5 唐布拉</div>
       <div class="day-dot-item"><span class="day-color-line" style="background: #9B59B6;"></span>D6 独库赛湖</div>
-      <div class="day-dot-item"><span class="day-color-line" style="background: #00CEC9;"></span>D7 环湖博乐</div>
-      <div class="day-dot-item"><span class="day-color-line" style="background: #FD79A8;"></span>D8 返广州</div>
+      <div class="day-dot-item"><span class="day-color-line" style="background: #00CEC9;"></span>D7 赛湖环湖</div>
+      <div class="day-dot-item"><span class="day-color-line" style="background: #FD79A8;"></span>D8 东门→机场</div>
     </div>
   </div>
 
@@ -805,9 +805,8 @@ window.onload = function() {
     { name: "乔尔玛烈士陵园", tag: "G217独库起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
     { name: "哈希勒根达坂", tag: "3400m 防雪长廊", coord: [83.950, 44.050], color: "#9B59B6", icon: "❄️", layout: "right" },
     { name: "果子沟金顶大桥", tag: "天山奇观大桥", coord: [81.162, 44.482], color: "#2563eb", icon: "🌉", layout: "left" },
-    { name: "赛里木湖", tag: "D6夕阳 / D7环湖", coord: [81.250, 44.600], color: "#00CEC9", icon: "💎", hotel: "D6宿 东门", layout: "right" },
-    { name: "博乐市区", tag: "D7 宿全季酒店", coord: [82.072, 44.903], color: "#00CEC9", icon: "🏙️", hotel: "宿 全季酒店", layout: "left" },
-    { name: "博乐阿拉山口机场", tag: "D8 12:00前还车飞广州", coord: [82.298, 44.895], color: "#FD79A8", icon: "✈️", type: "airport", layout: "right" }
+    { name: "赛里木湖东门", tag: "D6-D7连宿 · D7环湖", coord: [81.348, 44.622], color: "#00CEC9", icon: "💎", hotel: "宿 东门×2晚", layout: "right" },
+    { name: "博乐阿拉山口机场", tag: "D8 09:30出发 · 12:00还车", coord: [82.298, 44.895], color: "#FD79A8", icon: "✈️", type: "airport", layout: "right" }
   ];
 
   keyMarkers.forEach(m => {

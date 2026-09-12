@@ -33,16 +33,6 @@ const DEFAULT_HOTEL_OVERRIDES = {
     price: "¥250–350/间",
     note: "D5 特克斯→那拉提（Plan A）；搜「新源」或「那拉提镇」",
   },
-  "2026-10-06": {
-    name: "博乐赛湖云上酒店 / 赛湖之畔",
-    price: "¥463–890/间",
-    note: "D6 独库→赛湖东门；勿住博乐市区",
-  },
-  "2026-10-07": {
-    name: "博乐友好亚朵 / 万达悦华",
-    price: "¥400–500/间",
-    note: "D7 赛湖→博乐；方便 D8 还车",
-  },
 };
 
 function parseArgs(argv) {

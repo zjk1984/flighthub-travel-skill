@@ -647,7 +647,7 @@ const dayShortNames = [
   { day: 'D4', name: '东西喀拉峻' },
   { day: 'D5', name: '唐布拉' },
   { day: 'D6', name: '独库赛湖' },
-  { day: 'D7', name: '环湖博乐' },
+  { day: 'D7', name: '赛湖环湖' },
   { day: 'D8', name: '返程广州' }
 ];
 
