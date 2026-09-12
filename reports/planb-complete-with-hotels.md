@@ -68,7 +68,7 @@
 | ⭐ **喀兰朵·山湖悦己\|The Kharando Lodge**（✅ 已订） | — | — | [官网/详情](http://www.100wwhy.com/5164563) |
 | 备选：赛湖高白鲑鱼坊 | ¥711 | ¥2844 | [飞猪](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3FsyF3) |
 
-> 信敏净海商业中心 · 近东门新游客中心 · **D6** 东门入园 · **D7** 慢环湖 · **D8 09:30 出园**赴机场。
+> **D6** 赶路晚抵（约 20:30–22:00）· **D7** 主玩+日落 · **D8 09:30 出园**赴机场。
 
 ---
 
