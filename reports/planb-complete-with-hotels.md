@@ -18,7 +18,7 @@
 
 ## 🗺️ 环线概要
 
-伊宁 → **望湖庄园 (已订)** → **山涧云海民宿×2 (已订)** → **唐布拉** → **独库·赛湖东门×2** → 返广州
+伊宁 → **望湖庄园 (已订)** → **山涧云海民宿×2 (已订)** → **小满民宿 (已订)** → **独库·赛湖东门×2** → 返广州
 
 ---
 
@@ -56,8 +56,8 @@
 
 | 推荐 | 单间/晚 | 2间合计 | 预订 |
 |------|---------|---------|------|
-| ⭐ **巴依阿吾勒山庄** | ¥155 | ¥310 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1vEaG9) |
-| 唐布拉草原放蜂人家民宿 | ¥285 | ¥570 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4WvUxe) |
+| ⭐ **伊犁尼勒克小满民宿**（✅ 已订） | — | — | [携程](https://hotels.ctrip.com/hotels/111453794.html) |
+| 备选：唐布拉草原放蜂人家民宿 | ¥285 | ¥570 | [飞猪预订](https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4WvUxe) |
 
 ---
 

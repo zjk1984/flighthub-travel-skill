@@ -49,6 +49,27 @@ function loadHotelsBySegment(hotelsPath, trip, partySize) {
     let list = raw.filter((h) => h.segment === seg.segment);
     const override = hotelOverrides[seg.checkIn];
     const meta = { ...seg, curatedName: override?.name || "" };
+    if (override?.booked && override?.name) {
+      const priceNum = parsePriceNum(override.price);
+      const bookedPick = {
+        segment: seg.segment,
+        checkin: seg.checkIn,
+        checkout: seg.checkOut,
+        lodgingType: "民宿",
+        name: override.name,
+        price: override.price && String(override.price).includes("¥") ? override.price : priceNum ? `¥${priceNum}` : "—",
+        priceNum: priceNum || 0,
+        star: override.star || "舒适型",
+        poi: override.note || "景区旁",
+        url: override.url || "",
+        booked: true,
+        fromOverride: true,
+      };
+      const scored = scoreHotelsInSegment(list, hotelProfile, meta, partySize, trip.roomCount);
+      const backup = pickHotelForPlan(scored, hotelProfile);
+      bySegment.set(seg.segment, { pick: bookedPick, backup, scored, seg });
+      continue;
+    }
     if (seg.scenicHomestay && override?.name && !list.some((h) => h.name.includes(override.name.slice(0, 4)))) {
       const priceNum = parsePriceNum(override.price);
       list = [
@@ -98,10 +119,15 @@ function renderItineraryTable(trip, hotelsBySegment) {
     if (segKey && hotelsBySegment.has(segKey)) {
       const { pick } = hotelsBySegment.get(segKey);
       if (pick) {
-        hotel = `**${pick.name}**`;
+        hotel = pick.booked ? `✅ **已订** · **${pick.name}**` : `**${pick.name}**`;
         star = pick.star || "—";
-        total = pick.stayTotal ? `¥${pick.stayTotal.toFixed(0)}` : `¥${(pick.priceNum * rooms).toFixed(0)}`;
-        book = pick.url ? `[订](${pick.url})` : "—";
+        total =
+          pick.priceNum > 0
+            ? pick.stayTotal
+              ? `¥${pick.stayTotal.toFixed(0)}`
+              : `¥${(pick.priceNum * rooms).toFixed(0)}`
+            : "—";
+        book = pick.url ? (pick.booked ? `[订单](${pick.url})` : `[订](${pick.url})`) : "—";
       }
     } else if (day.stay && day.stay !== "—") {
       hotel = day.stay;
@@ -124,13 +150,15 @@ function renderHotelBookingSheet(trip, hotelsBySegment) {
   for (const [, { pick, backup, seg }] of hotelsBySegment) {
     if (!pick) continue;
     const range = `${seg.checkIn.slice(5)}→${seg.checkOut.slice(5)}`;
-    const book = pick.url ? `[首选](${pick.url})` : "—";
+    const book = pick.url ? (pick.booked ? `[已订](${pick.url})` : `[首选](${pick.url})`) : pick.booked ? "✅ 已订" : "—";
     const backupCell = backup
       ? backup.url
         ? `[${backup.name}](${backup.url}) ¥${backup.priceNum}`
         : `${backup.name} ¥${backup.priceNum}`
       : "—";
-    md += `| ${seg.segment} | ${range} | **${pick.name}** | ${backupCell} | ¥${pick.priceNum} | ¥${pick.stayTotal?.toFixed(0) || "—"} | ${book} |\n`;
+    const pickLabel = pick.booked ? `✅ **${pick.name}**` : `**${pick.name}**`;
+    const priceCell = pick.priceNum > 0 ? `¥${pick.priceNum}` : "—";
+    md += `| ${seg.segment} | ${range} | ${pickLabel} | ${backupCell} | ${priceCell} | ¥${pick.stayTotal?.toFixed(0) || "—"} | ${book} |\n`;
   }
   md += `\n> 各段 TOP3 评分与扣分明细见下方「酒店评分明细」\n\n`;
   return md;

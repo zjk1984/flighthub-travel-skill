@@ -800,7 +800,7 @@ window.onload = function() {
     { name: "昭苏玉湖", tag: "D2 冰川蓝湖", coord: [80.887, 42.943], color: "#FF4757", icon: "🌊", hotel: "宿 望湖庄园(已订)", layout: "left" },
     { name: "西喀拉峻人体草原", tag: "D3 下午九曲十八弯", coord: [82.080, 42.980], color: "#2ED573", icon: "🏔️", layout: "left" },
     { name: "喀拉峻大草原", tag: "D3-D4 宿山涧云海(已订)", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 山涧云海民宿(已订)", layout: "right" },
-    { name: "唐布拉百里画廊", tag: "D5 宿放蜂人家", coord: [83.275, 43.682], color: "#FFA502", icon: "🏕️", hotel: "宿 放蜂人家", layout: "left" },
+    { name: "伊犁尼勒克小满民宿", tag: "D5 宿小满(已订)", coord: [82.850, 43.760], color: "#FFA502", icon: "🏕️", hotel: "宿 小满民宿(已订)", layout: "left" },
     { name: "G217独库北段", tag: "D6 唐布拉→赛湖", coord: [83.780, 43.670], color: "#9B59B6", icon: "🛣️", layout: "right" },
     { name: "乔尔玛烈士陵园", tag: "G217独库起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
     { name: "哈希勒根达坂", tag: "3400m 防雪长廊", coord: [83.950, 44.050], color: "#9B59B6", icon: "❄️", layout: "right" },
