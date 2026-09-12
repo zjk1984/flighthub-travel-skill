@@ -37,7 +37,7 @@ PLAN="$ROOT_DIR/reports/xinjiang-travel-plan.md"
 echo "▶ Phase 2/4：返程航班" >&2
 FEISHU_SKIP=1 bash "$SCRIPT_DIR/monitor-return-flights.sh" "${@}"
 
-echo "▶ Phase 3/4：旅行计划 Plan A / Plan B" >&2
+echo "▶ Phase 3/4：旅行计划（最终版）" >&2
 FEISHU_SKIP=1 bash "$SCRIPT_DIR/monitor-travel-plan.sh"
 
 echo "▶ Phase 4/4：酒店" >&2
@@ -65,11 +65,9 @@ if feishu_notify_enabled; then
       all|*)
         node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程 TOP3" "$RANKED" || true
         [[ -f "$FLIGHTS_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程机票简报" "$FLIGHTS_BRIEF" || true
-        CARDS="$ROOT_DIR/reports/xinjiang-travel-cards.md"
-        CARDS_PLANB="$ROOT_DIR/reports/xinjiang-travel-cards-planb.md"
-        [[ -f "$CARDS" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程（独库）" "$CARDS" || true
-        [[ -f "$CARDS_PLANB" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程（Plan B 备选）" "$CARDS_PLANB" || true
-        [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
+      CARDS="$ROOT_DIR/reports/xinjiang-travel-cards.md"
+      [[ -f "$CARDS" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 8天行程（最终版）" "$CARDS" || true
+      [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程简报" "$TRAVEL_BRIEF" || true
         ;;
     esac
   fi

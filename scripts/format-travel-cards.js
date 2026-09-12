@@ -4,7 +4,7 @@
  *
  * Usage:
  *   node format-travel-cards.js [--out reports/xinjiang-travel-cards.md]
- *   node format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md
+ *   node format-travel-cards.js [--variant name] [--out reports/xinjiang-travel-cards.md]
  */
 const fs = require("fs");
 const path = require("path");
@@ -16,24 +16,6 @@ const { roomCountForParty } = require("./hotel-scoring");
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
 
-/** Shared overrides when API has no match (独库主方案) */
-const DEFAULT_HOTEL_OVERRIDES = {
-  "2026-10-02": {
-    name: "伊宁市区（六星街/将军府）",
-    price: "¥300–450/间",
-    note: "D2 休整；搜「六星街」「将军府」「喀赞其」",
-  },
-  "2026-10-03": {
-    name: "美豪丽致酒店(昭苏天马湖店)",
-    price: "¥245/间",
-    note: "D3-D4 连住昭苏",
-  },
-  "2026-10-05": {
-    name: "新源/那拉提镇",
-    price: "¥250–350/间",
-    note: "D5 特克斯→那拉提（Plan A）；搜「新源」或「那拉提镇」",
-  },
-};
 
 function parseArgs(argv) {
   let out = path.join(ROOT, "reports/xinjiang-travel-cards.md");
@@ -50,33 +32,33 @@ function parseArgs(argv) {
 function buildContext(variant) {
   const trip = CFG.trip || {};
   const partySize = trip.partySize || 1;
-  if (!variant) {
+  if (variant) {
+    const v = trip.itineraryVariants?.[variant];
+    if (!v) throw new Error(`Unknown itinerary variant: ${variant}`);
     return {
       trip,
       partySize,
-      label: trip.label || "伊犁自驾",
-      itinerary: trip.itinerary || {},
-      hotels: trip.hotels || [],
-      hotelOverrides: DEFAULT_HOTEL_OVERRIDES,
+      label: v.label || trip.label,
+      itinerary: v.itinerary || {},
+      hotels: v.hotels || trip.hotels || [],
+      hotelOverrides: v.hotelOverrides || trip.hotelOverrides || {},
       rooms: roomCountForParty(trip.partySize, trip.roomCount),
-      variantNote: trip.itinerary?.alternateRoute
-        ? `> **可选路线：** ${trip.itinerary.alternateRoute}\n\n`
-        : "",
+      variantNote: v.fallbackNote ? `> **封路备选：** ${v.fallbackNote}\n\n` : "",
       titleSuffix: "",
     };
   }
-  const v = trip.itineraryVariants?.[variant];
-  if (!v) throw new Error(`Unknown itinerary variant: ${variant}`);
   return {
     trip,
     partySize,
-    label: v.label || trip.label,
-    itinerary: v.itinerary || {},
-    hotels: v.hotels || trip.hotels || [],
-    hotelOverrides: { ...DEFAULT_HOTEL_OVERRIDES, ...(v.hotelOverrides || {}) },
+    label: trip.label || "伊犁自驾",
+    itinerary: trip.itinerary || {},
+    hotels: trip.hotels || [],
+    hotelOverrides: trip.hotelOverrides || {},
     rooms: roomCountForParty(trip.partySize, trip.roomCount),
-    variantNote: v.fallbackNote ? `> **备选说明：** ${v.fallbackNote}\n\n` : "",
-    titleSuffix: variant === "planb" ? " · Plan B 备选" : "",
+    variantNote: trip.itinerary?.fallbackNote
+      ? `> **封路备选：** ${trip.itinerary.fallbackNote}\n\n`
+      : "",
+    titleSuffix: "",
   };
 }
 
