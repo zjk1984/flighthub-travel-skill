@@ -1,10 +1,10 @@
 ---
 name: xinjiang-trip-workflow
-display_name: "伊犁行程决策工作流（去程→返程→计划→酒店）"
-description: 按严格优先级执行旅行 Skill：1 去程 2 返程 3 Plan A/B 4 酒店。含 Plan B 玉湖+喀拉峻+独库百里画廊+赛湖 最新路线、10:00 后出发、景区民宿优先与报告再生链。Agent 不得跳步。
+display_name: "伊犁行程决策工作流（去程→返程→计划→酒店→多媒体动线）"
+description: 按严格优先级执行旅行 Skill：1 去程 2 返程 3 Plan A/B 4 酒店 5 路线图与动线视频。含 Plan B 玉湖+喀拉峻+独库百里画廊+赛湖 最新路线、10:00 后出发、景区民宿优先、45s 动态自驾短视频（硬派越野 SUV、亚像素平滑插值、沿途路网景点标牌与解说字幕）与报告多媒体再生链。Agent 不得跳步。
 homepage: https://github.com/zjk1984/flighthub-travel-skill
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   agent:
     type: tool
     runtime: node
@@ -23,6 +23,7 @@ metadata:
 2. **确认返程航班** — `npm run skill:return:flights` → `workflow.confirmed.return: true`
 3. **确认旅行计划** — `npm run skill:plan` → Plan A（独库 `duku`）/ Plan B（`planb`）
 4. **确认酒店** — `npm run skill:hotels`（仅 `activeVariant` 对应酒店段）
+5. **生成路线视觉与动线视频（可选/展示）** — 9:16 高清路线海报 + 16:9 动态自驾短视频（`npm run map:poster`、`npm run map:video`）
 
 ```bash
 npm run skill:workflow:status
@@ -66,9 +67,9 @@ npm run skill:workflow          # 从当前阶段顺序执行
 
 ---
 
-## 修改行程后的报告再生链（必跑）
+## 修改行程后的报告与多媒体再生链（必跑）
 
-编辑 `config/trip-profile.json` 后，按顺序再生报告，避免卡片/简报与 profile 不一致：
+编辑 `config/trip-profile.json` 后，按顺序再生报告与路线视觉产物，避免卡片/简报/地图与 profile 不一致：
 
 ```bash
 # 1. 酒店实价（全量 6 段）
@@ -85,6 +86,10 @@ node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xin
 #    reports/planb-daily-guide.md
 #    reports/planb-complete-with-hotels.md
 #    reports/scenic-homestay-top3.md
+
+# 4. 路线图海报与 16:9 动态自驾短视频再生（当行程路线、途经路段或住宿调整时）
+npm run map:poster        # 9:16 高清海报与 4K 海报生成
+npm run map:video         # 16:9 45s 动态自驾路线短视频渲染
 ```
 
 **PR 合并冲突经验**：若 `main` 与 feature 分支同时改了 `trip-profile.json` 和 `reports/*`，合并时**保留 profile 逻辑 + 分支侧最新酒店价**，然后**重新跑上述命令**覆盖 reports，不要手工拼 JSON/MD。
@@ -157,10 +162,72 @@ npm run monitor:hotels:scenic       # refresh-scenic-homestays.js
 
 ---
 
+## 阶段 5：自驾路线视觉与 16:9 动态动线短视频
+
+在方案确认后，为了便于家庭沟通、手机壁纸打卡、朋友圈海报以及剪辑旅行 Vlog，工作流内置了基于 Google Maps 真实地理地形及路网数据的全套视觉生成工具链：
+
+### 1. 产物规格与定位
+
+| 产物文件 | 分辨率 / 格式 | 说明 |
+| :--- | :--- | :--- |
+| `reports/maps/xinjiang-itinerary-16-9.mp4` | **1920 × 1080 (16:9, 24fps, 45s)** | **动态自驾动线短视频**（主标题：「新疆伊犁 8天7晚自驾大环线」，硬派越野 SUV 车标固定向前、浮点亚像素平滑轨迹插值、沿途道路与景区标牌、底部旅行解说字幕条） |
+| `reports/maps/xinjiang-itinerary-9-16.png` | **1080 × 1920 (9:16 PNG)** | 标准手机竖屏自驾路线海报 |
+| `reports/maps/xinjiang-itinerary-9-16-hd.png` | **2160 × 3840 (9:16 4K)** | 超清打印/视网膜高清海报 |
+| `reports/maps/itinerary_map.html` | **交互式网页地图** | Leaflet + Google 地形底图，支持一键切换道路/卫星 |
+| `reports/maps/itinerary_video_stage.html` | **16:9 动线动画舞台** | 包含车载 HUD 界面、动态路牌、景区气泡与解说字幕 |
+| `reports/maps/preview_frames/` | **JPG 关键帧预览** | 视频各日程关键帧抽帧截图（D1、D2、D4、D6、Final） |
+| `reports/xinjiang-travel-map-guide.md` | **自驾路线指南** | 包含全程里程、每日路况及视频剪辑技术指标 |
+
+### 2. 16:9 动态短视频关键设计原则
+
+1. **命名规范**：左上角 HUD 主标题统一为 **「新疆伊犁 8天7晚自驾大环线」**，精简无冗余，突出大环线与天数。
+2. **黄金时长 45 秒标准分配**：
+   - 帧率：`24 fps`，总帧数：`1080 帧`（恰好 45.0 秒），采用 H.264 `yuv420p` 编码，各大剪辑软件（剪映、Premiere、Final Cut、DaVinci）开箱即用。
+   - 节奏分布：D1 (3.5s)、D2 (5.0s)、D3 (5.0s)、D4 (5.0s)、D5 (5.5s)、D6 (6.5s 最长自驾路段)、D7 (5.0s)、D8 (3.5s)、终局全景定格 (6.0s)。为观众阅读底部解说字幕留出充裕舒适时间。
+3. **专属硬派越野 SUV 车标 (Fixed Direction SUV Running Badge)**：
+   - 形象设计：高离地间隙底盘护板、车顶越野行李架、大尺寸全地形越野车轮与铬圈、高光车窗、明亮大灯、尾部速度流线，徽章右上角带有专业精致的 `SUV` 标识。
+   - **固定水平向前（Fixed Forward）**：车头全程保持水平向右前方，彻底避免因急弯或回头路导致车标剧烈旋转翻折而产生眩晕。
+4. **运动轨迹亚像素平滑连续插值 (Subpixel Smooth Interpolation)**：
+   - 严禁使用离散取整点索引（如 `Math.floor(progress * totalPts)`），避免长路段或弯道处车标与轨迹线发生突变和跳跃。
+   - 采用浮点亚像素级连续坐标线性插值算法：
+     ```javascript
+     const exactIndex = progress * (totalPts - 1);
+     const idxA = Math.floor(exactIndex);
+     const idxB = Math.min(idxA + 1, totalPts - 1);
+     const fraction = exactIndex - idxA;
+     const currentLat = pA[0] + (pB[0] - pA[0]) * fraction;
+     const currentLng = pA[1] + (pB[1] - pA[1]) * fraction;
+     ```
+     以此驱动轨迹实时平滑延伸与 SUV 徽章精准定位。
+5. **道路标牌与景区标牌动态浮现**：
+   - 沿途国道/省道盾徽（G577 天山新线、S237 特昭公路、S315 唐布拉百里画廊、G217 独库北段、G30 连霍等）与景区标牌（乌孙山隧道、昭苏玉湖、喀拉峻人体草原、阔克苏鳄鱼湾、库尔德宁东沟云杉林、乔尔玛纪念碑、哈希勒根防雪长廊 3400m、果子沟金顶大桥、赛里木湖点将台等）随车辆行程逐一浮现点亮。
+6. **底部旅行解说字幕条 (Travel Vlog Subtitles)**：
+   - 画面底部时间轴上方采用半透明毛玻璃字幕条，同步滚动展示每日详细行程解说、核心亮点与出行关键提醒（如出发时间、连住免搬箱、独库路况提醒）。
+
+### 3. 生成与渲染命令
+
+```bash
+# 步骤 1：准备/更新视频路网抽样与字幕数据
+npm run map:video:data
+# 等价于：python3 scripts/prepare_video_data.py && python3 scripts/prepare_subtitles.py
+
+# 步骤 2：生成 HTML 动画舞台并启动无头浏览器逐帧录制 MP4
+npm run map:video:render
+# 等价于：python3 scripts/generate_video_html.py && node scripts/render_video.js
+
+# 一键完成视频重渲染：
+npm run map:video
+
+# 渲染 9:16 手机海报：
+npm run map:poster
+```
+
+---
+
 ## 输出文件地图
 
 | 文件 | 生成方式 |
-|------|----------|
+| :--- | :--- |
 | `reports/xinjiang-travel-cards-planb.md` | `format-travel-cards.js --variant planb` |
 | `reports/xinjiang-travel-brief.md` | `format-travel-brief.js` |
 | `reports/xinjiang-hotels-latest.json` | `monitor-hotels.js` |
@@ -168,6 +235,11 @@ npm run monitor:hotels:scenic       # refresh-scenic-homestays.js
 | `reports/scenic-homestay-top3.md` | Agent 汇总 scenic 段 TOP（无专用脚本） |
 | `reports/planb-complete-with-hotels.md` | Agent 合并指南 + 订房链接 |
 | `reports/planb-complete-guide.md` | 逐时指南（手维，随 profile 同步） |
+| `reports/maps/xinjiang-itinerary-16-9.mp4` | `npm run map:video`（16:9 45s 自驾短视频） |
+| `reports/maps/xinjiang-itinerary-9-16.png` | `npm run map:poster`（9:16 标准手机路线海报） |
+| `reports/maps/xinjiang-itinerary-9-16-hd.png` | `npm run map:poster`（9:16 4K 超清海报） |
+| `reports/maps/preview_frames/` | 视频抽帧预览图（D1/D2/D4/D6/Final） |
+| `reports/xinjiang-travel-map-guide.md` | 自驾路线与视频多媒体指南 |
 
 ---
 
@@ -216,5 +288,7 @@ FEISHU_SKIP=1 npm run skill:hotels  # 跳过推送
 - [ ] Plan B `days` / `hotels` / `hotelOverrides` 日期对齐
 - [ ] 跑酒店查询 + ranked + cards + brief
 - [ ] 同步 `planb-complete-guide.md` 等手维报告
+- [ ] 路线或途经点变更时，同步跑 `npm run map:poster` 与 `npm run map:video` 更新海报与 45s 动态视频
+- [ ] 确保短视频遵循规范：时长 45s (24fps 1080帧)、硬派 SUV 固定朝向、亚像素平滑插值无跳跃、字幕与路牌同步
 - [ ] commit + push；合并冲突后**重跑再生链**，勿保留冲突半成品
 - [ ] 用户要求推送时再跑 `skill:hotels` 或 `notify:feishu`

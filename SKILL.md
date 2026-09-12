@@ -422,6 +422,16 @@ Detailed command docs live in **`references/`** (one file per subcommand):
 - Emphasize key facts: date, location, price, constraints.
 - Use valid Markdown tables for multi-option comparison.
 
+## Itinerary Route Visuals & Video Specs (Phase 5 Extension)
+When delivering travel road trip workflows or complete itineraries, support generating high-impact visual assets:
+- **9:16 Route Map Poster**: High-resolution mobile wallpaper/social poster (`npm run map:poster`).
+- **16:9 Dynamic Driving Video (45s)**: Ready for video editing (`npm run map:video`). Standard requirements:
+  - Title naming: Clean format, e.g., `新疆伊犁 8天7晚自驾大环线`.
+  - Duration: 45s @ 24fps (1080 frames), with comfortable pacing (3~6.5s per day) for subtitle reading.
+  - Car Marker: Side-view rugged SUV badge, fixed forward-facing direction without disorienting flips.
+  - Smooth Movement: Subpixel continuous floating-point linear interpolation to prevent jumping across points.
+  - Interactive Overlays: Dynamic highway shields, scenic spot bubbles, and bottom frosted-glass vlog subtitles.
+
 ## Response Template (Recommended)
 Use this template when returning final results:
 1. Brief conclusion and recommendation.
