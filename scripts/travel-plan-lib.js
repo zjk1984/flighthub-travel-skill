@@ -204,15 +204,21 @@ function loadPendingScheduleTodos() {
     .filter((i) => !i.booked && !["hotel", "flight"].includes(i.category))
     .sort((a, b) => (a.eventDate !== b.eventDate ? a.eventDate.localeCompare(b.eventDate) : (a.sortOrder ?? 0) - (b.sortOrder ?? 0)))
     .map((i) => {
-      const slot = i.appointmentTime
-        ? i.appointmentEnd
+      const fmt = (d) => d.slice(5).replace("-", "/");
+      let prefix;
+      if (i.appointmentTime) {
+        const slot = i.appointmentEnd
           ? ` ${i.appointmentTime}–${i.appointmentEnd}`
-          : ` ${i.appointmentTime}`
-        : i.bookTime
-          ? ` ${i.bookTime} 截止`
-          : "";
-      const date = i.bookByDate || i.eventDate;
-      const prefix = `${date.slice(5).replace("-", "/")}${slot}`;
+          : ` ${i.appointmentTime}`;
+        prefix = `游玩 ${fmt(i.eventDate)}${slot}`;
+      } else if (i.bookTime && i.bookByDate) {
+        prefix = `${fmt(i.bookByDate)} ${i.bookTime} 截止`;
+      } else if (i.bookByDate && i.bookByDate !== i.eventDate) {
+        const window = i.bookFromDate ? `${fmt(i.bookFromDate)}–${fmt(i.bookByDate)}` : `截止 ${fmt(i.bookByDate)}`;
+        prefix = `游玩 ${fmt(i.eventDate)} · 购票 ${window}`;
+      } else {
+        prefix = fmt(i.eventDate);
+      }
       return `**${i.title}** — ${prefix}${i.action ? ` · ${i.action}` : ""}`;
     });
 }

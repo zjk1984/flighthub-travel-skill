@@ -209,6 +209,10 @@ function formatEventDate(dateStr) {
   return `${parseInt(m, 10)}/${parseInt(d, 10)}`;
 }
 
+function hasAppointmentSlot(item) {
+  return !!(item.appointmentTime || item.bookTime);
+}
+
 function formatReserveTime(item) {
   if (item.appointmentTime && item.appointmentEnd) {
     return `${formatEventDate(item.eventDate)} ${item.appointmentTime}–${item.appointmentEnd}`;
@@ -219,8 +223,35 @@ function formatReserveTime(item) {
   if (item.bookTime && item.bookByDate) {
     return `${formatEventDate(item.bookByDate)} ${item.bookTime}`;
   }
+  if (item.bookByDate && item.bookByDate !== item.eventDate && !hasAppointmentSlot(item)) {
+    return formatEventDate(item.eventDate);
+  }
   if (item.bookByDate) return formatEventDate(item.bookByDate);
   return formatEventDate(item.eventDate);
+}
+
+/** Human-readable schedule line for digest (distinguishes 分时预约 vs 提前购票). */
+function formatScheduleLine(item) {
+  const event = formatEventDate(item.eventDate);
+  if (item.appointmentTime) {
+    const slot = item.appointmentEnd
+      ? `${item.appointmentTime}–${item.appointmentEnd}`
+      : item.appointmentTime;
+    return `预约 **${event} ${slot}** · 行程 **${event}**`;
+  }
+  if (item.bookTime && item.bookByDate) {
+    return `预约 **${formatEventDate(item.bookByDate)} ${item.bookTime}** · 行程 **${event}**`;
+  }
+  if (item.bookByDate && item.bookByDate !== item.eventDate) {
+    const from = item.bookFromDate ? formatEventDate(item.bookFromDate) : null;
+    const by = formatEventDate(item.bookByDate);
+    const window = from ? `${from}–${by}` : `截止 ${by}`;
+    return `游玩 **${event}** · 购票窗口 **${window}**（无分时预约）`;
+  }
+  if (item.bookByDate) {
+    return `行程 **${event}** · 购票 **${formatEventDate(item.bookByDate)}**`;
+  }
+  return `行程 **${event}**`;
 }
 
 function formatRemainingLabel(item, today) {
@@ -259,7 +290,7 @@ function renderItem(item, today, idx) {
   const emoji = CATEGORY_EMOJI[item.category] || "•";
   const status = item.booked ? "✅ 已订" : "⏳ 待办";
   const lines = [`**${idx}. ${emoji} ${status} · ${item.title}**`];
-  lines.push(`🕐 预约 **${formatReserveTime(item)}** · 行程 **${formatEventDate(item.eventDate)}**`);
+  lines.push(`🕐 ${formatScheduleLine(item)}`);
   const window = formatBookWindow(item, today);
   if (window) lines.push(`📌 预订 ${window}`);
   if (item.detail) lines.push(item.detail);
@@ -450,6 +481,8 @@ module.exports = {
   formatBookWindow,
   formatRemainingLabel,
   formatReserveTime,
+  formatScheduleLine,
+  hasAppointmentSlot,
   reserveTime,
   isBeforeBookOpen,
   isDigestItem,

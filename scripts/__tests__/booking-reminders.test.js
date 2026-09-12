@@ -17,6 +17,7 @@ const {
   saveState,
   formatBookWindow,
   formatReserveTime,
+  formatScheduleLine,
   formatRemainingLabel,
   isBeforeBookOpen,
 } = require('../booking-reminders.js');
@@ -103,6 +104,16 @@ test('formatReserveTime shows appointment slot', () => {
   const schedule = loadSchedule();
   const duku = schedule.items.find((i) => i.id === 'd6-duku-reserve');
   assert.match(formatReserveTime(duku), /10\/6 14:00–16:00/);
+});
+
+test('formatScheduleLine for sayram shows visit date not appointment slot', () => {
+  const schedule = loadSchedule();
+  const sayram = schedule.items.find((i) => i.id === 'd7-sayram-ticket');
+  const line = formatScheduleLine(sayram);
+  assert.match(line, /游玩 \*\*10\/7\*\*/);
+  assert.match(line, /9\/29–10\/6/);
+  assert.match(line, /无分时预约/);
+  assert.doesNotMatch(line, /10:00/);
 });
 
 test('no d6 sayram ticket in schedule after D6 no-entry change', () => {
