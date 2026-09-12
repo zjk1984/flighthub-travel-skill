@@ -23,8 +23,12 @@ describe("return alternate origins", () => {
   });
 
   it("buildReturnTasks queries all expanded routes in focus mode", () => {
-    const cfg = loadConfig();
-    if (!cfg.focusMode) return;
+    const base = loadConfig();
+    if (!base.focusMode) return;
+    const cfg = {
+      ...base,
+      trip: { ...base.trip, bookedReturn: null },
+    };
     const tasks = buildReturnTasks(cfg);
     const origins = new Set(tasks.map((t) => t.origin));
     assert.ok(origins.has("伊宁"));
@@ -32,5 +36,14 @@ describe("return alternate origins", () => {
     assert.ok(origins.has("博乐"));
     assert.ok(origins.has("石河子"));
     assert.equal(tasks.length, 8);
+  });
+
+  it("buildReturnTasks returns empty when return is booked", () => {
+    const base = loadConfig();
+    const cfg = {
+      ...base,
+      trip: { ...base.trip, bookedReturn: { route: "博乐→广州", date: "2026-10-08" } },
+    };
+    assert.deepEqual(buildReturnTasks(cfg), []);
   });
 });

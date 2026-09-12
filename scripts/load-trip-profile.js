@@ -83,6 +83,21 @@ function loadTripProfile(cfg) {
   };
 }
 
+function allHotelsBooked(trip) {
+  const segments = trip?.hotels || [];
+  if (!segments.length) return false;
+  const overrides = trip.hotelOverrides || {};
+  return segments.every((seg) => {
+    const ov = overrides[seg.checkIn];
+    return (seg.skipMonitor || ov?.booked) && ov?.booked === true;
+  });
+}
+
+/** Flights + hotels confirmed — Feishu/FlyAI should only surface booking-schedule todos. */
+function feishuTodosOnly(trip) {
+  return !!(trip?.bookedOutbound && trip?.bookedReturn && allHotelsBooked(trip));
+}
+
 function buildFocusTasks(focusRoutes, direction, defaultMode = "full") {
   const routes = focusRoutes?.[direction] || [];
   const tasks = [];
@@ -106,4 +121,6 @@ module.exports = {
   buildFocusTasks,
   resolveProfilePath,
   applyActiveVariant,
+  allHotelsBooked,
+  feishuTodosOnly,
 };

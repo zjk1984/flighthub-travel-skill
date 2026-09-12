@@ -9,3 +9,12 @@ feishu_notify_enabled() {
   fi
   return 1
 }
+
+# Exit 0 when flights + hotels are booked — Feishu should only push booking-schedule todos.
+feishu_todos_only() {
+  node -e "
+    const { loadConfig } = require('./scripts/load-monitor-config');
+    const { loadTripProfile, feishuTodosOnly } = require('./scripts/load-trip-profile');
+    process.exit(feishuTodosOnly(loadTripProfile(loadConfig())) ? 0 : 1);
+  " 2>/dev/null
+}

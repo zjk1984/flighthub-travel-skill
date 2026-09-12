@@ -39,6 +39,10 @@ RESULTS="$ROOT_DIR/reports/xinjiang-results.jsonl"
 node "$SCRIPT_DIR/monitor-run.js" --phase "$PHASE" "$RESULTS" "$OUTPUT" "$RANKED_OUTPUT"
 
 if feishu_notify_enabled && [[ "$PHASE" == "all" || "$PHASE" == "return" ]]; then
+  if feishu_todos_only; then
+    echo "Sending Feishu (机酒已订 — 仅待办 digest)..." >&2
+    node "$SCRIPT_DIR/booking-reminders.js" --force || echo "Feishu booking reminder failed (non-fatal)" >&2
+  else
   FEISHU_REPORT="${FEISHU_REPORT:-brief}"
   echo "Sending Feishu notification ($FEISHU_REPORT)..." >&2
   BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
@@ -69,4 +73,5 @@ if feishu_notify_enabled && [[ "$PHASE" == "all" || "$PHASE" == "return" ]]; the
       fi
       ;;
   esac
+  fi
 fi

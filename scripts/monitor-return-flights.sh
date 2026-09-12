@@ -24,10 +24,18 @@ if [[ "$REFRESH" == "true" ]]; then
   EXTRA_ARGS+=(--refresh)
 fi
 
-echo "▶ 返程航班（仅机票，不含酒店/行程）" >&2
-node "$SCRIPT_DIR/monitor-run.js" --phase return --flights-only "${EXTRA_ARGS[@]}" "$RESULTS" "$OUTPUT" "$RANKED"
+if feishu_todos_only; then
+  echo "▶ 返程已订 — 跳过 fly.ai 机票查询" >&2
+else
+  echo "▶ 返程航班（仅机票，不含酒店/行程）" >&2
+  node "$SCRIPT_DIR/monitor-run.js" --phase return --flights-only "${EXTRA_ARGS[@]}" "$RESULTS" "$OUTPUT" "$RANKED"
+fi
 
 if feishu_notify_enabled && [[ "${FEISHU_SKIP:-}" != "1" ]]; then
+  if feishu_todos_only; then
+    echo "Sending Feishu (机酒已订 — 仅待办 digest)..." >&2
+    node "$SCRIPT_DIR/booking-reminders.js" --force || true
+  else
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
   FLIGHTS_BRIEF="$ROOT_DIR/reports/xinjiang-flights-brief.md"
   FEISHU_REPORT="${FEISHU_REPORT:-all}"
@@ -44,4 +52,5 @@ if feishu_notify_enabled && [[ "${FEISHU_SKIP:-}" != "1" ]]; then
       [[ -f "$FLIGHTS_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 返程机票简报" "$FLIGHTS_BRIEF" || true
       ;;
   esac
+  fi
 fi

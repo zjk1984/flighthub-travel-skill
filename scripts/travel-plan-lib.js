@@ -2,7 +2,9 @@
  * Shared travel plan + hotel arrangement rendering for brief and plan reports.
  */
 const fs = require("fs");
+const path = require("path");
 const { formatDateShort } = require("./load-monitor-config");
+const { feishuTodosOnly } = require("./load-trip-profile");
 const {
   getHotelProfile,
   parsePriceNum,
@@ -65,9 +67,7 @@ function loadHotelsBySegment(hotelsPath, trip, partySize) {
         booked: true,
         fromOverride: true,
       };
-      const scored = scoreHotelsInSegment(list, hotelProfile, meta, partySize, trip.roomCount);
-      const backup = pickHotelForPlan(scored, hotelProfile);
-      bySegment.set(seg.segment, { pick: bookedPick, backup, scored, seg });
+      bySegment.set(seg.segment, { pick: bookedPick, backup: null, scored: [], seg });
       continue;
     }
     if (seg.scenicHomestay && override?.name && !list.some((h) => h.name.includes(override.name.slice(0, 4)))) {
@@ -143,7 +143,25 @@ function renderHotelBookingSheet(trip, hotelsBySegment) {
   }
 
   const rooms = roomCountForParty(trip.partySize, trip.roomCount);
-  let md = `## 🏨 酒店预订清单（${trip.partySize || 1} 人 · **${rooms} 间**）\n\n`;
+  const todosOnly = feishuTodosOnly(trip);
+  const allBooked = todosOnly || [...hotelsBySegment.values()].every(({ pick }) => pick?.booked);
+
+  let md = todosOnly
+    ? `## 🏨 已订酒店（${trip.partySize || 1} 人 · **${rooms} 间**）\n\n`
+    : `## 🏨 酒店预订清单（${trip.partySize || 1} 人 · **${rooms} 间**）\n\n`;
+
+  if (allBooked) {
+    md += `| 入住段 | 日期 | 酒店 | 预订 |\n`;
+    md += `|--------|------|------|------|\n`;
+    for (const [, { pick, seg }] of hotelsBySegment) {
+      if (!pick) continue;
+      const range = `${seg.checkIn.slice(5)}→${seg.checkOut.slice(5)}`;
+      const book = pick.url ? `[已订](${pick.url})` : "✅ 已订";
+      md += `| ${seg.segment} | ${range} | **${pick.name}** | ${book} |\n`;
+    }
+    return md + "\n";
+  }
+
   md += `| 入住段 | 日期 | 首选（老人友好） | 备选 | 单间/晚 | 段合计 | 预订 |\n`;
   md += `|--------|------|------------------|------|---------|--------|------|\n`;
 
@@ -178,10 +196,47 @@ function renderCarRentalBrief(itinerary) {
   return md + "\n";
 }
 
+function loadPendingScheduleTodos() {
+  const schedulePath = path.join(__dirname, "..", "config/booking-schedule.json");
+  if (!fs.existsSync(schedulePath)) return [];
+  const schedule = JSON.parse(fs.readFileSync(schedulePath, "utf8"));
+  return (schedule.items || [])
+    .filter((i) => !i.booked && !["hotel", "flight"].includes(i.category))
+    .sort((a, b) => (a.eventDate !== b.eventDate ? a.eventDate.localeCompare(b.eventDate) : (a.sortOrder ?? 0) - (b.sortOrder ?? 0)))
+    .map((i) => {
+      const fmt = (d) => d.slice(5).replace("-", "/");
+      let prefix;
+      if (i.appointmentTime) {
+        const slot = i.appointmentEnd
+          ? ` ${i.appointmentTime}–${i.appointmentEnd}`
+          : ` ${i.appointmentTime}`;
+        prefix = `游玩 ${fmt(i.eventDate)}${slot}`;
+      } else if (i.bookTime && i.bookByDate) {
+        prefix = `${fmt(i.bookByDate)} ${i.bookTime} 截止`;
+      } else if (i.bookByDate && i.bookByDate !== i.eventDate) {
+        const window = i.bookFromDate ? `${fmt(i.bookFromDate)}–${fmt(i.bookByDate)}` : `截止 ${fmt(i.bookByDate)}`;
+        prefix = `游玩 ${fmt(i.eventDate)} · 购票 ${window}`;
+      } else {
+        prefix = fmt(i.eventDate);
+      }
+      return `**${i.title}** — ${prefix}${i.action ? ` · ${i.action}` : ""}`;
+    });
+}
+
 function renderTodoBrief(trip, inboundByDate, profile) {
+  if (feishuTodosOnly(trip)) {
+    const pending = loadPendingScheduleTodos();
+    if (!pending.length) return "";
+    let md = `## ✅ 待办（门票 · 预约 · 路况）\n\n`;
+    pending.forEach((t, i) => {
+      md += `${i + 1}. ${t}\n`;
+    });
+    return md + "\n";
+  }
+
   const todos = trip.itinerary?.todo?.length ? [...trip.itinerary.todo] : [];
   const dates = trip.returnDateCompare || [];
-  if (dates.length >= 2 && inboundByDate) {
+  if (!trip.bookedReturn && dates.length >= 2 && inboundByDate) {
     const cheap1 = pickScenario(
       (inboundByDate.get(dates[1]) || []).map((f) => ({ ...f, priceVerified: f.priceVerified !== false })),
       "cheapest",

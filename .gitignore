@@ -10,3 +10,4 @@ apps/lvji/.next/
 reports/flight-route-cache.jsonl
 reports/leg2-cache.jsonl
 reports/.booking-reminders-state.json
+__pycache__/
