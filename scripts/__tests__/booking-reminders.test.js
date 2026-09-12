@@ -9,6 +9,7 @@ const {
   mergeProfileHotels,
   itemsForRemindDate,
   selectDailyDigest,
+  isDigestItem,
   sortByRemainingDays,
   remainingDays,
   buildDailyMarkdown,
@@ -109,4 +110,37 @@ test('no d6 sayram ticket in schedule after D6 no-entry change', () => {
   const ids = schedule.items.map((i) => i.id);
   assert.ok(!ids.includes('d6-sayram-ticket'));
   assert.ok(ids.includes('d7-sayram-ticket'));
+});
+
+test('isDigestItem excludes booked hotel and flight', () => {
+  assert.equal(isDigestItem({ booked: true, category: 'hotel' }), false);
+  assert.equal(isDigestItem({ booked: true, category: 'flight' }), false);
+  assert.equal(isDigestItem({ booked: false, category: 'ticket' }), true);
+});
+
+test('selectDailyDigest dueToday skips booked items on event date', () => {
+  const schedule = loadSchedule();
+  const trip = loadTripProfile(loadConfig());
+  const items = mergeProfileHotels(schedule.items, trip);
+  const digest = selectDailyDigest(items, '2026-10-01', schedule);
+  const dueIds = digest.dueToday.map((i) => i.id);
+  assert.ok(!dueIds.includes('d1-flight-out'));
+  assert.ok(!dueIds.includes('d1-hotel'));
+});
+
+test('itemsForRemindDate excludes booked hotel items', () => {
+  const schedule = loadSchedule();
+  const items = itemsForRemindDate(schedule, '2026-10-06');
+  const ids = items.map((i) => i.id);
+  assert.ok(!ids.includes('d7-hotel'));
+  assert.ok(ids.includes('d7-sayram-ticket'));
+});
+
+test('selectDailyDigest tomorrowPrep only lists pending todos', () => {
+  const schedule = loadSchedule();
+  const trip = loadTripProfile(loadConfig());
+  const items = mergeProfileHotels(schedule.items, trip);
+  const digest = selectDailyDigest(items, '2026-09-30', schedule);
+  const tomorrowIds = digest.tomorrowPrep.map((i) => i.id);
+  assert.ok(!tomorrowIds.some((id) => id.includes('hotel') || id.includes('flight')));
 });

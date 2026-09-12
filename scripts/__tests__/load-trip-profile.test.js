@@ -1,6 +1,6 @@
 const { describe, it } = require("node:test");
 const assert = require("node:assert/strict");
-const { buildFocusTasks, loadTripProfile } = require("../load-trip-profile");
+const { buildFocusTasks, loadTripProfile, feishuTodosOnly, allHotelsBooked } = require("../load-trip-profile");
 const path = require("path");
 
 describe("load-trip-profile", () => {
@@ -26,5 +26,14 @@ describe("load-trip-profile", () => {
     assert.ok(trip.focusRoutes.inbound.length > 0);
     assert.equal(trip.returnPreferences.filterTop3ByItinerary, false);
     assert.equal(trip.itineraryConstraints.byDate["2026-10-08"].minDepartureTime, "12:00");
+  });
+
+  it("feishuTodosOnly when flights and hotels are booked", () => {
+    const trip = loadTripProfile({
+      tripProfilePath: "config/trip-profile.json",
+      focusMode: true,
+    });
+    assert.equal(allHotelsBooked(trip), true);
+    assert.equal(feishuTodosOnly(trip), true);
   });
 });

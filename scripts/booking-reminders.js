@@ -125,10 +125,16 @@ function isActive(item, today) {
   return item.eventDate >= today;
 }
 
+/** Digest sections only surface actionable (unbooked) todos — not confirmed hotel/flight. */
+function isDigestItem(item) {
+  return !item.booked;
+}
+
 function itemsForRemindDate(schedule, remindDate) {
   const lead = schedule.remindDaysBefore ?? 1;
   return schedule.items
     .filter((item) => addDays(item.eventDate, -lead) === remindDate)
+    .filter(isDigestItem)
     .sort(sortItems);
 }
 
@@ -147,9 +153,10 @@ function selectDailyDigest(items, today, schedule) {
 
   const dueToday = sortByRemainingDays(
     active.filter((i) => {
-      if (i.bookByDate === today && !i.booked) return true;
+      if (!isDigestItem(i)) return false;
+      if (i.bookByDate === today) return true;
       if (addDays(i.eventDate, -lead) === today) return true;
-      if (!i.booked && i.eventDate === today) return true;
+      if (i.eventDate === today) return true;
       return false;
     }),
     today
@@ -168,14 +175,17 @@ function selectDailyDigest(items, today, schedule) {
   );
 
   const tomorrow = addDays(today, 1);
-  const tomorrowPrep = [...active.filter((i) => i.eventDate === tomorrow)].sort(sortRemaining);
+  const tomorrowPrep = sortByRemainingDays(
+    active.filter((i) => i.eventDate === tomorrow && isDigestItem(i)),
+    today
+  );
 
   const hasContent =
     pending.length > 0 ||
     dueToday.length > 0 ||
     overdue.length > 0 ||
     bookingWindow.length > 0 ||
-    tomorrowPrep.some((i) => !i.booked || addDays(i.eventDate, -lead) === today);
+    tomorrowPrep.length > 0;
 
   return { pending, overdue, dueToday, bookingWindow, tomorrowPrep, hasContent };
 }
@@ -442,4 +452,5 @@ module.exports = {
   formatReserveTime,
   reserveTime,
   isBeforeBookOpen,
+  isDigestItem,
 };

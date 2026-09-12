@@ -30,6 +30,7 @@ const {
   renderTodoBrief,
   renderTipsBrief,
 } = require("./travel-plan-lib");
+const { feishuTodosOnly } = require("./load-trip-profile");
 
 const ROOT = path.join(__dirname, "..");
 const CFG = loadConfig();
@@ -196,14 +197,22 @@ function main() {
     inboundByDate.get(f.date).push(f);
   }
 
-  let md = `# 旅行决策简报（行程 · 酒店）\n\n`;
+  const todosOnly = feishuTodosOnly(TRIP);
+
+  let md = todosOnly ? `# 行程简报（待办提醒）\n\n` : `# 旅行决策简报（行程 · 酒店）\n\n`;
   md += `> 生成时间：${formatShanghaiTime()} | 评分画像：**${PROFILE.label}** | **${PARTY} 人**\n\n`;
   if (TRIP.label) md += `> 行程：${TRIP.label}\n\n`;
   if (TRIP.bookedOutbound) {
     const b = TRIP.bookedOutbound;
     md += `**已订去程：** ${b.route} ${b.date} ${b.flightNo || ""} — ${b.note || ""}\n\n`;
   }
-  if (TRIP.skipOutboundMonitor || TRIP.bookedOutbound) {
+  if (TRIP.bookedReturn) {
+    const r = TRIP.bookedReturn;
+    md += `**已订返程：** ${r.route || "返程"} ${r.date} ${r.flightNo || ""} — ${r.note || ""}\n\n`;
+  }
+  if (todosOnly) {
+    md += `> 模式：**机酒已订 · 仅推送待办**（门票/预约/路况，不再查询 fly.ai 机酒比价）\n\n`;
+  } else if (TRIP.skipOutboundMonitor || TRIP.bookedOutbound) {
     md += `> 模式：**返程 + 行程 + 酒店安排**（去程已订，不再查询）\n\n`;
   } else if (CFG.focusMode) {
     md += `> 模式：聚焦盯票（仅查询 trip-profile 指定航线）\n\n`;
@@ -217,10 +226,15 @@ function main() {
   md += renderTipsBrief(TRIP.itinerary);
 
   md += `---\n\n`;
-  md += `> 返程机票 TOP3 / 库存告警见 \`reports/xinjiang-flights-ranked.md\` 与 \`reports/xinjiang-flights-brief.md\`\n\n`;
-  md += `## 酒店评分明细（各段 TOP3）\n\n`;
-  md += renderHotels(hotelsPath);
-  md += `---\n基于飞猪 fly.ai 实时数据 · 决策简报由 \`format-travel-brief.js\` 自动生成\n`;
+  if (!todosOnly) {
+    md += `> 返程机票 TOP3 / 库存告警见 \`reports/xinjiang-flights-ranked.md\` 与 \`reports/xinjiang-flights-brief.md\`\n\n`;
+    md += `## 酒店评分明细（各段 TOP3）\n\n`;
+    md += renderHotels(hotelsPath);
+  }
+  md += `---\n`;
+  md += todosOnly
+    ? `机酒已订 · 待办清单来自 \`config/booking-schedule.json\` · 由 \`format-travel-brief.js\` 自动生成\n`
+    : `基于飞猪 fly.ai 实时数据 · 决策简报由 \`format-travel-brief.js\` 自动生成\n`;
   process.stdout.write(md);
 }
 

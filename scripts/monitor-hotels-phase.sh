@@ -14,26 +14,36 @@ TRAVEL_BRIEF="$ROOT_DIR/reports/xinjiang-travel-brief.md"
 
 echo "▶ Phase 4/4：酒店（按 activeVariant 酒店段）" >&2
 node "$SCRIPT_DIR/trip-workflow-cli.js" gate hotels >&2 || true
-node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel monitor skipped (non-fatal)" >&2
+if feishu_todos_only; then
+  echo "▶ 机酒已订 — 跳过 fly.ai 酒店查询，仅刷新待办简报" >&2
+  node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel override refresh skipped (non-fatal)" >&2
+else
+  node "$SCRIPT_DIR/monitor-hotels.js" || echo "Hotel monitor skipped (non-fatal)" >&2
+fi
 node "$SCRIPT_DIR/format-travel-brief.js" "$RESULTS" > "$TRAVEL_BRIEF"
 
 if feishu_notify_enabled && [[ "${FEISHU_SKIP:-}" != "1" ]]; then
   eval "$(node "$SCRIPT_DIR/monitor-config.js" export-bash)"
-  FEISHU_REPORT="${FEISHU_REPORT:-brief}"
-  case "$FEISHU_REPORT" in
-    ranked)
-      RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
-      [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店 TOP3" "$RANKED" || true
-      ;;
-    all)
-      RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
-      [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店 TOP3" "$RANKED" || true
-      [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
-      ;;
-    brief|*)
-      RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
-      [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店·民宿 TOP3" "$RANKED" || true
-      [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
-      ;;
-  esac
+  if feishu_todos_only; then
+    echo "▶ Feishu：机酒已订，仅推送待办 digest" >&2
+    node "$SCRIPT_DIR/booking-reminders.js" --force || true
+  else
+    FEISHU_REPORT="${FEISHU_REPORT:-brief}"
+    case "$FEISHU_REPORT" in
+      ranked)
+        RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
+        [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店 TOP3" "$RANKED" || true
+        ;;
+      all)
+        RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
+        [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店 TOP3" "$RANKED" || true
+        [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
+        ;;
+      brief|*)
+        RANKED="$ROOT_DIR/reports/xinjiang-hotels-latest-ranked.md"
+        [[ -f "$RANKED" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 酒店·民宿 TOP3" "$RANKED" || true
+        [[ -f "$TRAVEL_BRIEF" ]] && node "$SCRIPT_DIR/feishu-notify.js" --title "${ROUTE_LABEL} 行程·酒店简报" "$TRAVEL_BRIEF" || true
+        ;;
+    esac
+  fi
 fi

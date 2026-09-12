@@ -16,7 +16,7 @@
       "outbound": true,
       "return": true,
       "plan": "planb",
-      "hotels": false
+      "hotels": true
     },
     "notes": [
       "严格顺序：1 去程 → 2 返程 → 3 Plan A/B → 4 酒店",

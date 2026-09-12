@@ -4,11 +4,15 @@ const { buildOutboundTasks, buildReturnTasks, loadConfig } = require("../load-mo
 
 describe("load-monitor-config focus mode", () => {
   it("focus mode uses trip profile routes only", () => {
-    const cfg = loadConfig();
-    if (!cfg.focusMode) {
+    const base = loadConfig();
+    if (!base.focusMode) {
       // skip when preset not applied in CI-like env
       return;
     }
+    const cfg = {
+      ...base,
+      trip: { ...base.trip, bookedReturn: null },
+    };
     const out = buildOutboundTasks(cfg);
     const ret = buildReturnTasks(cfg);
     assert.ok(out.every((t) => t.origin === "广州" && t.dest === "伊宁"));

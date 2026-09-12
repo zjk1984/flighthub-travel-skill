@@ -200,6 +200,7 @@ function buildOutboundTasks(cfg) {
 
 function buildReturnTasks(cfg) {
   const c = cfg || loadConfig();
+  if (c.trip?.bookedReturn) return [];
   const inbound = resolveInboundFocusRoutes(c.trip, c);
   if (c.focusMode && inbound.length) {
     return buildFocusTasks({ inbound }, "inbound", "full");
