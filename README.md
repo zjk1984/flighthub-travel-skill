@@ -191,6 +191,18 @@ npm run notify:feishu        # 推送当前 TOP3 报告
 npm run monitor:ranked       # 查询 + 生成报告 + 自动推送飞书
 ```
 
+**行程预订提醒（提前 1 天）：**
+
+按 `config/booking-schedule.json` 中各预订项的 `eventDate`，在**前一日**（Asia/Shanghai）汇总待办/已订清单并推送飞书。
+
+```bash
+npm run remind:bookings:dry              # 预览今日应提醒项（不发送）
+npm run remind:bookings:dry -- --date 2026-10-05   # 指定提醒日预览（例：10/6 行程项）
+npm run remind:bookings                  # 发送飞书（同日重复发送需 --force）
+```
+
+建议 cron 每日 09:00 运行：`npm run remind:bookings`。发送记录保存在 `reports/.booking-reminders-state.json`。
+
 **环境变量（`.env`）：**
 
 | 变量 | 说明 | 默认 |

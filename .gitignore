@@ -9,3 +9,4 @@ apps/lvji/.next/
 # Unified route cache (local API cache)
 reports/flight-route-cache.jsonl
 reports/leg2-cache.jsonl
+reports/.booking-reminders-state.json

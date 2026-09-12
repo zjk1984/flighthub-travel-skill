@@ -1,0 +1,226 @@
+{
+  "variant": "planb",
+  "label": "伊犁8天自驾 · 玉湖+喀拉峻+独库百里画廊+赛湖",
+  "remindDaysBefore": 1,
+  "timezone": "Asia/Shanghai",
+  "items": [
+    {
+      "id": "d1-flight-out",
+      "eventDate": "2026-10-01",
+      "sortOrder": 10,
+      "category": "flight",
+      "title": "D1 去程航班 CZ6888/CZ6827",
+      "detail": "广州→伊宁 · 23:10 落地 · 5人",
+      "booked": true,
+      "action": "确认值机/行李 · 全季机场已订"
+    },
+    {
+      "id": "d1-hotel",
+      "eventDate": "2026-10-01",
+      "sortOrder": 20,
+      "category": "hotel",
+      "title": "D1 入住 · 全季伊宁机场",
+      "detail": "2间 · 晚到休整",
+      "booked": true,
+      "profileCheckIn": "2026-10-01"
+    },
+    {
+      "id": "d2-car",
+      "eventDate": "2026-10-02",
+      "sortOrder": 10,
+      "category": "car",
+      "title": "D2 租车取车/验车",
+      "detail": "7座SUV · 已提前备好 · 10:00后出发",
+      "booked": true,
+      "action": "验车拍视频 · 买全险 · 满油"
+    },
+    {
+      "id": "d2-yuhu-ticket",
+      "eventDate": "2026-10-02",
+      "sortOrder": 20,
+      "category": "ticket",
+      "title": "D2 玉湖门票+自驾票",
+      "detail": "微信「玉湖景区智慧服务」· 约¥30/人+¥100/车",
+      "booked": false,
+      "action": "线上购票 · 5人"
+    },
+    {
+      "id": "d2-hotel",
+      "eventDate": "2026-10-02",
+      "sortOrder": 30,
+      "category": "hotel",
+      "title": "D2 入住 · 昭苏望湖庄园",
+      "detail": "玉湖景区旁 · 2间",
+      "booked": true,
+      "profileCheckIn": "2026-10-02"
+    },
+    {
+      "id": "d2-yizhao",
+      "eventDate": "2026-10-02",
+      "sortOrder": 40,
+      "category": "road",
+      "title": "D2 伊昭公路 S237",
+      "detail": "出发前查路况 · 封路改 G577",
+      "booked": false,
+      "action": "新疆交警/新疆路网"
+    },
+    {
+      "id": "d3-kalajun-ticket",
+      "eventDate": "2026-10-03",
+      "sortOrder": 10,
+      "category": "ticket",
+      "title": "D3 喀拉峻门票（下午西线）",
+      "detail": "「喀拉峻国际生态旅游区」· 全域联票或西线 · 5人",
+      "booked": false,
+      "action": "提前7天可约 · 分时入园 14:30 左右"
+    },
+    {
+      "id": "d3-hotel",
+      "eventDate": "2026-10-03",
+      "sortOrder": 20,
+      "category": "hotel",
+      "title": "D3 入住 · 山涧云海民宿",
+      "detail": "喀拉峻 · 连住第1晚 · 2间",
+      "booked": true,
+      "profileCheckIn": "2026-10-03"
+    },
+    {
+      "id": "d4-kalajun",
+      "eventDate": "2026-10-04",
+      "sortOrder": 10,
+      "category": "ticket",
+      "title": "D4 东喀拉峻全天",
+      "detail": "鲜花台/猎鹰台 · 区间车",
+      "booked": false,
+      "action": "若用全域联票则已含；否则另购当日票"
+    },
+    {
+      "id": "d4-hotel",
+      "eventDate": "2026-10-04",
+      "sortOrder": 20,
+      "category": "hotel",
+      "title": "D4 续住 · 山涧云海民宿",
+      "detail": "连住第2晚",
+      "booked": true,
+      "profileCheckIn": "2026-10-03"
+    },
+    {
+      "id": "d5-hotel",
+      "eventDate": "2026-10-05",
+      "sortOrder": 10,
+      "category": "hotel",
+      "title": "D5 入住 · 伊犁尼勒克小满民宿",
+      "detail": "S315种蜂场 · 2间 · 18:30前到",
+      "booked": true,
+      "profileCheckIn": "2026-10-05"
+    },
+    {
+      "id": "d5-duku-check",
+      "eventDate": "2026-10-05",
+      "sortOrder": 20,
+      "category": "road",
+      "title": "D5 晚查独库北段路况",
+      "detail": "新疆交警 · 封路改 G30",
+      "booked": false,
+      "action": "D6 独库是否可行"
+    },
+    {
+      "id": "d6-duku-reserve",
+      "eventDate": "2026-10-06",
+      "sortOrder": 10,
+      "category": "reservation",
+      "title": "D6 独库北段通行预约",
+      "detail": "乔尔玛入口 · 14:00–16:00 时段",
+      "booked": false,
+      "action": "「游新疆一码游」· 提前1–7天"
+    },
+    {
+      "id": "d6-sayram-ticket",
+      "eventDate": "2026-10-06",
+      "sortOrder": 20,
+      "category": "ticket",
+      "title": "D6 赛里木湖自驾套票",
+      "detail": "「一部手机游赛湖」· 东门进 · 5人 · 21:00前入园",
+      "booked": false,
+      "action": "国庆提前3–7天抢 · 每日10:00放票"
+    },
+    {
+      "id": "d6-hotel",
+      "eventDate": "2026-10-06",
+      "sortOrder": 30,
+      "category": "hotel",
+      "title": "D6 晚抵 · 喀兰朵·山湖悦己",
+      "detail": "赛湖景区东门店 · 2间 · 预计20:30–22:00到",
+      "booked": true,
+      "profileCheckIn": "2026-10-06",
+      "action": "提前致电晚到+留餐 · 17854128493"
+    },
+    {
+      "id": "d6-duku-am",
+      "eventDate": "2026-10-06",
+      "sortOrder": 40,
+      "category": "road",
+      "title": "D6 早查独库路况",
+      "detail": "封路立即改 G30 绕独山子",
+      "booked": false
+    },
+    {
+      "id": "d7-sayram-ticket-extra",
+      "eventDate": "2026-10-07",
+      "sortOrder": 10,
+      "category": "ticket",
+      "title": "D7 赛湖自驾票（如需补购）",
+      "detail": "若D6票24h过期 · 确认是否需10/7票",
+      "booked": false,
+      "action": "连住景区内仍须在园有效票"
+    },
+    {
+      "id": "d7-lake",
+      "eventDate": "2026-10-07",
+      "sortOrder": 20,
+      "category": "activity",
+      "title": "D7 赛湖主玩+日落",
+      "detail": "点将台/松树头/克勒涌珠 · 17:30–20:05日落",
+      "booked": false
+    },
+    {
+      "id": "d7-hotel",
+      "eventDate": "2026-10-07",
+      "sortOrder": 30,
+      "category": "hotel",
+      "title": "D7 续住 · 喀兰朵·山湖悦己",
+      "detail": "连住第2晚 · 20:30前回宿",
+      "booked": true,
+      "profileCheckIn": "2026-10-06"
+    },
+    {
+      "id": "d8-checkout",
+      "eventDate": "2026-10-08",
+      "sortOrder": 10,
+      "category": "hotel",
+      "title": "D8 早退房 · 喀兰朵",
+      "detail": "08:00早餐 · 09:30东门出园",
+      "booked": true,
+      "action": "前一晚确认早退房"
+    },
+    {
+      "id": "d8-car-return",
+      "eventDate": "2026-10-08",
+      "sortOrder": 20,
+      "category": "car",
+      "title": "D8 还车 · 博乐阿拉山口机场",
+      "detail": "09:30出园 · 12:00前还车",
+      "booked": true
+    },
+    {
+      "id": "d8-flight-return",
+      "eventDate": "2026-10-08",
+      "sortOrder": 30,
+      "category": "flight",
+      "title": "D8 返程 MU6170/MU2311",
+      "detail": "博乐13:30→广州21:55 · 5人",
+      "booked": true,
+      "action": "确认值机 · 备薄羽绒"
+    }
+  ]
+}
