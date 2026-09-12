@@ -33,6 +33,7 @@
     "notify:feishu": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-brief.md'",
     "notify:feishu:ranked": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js reports/xinjiang-flights-ranked.md'",
     "notify:feishu:test": "bash -c 'source scripts/load-env.sh && node scripts/feishu-notify.js --test'",
+    "notify:feishu:map": "bash -c 'source scripts/load-env.sh && node scripts/feishu-send-map.js'",
     "remind:bookings": "bash scripts/send-booking-reminders.sh",
     "remind:bookings:dry": "bash scripts/send-booking-reminders.sh --dry-run",
     "remind:bookings:eve": "bash scripts/send-booking-reminders.sh --mode eve",
