@@ -127,7 +127,7 @@ segments_def = [
             {"id": "w6_3", "name": "乔尔玛", "coord": [83.697, 43.667], "type": "lunch", "tag": "13:00午餐 · 独库起点", "stay": False},
             {"id": "w6_4", "name": "哈希勒根达坂", "coord": [83.950, 44.050], "type": "pass", "tag": "3400m 防雪长廊", "stay": False},
             {"id": "w6_5", "name": "果子沟金顶大桥", "coord": [81.162, 44.482], "type": "scenic", "tag": "天山奇观大桥", "stay": False},
-            {"id": "w6_6", "name": "赛里木湖南门", "coord": [81.183, 44.542], "type": "scenic", "tag": "南门入园", "stay": False},
+            {"id": "w6_6", "name": "赛湖东门新游客中心", "coord": [81.348, 44.622], "type": "scenic", "tag": "东门入园（南门只出不进）", "stay": False},
             {"id": "w6_7", "name": "赛湖东门", "coord": [81.348, 44.622], "type": "hotel", "tag": "D6-D7连宿 · 日落~20:05", "stay": True, "hotel": "赛湖东门客栈"}
         ],
         "route_pts": [(83.275, 43.682), (83.697, 43.667), (84.882, 44.327), (81.162, 44.482), (81.348, 44.622)]
