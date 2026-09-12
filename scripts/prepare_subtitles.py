@@ -1,4 +1,9 @@
 import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from trip_map_sync import apply_trip_to_subtitles
 
 # Extended daily script — times in 北京时间, aligned to 伊犁 local rhythm (~2h solar offset)
 subtitles_and_routes = [
@@ -161,6 +166,8 @@ subtitles_and_routes = [
         ]
     }
 ]
+
+subtitles_and_routes = apply_trip_to_subtitles(subtitles_and_routes)
 
 with open('/workspace/data/subtitles_data.json', 'w', encoding='utf-8') as f:
     json.dump(subtitles_and_routes, f, ensure_ascii=False, indent=2)

@@ -2,6 +2,10 @@ import json
 import time
 import urllib.request
 import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from trip_map_sync import apply_trip_to_segments
 
 def fetch_osrm_route(coords):
     coords_str = ';'.join(f'{c[0]},{c[1]}' for c in coords)
@@ -141,7 +145,7 @@ segments_def = [
         "lunch": "赛湖东门高白鲑（13:30–14:30）",
         "road": "赛湖环湖路 · G30",
         "waypoints": [
-            {"id": "w7_1", "name": "赛湖东门新游客中心", "coord": [81.348, 44.622], "type": "scenic", "tag": "持10/7票入园", "stay": False},
+            {"id": "w7_1", "name": "赛湖东门新游客中心", "coord": [81.395, 44.612], "type": "scenic", "tag": "持10/7票入园", "stay": False},
             {"id": "w7_2", "name": "点将台/松树头", "coord": [81.140, 44.610], "type": "scenic", "tag": "逆时针精华", "stay": False},
             {"id": "w7_0", "name": "赛湖高白鲑鱼坊", "coord": [81.340, 44.615], "type": "lunch", "tag": "13:30午餐 · 高白鲑", "stay": False},
             {"id": "w7_3", "name": "克勒涌珠", "coord": [81.250, 44.670], "type": "scenic", "tag": "雪山清泉", "stay": False},
@@ -150,7 +154,7 @@ segments_def = [
             {"id": "w7_6", "name": "喀兰朵·山湖悦己", "coord": [81.348, 44.622], "type": "hotel", "tag": "连住第2晚 · 22:00前回", "stay": True, "hotel": "喀兰朵山湖悦己"}
         ],
         "multi_legs": [
-            [(81.348, 44.622), (81.250, 44.670), (81.140, 44.610), (81.183, 44.542)],
+            [(81.395, 44.612), (81.250, 44.670), (81.140, 44.610), (81.183, 44.542)],
             [(81.183, 44.542), (81.162, 44.482), (81.348, 44.622)]
         ]
     },
@@ -171,6 +175,8 @@ segments_def = [
         "route_pts": [(81.348, 44.622), (82.298, 44.895)]
     }
 ]
+
+segments_def = apply_trip_to_segments(segments_def)
 
 results = []
 total_km = 0

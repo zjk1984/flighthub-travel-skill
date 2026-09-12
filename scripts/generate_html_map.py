@@ -1,7 +1,14 @@
 import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from trip_map_sync import build_key_markers
 
 with open('/workspace/data/route_data.json', 'r', encoding='utf-8') as f:
     route_data = json.load(f)
+
+key_markers_json = json.dumps(build_key_markers(route_data), ensure_ascii=False, indent=2)
 
 html_template = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -794,20 +801,8 @@ window.onload = function() {
     });
   }
 
-  // Key POI / Waypoint Markers with smart directional layout
-  const keyMarkers = [
-    { name: "伊宁机场", tag: "D1 落地 23:10", coord: [81.330, 43.956], color: "#747D8C", icon: "✈️", type: "airport", layout: "left" },
-    { name: "昭苏玉湖", tag: "D2 冰川蓝湖", coord: [80.887, 42.943], color: "#FF4757", icon: "🌊", hotel: "宿 望湖庄园(已订)", layout: "left" },
-    { name: "西喀拉峻人体草原", tag: "D3 下午九曲十八弯", coord: [82.080, 42.980], color: "#2ED573", icon: "🏔️", layout: "left" },
-    { name: "喀拉峻大草原", tag: "D3-D4 宿山涧云海(已订)", coord: [82.023, 43.003], color: "#2ED573", icon: "🏔️", hotel: "宿 山涧云海民宿(已订)", layout: "right" },
-    { name: "伊犁尼勒克小满民宿", tag: "D5 宿小满(已订)", coord: [82.850, 43.760], color: "#FFA502", icon: "🏕️", hotel: "宿 小满民宿(已订)", layout: "left" },
-    { name: "G217独库北段", tag: "D6 唐布拉→赛湖", coord: [83.780, 43.670], color: "#9B59B6", icon: "🛣️", layout: "right" },
-    { name: "乔尔玛烈士陵园", tag: "G217独库起点", coord: [83.697, 43.667], color: "#9B59B6", icon: "🎖️", layout: "right" },
-    { name: "哈希勒根达坂", tag: "3400m 防雪长廊", coord: [83.950, 44.050], color: "#9B59B6", icon: "❄️", layout: "right" },
-    { name: "果子沟金顶大桥", tag: "天山奇观大桥", coord: [81.162, 44.482], color: "#2563eb", icon: "🌉", layout: "left" },
-    { name: "赛里木湖东门", tag: "D6-D7连宿 · D7环湖", coord: [81.348, 44.622], color: "#00CEC9", icon: "💎", hotel: "宿 东门×2晚", layout: "right" },
-    { name: "博乐阿拉山口机场", tag: "D8 09:30出发 · 12:00还车", coord: [82.298, 44.895], color: "#FD79A8", icon: "✈️", type: "airport", layout: "right" }
-  ];
+  // Key POI / Waypoint Markers with smart directional layout (from trip-profile)
+  const keyMarkers = __KEY_MARKERS__;
 
   keyMarkers.forEach(m => {
     const isHotel = !!m.hotel;
@@ -869,7 +864,7 @@ window.onload = function() {
     const hotelWp = seg.waypoints.find(w => w.stay);
     if (hotelWp) {
       stayText = hotelWp.hotel || hotelWp.name;
-      if (seg.day === 'D1' || seg.day === 'D2' || seg.day === 'D3' || seg.day === 'D4') isBooked = true;
+      isBooked = !!(hotelWp.tag && hotelWp.tag.includes('已订'));
     } else if (seg.day === 'D8') {
       stayText = '飞返广州白云';
     }
@@ -901,7 +896,9 @@ window.onload = function() {
 </html>
 """
 
+html_output = html_template.replace("__KEY_MARKERS__", key_markers_json)
+
 with open('/workspace/reports/maps/itinerary_map.html', 'w', encoding='utf-8') as f:
-    f.write(html_template)
+    f.write(html_output)
 
 print("Updated /workspace/reports/maps/itinerary_map.html successfully!")
