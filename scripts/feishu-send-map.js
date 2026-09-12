@@ -2,18 +2,21 @@
 /**
  * Push updated itinerary map summary + poster image + route video to Feishu.
  *
- * Usage: node scripts/feishu-send-map.js [--dry-run]
+ * Usage:
+ *   node scripts/feishu-send-map.js [--dry-run]
+ *   node scripts/feishu-send-map.js --hd --poster-only   # 仅推送 4K 竖版动线图
  */
 const fs = require("fs");
 const path = require("path");
 
-const { resolveFeishuTransport, sendFeishuReport } = require("./feishu-notify");
+const { resolveFeishuTransport, sendFeishuReport, sendFeishuMessage } = require("./feishu-notify");
 const { loadConfig } = require("./load-monitor-config");
 const { loadTripProfile } = require("./load-trip-profile");
 
 const ROOT = path.join(__dirname, "..");
 const MAPS = path.join(ROOT, "reports/maps");
 const POSTER = path.join(MAPS, "xinjiang-itinerary-9-16.png");
+const POSTER_HD = path.join(MAPS, "xinjiang-itinerary-9-16-hd.png");
 const VIDEO = path.join(MAPS, "xinjiang-itinerary-16-9.mp4");
 const HTML = path.join(MAPS, "itinerary_map.html");
 
@@ -29,11 +32,22 @@ function loadRouteMeta() {
   };
 }
 
-function buildMarkdown(trip, routeMeta) {
+function parseFlags(argv) {
+  return {
+    dryRun: argv.includes("--dry-run"),
+    hd: argv.includes("--hd"),
+    posterOnly: argv.includes("--poster-only"),
+  };
+}
+
+function buildMarkdown(trip, routeMeta, flags) {
   const overrides = trip.hotelOverrides || {};
   const dates = Object.keys(overrides).sort();
+  const posterLabel = flags.hd ? "9:16 竖版动线海报 **4K HD**（2160×3840）" : "9:16 竖版动线海报（1080×1920）";
   const lines = [
-    "**动线图与行程视频已更新**（已对齐定稿酒店与 D6–D8 赛湖/喀兰朵动线）",
+    flags.posterOnly && flags.hd
+      ? "**9:16 高清动线图（4K）** · 已定稿酒店与 D6–D8 赛湖/喀兰朵动线"
+      : "**动线图与行程视频已更新**（已对齐定稿酒店与 D6–D8 赛湖/喀兰朵动线）",
     "",
     `全程自驾约 **${routeMeta.totalKm} km** · ${routeMeta.dateRange}`,
     "",
@@ -49,15 +63,29 @@ function buildMarkdown(trip, routeMeta) {
 
   lines.push(
     "",
-    "**附件**",
-    "• 9:16 竖版动线海报（图片消息）",
-    "• 16:9 动态路线视频 45s（视频文件）",
+  );
+
+  if (!flags.posterOnly) {
+    lines.push(
+      "",
+      "**附件**",
+      `• ${posterLabel}（图片消息）`,
+      "• 16:9 动态路线视频 45s（视频文件）",
+    );
+  } else if (flags.hd) {
+    lines.push("", `**附件**：${posterLabel}`);
+  }
+
+  lines.push(
     "",
     "**仓库路径**（便于下载/转发）",
     `• [交互地图 HTML](${REPO}/reports/maps/itinerary_map.html)`,
-    `• [16:9 视频 MP4](${REPO}/reports/maps/xinjiang-itinerary-16-9.mp4)`,
-    `• [9:16 海报 PNG](${REPO}/reports/maps/xinjiang-itinerary-9-16.png)`,
+    `• [9:16 海报 4K HD](${REPO}/reports/maps/xinjiang-itinerary-9-16-hd.png)`,
+    `• [9:16 海报标准](${REPO}/reports/maps/xinjiang-itinerary-9-16.png)`,
   );
+  if (!flags.posterOnly) {
+    lines.push(`• [16:9 视频 MP4](${REPO}/reports/maps/xinjiang-itinerary-16-9.mp4)`);
+  }
   return lines.join("\n");
 }
 
@@ -98,10 +126,13 @@ async function uploadImage(token, filePath) {
 
 async function uploadFile(token, filePath) {
   const buf = fs.readFileSync(filePath);
+  const ext = path.extname(filePath).toLowerCase();
+  const mime =
+    ext === ".mp4" ? "video/mp4" : ext === ".png" ? "image/png" : "application/octet-stream";
   const form = new FormData();
   form.append("file_type", "stream");
   form.append("file_name", path.basename(filePath));
-  form.append("file", new Blob([buf], { type: "video/mp4" }), path.basename(filePath));
+  form.append("file", new Blob([buf], { type: mime }), path.basename(filePath));
   const res = await fetch("https://open.feishu.cn/open-apis/im/v1/files", {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
@@ -129,8 +160,23 @@ async function sendMedia(token, chatId, msgType, content) {
   if (body.code !== 0) throw new Error(`Send ${msgType} failed: ${body.msg}`);
 }
 
+async function sendPosterImage(transport, token, posterPath) {
+  try {
+    const imageKey = await uploadImage(token, posterPath);
+    await sendMedia(token, transport.chatId, "image", { image_key: imageKey });
+    console.error(`Feishu poster image sent: ${path.basename(posterPath)}`);
+    return true;
+  } catch (err) {
+    console.error(`Image upload failed (${err.message}), trying file message...`);
+    const fileKey = await uploadFile(token, posterPath);
+    await sendMedia(token, transport.chatId, "file", { file_key: fileKey });
+    console.error(`Feishu poster file sent: ${path.basename(posterPath)}`);
+    return true;
+  }
+}
+
 async function main() {
-  const dryRun = process.argv.includes("--dry-run");
+  const flags = parseFlags(process.argv);
   const transport = resolveFeishuTransport();
   if (!transport) {
     console.error("Feishu not configured");
@@ -141,7 +187,9 @@ async function main() {
     process.exit(1);
   }
 
-  for (const f of [POSTER, VIDEO, HTML]) {
+  const posterPath = flags.hd ? POSTER_HD : POSTER;
+  const required = flags.posterOnly ? [posterPath, HTML] : [posterPath, VIDEO, HTML];
+  for (const f of required) {
     if (!fs.existsSync(f)) {
       console.error(`Missing: ${f}`);
       process.exit(1);
@@ -151,26 +199,33 @@ async function main() {
   const cfg = loadConfig();
   const trip = loadTripProfile(cfg);
   const routeMeta = loadRouteMeta();
-  const title = `${cfg.routeLabel || "新疆"} 动线图与行程视频（已定稿酒店）`;
-  const markdown = buildMarkdown(trip, routeMeta);
+  const title = flags.hd && flags.posterOnly
+    ? `${cfg.routeLabel || "新疆"} 9:16 高清动线图（4K · 已定稿酒店）`
+    : `${cfg.routeLabel || "新疆"} 动线图与行程视频（已定稿酒店）`;
+  const markdown = buildMarkdown(trip, routeMeta, flags);
 
-  if (dryRun) {
+  if (flags.dryRun) {
     console.log(title);
     console.log(markdown);
+    console.log(`poster: ${posterPath}`);
     return;
   }
 
-  await sendFeishuReport(transport, markdown, { title });
+  if (flags.posterOnly) {
+    await sendFeishuMessage(transport, title, markdown);
+  } else {
+    await sendFeishuReport(transport, markdown, { title });
+  }
   console.error("Feishu summary card sent");
 
   const token = await getTenantAccessToken(transport.appId, transport.appSecret);
-  const imageKey = await uploadImage(token, POSTER);
-  await sendMedia(token, transport.chatId, "image", { image_key: imageKey });
-  console.error("Feishu poster image sent");
+  await sendPosterImage(transport, token, posterPath);
 
-  const fileKey = await uploadFile(token, VIDEO);
-  await sendMedia(token, transport.chatId, "file", { file_key: fileKey });
-  console.error("Feishu route video sent");
+  if (!flags.posterOnly) {
+    const fileKey = await uploadFile(token, VIDEO);
+    await sendMedia(token, transport.chatId, "file", { file_key: fileKey });
+    console.error("Feishu route video sent");
+  }
 }
 
 main().catch((err) => {
