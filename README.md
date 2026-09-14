@@ -97,7 +97,7 @@ node scripts/monitor-config.js reset --destinations     # 仅重置目的地
 |---|------|------|
 | 1 | 去程 | `npm run skill:outbound` |
 | 2 | 返程 | `npm run skill:return:flights` |
-| 3 | 计划 Plan A/B | `npm run skill:plan` |
+| 3 | 定稿行程 | `npm run skill:plan` |
 | 4 | 酒店 | `npm run skill:hotels` |
 
 ```bash
@@ -105,6 +105,7 @@ npm install
 npm run monitor:preset -- xinjiang-focus-yining
 npm run skill:workflow:status   # 当前阶段
 npm run skill:return            # 去程已订时：2→3→4 顺序执行
+npm run map:regen               # 改酒店后同步动线地图/视频（必跑）
 ```
 
 **全量扫描（5 城 × 多日期，API 用量大）**
@@ -148,6 +149,8 @@ npm run monitor:presets     # 列出 preset
 | `scripts/price-history.js` | 每日最低价快照 |
 | `scripts/scoring-profiles.js` | 评分画像（default / family_elder / budget） |
 | `scripts/load-monitor-config.js` | 配置加载模块（脚本内部使用） |
+| `scripts/trip_map_sync.py` | 从 `hotelOverrides` 同步地图/视频酒店名（`map:fetch` / `map:video:data` 已接入） |
+| `scripts/booking-reminders.js` | 阶段 5 每日待办 digest（`bookTime`=放票，`appointmentTime`=分时） |
 
 ### 飞书卡片通报
 
@@ -206,6 +209,8 @@ npm run remind:bookings:eve              # 仅「行程日前一天」模式（�
 ```
 
 工作流文档：`skills/xinjiang-trip-workflow/SKILL.md` · `skills/travel-trip-workflow/SKILL.md`
+
+改酒店/路线后：`npm run map:regen`（`trip_map_sync.py` 同步 `hotelOverrides`）。飞书海报：`npm run notify:feishu:map` / `notify:feishu:map-hd`。
 
 本机 cron（推荐）：
 

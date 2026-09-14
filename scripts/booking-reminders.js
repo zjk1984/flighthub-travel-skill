@@ -209,8 +209,9 @@ function formatEventDate(dateStr) {
   return `${parseInt(m, 10)}/${parseInt(d, 10)}`;
 }
 
+/** Timed entry/pass reservation only. bookTime is a sale/cutoff clock, not 分时预约. */
 function hasAppointmentSlot(item) {
-  return !!(item.appointmentTime || item.bookTime);
+  return !!item.appointmentTime;
 }
 
 function formatReserveTime(item) {
@@ -221,7 +222,7 @@ function formatReserveTime(item) {
     return `${formatEventDate(item.eventDate)} ${item.appointmentTime}`;
   }
   if (item.bookTime && item.bookByDate) {
-    return `${formatEventDate(item.bookByDate)} ${item.bookTime}`;
+    return `${formatEventDate(item.bookByDate)} ${item.bookTime} 放票`;
   }
   if (item.bookByDate && item.bookByDate !== item.eventDate && !hasAppointmentSlot(item)) {
     return formatEventDate(item.eventDate);
@@ -240,7 +241,7 @@ function formatScheduleLine(item) {
     return `预约 **${event} ${slot}** · 行程 **${event}**`;
   }
   if (item.bookTime && item.bookByDate) {
-    return `预约 **${formatEventDate(item.bookByDate)} ${item.bookTime}** · 行程 **${event}**`;
+    return `放票 **${formatEventDate(item.bookByDate)} ${item.bookTime}** · 游玩 **${event}**`;
   }
   if (item.bookByDate && item.bookByDate !== item.eventDate) {
     const from = item.bookFromDate ? formatEventDate(item.bookFromDate) : null;

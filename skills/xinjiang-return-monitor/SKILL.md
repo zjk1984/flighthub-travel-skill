@@ -65,8 +65,8 @@ bash scripts/monitor-return-flights.sh --refresh
         确认后写入 bookedOutbound
 阶段 2  npm run skill:return:flights     # 返程（--refresh 强制重查）
         确认后 workflow.confirmed.return = true
-阶段 3  npm run skill:plan               # Plan A + Plan B 卡片
-        确认后 workflow.confirmed.plan = "duku" | "planb"
+阶段 3  npm run skill:plan               # 定稿行程卡片
+        确认后 workflow.confirmed.plan = "final"（伊犁已定稿，勿再写 duku/planb）
 阶段 4  npm run skill:hotels             # 酒店
 ```
 
@@ -80,7 +80,7 @@ npm run monitor:set -- --return-dates 2026-10-06,2026-10-07,2026-10-08
 ## 风控说明
 
 - 若返程阶段触发熔断，会跳过剩余航线及 custom transfer
-- 飞书推送默认发送完整 TOP3 报告（需配置 `FEISHU_WEBHOOK_URL`）
+- 飞书推送：优先 `FEISHU_APP_ID` + `FEISHU_APP_SECRET` + `FEISHU_CHAT_ID`；Webhook 仅作备选。机酒已订后改推待办 digest，不再推 TOP3
 - 返程完成后若紧接着查酒店，建议间隔 **≥30 分钟**；酒店全量 6 段易触发 451，可改用 `npm run monitor:hotels:scenic` 只刷景区段
 
 ## 后续阶段

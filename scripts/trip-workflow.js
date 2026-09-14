@@ -1,12 +1,15 @@
 /**
  * Trip skill workflow: outbound → return → plan → hotels (strict priority).
+ * Phase 5 (todos) is implied after hotels are booked — see feishuTodosOnly().
  */
+const { feishuTodosOnly } = require("./load-trip-profile");
+
 const WORKFLOW_ORDER = ["outbound", "return", "plan", "hotels"];
 
 const PHASE_LABELS = {
   outbound: "1. 确认去程航班",
   return: "2. 确认返程航班",
-  plan: "3. 确认旅行计划（Plan A / Plan B …）",
+  plan: "3. 确认旅行计划",
   hotels: "4. 确认酒店",
 };
 
@@ -80,8 +83,8 @@ function renderWorkflowStatus(trip) {
   const scopes = {
     outbound: "查去程 TOP3 → 写入 bookedOutbound",
     return: "查返程 TOP3 · **纯机票评分**（多机场比价，不看 D8 行程）",
-    plan: "Plan A/B 卡片 + itineraryConstraints 衔接提示",
-    hotels: "按 activeVariant 查酒店",
+    plan: "定稿行程卡片 + itineraryConstraints 衔接提示",
+    hotels: "按 trip-profile 根级 hotels / hotelOverrides 查住宿",
   };
   for (const key of WORKFLOW_ORDER) {
     const done =
@@ -98,7 +101,15 @@ function renderWorkflowStatus(trip) {
     lines.push(`${mark} ${PHASE_LABELS[key]}${extra}`);
   }
   if (currentPhase === "done") {
-    lines.push("", "> 全部阶段已确认，可按需刷新酒店/航班。");
+    if (feishuTodosOnly(trip)) {
+      lines.push(
+        "",
+        "> 机酒已订 · **阶段 5 待办运维**：`npm run remind:bookings`（门票/预约/路况）",
+        "> **不要**再 fly.ai 查机酒或推 TOP3。改行程后先 `npm run map:regen` 同步 hotelOverrides。"
+      );
+    } else {
+      lines.push("", "> 全部阶段已确认，可按需刷新酒店/航班。");
+    }
   } else {
     lines.push("", `> **当前阶段：** ${PHASE_LABELS[currentPhase] || currentPhase}`);
     if (scopes[currentPhase]) lines.push(`> **本阶段范围：** ${scopes[currentPhase]}`);

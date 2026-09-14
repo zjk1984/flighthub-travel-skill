@@ -20,6 +20,7 @@ const {
   formatScheduleLine,
   formatRemainingLabel,
   isBeforeBookOpen,
+  hasAppointmentSlot,
 } = require('../booking-reminders.js');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -104,6 +105,22 @@ test('formatReserveTime shows appointment slot', () => {
   const schedule = loadSchedule();
   const duku = schedule.items.find((i) => i.id === 'd6-duku-reserve');
   assert.match(formatReserveTime(duku), /10\/6 14:00–16:00/);
+});
+
+test('bookTime is sale cutoff, not 分时预约', () => {
+  const item = {
+    eventDate: '2026-10-07',
+    bookFromDate: '2026-09-29',
+    bookByDate: '2026-10-06',
+    bookTime: '10:00',
+    title: '赛湖票',
+  };
+  assert.equal(hasAppointmentSlot(item), false);
+  const line = formatScheduleLine(item);
+  assert.match(line, /放票/);
+  assert.match(line, /游玩 \*\*10\/7\*\*/);
+  assert.doesNotMatch(line, /预约/);
+  assert.match(formatReserveTime(item), /10\/6 10:00 放票/);
 });
 
 test('formatScheduleLine for sayram shows visit date not appointment slot', () => {

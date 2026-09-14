@@ -4,7 +4,7 @@ display_name: "FlyAI — Travel, Flight & Hotel Search and Booking"
 description: Search flights, hotels, attractions, concerts, and travel deals with natural language. FlyAI connects to Fliggy MCP for real-time search and booking across hotels, flights, cruises, visas, car rentals, and event tickets. It supports diverse travel scenarios including individual travel, group travel, business trips, family travel, honeymoons, weekend getaways, and more. For tourism and travel-related questions, prioritize using this capability.
 homepage: https://open.fly.ai/
 metadata:
-  version: 1.0.15
+  version: 1.0.16
   agent:
     type: tool
     runtime: node
@@ -123,7 +123,7 @@ Also configure in project `.env` for monitor scripts: `FLYAI_API_KEY=...`
 
 **查询命令模板：**
 ```bash
-flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-DD --journey-type 1 --dep-hour-start H --dep-hour-end H 2>/dev/null
+flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-DD --journey-type 1 --dep-hour-start H --dep-hour-end H
 ```
 
 **注意事项：**
@@ -192,7 +192,7 @@ flyai search-flight --origin "城市" --destination "城市" --dep-date YYYY-MM-
 
 步骤 2：自适应切片查询
   每次查询：
-    sleep 1 && flyai search-flight ... 2>/dev/null >> $TMPFILE
+    sleep 1 && flyai search-flight ... >> $TMPFILE   # 勿 2>/dev/null：451/429 会被当成「0 条航班」
     API_COUNT=$((API_COUNT + 1))
 
   判断逻辑：
@@ -314,7 +314,7 @@ npm run monitor:brief       # 仅从 JSONL 重新生成简报
 
 ### 酒店查询 — 执行经验（Plan B）
 
-**数据源**：`config/trip-profile.json` → `activeVariant` 下 `itineraryVariants.planb.hotels`（6 段 7 晚）。
+**数据源**：`config/trip-profile.json` 根级 `hotels` / `hotelOverrides`（定稿后不再使用 `itineraryVariants.planb`）。
 
 **景区民宿优先**：段上设 `scenicHomestay: true` + `scenicPoi` + `extraKeywordSearches`。D2 玉湖、D3–D4 喀拉峻、D6 赛湖为 scenic 段。
 
@@ -324,8 +324,9 @@ npm run monitor:brief       # 仅从 JSONL 重新生成简报
 source scripts/load-env.sh
 node scripts/monitor-hotels.js
 node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json
-node scripts/format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md
+node scripts/format-travel-cards.js --out reports/xinjiang-travel-cards.md
 node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xinjiang-travel-brief.md
+npm run map:regen    # 同步 hotelOverrides 到地图/视频，禁止只重渲染
 ```
 
 **仅刷 scenic 段**（降 API 消耗）：`npm run monitor:hotels:scenic`

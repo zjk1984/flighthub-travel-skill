@@ -46,6 +46,7 @@
     "map:poster": "node scripts/render_poster.js",
     "map:video:data": "python3 scripts/prepare_video_data.py && python3 scripts/prepare_subtitles.py && python3 scripts/generate_html_map.py && python3 scripts/generate_video_html.py",
     "map:video": "node scripts/render_video.js",
+    "map:regen": "npm run map:fetch && npm run map:video:data && npm run map:poster && npm run map:video",
     "test": "node --test scripts/__tests__/*.test.js"
   },
   "repository": {

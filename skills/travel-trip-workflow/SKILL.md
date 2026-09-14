@@ -4,7 +4,7 @@ display_name: "通用旅行决策工作流（机酒→待办）"
 description: 可复用于任意目的地的五阶段旅行 Skill：1 去程 2 返程 3 计划 4 酒店 5 门票/预约/路况待办。机酒全订后进入 feishuTodosOnly，FlyAI 只维护 booking-schedule 未完成项。Agent 不得跳步。
 homepage: https://github.com/zjk1984/flighthub-travel-skill
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   agent:
     type: tool
     runtime: node
@@ -120,7 +120,7 @@ npm run monitor:set -- --outbound-dates 2026-11-01 --return-dates 2026-11-08
 - `itineraryVariants.primary` — 主路线
 - `itineraryVariants.fallback` — 封路/天气/闭园备选
 
-命名不限于 `primary/fallback`；伊犁实例用 `duku` / `planb`，逻辑相同。
+命名不限于 `primary/fallback`。**方案一旦定稿为唯一行程，把 days/hotels/hotelOverrides 提到根级并删掉 variants**（伊犁 2026-09：`plan = "final"`）。此时 `--variant planb` 会回退到根级（兼容旧命令），新调用不要传 `--variant`。
 
 ### 5. 配置酒店段 `hotels`
 
@@ -188,7 +188,8 @@ npm run skill:hotels              # 阶段 4
 | 航班 JSONL | 各 monitor 脚本追加 `reports/xinjiang-results.jsonl` |
 | 酒店 JSON | `node scripts/monitor-hotels.js --profile config/trip-profile.json` |
 | 酒店 TOP3 | `node scripts/format-hotels-ranked.js reports/...json` |
-| 行程卡片 | `node scripts/format-travel-cards.js --variant primary --out reports/...md` |
+| 行程卡片 | `node scripts/format-travel-cards.js --out reports/...md`（有 variants 才加 `--variant`） |
+| 动线/视频 | `npm run map:regen`（`trip_map_sync.py` 读 `hotelOverrides`，禁止只重渲染） |
 | 决策简报 | `node scripts/format-travel-brief.js reports/...jsonl > reports/...md` |
 
 ### 10. 确认 workflow 状态
@@ -240,8 +241,8 @@ npm run skill:hotels              # 阶段 4
 | `category` | 典型内容 | digest 行为 |
 |------------|----------|-------------|
 | `flight` / `hotel` | 已订机酒 | `booked: true` → **不展示** |
-| `ticket` | 景区门票、自驾票 | 按 `bookFromDate` / `bookByDate` 提醒 |
-| `reservation` | 通行预约、分时入园 | 含 `appointmentTime` |
+| `ticket` | 景区门票、自驾票 | 按 `bookFromDate` / `bookByDate` 提醒；**无分时不要写 `appointmentTime`** |
+| `reservation` | 通行预约、分时入园 | **仅此时**用 `appointmentTime`；`bookTime` 是放票钟点，Digest 不得写成「预约」 |
 | `road` | 路况查询（封路改线） | 行程日前提醒 |
 | `car` / `activity` | 租车/还车、当日活动 | 按需 |
 
@@ -312,8 +313,9 @@ node scripts/monitor-hotels.js
 node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json
 
 # 2. 卡片 + 简报（--variant 与 activeVariant 一致）
-node scripts/format-travel-cards.js --variant primary --out reports/travel-cards-primary.md
+node scripts/format-travel-cards.js --out reports/travel-cards.md
 node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/travel-brief.md
+npm run map:regen   # 改酒店/路线后必须；否则地图停在旧硬编码
 ```
 
 **合并冲突经验**：保留 profile 逻辑 + 重跑再生链；勿手工拼 reports。
@@ -364,6 +366,8 @@ GitHub Actions：`.github/workflows/booking-reminders.yml`
 
 机酒已订时，`monitor-xinjiang.sh` / `monitor-hotels-phase.sh` / `monitor-return.sh` 检测到 `feishuTodosOnly` 后**自动改推** `booking-reminders.js`，不再推 TOP3 评分明细。
 
+飞书优先 Open API 应用机器人：`FEISHU_APP_ID` + `FEISHU_APP_SECRET` + `FEISHU_CHAT_ID`。动线：`notify:feishu:map` / `notify:feishu:map-hd`。
+
 ---
 
 ## 顾问式选型（不写进脚本）
@@ -384,7 +388,7 @@ GitHub Actions：`.github/workflows/booking-reminders.yml`
 **阶段 1–4（机酒决策）**
 
 - [ ] `monitor-config.json` 的 `tripProfilePath` 指向正确 profile
-- [ ] `activeVariant` 与 `workflow.confirmed.plan` 一致
+- [ ] 定稿前 `activeVariant` 与 `workflow.confirmed.plan` 一致；定稿后行程在根级
 - [ ] `days` / `hotels` / `hotelOverrides` 日期对齐
 - [ ] 四阶段顺序执行，未确认不查酒店
 - [ ] 451 连续失败时降频或 scenic 单段刷新
@@ -400,8 +404,10 @@ GitHub Actions：`.github/workflows/booking-reminders.yml`
 **通用**
 
 - [ ] 改 profile/schedule 后跑再生链
+- [ ] 改酒店/路线后 `npm run map:regen`（不要只重渲染旧硬编码）
 - [ ] 合并冲突后重跑，不保留半成品 reports
-- [ ] 用户要求推送：`remind:bookings --force` 或决策期 `skill:hotels`
+- [ ] 用户要求推送：`remind:bookings --force`、`notify:feishu:map[-hd]` 或决策期 `skill:hotels`
+- [ ] 飞书用 App ID+Secret+Chat ID；不要把 `cli_…` 当 Webhook
 
 ---
 

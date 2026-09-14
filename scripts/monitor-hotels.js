@@ -149,7 +149,11 @@ function isScenicHomestayCandidate(h, seg) {
   if (hasKalajun && /琼库什台/.test(text) && !/喀拉峻|阔克苏|波森|别克|霍斯宝|云雾牧|无垠/.test(text)) {
     return false;
   }
-  if (hasKalajun && /八卦城|县人民政府|离街|太极坛/.test(text) && !/喀拉峻|阔克苏|波森|别克|琼库/.test(text)) {
+  if (
+    hasKalajun &&
+    /八卦城|县人民政府|离街|太极坛/.test(text) &&
+    !/喀拉峻|阔克苏|波森|别克|琼库|霍斯宝|云雾牧|无垠|山涧/.test(text)
+  ) {
     return false;
   }
   if (hasSayram && /赛里木湖路|灵壤|天祥国际|建材家具|博乐巨辉|时代酒店/.test(text) && !/风景名胜|景区|游客中心|赛里木湖国家级/.test(text)) {
