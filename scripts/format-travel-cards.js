@@ -29,12 +29,25 @@ function parseArgs(argv) {
   return { out, hotelsPath, variant };
 }
 
+const ROOT_VARIANT_ALIASES = new Set(["planb", "final", "primary", "main", "duku"]);
+
+function resolveVariant(trip, variant) {
+  if (!variant) return null;
+  const variants = trip.itineraryVariants || {};
+  if (variants[variant]) return variants[variant];
+  // Confirmed unique itinerary is flattened to root (伊犁 2026-09 定稿).
+  // Legacy --variant planb / final must not fail after itineraryVariants is removed.
+  if (ROOT_VARIANT_ALIASES.has(variant) || !Object.keys(variants).length) {
+    return null;
+  }
+  throw new Error(`Unknown itinerary variant: ${variant}`);
+}
+
 function buildContext(variant) {
   const trip = CFG.trip || {};
   const partySize = trip.partySize || 1;
-  if (variant) {
-    const v = trip.itineraryVariants?.[variant];
-    if (!v) throw new Error(`Unknown itinerary variant: ${variant}`);
+  const v = resolveVariant(trip, variant);
+  if (v) {
     return {
       trip,
       partySize,
@@ -185,10 +198,19 @@ function renderCards(ctx, hotelsPath, out) {
   process.stderr.write(`Travel cards saved: ${out}\n`);
 }
 
-function main() {
-  const { out, hotelsPath, variant } = parseArgs(process.argv);
+function main(argv = process.argv) {
+  const { out, hotelsPath, variant } = parseArgs(argv);
   const ctx = buildContext(variant);
   renderCards(ctx, hotelsPath, out);
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  parseArgs,
+  resolveVariant,
+  buildContext,
+  main,
+};

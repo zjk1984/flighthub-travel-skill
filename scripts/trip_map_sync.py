@@ -140,10 +140,40 @@ def apply_trip_to_subtitles(subtitles):
                 f"【D3 西喀拉峻下午场】10:00出发，13:30特克斯午餐，"
                 f"下午西线人体草原，18:00前离园，宿{short}(已订 · 连住第1晚)。"
             )
+            seg["subtitle_short"] = (
+                f"10:00+ ➔ 13:30特克斯午餐 ➔ 下午西喀拉峻 ➔ 宿{short} (已订 · 连住第1晚)"
+            )
+        elif card_id == "D4":
+            seg["subtitle"] = (
+                f"【D4 东喀拉峻全天】10:00东线鲜花台/猎鹰台，13:00景区午餐，"
+                f"下午继续东线补点，19:00回{short}续住(已订)。"
+            )
+            seg["subtitle_short"] = (
+                f"10:00+东喀拉峻全天 ➔ 13:00午餐 ➔ 续住{short} (已订)"
+            )
         elif card_id == "D5":
             seg["subtitle"] = (
                 f"【D5 直赴唐布拉】10:00出发，13:30巩留午餐，"
                 f"沿S315百里画廊18:30前抵种蜂场，宿{short}(已订)，晚查独库。"
+            )
+            seg["subtitle_short"] = (
+                f"10:00+ ➔ 13:30巩留午餐 ➔ S315唐布拉 ➔ 宿{short} (已订)"
+            )
+        elif card_id == "D6":
+            seg["subtitle"] = (
+                f"【D6 赶路·不入园】10:00小满退房，13:00乔尔玛午餐，独库14-16点，"
+                f"G30直驱{short}，不购票不入园，20:30-22:00到。"
+            )
+            seg["subtitle_short"] = (
+                f"10:00+小满 ➔ 13:00乔尔玛 ➔ G217独库 ➔ G30{short}(不入园)"
+            )
+        elif card_id == "D7":
+            seg["subtitle"] = (
+                f"【D7 东门进逆时针】10:00东门购票入园，逆时针点将台/松树头/克勒涌珠，"
+                f"南门出园，果子沟观景台日落~20:05，回{short}。"
+            )
+            seg["subtitle_short"] = (
+                f"10:00+东门进 ➔ 逆时针环湖 ➔ 南门出 ➔ 果子沟日落 ➔ {short}"
             )
 
     return subtitles

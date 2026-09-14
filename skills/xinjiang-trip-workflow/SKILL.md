@@ -1,10 +1,10 @@
 ---
 name: xinjiang-trip-workflow
 display_name: "伊犁行程决策工作流（机酒→待办）"
-description: 按严格优先级执行旅行 Skill：1 去程 2 返程 3 Plan A/B 4 酒店 5 门票/预约/路况待办。机酒全部确认后自动进入「仅待办」模式，FlyAI 不再查机酒比价，飞书只推 booking-schedule 未完成项。Agent 不得跳步。
+description: 按严格优先级执行旅行 Skill：1 去程 2 返程 3 定稿行程 4 酒店 5 门票/预约/路况待办。机酒全部确认后进入「仅待办」模式。改酒店必须 map:regen 同步 hotelOverrides。Agent 不得跳步。
 homepage: https://github.com/zjk1984/flighthub-travel-skill
 metadata:
-  version: 1.2.0
+  version: 1.3.0
   agent:
     type: tool
     runtime: node
@@ -15,7 +15,7 @@ metadata:
 
 # 伊犁行程决策工作流
 
-> **通用框架**：可复用于其他目的地的五阶段工作流见 [`skills/travel-trip-workflow/SKILL.md`](skills/travel-trip-workflow/SKILL.md)；配置模板见 [`config/trip-profile.template.json`](config/trip-profile.template.json)。本文档为**伊犁 Plan B 参考实现**。
+> **通用框架**：可复用于其他目的地的五阶段工作流见 [`skills/travel-trip-workflow/SKILL.md`](skills/travel-trip-workflow/SKILL.md)；配置模板见 [`config/trip-profile.template.json`](config/trip-profile.template.json)。本文档为**伊犁最终行程参考实现**（2026-09 定稿，旧 Plan A/B 变体已删除）。
 
 ## 五阶段优先级（铁律）
 
@@ -23,7 +23,7 @@ metadata:
 |------|------|------------|----------|------|
 | **1 去程** | 选定出发航班 | `search-flight` | `bookedOutbound` | `npm run skill:outbound` |
 | **2 返程** | 选定返程（多机场/多日期） | `search-flight` | `bookedReturn` | `npm run skill:return:flights` |
-| **3 计划** | Plan A（独库）/ Plan B | — | `workflow.confirmed.plan: "planb"` | `npm run skill:plan` |
+| **3 计划** | 定稿唯一行程（最终版） | — | `workflow.confirmed.plan: "final"` | `npm run skill:plan` |
 | **4 酒店** | 分段住宿（7 晚 5 段） | `search-hotel` | `hotelOverrides.*.booked` + `workflow.confirmed.hotels: true` | `npm run skill:hotels` |
 | **5 待办** | 门票/预约/路况/活动 | **不查 fly.ai** | `booking-schedule.json` 中 `booked: false` | `npm run remind:bookings` |
 
@@ -65,8 +65,8 @@ Plan B 全部预订项（机酒 + 门票 + 预约 + 路况）统一维护在此�
 | `eventDate` | 行程日 |
 | `bookFromDate` | 开放预约日（可选） |
 | `bookByDate` | 截止预订日（可选） |
-| `bookTime` | 放票/截止时刻，如 `10:00` |
-| `appointmentTime` / `appointmentEnd` | 分时入园/通行时段 |
+| `bookTime` | **放票/截止钟点**（不是分时预约）。Digest 显示「放票」，禁止写成「预约」 |
+| `appointmentTime` / `appointmentEnd` | **仅**分时入园/通行时段（如独库 14:00–16:00、喀拉峻 14:30） |
 | `booked` | `true` = 已订，digest **不展示** |
 | `profileCheckIn` | 与 `hotelOverrides` 日期对齐，自动同步酒店名 |
 
@@ -130,7 +130,7 @@ Cron / GitHub Actions：`0 7 * * * TZ=Asia/Shanghai npm run remind:bookings`（�
 | D7 | 10/7 | 东门进→逆时针→南门出→果子沟日落 | **10:00 后** | 喀兰朵（连住）✅ |
 | D8 | 10/8 | 喀兰朵→还车→MU6170 13:30 | **09:30 出发** | — |
 
-**行程原则（`itineraryVariants.planb`）：**
+**行程原则（根级 `itinerary`，已定稿 `workflow.confirmed.plan = "final"`）：**
 
 - **全程尽量 10:00 后上路**；D8 还车例外（09:30 出发）
 - **D2 无需取车**：车辆已提前备好
@@ -153,9 +153,9 @@ Cron / GitHub Actions：`0 7 * * * TZ=Asia/Shanghai npm run remind:bookings`（�
 
 ```text
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│ 1 去程机票   │ ──► │ 2 返程机票   │ ──► │ 3 Plan A/B  │ ──► │ 4 分段酒店   │
-│ search-flight│     │ search-flight│     │ 卡片/指南    │     │ search-hotel │
-│ bookedOutbound│    │ bookedReturn │     │ activeVariant│     │ hotelOverrides│
+│ 1 去程机票   │ ──► │ 2 返程机票   │ ──► │ 3 定稿行程   │ ──► │ 4 分段酒店   │
+│ search-flight│     │ search-flight│     │ 根级 itinerary│     │ search-hotel │
+│ bookedOutbound│    │ bookedReturn │     │ plan=final   │     │ hotelOverrides│
 └─────────────┘     └─────────────┘     └─────────────┘     └──────┬──────┘
                                                                     │
                     feishuTodosOnly = 去程+返程+全部酒店已订          ▼
@@ -179,8 +179,9 @@ Cron / GitHub Actions：`0 7 * * * TZ=Asia/Shanghai npm run remind:bookings`（�
 source scripts/load-env.sh
 node scripts/monitor-hotels.js
 node scripts/format-hotels-ranked.js reports/xinjiang-hotels-latest.json
-node scripts/format-travel-cards.js --variant planb --out reports/xinjiang-travel-cards-planb.md
+node scripts/format-travel-cards.js --out reports/xinjiang-travel-cards.md
 node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xinjiang-travel-brief.md
+npm run map:regen                       # hotelOverrides → 地图/视频（禁止手改 POI）
 ```
 
 ### 机酒已全部确认时（当前）
@@ -190,6 +191,8 @@ node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xin
 node scripts/monitor-hotels.js          # 只写 skipMonitor 段的 override
 node scripts/format-travel-brief.js reports/xinjiang-results.jsonl > reports/xinjiang-travel-brief.md
 npm run remind:bookings:dry             # 验证 digest
+# 酒店名/路线变了必须再跑：
+npm run map:regen
 ```
 
 手维文档（无自动生成器，Agent 按 profile 同步）：
@@ -242,6 +245,15 @@ npm run remind:bookings -- --force     # 强制重发当日 digest
 
 `feishu_todos_only()`（`scripts/feishu-env.sh`）：monitor 脚本检测后自动改推 `booking-reminders.js`，不再推 TOP3。
 
+飞书配置优先 **Open API 应用机器人**（`FEISHU_APP_ID` + `FEISHU_APP_SECRET` + `FEISHU_CHAT_ID`）。不要把 `cli_…` App ID 当成 Webhook。
+
+动线海报/视频：
+
+```bash
+npm run notify:feishu:map       # 摘要卡 + 9:16 海报 + 16:9 视频
+npm run notify:feishu:map-hd    # 仅 2160×3840 HD 海报
+```
+
 ---
 
 ## 输出文件地图
@@ -251,10 +263,12 @@ npm run remind:bookings -- --force     # 强制重发当日 digest
 | `config/booking-schedule.json` | 手维 + Agent 同步 | 5 待办 |
 | `reports/.booking-reminders-state.json` | 发送记录（防重复） | 5 |
 | `reports/xinjiang-travel-brief.md` | `format-travel-brief.js` | 4/5 |
-| `reports/xinjiang-travel-cards-planb.md` | `format-travel-cards.js --variant planb` | 3 |
+| `reports/xinjiang-travel-cards.md` | `format-travel-cards.js`（**不要** `--variant planb`，变体已定稿到根级） | 3 |
 | `reports/xinjiang-hotels-latest.json` | `monitor-hotels.js` | 4 |
 | `reports/xinjiang-hotels-latest-ranked.md` | `format-hotels-ranked.js` | 4（决策期） |
 | `reports/xinjiang-flights-ranked.md` | `monitor-run.js` | 1–2（决策期） |
+| `reports/maps/xinjiang-itinerary-9-16[-hd].png` | `map:poster`（先 `map:fetch`） | 3/4 视觉 |
+| `reports/maps/xinjiang-itinerary-16-9.mp4` | `map:video`（先 `map:video:data`） | 3/4 视觉 |
 
 ---
 
@@ -262,8 +276,8 @@ npm run remind:bookings -- --force     # 强制重发当日 digest
 
 ### 阶段 1–4（机酒决策）
 
-- [ ] `activeVariant` 与 `workflow.confirmed.plan` 一致
-- [ ] Plan B `days` / `hotels` / `hotelOverrides` 日期对齐
+- [ ] `workflow.confirmed.plan` 为 `"final"`，行程在根级 `itinerary`（无 itineraryVariants）
+- [ ] `days` / `hotels` / `hotelOverrides` 日期对齐
 - [ ] 四阶段顺序执行，未确认不查酒店
 - [ ] 451 连续失败时降频或 scenic 单段刷新
 
@@ -279,10 +293,39 @@ npm run remind:bookings -- --force     # 强制重发当日 digest
 ### 通用
 
 - [ ] 改 profile/schedule 后重跑再生链
+- [ ] 改酒店/路线后必须 `npm run map:regen`（`trip_map_sync.py` 读 `hotelOverrides`），禁止只重渲染旧硬编码
 - [ ] 合并冲突后重跑，不保留半成品 reports
-- [ ] 用户要求推送时用 `remind:bookings --force` 或 `monitor:brief`
+- [ ] 用户要求推送时用 `remind:bookings --force`、`notify:feishu:map[-hd]` 或 `monitor:brief`
+- [ ] Digest 文案：`appointmentTime` 才写「预约」；`bookTime` 写「放票」；赛湖**无分时预约**
 
 ---
+
+## 动线地图 / 视频（改酒店后必跑）
+
+2026-09 执行教训：只跑 `map:poster` / `map:video` **不会**读已订酒店，字幕会停在「宿 东门」等旧硬编码。
+
+`scripts/trip_map_sync.py` 从根级 `hotelOverrides` 写入路段/字幕/POI。`map:fetch` 与 `map:video:data` 已接入。一键：
+
+```bash
+npm run map:regen
+# = map:fetch → map:video:data → map:poster → map:video
+```
+
+检查：D1 全季全名、D5–D7「已订」、赛湖段为**喀兰朵**不是「东门×2晚」。
+
+规格：标题「新疆伊犁 8天7晚自驾大环线」；视频 45s / 24fps / 1080 帧；SUV 车标固定朝前；亚像素插值。
+
+## 执行踩坑（2026-09）
+
+| 现象 | 根因 | 正确做法 |
+|------|------|----------|
+| `--variant planb` 报 Unknown variant | 变体已定稿到根级 | `format-travel-cards.js` 不传 variant |
+| 飞书「赛湖预约 10/6」 | `bookTime` 被当成分时预约 | 赛湖只写 `bookFromDate`/`bookByDate`；`appointmentTime` 仅用于真分时 |
+| 喀拉峻 API 只剩别克波森 | `filterScenicHomestays` 误杀八卦城附近民宿 | 必须带 `extraKeywordSearches`：`喀拉峻 民宿` / 山涧云海 / 霍斯宝 / 云雾牧 |
+| 地图酒店名过期 | 渲染没用 `trip_map_sync` | `npm run map:regen` |
+| 空航班报告 | 451/429 被当成无票 | JSONL `apiError` ≠ 无航班；去程/返程间隔 ≥30min |
+| 飞书 19001 | 把 App ID `cli_…` 当 Webhook | 用 `FEISHU_APP_ID` + `SECRET` + `CHAT_ID` |
+| `remind:bookings:dry` 无输出 | 脚本在 dry-run 前就因未配飞书退出 | dry-run **不要求**飞书；直接跑 `npm run remind:bookings:dry` |
 
 ## 目的地选型参考（顾问式，非脚本）
 
