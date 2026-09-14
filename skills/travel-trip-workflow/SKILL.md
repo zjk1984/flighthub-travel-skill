@@ -44,7 +44,7 @@ metadata:
 ```bash
 npm run skill:workflow:status    # 阶段 1–4 进度（全完成后 currentPhase = done）
 npm run skill:workflow           # 从当前阶段顺序执行到酒店
-npm run remind:bookings:dry      # 预览阶段 5 每日 digest
+npm run remind:bookings:dry      # 预览阶段 5 每日 digest（不要求飞书）
 npm run remind:bookings          # 推送阶段 5 飞书提醒
 ```
 
