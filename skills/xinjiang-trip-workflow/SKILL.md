@@ -325,6 +325,7 @@ npm run map:regen
 | 地图酒店名过期 | 渲染没用 `trip_map_sync` | `npm run map:regen` |
 | 空航班报告 | 451/429 被当成无票 | JSONL `apiError` ≠ 无航班；去程/返程间隔 ≥30min |
 | 飞书 19001 | 把 App ID `cli_…` 当 Webhook | 用 `FEISHU_APP_ID` + `SECRET` + `CHAT_ID` |
+| `remind:bookings:dry` 无输出 | 脚本在 dry-run 前就因未配飞书退出 | dry-run **不要求**飞书；直接跑 `npm run remind:bookings:dry` |
 
 ## 目的地选型参考（顾问式，非脚本）
 
